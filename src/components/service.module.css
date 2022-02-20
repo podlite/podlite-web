@@ -1,0 +1,34 @@
+
+/* Clear floats after the columns */
+/* :root { */
+    /* --count-columns : 2 */
+    @value count-columns: 2;
+/* } */
+.Conatainer {
+    --count-columns : 2;
+    content: "";
+    display: table;
+    clear: both;
+}
+.row {
+    display: flex;
+}
+/* .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  } */
+  /* Create two equal columns that floats next to each other */
+.column {
+    flex: calc((100% - 10%) / count-columns);
+    min-width: 30vw;
+    /* float: left; */
+    /* width: calc(100% / var(--count-columns)); */
+    /* width: calc(100% / count-columns);  */
+    padding: 10px;
+  }
+  @media screen and (max-width: 600px) {
+    .row {
+        display: block;
+    }
+  }

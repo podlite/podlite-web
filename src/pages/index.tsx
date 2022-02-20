@@ -1,5 +1,6 @@
 import Head from "next/head"
 import { DataFeedContent } from "../../bin/makeDataSource"
+import styles from "../styles/Home.module.css"
 import { getData } from "../utils"
 import { writeRss } from "../utils/rss"
 import { generateSitemap } from "../utils/sitemap"
