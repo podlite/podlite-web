@@ -2,7 +2,7 @@
 = :postsPerPage<4> :favicon<./favicon.png>
 = :url<http://example.com>
 = :pathPrefix("/")
-= :globalStyles("./src/styles/new.css")
+= :globalStyles("../src/styles/new.css")
 
 
 =TITLE 📝 How to make a great post
