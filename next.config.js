@@ -1,4 +1,5 @@
 // const isDev = process.env.NODE_ENV !== "production";
+const path = require("path");
 const withPlugins = require("next-compose-plugins");
 const optimizedImages = require("next-optimized-images");
 module.exports = withPlugins([
@@ -26,7 +27,7 @@ module.exports = withPlugins([
     // esModule: true,
     webpack: (config) => {
       const assetRegex = new RegExp(`.(png|jpe?g|gif|woff|woff2|ico|svg|mp4)$`);
-
+      config.resolve.alias["@Components"] = path.resolve("./src/components"),
       config.module.rules.push({
         test: assetRegex,
         type: "asset/resource",

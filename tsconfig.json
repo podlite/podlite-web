@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    // "baseUrl": ".",
+    "baseUrl": ".",
     "target": "es6",
     "module": "esnext",
     "jsx": "preserve",
@@ -21,11 +21,15 @@
     "incremental": true,
     "noImplicitAny": false,
     "downlevelIteration": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths":{
+        "@Components/*": ["src/components/*"],
+      },
   },
   "exclude": [
-    "node_modules1"
+    "node_modules"
   ],
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
