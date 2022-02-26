@@ -41,9 +41,9 @@ For insert video use C<=Video> block. The following examples are equivalents:
 
 =for Video  :width(958) :height("539")
 = :src("https://www.youtube.com/embed/20SHvU2PKsM")
-= :title("Title of the video ")
+= :caption("Caption of the video ")
 
-=for Video  :width(958) :height("539") :title("Title of the video ")
+=for Video  :width(958) :height("539") :caption("Caption of the video ")
 https://www.youtube.com/embed/20SHvU2PKsM
 
 =end code 
@@ -55,7 +55,7 @@ C<=Video https://www.youtube.com/embed/20SHvU2PKsM>
 
 =for Video  :width(958) :height("539")
 = :src("https://www.youtube.com/embed/20SHvU2PKsM")
-= :title("Title of the video ")
+= :caption("Caption of the video ")
 
 
 Items levels
