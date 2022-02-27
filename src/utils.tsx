@@ -30,22 +30,7 @@ export type DataFeed = {
     [path: string]: string
   }
 }
-export type SiteInfo = {
-  postsPerPage: 4
-  favicon: "./favicon.png"
-  url: "http://example.com"
-  pathPrefix: "/"
-  title: "Example"
-  subtitle: "Example"
-  globalStyles?: string
-  node: PodNode
-  author: {
-    name: "Your name here"
-    photo: "./photo.jpg"
-    bio: "Keeping this page up to date 💻."
-    [name: string]: string
-  }
-}
+
 
 export type FeedContent = publishRecord & {
   number?: number
