@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "yarn config set --home enableTelemetry 0 && next telemetry disable",
+    "export": "yarn process && yarn build && next export",
     "ci": "rimraf node_modules && yarn",
     "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out",
     "process": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
