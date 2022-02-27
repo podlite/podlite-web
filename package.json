@@ -7,6 +7,7 @@
     "build": "next telemetry disable && next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "next telemetry disable",
     "ci": "rimraf node_modules && yarn",
     "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out",
     "process": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
