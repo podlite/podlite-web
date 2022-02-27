@@ -9,6 +9,7 @@ import {
   PUBLIC_PATH,
   defaultIndexPage,
   STYLES_LIB,
+  SiteInfo,
 } from "../src/constants"
 import { podlite as podlite_core } from "podlite"
 import makeAttrs from "pod6/built/helpers/config"
@@ -19,7 +20,7 @@ import {
   PodliteDocument,
   PodNode,
 } from "@podlite/schema"
-import { SiteInfo } from "../src/utils"
+
 
 const glob = require("glob")
 

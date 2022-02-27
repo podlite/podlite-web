@@ -1,3 +1,4 @@
+import { PodNode } from "@podlite/schema"
 import path from "path"
 
 // export const POSTS_PATH = path.join(process.cwd(), "/data")
@@ -13,6 +14,23 @@ export const PAGES_FILE_PATH = path.join(process.cwd())
 export const ASSETS_PATH = path.join(process.cwd(), "/public/assets")
 export const PUBLIC_PATH = path.join(process.cwd(), "/public")
 
+export type SiteInfo = {
+    postsPerPage: 4
+    favicon: "./favicon.png"
+    url: "http://example.com"
+    pathPrefix: "/"
+    title: "Example"
+    subtitle: "Example"
+    globalStyles?: string
+    node: PodNode
+    author: {
+      name: "Your name here"
+      photo: "./photo.jpg"
+      bio: "Keeping this page up to date 💻."
+      [name: string]: string
+    }
+  }
+  
 export const defaultIndexPage = `
 =begin pod  
 = :postsPerPage<4> :favicon<./favicon.png>
