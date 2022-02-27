@@ -411,7 +411,7 @@ const indexPageData = (() => {
   const pageAttr = Object.fromEntries(
     Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)])
   )
-  const {postsPerPage, favicon, url, pathPrefix, globalStyles} = pageAttr
+  const {postsPerPage, favicon, url, pathPrefix, globalStyles = "../src/styles/pod6.css"} = pageAttr
 
   let title
   let subtitle
