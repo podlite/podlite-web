@@ -8,13 +8,13 @@ import { generateSitemap } from "../utils/sitemap"
 
 const Home = ({url, author, title, subtitle, node}:IndexProps) => {
     return (
-      <div className={styles.container}>
+        <div>
         <Head>
           <title>{title}</title>
           <meta name="description" content={subtitle} />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main className={styles.main}>
+        <main id="body"> 
           {getPostComponent(node)}
         </main>
       </div>
