@@ -98,7 +98,7 @@ export function getPostComponent(podNode: PodNode) {
         if (components[componentName]) {
           return makeComponent(
             components[componentName],
-            {},
+            {id:conf.getFirstValue("id")},
             interator(node.content, ctx)
           )
         } else {
