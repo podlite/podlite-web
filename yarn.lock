@@ -246,11 +246,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@podlite/diagram@npm:^0.0.11":
-  version: 0.0.11
-  resolution: "@podlite/diagram@npm:0.0.11"
+"@podlite/diagram@npm:^0.0.12":
+  version: 0.0.12
+  resolution: "@podlite/diagram@npm:0.0.12"
   dependencies:
-    "@podlite/schema": 0.0.8
+    "@podlite/schema": 0.0.9
     mermaid: 8.12.1
     react-is: ^17.0.2
   peerDependencies:
@@ -258,7 +258,7 @@ __metadata:
     react: "*"
     react-dom: "*"
     react-is: "*"
-  checksum: 6ae2349ded6d0fd31ff997d0ed3ad850eddb2a35629cc8522579360eb5e0ceeaead40afe3a7b4b7f7a32f160d0bb89c4b227e4b8b003f5e309bd9f812a94fa51
+  checksum: 3c31e369a251e7bb00212cbf2895bfada8ed297f3dd2b64bf12535cad7ab405e1aa5a246cde43ccac62e8df27696a77f93080fa7e31027118bdbed3fc139ed33
   languageName: node
   linkType: hard
 
@@ -307,11 +307,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@podlite/to-jsx@npm:^0.0.12":
-  version: 0.0.12
-  resolution: "@podlite/to-jsx@npm:0.0.12"
+"@podlite/to-jsx@npm:^0.0.13":
+  version: 0.0.13
+  resolution: "@podlite/to-jsx@npm:0.0.13"
   dependencies:
-    "@podlite/diagram": ^0.0.11
+    "@podlite/diagram": ^0.0.12
     "@podlite/schema": 0.0.9
     pod6: ^0.0.44
     react-is: ^17.0.2
@@ -321,7 +321,7 @@ __metadata:
     pod6: "*"
     react: ^16.0.0 || ^17.0.0
     react-dom: ^16.0.0 || ^17.0.0
-  checksum: 6955eb140ff9496e706196ed20844435cbb55d1ef0d1701aed85e274581887d2ff3f83b70361aba874e0af61a366e6c9190ab72a5fd03ffee29543d94cd898cb
+  checksum: e599c8ca262a9ddb73b07faa5dd69b7c168f6c6e48c12ea3a2dd557b75f5044a27cad0ab787fa7d2b5d35823908e4049cd4b67c982d7fede0527bec12e7b53bc
   languageName: node
   linkType: hard
 
@@ -4935,7 +4935,7 @@ __metadata:
   resolution: "podlite-nextjs-site-blog-template@workspace:."
   dependencies:
     "@podlite/schema": ^0.0.9
-    "@podlite/to-jsx": ^0.0.12
+    "@podlite/to-jsx": ^0.0.13
     "@types/node": 17.0.17
     "@types/react": 17.0.39
     commander: ^9.0.0
@@ -4949,7 +4949,7 @@ __metadata:
     next-images: ^1.8.4
     next-optimized-images: ^2.6.2
     pod6: ^0.0.44
-    podlite: ^0.0.18
+    podlite: ^0.0.19
     prettier: ^2.5.1
     react: 17.0.2
     react-dom: 17.0.2
@@ -4962,11 +4962,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"podlite@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "podlite@npm:0.0.18"
+"podlite@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "podlite@npm:0.0.19"
   dependencies:
-    "@podlite/diagram": ^0.0.11
+    "@podlite/diagram": ^0.0.12
     "@podlite/image": ^0.0.8
     "@podlite/schema": ^0.0.9
     "@podlite/toc": 0.0.2
@@ -4974,7 +4974,7 @@ __metadata:
     pod6: ^0.0.44
   peerDependencies:
     pod6: "*"
-  checksum: 5703ad696cf7e8088be03dcb35f217bf111513f7b4b49f2f1092de702843d53b85833acff2b6c1b82ef498ced301787a816f393ebe07876ffaa23184c5f77d82
+  checksum: a2492e6b531bd2713294799e5488cbb2fed96fde4c9b738e702717dbcab483cb5dd6b140d41acc78557e4063bb00a3d14061e83a47fc7451417258e077f91f63
   languageName: node
   linkType: hard
 
