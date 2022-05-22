@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@podlite/schema": "^0.0.9",
-    "@podlite/to-jsx": "^0.0.12",
+    "@podlite/to-jsx": "^0.0.13",
     "@types/node": "17.0.17",
     "@types/react": "17.0.39",
     "commander": "^9.0.0",
@@ -35,7 +35,7 @@
     "next-images": "^1.8.4",
     "next-optimized-images": "^2.6.2",
     "pod6": "^0.0.44",
-    "podlite": "^0.0.18",
+    "podlite": "^0.0.19",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",
