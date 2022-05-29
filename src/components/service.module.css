@@ -7,7 +7,7 @@
 .Conatainer {
     --count-columns : 2;
     content: "";
-    display: table;
+    /* display: table; */
     clear: both;
 }
 .row {
@@ -21,7 +21,7 @@
   /* Create two equal columns that floats next to each other */
 .column {
     flex: calc((100% - 10%) / count-columns);
-    min-width: 30vw;
+    /* min-width: 30vw; */
     /* float: left; */
     /* width: calc(100% / var(--count-columns)); */
     /* width: calc(100% / count-columns);  */
