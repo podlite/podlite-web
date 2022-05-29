@@ -10,9 +10,7 @@ export const TestComponent = ({id,children})=>{
   return <div id={id} className={styles.Conatainer} style={style}>
     <div className={styles.row}>
 
-        {children.map((i,c)=>(
-            <div className={styles.column} key={c}>{i}</div>
-        ))}
+        {children.map((i,c)=><div className={styles.column} key={c}>{i}</div>)}
     </div>
 </div>
 }
@@ -30,8 +28,8 @@ for ( const  year of  Object.keys(groupedByYearMonth).sort((a,b)=> parseInt(b,10
         <h3>{ !isYearAlreadyPut && <time>{year}</time> } 
             <time>{ moment(`${year}-${parseInt(month,10)+1}`).format('MMMM').toUpperCase()}</time>
         </h3>
-        { months[month].map(({publishUrl,title,pubdate, node })=>(
-            <a href={publishUrl}><p>{title || getTextContentFromNode(node)}</p><hr/><time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time></a>       
+        { months[month].map(({publishUrl,title,pubdate, node },index)=>(
+            <a key={index} href={publishUrl}><p>{title || getTextContentFromNode(node)}</p><hr/><time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time></a>       
            ))
         }
         </>
