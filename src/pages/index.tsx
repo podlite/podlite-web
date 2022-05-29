@@ -2,7 +2,7 @@ import { PodNode } from "@podlite/schema"
 import Head from "next/head"
 import { DataFeedContent } from "../../bin/makeDataSource"
 import styles from "../styles/Home.module.css"
-import { getData, getPostComponent } from "../utils"
+import { contentData, getData, getPostComponent } from "../utils"
 import { writeRss } from "../utils/rss"
 import { generateSitemap } from "../utils/sitemap"
 
