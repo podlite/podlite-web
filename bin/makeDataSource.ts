@@ -383,7 +383,7 @@ const processNode = (node: PodNode, file:string) => {
   }
   return makeInterator(rules)(node, {})
 }
-const allRecords = [...notPagesWithPublishAttrs, ...Pages].map(item => {
+const allRecords  = [...notPagesWithPublishAttrs, ...Pages].map(item => {
 
    const node = processNode(item.node, item.file)
   // process images inside description
