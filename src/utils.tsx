@@ -53,13 +53,17 @@ export function pageNames() {
   const data = getData()
   return data.all.map(post => post.publishUrl)
 }
-export function contentData(): ContentRecord[] {
+
+export function contentData(): DataFeedContent["all"] {
   const data = getData()
-  return data.all.map(({ publishUrl, title, node, sources }) => ({
+  return data.all.map(({ publishUrl, title, node, sources, pubdate, ...args }) => ({
+    ...args,
     publishUrl,
     title,
     node,
     sources,
+    pubdate,
+    shortUrl: sources[0]
   }))
 }
 export function mapPathToImage(path: string): string | undefined {
