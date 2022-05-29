@@ -1,19 +1,26 @@
+import { ArticlesWithNavigation, Page } from "@Components/service"
 import { contentData, getPostComponent } from "../utils"
 
-export default function Page({ slug }) {
-  const data = contentData().filter(({ publishUrl }) => {
+export default function AnyPage({ slug }) {
+
+  const checkSlug = (slug) => ({ publishUrl }) => {
     const url = "/" + slug.join("/")
     return publishUrl.match(url)
-  })[0]
+  }
+  const item: any = contentData().find(checkSlug(slug))
+  const allData = item.type !== 'page' ? contentData().filter(({type=''}:any)=>type !== 'page') :  contentData()
+  const articleIndex = allData.findIndex(checkSlug(slug))
+  const prev = allData[articleIndex - 1]
+  const current:any = allData[articleIndex]
+  const next = allData[articleIndex + 1]
+  
   // wrap all elements and add line link info
   return (
     <>
       <main>
-        {/* 
-            //@ts-ignore */}
-        <article>
-        {getPostComponent(data.node)}
-        </article>
+      { item.type === 'page' ? 
+        Page(item)   : <ArticlesWithNavigation articles={[current]} prev={prev} next={next}/>
+    }
       </main>
     </>
   )
