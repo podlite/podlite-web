@@ -117,10 +117,16 @@ export function getPostComponent(podNode: PodNode) {
       React: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
         const componentName = conf.getFirstValue("component")
+        const variables = Object.keys(conf.asHash()).filter((name)=>name !== "component")
+        // prepare simple key value pairs
+        const props = variables.reduce((acc, name) => {
+            acc[name] = conf.getFirstValue(name)
+            return acc
+        }, {})
         if (components[componentName]) {
           return makeComponent(
             components[componentName],
-            {id:conf.getFirstValue("id")},
+            {...props},
             interator(node.content, ctx)
           )
         } else {
