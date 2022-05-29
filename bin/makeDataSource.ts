@@ -136,9 +136,6 @@ const allFiles = glob
   .map((f: any) => {
     count++
     const testData = fs.readFileSync(f).toString()
-    // let podlite = podlite_core({ importPlugins: true }).use({});
-    // let tree = podlite.parse(testData);
-    // const asAst =  podlite.toAstResult(tree).interator;
     console.log(`start parse: ${f}`)
     const asAst = makeAstFromSrc(testData)
     // now check if tree contains block with :pubdate attribute
