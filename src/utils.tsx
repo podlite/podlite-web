@@ -38,10 +38,11 @@ export type FeedContent = publishRecord & {
   sequence?: number
   slug?: string
   sources?: string[]
+  shortUrl?: string
 }
 export type ContentRecord = Pick<
   FeedContent,
-  "publishUrl" | "title" | "node" | "sources"
+  "publishUrl" | "title" | "node" | "sources" | "shortUrl"
 >
 export function getData(): DataFeedContent {
   //@ts-ignore
