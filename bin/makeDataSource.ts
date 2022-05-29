@@ -326,10 +326,19 @@ const processNode = (node: PodNode, file:string) => {
         // save absolute Component path and Component name
         const notDefaultImport = component.match(/{(.*)}/)
         if (notDefaultImport) {
-            
-            componensMap.set(path, notDefaultImport[1].split(/\s*,\s*/) )
+            const components = notDefaultImport[1].split(/\s*,\s*/)
+            // check if already exists
+            if (componensMap.has(path)) {
+                const savedComponents = componensMap.get(path)
+                const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+                const newComponents = [...savedComponents, ...components].filter(onlyUnique)
+                componensMap.set(path, newComponents )
+            } else {
+                componensMap.set(path, components )
+            }
         } else {
-            componensMap.set(path, component)
+                componensMap.set(path, component)
+           
         }
       } else {
           console.warn(`can't parse =React body. Expected =React Component from './somefile.tsx', but got: ${text}`)
