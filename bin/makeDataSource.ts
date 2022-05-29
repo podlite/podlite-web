@@ -20,6 +20,8 @@ import {
   PodliteDocument,
   PodNode,
 } from "@podlite/schema"
+import { convertFileLinksToUrl, makeLinksMap, parseFiles } from "../src/node-utils"
+import { addUrl, makeAstFromSrc } from "../src/shared"
 
 
 const glob = require("glob")
@@ -31,79 +33,12 @@ type pubRecord = {
   description: PodNode
   file: string
 }
-// now we add base60 letters
-const translit = require("iso_9")
-const base60 = require("newbase60")
-const addUrl = (items: publishRecord[]) => {
-  const withSxd: (publishRecord & {
-    number?: number
-    sxd: string
-    sequence?: number
-    slug?: string
-  })[] = items.map(i => {
-    const { file: f } = i
-    const attrs = i
-    const pubDate = new Date(i.pubdate)
-    const sxd = base60.DateToSxg(pubDate)
-    const type = i.type === "note" ? "n" : "a"
-    // make short name from title
-    //console.error(`process ${f}`)
-    let words: string[] = (attrs.title || "").split(/\s/)
-    let res = []
-    while ([...res, words[0]].join(" ").length < 120) {
-      //@ts-ignore
-      res.push(words.shift())
-    }
-    let shortTitle = res.join(" ")
-    // translit only cyrillic
-    const translit2 = /[а-яА-ЯЁё]/.test(shortTitle)
-      ? translit(shortTitle, 5)
-      : shortTitle
-    // console.log({title:attrs.TITLE, shortTitle, translit2})
-    // make url clean
-    const slug = ((translit2.replace(/`/, "") || "").replace(/\W+/g, "-") || "")
-      .replace(/(^[-]+|[-]+$)/g, "")
-      .toLowerCase()
+type publishRecord = pubRecord & {
+    title: string | undefined
+    publishUrl: string
+    sources: string[]
+  }
 
-    return { ...attrs, type, sxd, slug, file: f }
-  })
-
-  // get count of each type on corresponding date
-  withSxd.reduce((acc, item) => {
-    const { sxd, type } = item
-    acc[sxd] = acc[sxd] || {}
-    acc[sxd][type] = acc[sxd][type] || 0
-    acc[sxd][type]++
-    item.number = acc[sxd][type]
-    return acc
-  }, {})
-  // sequence -  index of record at all in that day
-  withSxd.reduce((acc, item) => {
-    const { sxd } = item
-    acc[sxd] = acc[sxd] || 0
-    acc[sxd]++
-    item.sequence = acc[sxd]
-    return acc
-  }, {})
-
-  return withSxd.map(item => {
-    const { type, number, sxd, slug, pubdate, sequence } = item
-    const shortUrl = `/${type}${sxd}${number}`
-    // /2019/12/34/a1/WriteAt-my-opensource-startup-on-Perl-6-Pod
-    const date = new Date(pubdate)
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
-    const day = date.getDate()
-    // !!!!! publishUrl may exists
-    const publishUrl = `/${year}/${month}/${day}/${sequence}/${slug}`
-    const sources = [
-      shortUrl,
-      `/${year}/${month}/${day}/${sequence}`,
-      `/${year}/${month}/${day}/${sequence}/(.*)`,
-    ]
-    return { ...item, shortUrl, publishUrl, sources }
-  })
-}
 
 export function isExistsPubdate(node: PodNode) {
   let isShouldBePublished = false
@@ -123,111 +58,10 @@ export function isExistsPubdate(node: PodNode) {
   const res = transformer(node, {})
   return isShouldBePublished
 }
-let count = 0
 
-const makeAstFromSrc = (src: string) => {
-  let podlite = podlite_core({ importPlugins: true }).use({})
-  let tree = podlite.parse(src)
-  const asAst = podlite.toAstResult(tree).interator as PodliteDocument
-  return asAst
-}
-const allFiles = glob
-  .sync(`${POSTS_PATH}/**/*.pod6`)
-  .map((f: any) => {
-    count++
-    const testData = fs.readFileSync(f).toString()
-    console.log(`start parse: ${f}`)
-    const asAst = makeAstFromSrc(testData)
-    // now check if tree contains block with :pubdate attribute
-    // '* :pubdate'
-    if (!isExistsPubdate(asAst)) {
-      return
-    }
-    // extract notes
-
-    const notes: pubRecord[] = getFromTree(asAst, "para")
-      .filter(n => makeAttrs(n, {}).exists("pubdate"))
-      .map((n: PodNode) => {
-        const pubdate = makeAttrs(n, {}).getFirstValue("pubdate")
-        return {
-          pubdate,
-          type: "note",
-          node: n,
-          description: n,
-          file: f,
-        }
-      })
-
-    let articles: pubRecord[] = []
-    const getArticles = array => {
-      // collect alias
-      const aliases = array.filter(i => i.type == "alias")
-      // at first collect all levels
-      const levels =
-        array.filter(node => node.level && node.name === "head") || []
-      const nodesWithPubdate = levels.filter(node => {
-        return makeAttrs(node, {}).exists("pubdate")
-      })
-      if (nodesWithPubdate.length > 0) {
-        const nodePublished = nodesWithPubdate[0]
-        // get next header with same level
-        const nextHeader = levels
-          .slice(levels.indexOf(nodePublished) + 1) // ignore this and previous nodes
-          .filter(node => node.level <= nodePublished.level) // stop then found the same or lower level
-          .shift()
-
-        let lastIndexOfArticleNode = !nextHeader
-          ? array.length
-          : array.indexOf(nextHeader)
-        const articleContent = array.slice(
-          array.indexOf(nodePublished) + 1,
-          lastIndexOfArticleNode
-        )
-        if (articleContent.length) {
-          const description = getFromTree(articleContent, "para")[0]
-          const pubdate = makeAttrs(nodePublished, {}).getFirstValue("pubdate")
-          articles.push({
-            pubdate,
-            type: "page",
-            node: articleContent,
-            description,
-            file: f,
-          })
-        }
-      }
-      array.forEach(node => {
-        if (Array.isArray(node.content)) {
-          getArticles(node.content)
-        }
-      })
-    }
-    getArticles([asAst])
-    // note get full posts
-    const pages: pubRecord[] = getFromTree(asAst, "pod")
-      .filter(n => makeAttrs(n, {}).exists("pubdate"))
-      .map((n: PodNode) => {
-        const pubdate = makeAttrs(n, {}).getFirstValue("pubdate")
-        return {
-          pubdate,
-          type: "page",
-          node: n,
-          file: f,
-        }
-      })
-    console.warn(
-      ` pages: ${pages.length} articles: ${articles.length}, notes: ${notes.length} from ${f}`
-    )
-    return [...pages, ...articles, ...notes].map(item => {
-      return { ...item, file: f }
-    })
-  })
-  .filter(Boolean)
+const allFiles = parseFiles(`${POSTS_PATH}/**/*.pod6`)
 // flatten
-type publishRecord = pubRecord & {
-  title: string | undefined
-  publishUrl: string
-  sources: string[]
-}
+
 // declare type pubRecord = { type: string, pubdate: string, node: PodNode, description: PodNode, file: string, publishUrl: string}
 const nodes: publishRecord[] = []
 allFiles.flat().map((record: pubRecord) => {
@@ -383,7 +217,7 @@ const processNode = (node: PodNode, file:string) => {
   }
   return makeInterator(rules)(node, {})
 }
-const allRecords  = [...notPagesWithPublishAttrs, ...Pages].map(item => {
+const allRecords  = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages]).map(item => {
 
    const node = processNode(item.node, item.file)
   // process images inside description
@@ -402,7 +236,11 @@ const controlJson = { nextPublishTime: nextPublishTime }
 
 // const siteInfo = require(`${POSTS_PATH}/config`)
 // for now trying to et index page
+
+// try to get index.from alreday exists records
 const indexFilePath = `${POSTS_PATH}/index.pod6`
+const collectlinksMap = makeLinksMap(allRecords)
+// console.log(indexPageRecord);
 const indexPageData = (() => {
     
     if ( fs.existsSync(indexFilePath) ) {
@@ -412,7 +250,19 @@ const indexPageData = (() => {
         return defaultIndexPage
     }
  })()
- const indexPageTree  = processNode( makeAstFromSrc (indexPageData ), indexFilePath)
+ const indexPageTree  = convertFileLinksToUrl(
+    [{
+        node: processNode( makeAstFromSrc (indexPageData ), indexFilePath),
+        publishUrl: "/",
+        file: indexFilePath,
+        type: "page",
+        pubdate:'',
+        description:'',
+        title:'',
+        sources:[]
+    }],
+    collectlinksMap
+    )[0].node
   // collect site metadata like TITLE, SUBTITLE and attributes from pod
   const [pod] = getFromTree(indexPageTree, "pod")
   const attr = makeAttrs(pod, {})
@@ -441,7 +291,7 @@ const indexPageData = (() => {
   })(indexPageTree, {})
 
   const siteData:SiteInfo = {
-        postsPerPage, favicon, url, pathPrefix,
+        postsPerPage, favicon, url:process.env.SITE_URL||url, pathPrefix,
         node:pageNode,
         author,
         title,
