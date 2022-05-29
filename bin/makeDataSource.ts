@@ -94,7 +94,7 @@ const addUrl = (items: publishRecord[]) => {
     const month = date.getMonth() + 1
     const year = date.getFullYear()
     const day = date.getDate()
-    // !!!!! publishUrl  может присутсвовать
+    // !!!!! publishUrl may exists
     const publishUrl = `/${year}/${month}/${day}/${sequence}/${slug}`
     const sources = [
       shortUrl,
