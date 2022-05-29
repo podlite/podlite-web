@@ -66,6 +66,28 @@ export function mapPathToImage(path: string): string | undefined {
   const data = getData().imagesMap
   return data[path]
 }
+export function getArticlesGroupedByYearMonth() {
+    //filter out pages
+    const source =contentData().filter(({type=''})=>type !== 'page').reverse();
+    
+    const groupedByYearMonth = source.reduce((acc:{[year:number]:{
+        [month:number]:DataFeedContent["all"]
+    }},  rest ) => {
+        const year = new Date(rest.pubdate).getFullYear()
+        const month = new Date(rest.pubdate).getMonth()
+        const { [year]:months={}, ...other } = acc
+        const { [month]:monthRecords=[], ...otherMonth } = months
+        return {
+            ...other,
+            [year]: {
+                ...otherMonth,
+                [month]: [ ...monthRecords, rest ]
+            }
+        }
+        
+    }, {})
+    return groupedByYearMonth
+}
 
 export function getPostComponent(podNode: PodNode) {
   const plugins = (makeComponent): Partial<Rules> => {
