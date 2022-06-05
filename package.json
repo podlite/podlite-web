@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "next_dev": "next dev",
     "build": "next telemetry disable &&NODE_OPTIONS=--max_old_space_size=4096 next build",
-    "start": "next start",
+    "start": "yarn process && yarn build && next start",
     "test": "jest",
     "lint": "next lint",
     "postinstall": "yarn config set --home enableTelemetry 0 && next telemetry disable",
@@ -13,7 +13,7 @@
     "ci": "rimraf node_modules && yarn",
     "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out",
     "process": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
-    "watch": "npx nodemon --watch ./data --watch ./pub -e pod6   --exec 'yarn clean && yarn process && next dev'",
+    "dev": "npx nodemon --watch ./data --watch ./pub -e pod6   --exec 'yarn clean && yarn process && next dev'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
@@ -39,6 +39,7 @@
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.4",
     "next-optimized-images": "^2.6.2",
+    "nodemon": "^2.0.16",
     "pod6": "^0.0.44",
     "podlite": "^0.0.20",
     "prettier": "^2.5.1",

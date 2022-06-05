@@ -64,7 +64,7 @@ export const Page = ({title, node, shortUrl, key,publishUrl, pubdate})=>(
 )
 
 export const ArticlesWithNavigation = ({articles, prev, next }:{articles:any[],prev?:any, next?:any})=>{
-  const makeLink = (title, url) => <Link href={url}><a>{title}</a></Link>
+  const makeLink = (title, url) => <Link href={url}>{title}</Link>
   return (<>
     { 
         articles.map(({publishUrl, ...args}:any)=>Article({key:publishUrl, publishUrl, ...args}))
