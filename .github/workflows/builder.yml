@@ -14,7 +14,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push the Docker
-          run: |
+        run: |
           docker build -t podlite/podlite-nextjs-template .
           docker push podlite/podlite-nextjs-template
 
