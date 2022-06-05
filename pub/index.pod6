@@ -2,7 +2,8 @@
 = :postsPerPage<4> :favicon<./favicon.png>
 = :url<http://example.com>
 = :pathPrefix("/")
-= :globalStyles("../src/styles/pod6.css")
+= :globalStyles("./page.styles.css")
+= :pubdate<2018-01-01>
 
 
 =TITLE 📝 How to make a great post
@@ -14,52 +15,6 @@
 = :bio<Keeping this page up to date 💻.>
 = :contact
 
-=useReact  {TestComponent} from '@Components/service'
-=begin React :component<TestComponent>
-=Image ./gatsby-astronaut.png
-=begin para
-
-=para
-Use a C<for> loop instead.N<The Raku C<for> loop is far more
-powerful than its Perl 5 predecessor.> Preferably with an explicit
-iterator variable.
-
-Options B<are>:
-
-=item1  Animal
-=item2     Vertebrate
-=item2     Invertebrate
-
-=item1  Phase
-=item2     Solid
-=item2     Liquid
-=item2     Gas
-=item2     I<Chocolate>
-
-I<Table>
-
-=para
-Use a C<for> loop instead.N<The Raku C<for> loop is far more
-powerful than its Perl 5 predecessor.> Preferably with an explicit
-iterator variable.
-
-Options B<are>:
-
-=item1  Animal
-=item2     Vertebrate
-=item2     Invertebrate
-
-=item1  Phase
-=item2     Solid
-=item2     Liquid
-=item2     Gas
-=item2     I<Chocolate>
-
-I<Table>
-
-
-=end para
-=end React
 
 =head1 Title
 =head2 Subtitle
@@ -113,9 +68,8 @@ I<Table>
 
 =end table
 
-
-
-=COPYRIGHT 
-© All rights reserved. 2022. <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <a href="https://zahatski.com/2020/5/8/1/sources-of-this-blog">Made with 🌶️ and podlite</a>
+=begin para :id<copyright> 
+© All rights reserved. 2022.  I<L<Made with 🌶️ and podlite|https://github.com/podlite>>
+=end para
 
 =end pod
