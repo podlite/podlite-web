@@ -2,7 +2,7 @@ import { PodNode } from "@podlite/schema"
 import path from "path"
 
 // export const POSTS_PATH = path.join(process.cwd(), "/data")
-export const POSTS_PATH = path.join(process.cwd(), "/pub")
+export const POSTS_PATH = process.env.POSTS_PATH || path.join(process.cwd(), "/pub")
 
 export const DATA_PATH = path.join(process.cwd(), "/built/data.json")
 export const IMAGE_LIB = path.join(process.cwd(), "/built/images.ts")
