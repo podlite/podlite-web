@@ -5,7 +5,7 @@ import type { AppProps } from "next/app"
 import { contentData, getSiteInfo } from "../utils"
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const {slug} = pageProps
+    const {slug = []} = pageProps
     const checkSlug = (slug) => ({ publishUrl }) => {
         const url = "/" + slug.join("/")
         return publishUrl.match(url)
