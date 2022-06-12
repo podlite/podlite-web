@@ -13,7 +13,6 @@ export default function AnyPage({ slug }) {
   const prev = allData[articleIndex - 1]
   const current:any = allData[articleIndex]
   const next = allData[articleIndex + 1]
-  
   // wrap all elements and add line link info
   return (
     <>

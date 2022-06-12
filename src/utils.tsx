@@ -50,6 +50,10 @@ export function getData(): DataFeedContent {
   //   const data = fs.readFileSync(DATA_PATH, "utf8").toString()
   //   return JSON.parse(data)
 }
+
+export function getSiteInfo():DataFeedContent["siteInfo"] {
+    return getData().siteInfo
+}
 export function pageNames() {
   const data = getData()
   return data.all.map(post => post.publishUrl)
