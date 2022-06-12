@@ -47,7 +47,7 @@ export function writeRss() {
       return new Date(a.pubdate) - new Date(b.pubdate)
     })
     .reverse()
-    .splice(0, 20)
+    .splice(0, 10)
   const rss = getRssForData({ ...dataFeed, all: pages })
   fs.writeFileSync(`${PUBLIC_PATH}/rss.xml`, rss);
 }
