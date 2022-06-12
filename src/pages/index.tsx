@@ -1,8 +1,8 @@
 import { PodNode } from "@podlite/schema"
 import Head from "next/head"
+import { generateRedirects } from "src/utils/redirects"
 import { DataFeedContent } from "../../bin/makeDataSource"
-import styles from "../styles/Home.module.css"
-import { contentData, getData, getPostComponent } from "../utils"
+import { getData, getPostComponent } from "../utils"
 import { writeRss } from "../utils/rss"
 import { generateSitemap } from "../utils/sitemap"
 
@@ -32,6 +32,7 @@ interface IndexProps  {
 export async function getStaticProps():Promise<{ props :IndexProps}> {
     writeRss()
     generateSitemap()
+    generateRedirects()
     const { author, url, title , subtitle , node }:IndexProps = getData().siteInfo
     return {props:{author, url, title, subtitle, node }}
     
