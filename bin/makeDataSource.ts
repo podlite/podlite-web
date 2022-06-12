@@ -111,14 +111,6 @@ let Pages = allItemForPublish
 
 const notPagesWithPublishAttrs = addUrl(notPages)
 
-// let redirects = []
-// notPagesWithPublishAttrs.map(item=>{
-//     const {publishUrl, sources } = item
-//     sources.forEach( src => {
-//       redirects.push({source: src, destination: publishUrl, "statusCode": 301})
-//     })
-// })
-
 // save additional info
 const nextPublishTime = (
   allItemForPublish.filter(a => isDateInFuture(a.pubdate))[0] || {}
@@ -290,6 +282,13 @@ const indexPageData = (() => {
     },
   })(indexPageTree, {})
 
+  let redirects:SiteInfo['redirects'] = []
+  notPagesWithPublishAttrs.map(item=>{
+        const {publishUrl, sources } = item
+        sources.forEach( src => {
+        redirects.push({source: src, destination: publishUrl, "statusCode": 308}) //permanent redirect
+        })
+  })
   const siteData:SiteInfo = {
         postsPerPage, favicon, url:process.env.SITE_URL||url, pathPrefix,
         node:pageNode,
@@ -297,6 +296,7 @@ const indexPageData = (() => {
         title,
         subtitle,
         globalStyles,
+        redirects
   }
 
 export type DataFeedContent = typeof dataJson

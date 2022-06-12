@@ -28,7 +28,12 @@ export type SiteInfo = {
       photo: "./photo.jpg"
       bio: "Keeping this page up to date 💻."
       [name: string]: string
-    }
+    },
+    redirects:{
+        source : string,
+        destination: string,
+        statusCode: number,
+    }[]
   }
   
 export const defaultIndexPage = `
