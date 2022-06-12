@@ -1,4 +1,4 @@
-import { contentData, ContentRecord, getArticlesGroupedByYearMonth, getPostComponent } from 'src/utils';
+import { contentData, ContentRecord, getArticlesGroupedByYearMonth, getPostComponent, getSiteInfo } from 'src/utils';
 import moment from 'moment';
 import 'moment/min/locales.min'
 import styles from './service.module.css'
@@ -41,13 +41,15 @@ for ( const  year of  Object.keys(groupedByYearMonth).sort((a,b)=> parseInt(b,10
 return <div className="details">{res}</div>
 }
 
-export const Article = ({title, node, shortUrl, key,publishUrl, pubdate})=>(
+export const Article = ({title, node, shortUrl, key,publishUrl, pubdate})=>{
+    const [ _ , domain = '' ]  = getSiteInfo().url.split(/\/\//)
+    return (
         <article key={key}>
         <header><h1>{title}</h1></header>
         {getPostComponent(node)}
-        <footer><a href={shortUrl}>{shortUrl}</a><Link href={publishUrl}>{moment(pubdate).format('H:mm on YYYY-MM-DD')}</Link></footer>
+        <footer><a href={shortUrl}>{domain}{shortUrl}</a><Link href={publishUrl}>{moment(pubdate).format('H:mm on YYYY-MM-DD')}</Link></footer>
         </article>
-)
+)}
 
 export const Page = ({title, node, shortUrl, key,publishUrl, pubdate})=>(
   <>
