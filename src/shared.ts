@@ -153,7 +153,7 @@ export const addUrl = (items: publishRecord[]) => {
       const publishUrl = `/${year}/${month}/${day}/${sequence}/${slug}`
       const sources = [
         shortUrl,
-        `/${year}/${month}/${day}/${sequence}`,
+        // `/${year}/${month}/${day}/${sequence}`,
       ]
       return { ...item, shortUrl, publishUrl, sources }
     })
