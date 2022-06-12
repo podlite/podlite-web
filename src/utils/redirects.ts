@@ -5,5 +5,5 @@ import { getSiteInfo } from "../utils";
 export function generateRedirects() {
     const {redirects} = getSiteInfo()
     
-  fs.writeFileSync(`${PUBLIC_PATH}/vercel.json`, JSON.stringify({redirects},null,2));
+  fs.writeFileSync(`${PUBLIC_PATH}/vercel.json`, JSON.stringify({redirects,"cleanUrls": true},null,2));
 }
