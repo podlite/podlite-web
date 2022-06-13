@@ -150,7 +150,7 @@ export const addUrl = (items: publishRecord[]) => {
       const year = date.getFullYear()
       const day = date.getDate()
       // !!!!! publishUrl may exists
-      const publishUrl = `/${year}/${month}/${day}/${sequence}/${slug}`
+      const publishUrl = `/${year}/${month}/${day}/${sequence}/${slug}`.replace(/\/$/,'')
       const sources = [
         shortUrl,
         // `/${year}/${month}/${day}/${sequence}`,
