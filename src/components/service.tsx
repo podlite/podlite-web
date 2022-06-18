@@ -26,7 +26,7 @@ for ( const  year of  Object.keys(groupedByYearMonth).sort((a,b)=> parseInt(b,10
     for ( const month of Object.keys(months).sort((a,b)=> parseInt(b,10)-parseInt(a,10)) ) {
         const monthRecord = <>
         <h3>{ !isYearAlreadyPut && <time>{year}</time> } 
-            <time>{ moment(`${year}-${parseInt(month,10)+1}`).format('MMMM').toUpperCase()}</time>
+            <time>{ moment(`${year}-${parseInt(month,10)+1}`,["YYYY-MM"]).format('MMMM').toUpperCase()}</time>
         </h3>
         { months[month].map(({publishUrl,title,pubdate, node },index)=>(
             <a key={index} href={publishUrl}><p>{title || getTextContentFromNode(node)}</p><hr/><time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time></a>       
