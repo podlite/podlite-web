@@ -1,4 +1,5 @@
 import * as fs from "fs"
+import * as CRC32 from "crc-32" 
 import {
   POSTS_PATH,
   DATA_PATH,
@@ -222,7 +223,15 @@ const allRecords  = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages
   return { ...item, node, ...extra }
 })
 
-const controlJson = { nextPublishTime: nextPublishTime }
+const getStateVersion = (allREcords:typeof allRecords):string => {
+    return CRC32.str(allREcords.reduce((prev,current)=>{
+        return prev + CRC32.str(getTextContentFromNode(current.node))
+    }, "")) + ""
+}
+
+const controlJson = { 
+    stateVersion: getStateVersion(allRecords),
+    nextPublishTime: nextPublishTime }
 
 
 
