@@ -2291,6 +2291,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"crc-32@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "crc-32@npm:1.2.2"
+  bin:
+    crc32: bin/crc32.njs
+  checksum: ad2d0ad0cbd465b75dcaeeff0600f8195b686816ab5f3ba4c6e052a07f728c3e70df2e3ca9fd3d4484dc4ba70586e161ca5a2334ec8bf5a41bf022a6103ff243
+  languageName: node
+  linkType: hard
+
 "create-require@npm:^1.1.0":
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
@@ -6504,6 +6513,7 @@ __metadata:
     "@types/node": 17.0.17
     "@types/react": 17.0.39
     commander: ^9.0.0
+    crc-32: ^1.2.2
     eslint: 8.9.0
     eslint-config-next: 12.0.10
     iso_9: ^1.0.4
