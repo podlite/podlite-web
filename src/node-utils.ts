@@ -72,7 +72,12 @@ const allFiles = glob
     const notes: pubRecord[] = getFromTree(asAst, "para")
       .filter(n => makeAttrs(n, {}).exists("pubdate"))
       .map((n: PodNode) => {
-        const pubdate = makeAttrs(n, {}).getFirstValue("pubdate")
+        const a_pubdate = makeAttrs(n, {}).getFirstValue("pubdate")
+        // Due to cover some cases whan new Date fail on safari, i.e.
+        // new Date("2022-05-07 10:00:00").getFullYear() -> NaN
+        // convert to ISO 8601 "2022-05-07 10:00:00" -> "2022-05-07T10:00:00"
+        const  pubdate = a_pubdate.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/) ? a_pubdate.replace(" ","T") : a_pubdate
+
         return {
           pubdate,
           type: "note",
@@ -88,8 +93,12 @@ const allFiles = glob
     const pages: pubRecord[] = getFromTree(asAst, "pod")
       .filter(n => makeAttrs(n, {}).exists("pubdate"))
       .map((n: PodNode) => {
-        const pubdate = makeAttrs(n, {}).getFirstValue("pubdate")
-        return {
+        const a_pubdate = makeAttrs(n, {}).getFirstValue("pubdate")
+        // Due to cover some cases whan new Date fail on safari, i.e.
+        // new Date("2022-05-07 10:00:00").getFullYear() -> NaN
+        // convert to ISO 8601 "2022-05-07 10:00:00" -> "2022-05-07T10:00:00"
+        const  pubdate = a_pubdate.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/) ? a_pubdate.replace(" ","T") : a_pubdate
+       return {
           pubdate,
           type: "page",
           node: n,
