@@ -5,7 +5,7 @@ export default function AnyPage({ slug }) {
 
   const checkSlug = (slug) => ({ publishUrl }) => {
     const url = "/" + slug.join("/")
-    return publishUrl.match(url)
+    return publishUrl === url
   }
   const item: any = contentData().find(checkSlug(slug))
   const allData = item.type !== 'page' ? contentData().filter(({type=''}:any)=>type !== 'page') :  contentData()
