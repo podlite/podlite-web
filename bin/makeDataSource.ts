@@ -11,6 +11,7 @@ import {
   defaultIndexPage,
   STYLES_LIB,
   SiteInfo,
+  INDEX_PATH,
 } from "../src/constants"
 import { podlite as podlite_core } from "podlite"
 import makeAttrs from "pod6/built/helpers/config"
@@ -239,7 +240,7 @@ const controlJson = {
 // for now trying to et index page
 
 // try to get index.from alreday exists records
-const indexFilePath = `${POSTS_PATH}/index.pod6`
+const indexFilePath = `${POSTS_PATH}/${INDEX_PATH}`
 const collectlinksMap = makeLinksMap(allRecords)
 // console.log(indexPageRecord);
 const indexPageData = (() => {
