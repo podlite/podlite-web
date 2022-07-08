@@ -29,7 +29,7 @@ export const convertFileLinksToUrl = (records:publishRecord[], additinalMap = {}
     const linksMap = { ...additinalMap, ...makeLinksMap(records)}
     const processed = records.map(
         item=>{
-        const res = makeInterator({
+        const converter = makeInterator({
             'L<>': (node, ctx, interator) => {
             const {content,meta} = node
             const link = meta ? meta : getTextContentFromNode(content)
@@ -47,7 +47,12 @@ export const convertFileLinksToUrl = (records:publishRecord[], additinalMap = {}
 
             return {...node, ...updated}
             },
-      })(item.node, {})
+      })
+      const res = converter(item.node, {})
+      if (item.description) {
+        const description = converter(item.description, {})
+        return { ...item, node:res , description}
+      }
       return { ...item, node:res }
     })
     return processed
