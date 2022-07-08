@@ -19,7 +19,7 @@ it("collect links", () => {
     .map(({ node }) => {
       let links: any[] = []
       makeInterator({
-        "L<>": ({content,meta}) => {
+        "L<>": ({ content, meta }) => {
           links = [...links, meta ? meta : getTextContentFromNode(content)]
         },
       })(node, {})
@@ -29,7 +29,7 @@ it("collect links", () => {
 
   expect(res).toMatchInlineSnapshot(`
     Array [
-      "/2023/4/1/2/",
+      "/2023/4/1/2",
     ]
   `)
 })
