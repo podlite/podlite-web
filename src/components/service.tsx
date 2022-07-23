@@ -59,7 +59,7 @@ export const Page = ({title, node, shortUrl, key,publishUrl, pubdate})=>(
     </article>
         <TestComponent id="nav">
         <></>
-        { <Link href='/'>🔼</Link> }
+        { <Link href='/'>↑</Link> }
         <></>
     </TestComponent>
   </>
@@ -73,8 +73,8 @@ export const ArticlesWithNavigation = ({articles, prev, next }:{articles:any[],p
     }
     <TestComponent id="nav">
         { prev && makeLink(prev.title || getTextContentFromNode(prev.node), prev.publishUrl)}
-        { <div className="navigate">{prev && makeLink("←", prev.publishUrl)}<Link href='/'>🔼</Link>{next &&makeLink("→", next.publishUrl)}</div>}
-        { next && makeLink(next.title || getTextContentFromNode(next.node), next.publishUrl)}
+        { <div className="navigate">{prev ? makeLink("←", prev.publishUrl) : <Link href="#"> </Link>}<Link href='/'>↑</Link>{next ? makeLink("→", next.publishUrl) : <Link href="#"> </Link>}</div>}
+        { next && makeLink(next.title || getTextContentFromNode(next.node), next.publishUrl) }
     </TestComponent>
   </>
 )}
