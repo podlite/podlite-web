@@ -17,19 +17,12 @@ export const PUBLIC_PATH = path.join(process.cwd(), "/public")
 
 export type SiteInfo = {
     postsPerPage: 4
-    favicon: "./favicon.png"
+    favicon: string
     url: "http://example.com"
     pathPrefix: "/"
     title: "Example"
-    subtitle: "Example"
     globalStyles?: string
     node: PodNode
-    author: {
-      name: "Your name here"
-      photo: "./photo.jpg"
-      bio: "Keeping this page up to date 💻."
-      [name: string]: string
-    },
     redirects:{
         source : string,
         destination: string,
