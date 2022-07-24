@@ -25,7 +25,7 @@ import {
 import { convertFileLinksToUrl, makeLinksMap, parseFiles } from "../src/node-utils"
 import { addUrl, makeAstFromSrc } from "../src/shared"
 
-
+const pathFs = require("path")
 const glob = require("glob")
 
 type pubRecord = {
@@ -308,11 +308,9 @@ const indexPageData = (() => {
         })
   })
   const siteData:SiteInfo = {
-        postsPerPage, favicon, url:process.env.SITE_URL||url, pathPrefix,
+        postsPerPage, favicon: faviconFileName, url:process.env.SITE_URL||url, pathPrefix,
         node:pageNode,
-        author,
         title,
-        subtitle,
         globalStyles,
         redirects
   }
