@@ -6,13 +6,14 @@ import { getData, getPostComponent } from "../utils"
 import { writeRss } from "../utils/rss"
 import { generateSitemap } from "../utils/sitemap"
 
-const Home = ({url, author, title, subtitle, node}:IndexProps) => {
+const Home = ({title, node}:IndexProps) => {
+    const faviconFile = getData().siteInfo.favicon
     return (
         <div>
         <Head>
           <title>{title}</title>
-          <meta name="description" content={subtitle} />
-          <link rel="icon" href="/favicon.ico" />
+          <meta name="description" content={title} />
+          <link rel="shortcut icon" href={`/${faviconFile}`} />
         </Head>
         <main id="body"> 
           {getPostComponent(node)}
@@ -22,19 +23,17 @@ const Home = ({url, author, title, subtitle, node}:IndexProps) => {
   }
 interface SiteProps extends Partial<DataFeedContent['siteInfo']> {}
 interface IndexProps  {
-    url:string,
+    url?:string,
     title:string,
-    subtitle:string,
     node:PodNode,
-    author: SiteProps['author'],
 }
 
 export async function getStaticProps():Promise<{ props :IndexProps}> {
     writeRss()
     generateSitemap()
     generateRedirects()
-    const { author, url, title , subtitle , node }:IndexProps = getData().siteInfo
-    return {props:{author, url, title, subtitle, node }}
+    const { title ,  node }:IndexProps = getData().siteInfo
+    return {props:{ title, node }}
     
 }
 export default Home
