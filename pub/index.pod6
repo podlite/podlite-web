@@ -1,5 +1,5 @@
 =begin pod  
-= :postsPerPage<4> :favicon<./favicon.png>
+= :favicon<./256x256.png>
 = :url<http://example.com>
 = :pathPrefix("/")
 = :globalStyles("./page.styles.css")
@@ -7,14 +7,6 @@
 
 
 =TITLE 📝 How to make a great post
-=SUBTITLE This is a subtitle
-
-=for AUTHOR 
-= :name<Your name here>
-= :photo<./photo.jpg>
-= :bio<Keeping this page up to date 💻.>
-= :contact
-
 
 =head1 Title
 =head2 Subtitle
