@@ -271,7 +271,15 @@ const indexPageData = (() => {
   const pageAttr = Object.fromEntries(
     Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)])
   )
-  const {postsPerPage, favicon, url, pathPrefix, globalStyles = "../src/styles/pod6.css"} = pageAttr
+  const {postsPerPage, favicon, url, pathPrefix, globalStyles } = pageAttr
+
+  // process favicon file
+  
+  const faviconPath = favicon ? pathFs.join(pathFs.dirname(indexFilePath),favicon) : 'src/favicon.png'
+  const { base, ext } = pathFs.parse(faviconPath)
+  const faviconFileName = `favicon${ext}`
+  fs.copyFileSync(faviconPath, `${PUBLIC_PATH}/${faviconFileName}`)
+
 
   let title
   let subtitle
