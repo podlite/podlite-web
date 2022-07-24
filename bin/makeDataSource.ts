@@ -332,8 +332,14 @@ fs.writeFileSync(DATA_PATH, JSON.stringify(dataJson, null, 2))
     if ( siteData.globalStyles ) {
         const pathFs = require("path")
         const docDirPath = pathFs.dirname(STYLES_LIB)
-        // const path = pathFs.relative(docDirPath, siteData.globalStyles )
         const path = pathFs.relative(docDirPath, pathFs.join(pathFs.dirname(indexFilePath),siteData.globalStyles) )
+        stylesContent += `
+            @import '${path}';
+        `
+    } else {
+        const pathDefault = pathFs.join( process.cwd(),"src/styles/pod6.css")
+        const docDirPath = pathFs.dirname(STYLES_LIB)
+        const path = pathFs.relative(docDirPath, pathDefault  )
         stylesContent += `
             @import '${path}';
         `
