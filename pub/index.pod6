@@ -3,13 +3,30 @@
 = :url<http://example.com>
 = :pathPrefix("/")
 = :globalStyles("./page.styles.css")
-= :pubdate<2018-01-01>
 
 
 =TITLE 📝 How to make a great post
 
-=head1 Title
-=head2 Subtitle
+=head1 👋 Welcome !
+=head2 This is demo page of L<podlite-web|https://github.com/podlite/podlite-web>! 
+
+podlite-web - a minimal, lightweight starter for creating blogs/sites using nexjs and L<pod6|https://docs.raku.org/language/pod> markup language!
+
+
+=for Toc :title<Table if contents>
+head3
+
+It possible to create I<table of contents> for selected blocks:
+
+=begin code
+=for Toc :title<List of tables, images, diagrams>
+table, Image, Diagram
+=end code
+
+will render to:
+
+=for Toc :title<List of tables, images, diagrams>
+table, Image, Diagram
 
 =for code :allow(B)
 This I<is> a B<text>
@@ -42,7 +59,7 @@ Options B<are>:
 =item2     Gas
 =item2     I<Chocolate>
 
-I<Table>
+=head3 Using tables
 
 =begin table :caption('Super table!')
                         Secret
@@ -60,8 +77,39 @@ I<Table>
 
 =end table
 
+=head3 Using diagrams
+
+=begin code
+=for Diagram :caption<This is demo diagram>
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+=end code
+
+=for Diagram :caption<This is demo diagram>
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+
+=head3 Using images
+=begin code
+=Image logo.png
+This is a logo of L<podlite|https://github.com/podlite> project.
+
+=end code
+=Image logo.png
+This is a logo of L<podlite|https://github.com/podlite> project.
+
+You can try Pod6 here: L<Pod6 online| https://pod6.in>.
+
+Source of this page you can found L<here| https://github.com/podlite/podlite-web/blob/master/pub/index.pod6>
+
 =begin para :id<copyright> 
-© All rights reserved. 2022.  I<L<Made with 🌶️ and podlite|https://github.com/podlite>>
+© All rights reserved. I<L<Made with podlite|https://github.com/podlite>>
 =end para
 
 =end pod
