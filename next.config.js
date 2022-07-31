@@ -28,6 +28,7 @@ module.exports = withPlugins([
     webpack: (config) => {
       const assetRegex = new RegExp(`.(png|jpe?g|gif|woff|woff2|ico|svg|mp4)$`);
       config.resolve.alias["@Components"] = path.resolve("./src/components"),
+      config.resolve.alias["@Styles"] = path.resolve("./src/styles"),
       config.module.rules.push({
         test: assetRegex,
         type: "asset/resource",
