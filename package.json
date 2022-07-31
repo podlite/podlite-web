@@ -10,8 +10,9 @@
     "lint": "next lint",
     "postinstall": "yarn config set --home enableTelemetry 0 && next telemetry disable",
     "export": "yarn process && yarn build && next export -o out",
+    "export-zip": "yarn process && yarn build && next export -o site && zip -r - site | cat",
     "ci": "rimraf node_modules && yarn",
-    "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out 'public/!(.gitignore)'",
+    "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out 'public/!(.gitignore)' site",
     "process": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
     "dev": "npx nodemon --watch ./data --watch ./pub -e pod6   --exec 'yarn clean && yarn process && next dev'",
     "format": "prettier --write 'src/**/*.{ts,tsx}'"
