@@ -1,4 +1,3 @@
-import "../styles/pod6.css"
 import "../../built/styles.css"
 import Head from "next/head"
 import type { AppProps } from "next/app"

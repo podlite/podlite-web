@@ -335,9 +335,10 @@ fs.writeFileSync(DATA_PATH, JSON.stringify(dataJson, null, 2))
             @import '${path}';
         `
     } else {
-        const pathDefault = pathFs.join( process.cwd(),"src/styles/pod6.css")
-        const docDirPath = pathFs.dirname(STYLES_LIB)
-        const path = pathFs.relative(docDirPath, pathDefault  )
+        // const pathDefault = pathFs.join( process.cwd(),"src/styles/pod6.css")
+        // const docDirPath = pathFs.dirname(STYLES_LIB)
+        // const path = pathFs.relative(docDirPath, pathDefault  )
+        const path = '@Styles/default'
         stylesContent += `
             @import '${path}';
         `

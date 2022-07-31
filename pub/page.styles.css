@@ -1,3 +1,10 @@
+@import "@Styles/default.css";
 body {
     padding: 2em 5em;
+}
+h1 {
+    font-size: 48px;
+}
+h2 {
+    font-size: 24px;
 }
