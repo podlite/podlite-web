@@ -11,6 +11,15 @@ yarn && yarn dev
 ```
 * open link [http://localhost:3000](http://localhost:3000) after
 
+Here is demo page from `pub` directory. 
+
+![Podlite-Web demo page Screenshot](./assets/demopage1.png)
+![Podlite-Web demo page Screenshot](./assets/demopage2.png)
+
+You can edit pub/*.pod6 files and see changes after save.
+
+All features  like `=Diagram`, `=Image` , `=Toc` for [Podlite editor](https://github.com/podlite/podlite-desktop) is available for podlite-web too:
+![Podlite editor Screenshot](./assets/podlite-editor.png)
 
 ### using Docker
 
@@ -19,7 +28,7 @@ yarn && yarn dev
 =begin pod
 =TITLE Personal blog
 
-🚧Web site is under construction.🚧
+🚧 Web site is under construction. 🚧
 =end pod
 ```
 run the command:
@@ -61,7 +70,7 @@ yarn
 
 ### Develop
 
-`yarn dev` will spin up the demosite from `pub` directory and watch changes to the libraries.
+`yarn dev` will spin up the demosite from `pub` directory and watch changes to the files.
 
 ### Export to zip 
 
@@ -69,7 +78,7 @@ yarn
 yarn export-zip > file.zip
 ```
 
-Explore `examples` dir for get more pod6 insight's.
+Explore `examples` dir for get more pod6 insights.
 
 thank you!
 ## License

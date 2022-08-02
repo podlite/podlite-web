@@ -5,12 +5,12 @@
 = :globalStyles("./page.styles.css")
 
 
-=TITLE 📝 How to make a great post
+=TITLE 📝 This is a title of site
 
 =head1 👋 Welcome !
 =head2 This is demo page of L<podlite-web|https://github.com/podlite/podlite-web>! 
 
-podlite-web - a minimal, lightweight starter for creating blogs/sites using nexjs and L<pod6|https://docs.raku.org/language/pod> markup language!
+podlite-web - a minimal, lightweight starter for creating static blogs/sites using nexjs and L<pod6|https://docs.raku.org/language/pod> markup language!
 
 
 =for Toc :title<Table if contents>
