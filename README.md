@@ -53,10 +53,10 @@ docker run -it --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > site.zip
 * change default `index.pod6` path to subdirectory
 
 ```sh
+cd examples/01-minimal
 docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 \
 -e 'SITE_URL=https://example.com' \
 -e 'TZ=Europe/London' \
--e 'INDEX_PATH=minimal/index.pod6' \
 podlite/podlite-web export-zip > site.zip
 ```
 
