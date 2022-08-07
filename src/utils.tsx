@@ -6,6 +6,8 @@ import d from "../built/data.json"
 import * as img from "../built/images"
 import * as components from "../built/components"
 import { DataFeedContent } from "../bin/makeDataSource"
+import { setFn } from 'pod6/built/helpers/handlers'
+import Link from 'next/link'
 // import * as fs from "fs"
 import { DATA_PATH } from "./constants"
 import makeAttrs from "pod6/built/helpers/config"
@@ -123,6 +125,22 @@ export function getPostComponent(podNode: PodNode) {
       TITLE: () => () => null,
       //@ts-ignore
       DESCRIPTION: () => () => null,
+      "L<>": setFn(( node, ctx ) => {
+        let { meta } = node
+        if ( meta === null) {
+            meta = node.content
+        }
+        //TODO: extract text from content array
+        if ( Array.isArray(meta)) {
+            meta = meta[0]
+        }
+        if ( meta && typeof meta !== 'string' && 'value' in meta ) {
+            meta = meta.value
+        }
+        return mkComponent(({children, key })=>{
+        return <Link href={meta||'#'} key={key}>{children[0]}</Link>}
+        )
+    }),
       React: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
         const componentName = conf.getFirstValue("component")
