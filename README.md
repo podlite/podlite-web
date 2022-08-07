@@ -43,7 +43,7 @@ docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000  podlite/podlite-web dev
 
 #### Export to zipped static site
 ```sh
-docker run -it --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > zip.file
+docker run -it --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > site.zip
 ```
 
 #### Advance configuration
@@ -57,7 +57,7 @@ docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 \
 -e 'SITE_URL=https://example.com' \
 -e 'TZ=Europe/London' \
 -e 'INDEX_PATH=minimal/index.pod6' \
-podlite/podlite-web export-zip > zip.file
+podlite/podlite-web export-zip > site.zip
 ```
 
 ## 💻 Develop
