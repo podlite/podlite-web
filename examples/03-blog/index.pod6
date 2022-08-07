@@ -1,0 +1,49 @@
+=begin pod 
+= :favicon<./logo.png>
+= :puburl<http://example.com>
+= :globalStyles("./styles.css")
+=TITLE Podlite-web Starter Blog
+
+=useReact {HeaderCol,LastArticles} from '@Components/service'
+=begin React :component<HeaderCol> :id<menu> 
+=para L<About|file:./about.pod6>
+=para L<Now|file:./now.pod6>
+=para L<Table of contents|file:./content.pod6>
+=para L<github | https://github.com/podlite>
+=para L<twitter | https://twitter.com>
+=end React
+
+=head2 👋 Welcome to my blog!
+
+=begin React :component<HeaderCol> :id<header> 
+=begin para
+=head1 My projects
+=begin defn 
+L<Project One|https://github.com>
+
+this is short library
+=end defn
+=defn L<Oh my Podlite|https://github.com>
+Yet another project
+=defn L<Why|https://github.com>
+Most wanted project
+=end para
+=begin para
+=Image ./logo.png
+This site is driven by rakudoc (aka pod6) markup language.
+
+=end para
+=end React
+
+Latest blog posts:
+=begin React :component<LastArticles> :count(2)
+=end React
+
+=para All my writings: L<Table of contents|file:./content.pod6>
+
+=begin para :id<copyright> 
+© All rights reserved. 2022. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
+=end para
+
+
+=end pod

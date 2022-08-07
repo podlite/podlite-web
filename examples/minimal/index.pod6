@@ -1,5 +1,0 @@
-=begin pod
-=TITLE Personal blog
-
-🚧Web site is under construction.🚧
-=end pod

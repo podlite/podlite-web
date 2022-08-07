@@ -1,0 +1,35 @@
+=begin pod :pubdate('2022-08-06 23:00:00')
+=TITLE Blog post
+
+=head1 😀 Template of blog post!
+=para
+Lorem Ipsum
+
+
+=for Diagram :caption<This is demo diagram>
+graph LR
+    A[Square Rect] -- Link text --> B((Circle))
+    A --> C(Round Rect)
+    B --> D{Rhombus}
+    C --> D
+
+
+
+=begin table :caption('Super table!')
+                        Secret
+        Superhero       Identity          Superpower
+        =============   ===============   ===================
+        The Shoveller   Eddie Stevens     King Arthur's
+                                          singing shovel
+
+        Blue Raja       Geoffrey Smith    Master of cutlery
+
+        Mr Furious      B<Roy Orson>         Ticking time bomb
+                                          of fury
+
+        The Bowler      Carol Pinnsler    B<Haunted> bowling ball
+
+=end table
+
+
+=end pod

@@ -1,0 +1,10 @@
+=begin pod :pubdate('2022-08-05 23:00:00') :puburl</about>
+=TITLE About page
+
+=head1 😀 What is an 'About' page?
+=para
+Your About Us page is going to be about you!
+
+Please check L<Now page|file:./now.pod6>
+
+=end pod
