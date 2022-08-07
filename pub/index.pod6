@@ -1,7 +1,6 @@
 =begin pod  
 = :favicon<./256x256.png>
-= :url<http://example.com>
-= :pathPrefix("/")
+= :puburl<http://example.com>
 = :globalStyles("./page.styles.css")
 
 
@@ -109,7 +108,7 @@ You can try Pod6 here: L<Pod6 online| https://pod6.in>.
 Source of this page you can found L<here| https://github.com/podlite/podlite-web/blob/master/pub/index.pod6>
 
 =begin para :id<copyright> 
-© All rights reserved. I<L<Made with podlite|https://github.com/podlite>>
+© All rights reserved. 2022. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
 =end para
 
 =end pod
