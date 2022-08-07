@@ -1,0 +1,11 @@
+=begin pod :pubdate('2022-08-06 23:00:00') :puburl</now>
+=TITLE Now page
+
+=head1 🎧 What is an 'Now' page?
+=para
+So a website with a link that says “B<now>” goes to a page that tells you B<what this person is focused on at this point in their life>. For short, we call it a “now page”.
+
+
+Please check L<About page|file:./about.pod6>
+
+=end pod

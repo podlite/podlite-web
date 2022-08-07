@@ -1,0 +1,47 @@
+=begin pod
+=TITLE Personal blog
+
+=head2 Make static pages
+
+Each satic page have contantly defined url. It posible by using C<:puburl> attribute for C<=pod> block.
+For example, lets check for example C<about.pod6>:
+
+=begin code :allow<Z B I>
+Z<>=begin pod :pubdate('2012-08-08 23:00:00') B<:puburl>Z<></about>
+Z<>=TITLE About page
+Z<>=end pod
+=end code
+
+where  I<pubdate> - is needed to indicate that this page is publicly accessible from a certain date.
+Pages without I<pubdate> are skipped when published.
+
+Pages without a I<puburl> are treated as blog posts and the url is generate based on the publication date.
+For example: 
+=begin code :allow<Z B I>
+Z<>=begin pod :pubdate('2012-08-08 23:00:00') 
+Z<>=TITLE  Blog post 
+Z<>=end pod
+=end code
+
+will be avalable at url C</2022/8/6/1/blog-post>.
+
+=head2 Linking pages
+
+For now, let's make a link to the About page.
+This is done by using C<L<>> fromatting code: 
+=begin code
+Please check L<About page|file:./about.pod6>
+=end code
+
+This link between files process to web link on site. 
+Links to files are converted into links between web pages  during publication.
+It be rendered as:
+
+Please check L<About page|file:./about.pod6>
+
+Here is a few examples:
+
+Please check L<Now page|file:./now.pod6>
+
+This is a link to L<blog-post.pod6| file:./blog-post.pod6>
+=end pod
