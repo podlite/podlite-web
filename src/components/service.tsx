@@ -93,5 +93,16 @@ export const LastArticles = ({count=1, id,children})=>{
     )
  }
  
+ export const HeaderCol = ({id,children}:{id?:any,children:any})=>{
+    var style = { "--count-columns ": children.length } as React.CSSProperties;
+   return <header id={id} className={styles.Conatainer} style={style}>
+     <div className={styles.row}>
+ 
+         {children.map((i,c)=>(
+             <div className={styles.column} key={c}>{i}</div>
+         ))}
+     </div>
+ </header>
+ }
     
 export default TestComponent
