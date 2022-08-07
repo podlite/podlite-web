@@ -1,0 +1,8 @@
+=begin pod :pubdate('2022-08-06 23:00:00')
+=TITLE Blog post
+
+=head1 😀 this is a test !
+=para
+Lorem Ipsum
+
+=end pod
