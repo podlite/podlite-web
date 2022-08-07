@@ -32,18 +32,10 @@ export type SiteInfo = {
   
 export const defaultIndexPage = `
 =begin pod  
-= :postsPerPage<4> :favicon<./favicon.png>
-= :url<http://example.com>
-= :pathPrefix("/")
+= :favicon<./favicon.png>
+= :puburl<http://example.com>
 
 =TITLE 📝 How to make a great post
-=SUBTITLE This is a subtitle
-
-=for AUTHOR 
-= :name<Your name here>
-= :photo<./photo.jpg>
-= :bio<Keeping this page up to date 💻.>
-= :contact
 
 =para 
 Hey, this is a test page!
