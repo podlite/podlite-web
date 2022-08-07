@@ -60,6 +60,26 @@ docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 \
 podlite/podlite-web export-zip > site.zip
 ```
 
+## Run examples
+
+### Run minimal site
+```sh
+POSTS_PATH='examples/01-minimal'  yarn dev
+```
+
+### Make links between pages
+```sh
+POSTS_PATH='examples/02-pages'  yarn dev
+```
+
+### Blog with standalone pages and Notes from Diary
+
+This example contains integration with ```React``` components, customize styles and publish notes from Diary document.
+
+```sh
+POSTS_PATH='examples/03-blog'  yarn dev
+```
+
 ## 💻 Develop
 
 ### Setup the repo
