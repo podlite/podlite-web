@@ -1,0 +1,12 @@
+=begin pod  :pubdate('2022-07-26 10:00:00') :puburl('/content')
+=TITLE Table of contents
+
+=head1 All my writings
+
+=useReact  {Contents} from '@Components/service'
+
+=begin React :component<Contents> :locale<en>
+=end React
+
+
+=end pod
