@@ -19,7 +19,6 @@ export type SiteInfo = {
     postsPerPage: 4
     favicon: string
     url: "http://example.com"
-    pathPrefix: "/"
     title: "Example"
     globalStyles?: string
     node: PodNode

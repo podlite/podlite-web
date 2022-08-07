@@ -83,7 +83,10 @@ allFiles.flat().map((record: pubRecord) => {
   })(record.node, {})
   // prepare publishUrl
   const conf = makeAttrs(record.node, {})
-  const publishUrl = conf.exists("publishUrl")
+  const publishUrl = conf.exists("puburl")
+    ? conf.getFirstValue("puburl")
+    // check old publishUrl attribute
+    : conf.exists("publishUrl")
     ? conf.getFirstValue("publishUrl")
     : undefined
   nodes.push({ ...record, title, publishUrl, sources: [], description })
@@ -190,20 +193,8 @@ const processNode = (node: PodNode, file:string) => {
         .join("_")
         .replace(/\W+/g, "_")
         .toLowerCase()
-      // const random = getRandomInt(0,1000000)
-      // const variable_name = `${name.replace(/[\W_]+/g, '-')}-${random}`
       const newFileName = `${variable_name}${ext}`
-      //   const newPath = pathMod.join("..", "assets", `${newFileName}`); ////   ext: '.txt',
       const dstFilename = ASSETS_PATH + "/" + newFileName
-      // copy file
-      //   const fs = require("fs");
-      //   if (!fs.existsSync(dstFilename) && fs.existsSync(path)) {
-      //     fs.copyFileSync(path, dstFilename);
-      //   }
-      //   const relativeToPost = pathMod.relative(PAGES_FILE_PATH, dstFilename); //dir
-
-      // const variable_name = path.split('/').slice(1).join('_').replace(/\W+/g, '_').toLowerCase()
-
       imagesMap.set(path, variable_name)
 
       return { ...node, src: variable_name }
@@ -217,7 +208,6 @@ const allRecords  = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages
   // process images inside description
   let extra = {} as { description?: PodNode }
   if (item.description) {
-    // extra.description = makeInterator(rules)(item.description, {})
     extra.description = processNode(item.description, item.file)
   }
 
@@ -236,13 +226,10 @@ const controlJson = {
 
 
 
-// const siteInfo = require(`${POSTS_PATH}/config`)
-// for now trying to et index page
 
-// try to get index.from alreday exists records
+// try to get index.from already exists records
 const indexFilePath = `${POSTS_PATH}/${INDEX_PATH}`
 const collectlinksMap = makeLinksMap(allRecords)
-// console.log(indexPageRecord);
 const indexPageData = (() => {
     
     if ( fs.existsSync(indexFilePath) ) {
@@ -271,7 +258,7 @@ const indexPageData = (() => {
   const pageAttr = Object.fromEntries(
     Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)])
   )
-  const {postsPerPage, favicon, url, pathPrefix, globalStyles } = pageAttr
+  const {postsPerPage, favicon, puburl, globalStyles } = pageAttr
 
   // process favicon file
   
@@ -308,7 +295,7 @@ const indexPageData = (() => {
         })
   })
   const siteData:SiteInfo = {
-        postsPerPage, favicon: faviconFileName, url:process.env.SITE_URL||url, pathPrefix,
+        postsPerPage, favicon: faviconFileName, url:process.env.SITE_URL||puburl,
         node:pageNode,
         title,
         globalStyles,
@@ -335,9 +322,6 @@ fs.writeFileSync(DATA_PATH, JSON.stringify(dataJson, null, 2))
             @import '${path}';
         `
     } else {
-        // const pathDefault = pathFs.join( process.cwd(),"src/styles/pod6.css")
-        // const docDirPath = pathFs.dirname(STYLES_LIB)
-        // const path = pathFs.relative(docDirPath, pathDefault  )
         const path = '@Styles/default'
         stylesContent += `
             @import '${path}';
