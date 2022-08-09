@@ -187,7 +187,7 @@ const processNode = (node: PodNode, file:string) => {
       // '../assets/'
       const { path } = getPathToOpen(node.src, file)
       const { name, ext, dir } = pathMod.parse(path)
-      const variable_name = path
+      const variable_name ='i'+ path
         .split("/")
         .slice(1)
         .join("_")
