@@ -25,6 +25,7 @@ import {
 import { convertFileLinksToUrl, makeLinksMap, parseFiles } from "../src/node-utils"
 import { addUrl, makeAstFromSrc } from "../src/shared"
 
+const version = require('../package.json').version
 const pathFs = require("path")
 const glob = require("glob")
 
@@ -217,7 +218,7 @@ const allRecords  = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages
 const getStateVersion = (allREcords:typeof allRecords):string => {
     return CRC32.str(allREcords.reduce((prev,current)=>{
         return prev + CRC32.str(getTextContentFromNode(current.node))
-    }, "")) + ""
+    }, "")) + "+v" + version
 }
 
 const controlJson = { 
