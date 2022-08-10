@@ -1,5 +1,5 @@
 import React from "react"
-import { PodNode, Rules } from "@podlite/schema"
+import { PodNode, Rules, getTextContentFromNode} from "@podlite/schema"
 import ReactDOMServer from "react-dom/server"
 import Podlite from "@podlite/to-jsx"
 import d from "../built/data.json"
@@ -128,18 +128,9 @@ export function getPostComponent(podNode: PodNode) {
       "L<>": setFn(( node, ctx ) => {
         let { meta } = node
         if ( meta === null) {
-            meta = node.content
+            meta = getTextContentFromNode(node)
         }
-        //TODO: extract text from content array
-        if ( Array.isArray(meta)) {
-            meta = meta[0]
-        }
-        if ( meta && typeof meta !== 'string' && 'value' in meta ) {
-            meta = meta.value
-        }
-        return mkComponent(({children, key })=>{
-        return <Link href={meta||'#'} key={key}>{children[0]}</Link>}
-        )
+        return mkComponent(({children, key })=>(<Link href={meta||'#'} key={key}>{Array.isArray(children) ? children[0] : children}</Link>))
     }),
       React: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
