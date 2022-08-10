@@ -12,6 +12,7 @@ Variables
     --color-dim: #797673;
     --color-vdim: #494745;
     --font-sans: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    --font-mono: ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
     --font-serif: Times,serif;
     --font-size: 19px;
     --font-s: 14px;
@@ -23,7 +24,7 @@ Variables
     --spacing-xl: calc(2.5 * var(--spacing));
     --spacing-xxl: calc(5 * var(--spacing));
     --spacing-col: calc(6 * var(--spacing));
-    --spacing-width-max: 38rem;
+    --spacing-width-max: 40rem;
     --spacing-width-tiny: 15rem;
     --spacing-width-xl: 38rem;
 }
@@ -250,29 +251,6 @@ p.emailoctopus-success-message {
     font-size: 1rem !important;
 }
 
-[data-form="71e6f86b-0538-11ec-96e5-06b4694bee2a"] .emailoctopus-form input {
-    font-family: var(--font-sans) !important;
-    font-weight: 500 !important;
-}
-
-[data-form="71e6f86b-0538-11ec-96e5-06b4694bee2a"] .emailoctopus-form input:not([type=submit]) {
-    background-color: rgba(255,255,255,0.05) !important;
-    border-color: var(--color-dim) !important;
-    font-weight: 500 !important;
-    color: var(--color-highlight) !important;
-}
-
-[data-form="71e6f86b-0538-11ec-96e5-06b4694bee2a"] .emailoctopus-form input:not([type=submit])::placeholder {
-    color: var(--color-dim);
-}
-
-[data-form="71e6f86b-0538-11ec-96e5-06b4694bee2a"] .emailoctopus-form input:not([type=submit]):focus {
-    outline: 1px solid rgba(0,0,0,0);
-}
-
-[data-form="71e6f86b-0538-11ec-96e5-06b4694bee2a"] .emailoctopus-form [eo-form-fields-container] {
-    gap: 2rem !important;
-}
 
 /* -----------------------------------
 Post Index & Post
@@ -308,10 +286,11 @@ p, blockquote, ol, ul, details, pre.code, figcaption,
 Handle overflow for code blocks
 */
 code pre, article>table {
-    block-size: fit-content;
-    width: fit-content;
-    max-width: fit-content;
-    min-width: var(--spacing-width-max);
+    overflow:auto;
+    white-space: pre;
+}
+code pre {
+    font-family: var(--font-mono);
 }
 figure, audio, video, img {
     max-width: var(--spacing-width-xl);
