@@ -65,7 +65,7 @@ export const Page = ({title, node, shortUrl, key,publishUrl, pubdate})=>(
     </article>
         <TestComponent id="nav">
         <></>
-        { <Link href='/'>↑</Link> }
+        <div className="navigate">&nbsp;<Link href='/'>↑</Link>&nbsp;</div> 
         <></>
     </TestComponent>
   </>
