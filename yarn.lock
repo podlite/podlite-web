@@ -6503,9 +6503,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"podlite-nextjs-site-blog-template@workspace:.":
+"podlite-web@workspace:.":
   version: 0.0.0-use.local
-  resolution: "podlite-nextjs-site-blog-template@workspace:."
+  resolution: "podlite-web@workspace:."
   dependencies:
     "@podlite/schema": ^0.0.9
     "@podlite/to-jsx": ^0.0.13
