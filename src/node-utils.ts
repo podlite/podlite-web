@@ -81,7 +81,7 @@ const allFiles = glob
         // Due to cover some cases whan new Date fail on safari, i.e.
         // new Date("2022-05-07 10:00:00").getFullYear() -> NaN
         // convert to ISO 8601 "2022-05-07 10:00:00" -> "2022-05-07T10:00:00"
-        const  pubdate = a_pubdate.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/) ? a_pubdate.replace(" ","T") : a_pubdate
+        const  pubdate = a_pubdate.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(:\d{2})?$/) ? a_pubdate.replace(" ","T") : a_pubdate
 
         return {
           pubdate,
@@ -102,7 +102,7 @@ const allFiles = glob
         // Due to cover some cases whan new Date fail on safari, i.e.
         // new Date("2022-05-07 10:00:00").getFullYear() -> NaN
         // convert to ISO 8601 "2022-05-07 10:00:00" -> "2022-05-07T10:00:00"
-        const  pubdate = a_pubdate.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/) ? a_pubdate.replace(" ","T") : a_pubdate
+        const  pubdate = a_pubdate.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(:\d{2})?$/) ? a_pubdate.replace(" ","T") : a_pubdate
        return {
           pubdate,
           type: "page",
