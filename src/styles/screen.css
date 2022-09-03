@@ -291,6 +291,7 @@ code pre, article>table {
 }
 code pre {
     font-family: var(--font-mono);
+    line-height: 1.2;
 }
 figure, audio, video, img {
     max-width: var(--spacing-width-xl);
