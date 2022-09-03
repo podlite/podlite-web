@@ -110,6 +110,19 @@ yarn export-zip > file.zip
 Explore `examples` dir for get more pod6 insights.
 
 thank you!
+
+Useful links
+------------
+
+* ["Start your own blog/site with PodLite for Web"](https://zahatski.com/2022/8/23/1/start-you-own-blog-site-with-podlite-for-web) - how-to article
+*   [Pod6 - An easy-to-use markup language for documenting Raku modules and programs](https://docs.raku.org/language/pod)
+    
+*   Specification of pod6: [Synopsis 26](https://github.com/perl6/specs/blob/master/S26-documentation.pod)
+    
+*   Online editor: [https://pod6.in](https://pod6.in)
+    
+*   [PodLite](https://github.com/zag/podlite-desktop) - open-source desktop pod6 editor for Windows, Linux, and Mac.
+
 ## License
 
 This project is licensed under the terms of the
