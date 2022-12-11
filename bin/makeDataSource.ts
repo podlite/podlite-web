@@ -259,7 +259,7 @@ const indexPageData = (() => {
   const pageAttr = Object.fromEntries(
     Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)])
   )
-  const {postsPerPage, favicon, puburl, globalStyles } = pageAttr
+  const {postsPerPage, favicon, puburl, url, globalStyles } = pageAttr
 
   // process favicon file
   
@@ -296,7 +296,7 @@ const indexPageData = (() => {
         })
   })
   const siteData:SiteInfo = {
-        postsPerPage, favicon: faviconFileName, url:process.env.SITE_URL||puburl,
+        postsPerPage, favicon: faviconFileName, url:process.env.SITE_URL||url||puburl,
         node:pageNode,
         title,
         globalStyles,
