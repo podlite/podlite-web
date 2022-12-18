@@ -171,12 +171,15 @@ export function getPostComponent(podNode: PodNode) {
     defenitions: {},
   }
   // wrap all elements and add line link info
-  const wrapFunction = (node: PodNode, children) => {
+  const wrapFunction = (node: PodNode, children, ctx) => {
     if (typeof node !== "string" && "type" in node && node.type == "image") {
       const imageName = node.src
+      console.log({ctx})
+      const linkTo = ctx.link
       if (imageName && img[imageName]) {
         const placeholder = !node.src.endsWith("gif") ? "blur" : "empty"
-        if (node.src.endsWith("mp4")) {
+        const Comp = ()=> {
+            if (node.src.endsWith("mp4")) {
           return (
             <div className="video shadow">
               {" "}
@@ -189,6 +192,8 @@ export function getPostComponent(podNode: PodNode) {
         } else {
           return <img className="shadow_DISABLED" src={img[imageName]} />
         }
+        }
+        return linkTo ? <a target="_blank" href={linkTo}><Comp/></a> : <Comp/>
       } else {
         return (
           <>
