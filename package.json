@@ -1,6 +1,6 @@
 {
   "name": "podlite-web",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": true,
   "scripts": {
     "next_dev": "next dev",
@@ -23,8 +23,8 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@podlite/schema": "^0.0.10",
-    "@podlite/to-jsx": "^0.0.14",
+    "@podlite/schema": "^0.0.11",
+    "@podlite/to-jsx": "^0.0.15",
     "@types/jest": "^27.5.1",
     "@types/node": "17.0.17",
     "@types/react": "17.0.39",
@@ -42,7 +42,7 @@
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
     "pod6": "^0.0.48",
-    "podlite": "^0.0.22",
+    "podlite": "^0.0.23",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",

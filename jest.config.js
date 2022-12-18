@@ -2,6 +2,9 @@ module.exports = {
     moduleDirectories: [
       'node_modules'
     ],
+    "modulePaths": [
+        "<rootDir>",
+    ],
     "snapshotSerializers": [
         "jest-serializer-html"
      ],
