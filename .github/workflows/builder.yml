@@ -1,5 +1,11 @@
 name: Build new docker image
-on: [push, repository_dispatch]
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "main"
+    tags:
+      - "*"
 
 jobs:
   deploy:
@@ -19,12 +25,20 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
+      - uses: docker/metadata-action@v3
+        id: meta
+        with:
+          images: podlite/podlite-web
+          flavor: |
+            latest=auto
+          tags: |
+            type=edge,branch=main
+            type=semver,pattern={{ raw }}
+      - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: podlite/podlite-web:latest
+          tags: ${{ steps.meta.outputs.tags }}
 
