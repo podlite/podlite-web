@@ -1,6 +1,9 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+ =item * fix mobile styles
+ =item * fix style for headers
+ =item * fix generate anchor links
 =head1 0.1.9
-- fix :link for =Image
+ =item * fix :link for =Image
 
