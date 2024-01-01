@@ -177,7 +177,6 @@ export function getPostComponent(podNode: PodNode) {
   const wrapFunction = (node: PodNode, children, ctx) => {
     if (typeof node !== "string" && "type" in node && node.type == "image") {
       const imageName = node.src
-      console.log({ctx})
       const linkTo = ctx.link
       if (imageName && img[imageName]) {
         const placeholder = !node.src.endsWith("gif") ? "blur" : "empty"
