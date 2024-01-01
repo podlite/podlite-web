@@ -23,14 +23,14 @@ L<Project One|https://github.com>
 
 this is short library
 =end defn
-=defn L<Oh my Podlite|https://github.com>
+=defn L<Oh my Podlite|https://github.com/podlite>
 Yet another project
 =defn L<Why|https://github.com>
 Most wanted project
 =end para
 =begin para
 =Image ./logo.png
-This site is driven by rakudoc (aka pod6) markup language.
+This site is driven by L<Podlite|https://podlite.org> markup language.
 
 =end para
 =end React
@@ -42,7 +42,7 @@ Latest blog posts:
 =para All my writings: L<Table of contents|file:./content.pod6>
 
 =begin para :id<copyright> 
-© All rights reserved. 2022. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
+© All rights reserved. 2024. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
 =end para
 
 
