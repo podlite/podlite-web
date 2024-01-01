@@ -130,7 +130,10 @@ export function getPostComponent(podNode: PodNode) {
         if ( meta === null) {
             meta = getTextContentFromNode(node)
         }
-        return mkComponent(({children, key })=>(<Link href={meta||'#'} key={key}>{Array.isArray(children) ? children[0] : children}</Link>))
+        const text_content = getTextContentFromNode(node);
+        return mkComponent(({children, key })=>(<Link href={meta||'#'} key={key}>{text_content}
+        {/* {Array.isArray(children) ? children[0] : children} */}
+        </Link>))
     }),
       React: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
