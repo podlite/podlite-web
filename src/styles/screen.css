@@ -218,6 +218,12 @@ figure img {
     height: auto;
 }
 
+/* TODO: Remove in future, due to change to figure */
+div.image_block img {
+    width: 100%;
+    height: auto;
+}
+
 /* -----------------------------------
 Home
 -------------------------------------- */
