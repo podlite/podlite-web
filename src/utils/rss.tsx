@@ -24,7 +24,7 @@ ${pages
         <guid>${conf.url}${post.publishUrl}</guid>
         <pubDate>${new Date(post.pubdate).toUTCString()}</pubDate>
         <description><![CDATA[
-          <p>${convertPodNodeToHtml(post.description)}</p>
+          <p>${convertPodNodeToHtml(post.description || '')}</p>
           </p>
         ]]></description>
       </item>`
