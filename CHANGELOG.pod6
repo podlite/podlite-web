@@ -1,6 +1,8 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+=head1 0.1.12
+ =item * fix build error
 =head1 0.1.11
  =item * fix styles for =table, =nested and =code
  =item * update dependencies

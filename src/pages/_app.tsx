@@ -3,7 +3,7 @@ import * as img from "../../built/images"
 import Head from "next/head"
 import type { AppProps } from "next/app"
 import { contentData, getSiteInfo } from "../utils"
-import { getFromTree, getTextContentFromNode } from "@podlite/schema"
+import { getFromTree, getTextContentFromNode,Image } from "@podlite/schema"
 
 function MyApp({ Component, pageProps }: AppProps) {
     const {slug = []} = pageProps
@@ -14,7 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     const item: any = contentData().find(checkSlug(slug))
     const {title:siteTitle, url  } = getSiteInfo()
     const title = `${item?.title || ''} ${siteTitle}` 
-    const [image] = getFromTree(item?.node, {type:"image"})
+    const [image] = getFromTree(item?.node, {type:"image"}) as Array<Image>
     const metaImage = image?.src || null
     const description = getTextContentFromNode(item?.description || []) || title
     const resultUrl = url || ''
