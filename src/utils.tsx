@@ -1,16 +1,13 @@
 import React from "react"
-import { PodNode, Rules, getTextContentFromNode} from "@podlite/schema"
+import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn} from "@podlite/schema"
 import ReactDOMServer from "react-dom/server"
 import Podlite from "@podlite/to-jsx"
 import d from "../built/data.json"
 import * as img from "../built/images"
 import * as components from "../built/components"
 import { DataFeedContent } from "../bin/makeDataSource"
-import { setFn } from 'pod6/built/helpers/handlers'
 import Link from 'next/link'
-// import * as fs from "fs"
 import { DATA_PATH } from "./constants"
-import makeAttrs from "pod6/built/helpers/config"
 // POSTS_PATH is useful when you want to get the path to a specific file
 type pubRecord = {
   type: string
@@ -131,7 +128,8 @@ export function getPostComponent(podNode: PodNode) {
             meta = getTextContentFromNode(node)
         }
         const text_content = getTextContentFromNode(node);
-        return mkComponent(({children, key })=>(<Link href={meta||'#'} key={key}>{text_content}
+        //TODO: fix links to anchors
+        return mkComponent(({children, key })=>(<Link href={meta?.trim().replace(/\s/g,'-')||'#'} key={key}>{text_content}
         {/* {Array.isArray(children) ? children[0] : children} */}
         </Link>))
     }),
