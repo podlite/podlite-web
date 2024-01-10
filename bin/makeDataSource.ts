@@ -13,11 +13,10 @@ import {
   SiteInfo,
   INDEX_PATH,
 } from "../src/constants"
-import { podlite as podlite_core } from "podlite"
-import makeAttrs from "pod6/built/helpers/config"
 import {
   getFromTree,
   getTextContentFromNode,
+  makeAttrs,
   makeInterator,
   PodliteDocument,
   PodNode,

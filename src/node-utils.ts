@@ -1,6 +1,5 @@
-import { getFromTree, getTextContentFromNode, makeInterator, PodNode, Text} from "@podlite/schema"
+import { getFromTree, getTextContentFromNode, makeAttrs, makeInterator, PodNode, Text} from "@podlite/schema"
 import * as fs from "fs"
-import makeAttrs from "pod6/built/helpers/config"
 import { getAllArticles, isExistsPubdate, makeAstFromSrc, pubRecord, publishRecord } from "./shared"
 
 const glob = require("glob")

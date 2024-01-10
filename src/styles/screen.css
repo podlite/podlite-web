@@ -176,6 +176,7 @@ p, ol, ul, dl {
 
 blockquote {
     font-weight: normal;
+    padding: 0 1em; /* add padding for =nested */
 }
 
 figcaption, .caption , .caption > *{
@@ -289,7 +290,8 @@ Limit widths
 body>header, article>header,article>table, main>table,
 h1, h2, h3, h4, h5, h6, h7, time,
 p, blockquote, ol, ul, details, pre.code, figcaption, .caption,
-.split, .posts, #header, code pre, #body>header, section>header,dl, dt, article>footer
+.split, .posts, #header, code pre, #body>header, section>header,dl, dt, article>footer,
+article table /* rules for tables inside othe blocks*/
 {
     max-width: var(--spacing-width-max);
     margin-left: auto;
@@ -298,7 +300,7 @@ p, blockquote, ol, ul, details, pre.code, figcaption, .caption,
 /* -----------------------------------
 Handle overflow for code blocks
 */
-code pre, article>table {
+code pre, article>table, article table {
     overflow:auto;
 }
 code pre {

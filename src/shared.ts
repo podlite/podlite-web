@@ -1,5 +1,4 @@
-import { getFromTree, makeInterator, PodliteDocument, PodNode } from "@podlite/schema"
-import makeAttrs from "pod6/built/helpers/config"
+import { getFromTree, makeAttrs, makeInterator, PodliteDocument, PodNode } from "@podlite/schema"
 import { podlite as podlite_core } from "podlite"
 // now we add base60 letters
 const translit = require("iso_9")
@@ -9,7 +8,7 @@ export type pubRecord = {
     type: string
     pubdate: string
     node: PodNode
-    description: PodNode
+    description?: PodNode
     file: string
   }
 export type publishRecord = pubRecord & {
