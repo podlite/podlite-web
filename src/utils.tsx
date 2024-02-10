@@ -1,13 +1,13 @@
-import React from "react"
-import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn} from "@podlite/schema"
-import ReactDOMServer from "react-dom/server"
-import Podlite from "@podlite/to-jsx"
-import d from "../built/data.json"
-import * as img from "../built/images"
-import * as components from "../built/components"
-import { DataFeedContent } from "../bin/makeDataSource"
+import React from 'react'
+import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn } from '@podlite/schema'
+import ReactDOMServer from 'react-dom/server'
+import Podlite from '@podlite/to-jsx'
+import d from '../built/data.json'
+import * as img from '../built/images'
+import * as components from '../built/components'
+import { DataFeedContent } from '../bin/makeDataSource'
 import Link from 'next/link'
-import { DATA_PATH } from "./constants"
+import { DATA_PATH } from './constants'
 // POSTS_PATH is useful when you want to get the path to a specific file
 type pubRecord = {
   type: string
@@ -30,7 +30,6 @@ export type DataFeed = {
   }
 }
 
-
 export type FeedContent = publishRecord & {
   number?: number
   sxd: string
@@ -39,10 +38,7 @@ export type FeedContent = publishRecord & {
   sources?: string[]
   shortUrl?: string
 }
-export type ContentRecord = Pick<
-  FeedContent,
-  "publishUrl" | "title" | "node" | "sources" | "shortUrl"
->
+export type ContentRecord = Pick<FeedContent, 'publishUrl' | 'title' | 'node' | 'sources' | 'shortUrl'>
 export function getData(): DataFeedContent {
   //@ts-ignore
   return d as DataFeedContent
@@ -50,15 +46,15 @@ export function getData(): DataFeedContent {
   //   return JSON.parse(data)
 }
 
-export function getSiteInfo():DataFeedContent["siteInfo"] {
-    return getData().siteInfo
+export function getSiteInfo(): DataFeedContent['siteInfo'] {
+  return getData().siteInfo
 }
 export function pageNames() {
   const data = getData()
   return data.all.map(post => post.publishUrl)
 }
 
-export function contentData(): DataFeedContent["all"] {
+export function contentData(): DataFeedContent['all'] {
   const data = getData()
   return data.all.map(({ publishUrl, title, node, sources, pubdate, ...args }) => ({
     ...args,
@@ -67,7 +63,7 @@ export function contentData(): DataFeedContent["all"] {
     node,
     sources,
     pubdate,
-    shortUrl: sources[0]
+    shortUrl: sources[0],
   }))
 }
 export function mapPathToImage(path: string): string | undefined {
@@ -75,39 +71,43 @@ export function mapPathToImage(path: string): string | undefined {
   return data[path]
 }
 export function getArticlesGroupedByYearMonth() {
-    //filter out pages
-    const source =contentData().filter(({type=''})=>type !== 'page').reverse();
-    
-    const groupedByYearMonth = source.reduce((acc:{[year:number]:{
-        [month:number]:DataFeedContent["all"]
-    }},  rest ) => {
-        const year = new Date(rest.pubdate).getFullYear()
-        const month = new Date(rest.pubdate).getMonth()
-        const { [year]:months={}, ...other } = acc
-        const { [month]:monthRecords=[], ...otherMonth } = months
-        return {
-            ...other,
-            [year]: {
-                ...otherMonth,
-                [month]: [ ...monthRecords, rest ]
-            }
+  //filter out pages
+  const source = contentData()
+    .filter(({ type = '' }) => type !== 'page')
+    .reverse()
+
+  const groupedByYearMonth = source.reduce(
+    (
+      acc: {
+        [year: number]: {
+          [month: number]: DataFeedContent['all']
         }
-        
-    }, {})
-    return groupedByYearMonth
+      },
+      rest,
+    ) => {
+      const year = new Date(rest.pubdate).getFullYear()
+      const month = new Date(rest.pubdate).getMonth()
+      const { [year]: months = {}, ...other } = acc
+      const { [month]: monthRecords = [], ...otherMonth } = months
+      return {
+        ...other,
+        [year]: {
+          ...otherMonth,
+          [month]: [...monthRecords, rest],
+        },
+      }
+    },
+    {},
+  )
+  return groupedByYearMonth
 }
 
 export function getPostComponent(podNode: PodNode) {
   const plugins = (makeComponent): Partial<Rules> => {
-    const mkComponent =
-      src => (writer, processor) => (node, ctx, interator) => {
-        // check if node.content defined
-        return makeComponent(
-          src,
-          node,
-          "content" in node ? interator(node.content, { ...ctx }) : []
-        )
-      }
+    const mkComponent = src => (writer, processor) => (node, ctx, interator) => {
+      // check if node.content defined
+      return makeComponent(src, node, 'content' in node ? interator(node.content, { ...ctx }) : [])
+    }
 
     return {
       //process only content nodes
@@ -122,37 +122,36 @@ export function getPostComponent(podNode: PodNode) {
       TITLE: () => () => null,
       //@ts-ignore
       DESCRIPTION: () => () => null,
-      "L<>": setFn(( node, ctx ) => {
+      'L<>': setFn((node, ctx) => {
         let { meta } = node
-        if ( meta === null) {
-            meta = getTextContentFromNode(node)
+        if (meta === null) {
+          meta = getTextContentFromNode(node)
         }
-        const text_content = getTextContentFromNode(node);
+        const text_content = getTextContentFromNode(node)
         //TODO: fix links to anchors
-        return mkComponent(({children, key })=>(<Link href={meta?.trim().replace(/\s/g,'-')||'#'} key={key}>{text_content}
-        {/* {Array.isArray(children) ? children[0] : children} */}
-        </Link>))
-    }),
+        return mkComponent(({ children, key }) => (
+          <Link href={meta?.trim().replace(/\s/g, '-') || '#'} key={key}>
+            {text_content}
+            {/* {Array.isArray(children) ? children[0] : children} */}
+          </Link>
+        ))
+      }),
       React: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
-        const componentName = conf.getFirstValue("component")
-        const variables = Object.keys(conf.asHash()).filter((name)=>name !== "component")
+        const componentName = conf.getFirstValue('component')
+        const variables = Object.keys(conf.asHash()).filter(name => name !== 'component')
         // prepare simple key value pairs
         const props = variables.reduce((acc, name) => {
-            acc[name] = conf.getFirstValue(name)
-            return acc
+          acc[name] = conf.getFirstValue(name)
+          return acc
         }, {})
         if (components[componentName]) {
-          return makeComponent(
-            components[componentName],
-            {...props},
-            interator(node.content, ctx)
-          )
+          return makeComponent(components[componentName], { ...props }, interator(node.content, ctx))
         } else {
           return (
-            <div style={{ color: "red" }}>
-              {" "}
-              Not found:{" "}
+            <div style={{ color: 'red' }}>
+              {' '}
+              Not found:{' '}
               <code>
                 <pre>{componentName}</pre>
               </code>
@@ -165,35 +164,41 @@ export function getPostComponent(podNode: PodNode) {
   const node = {
     interator: podNode,
     errors: {},
-    toString: () => "",
-    valueOf: () => "",
+    toString: () => '',
+    valueOf: () => '',
     indexingTerms: {},
     annotations: {},
     defenitions: {},
   }
   // wrap all elements and add line link info
   const wrapFunction = (node: PodNode, children, ctx) => {
-    if (typeof node !== "string" && "type" in node && node.type == "image") {
+    if (typeof node !== 'string' && 'type' in node && node.type == 'image') {
       const imageName = node.src
       const linkTo = ctx.link
       if (imageName && img[imageName]) {
-        const placeholder = !node.src.endsWith("gif") ? "blur" : "empty"
-        const Comp = ()=> {
-            if (node.src.endsWith("mp4")) {
-          return (
-            <div className="video shadow">
-              {" "}
-              <video controls>
-                {" "}
-                <source src={img[imageName]} type="video/mp4" />{" "}
-              </video>
-            </div>
-          )
-        } else {
-          return <img className="shadow_DISABLED" src={img[imageName]} />
+        const placeholder = !node.src.endsWith('gif') ? 'blur' : 'empty'
+        const Comp = () => {
+          if (node.src.endsWith('mp4')) {
+            return (
+              <div className="video shadow">
+                {' '}
+                <video controls>
+                  {' '}
+                  <source src={img[imageName]} type="video/mp4" />{' '}
+                </video>
+              </div>
+            )
+          } else {
+            return <img className="shadow_DISABLED" src={img[imageName]} />
+          }
         }
-        }
-        return linkTo ? <a target="_blank" href={linkTo}><Comp/></a> : <Comp/>
+        return linkTo ? (
+          <a target="_blank" href={linkTo}>
+            <Comp />
+          </a>
+        ) : (
+          <Comp />
+        )
       } else {
         return (
           <>

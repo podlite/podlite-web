@@ -1,7 +1,7 @@
-import { DataFeedContent } from "../../bin/makeDataSource"
-import { DATA_PATH, PUBLIC_PATH } from "../constants"
-import * as fs from "fs"
-import { convertPodNodeToHtml as convertPodNodeToHtml, getData } from "../utils"
+import { DataFeedContent } from '../../bin/makeDataSource'
+import { DATA_PATH, PUBLIC_PATH } from '../constants'
+import * as fs from 'fs'
+import { convertPodNodeToHtml as convertPodNodeToHtml, getData } from '../utils'
 
 export function getRssForData(data: DataFeedContent) {
   const conf = data.siteInfo
@@ -10,9 +10,7 @@ export function getRssForData(data: DataFeedContent) {
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${conf.title}</title>
-      <atom:link href="${
-        conf.url
-      }/rss.xml" rel="self" type="application/rss+xml"/>
+      <atom:link href="${conf.url}/rss.xml" rel="self" type="application/rss+xml"/>
       <link>${conf.url}</link>
       <description>${conf.title}</description>
       <language>ru</language>
@@ -27,21 +25,21 @@ ${pages
           <p>${convertPodNodeToHtml(post.description || '')}</p>
           </p>
         ]]></description>
-      </item>`
+      </item>`,
   )
-  .join("\n")}
+  .join('\n')}
     </channel>
   </rss>
 `
 }
 export function writeRss() {
-//   const dataFeed: DataFeedContent = JSON.parse(
-//     fs.readFileSync(DATA_PATH).toString()
-//   )
+  //   const dataFeed: DataFeedContent = JSON.parse(
+  //     fs.readFileSync(DATA_PATH).toString()
+  //   )
   const dataFeed = getData()
   const pages = dataFeed.all
     .filter(a => a.pubdate)
-    .filter( page => page.description)
+    .filter(page => page.description)
     .sort((a, b) => {
       //@ts-ignore
       return new Date(a.pubdate) - new Date(b.pubdate)
@@ -49,5 +47,5 @@ export function writeRss() {
     .reverse()
     .splice(0, 10)
   const rss = getRssForData({ ...dataFeed, all: pages })
-  fs.writeFileSync(`${PUBLIC_PATH}/rss.xml`, rss);
+  fs.writeFileSync(`${PUBLIC_PATH}/rss.xml`, rss)
 }
