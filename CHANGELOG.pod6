@@ -1,6 +1,8 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+=head1 0.1.13
+ =item * update dependencies
 =head1 0.1.12
  =item * fix build error
 =head1 0.1.11
