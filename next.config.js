@@ -37,6 +37,7 @@ module.exports = withPlugins([
             filename: './static/assets/[name]-[contenthash].[ext]',
           },
         })
+        config.resolve.symlinks = false
       return config
     },
   },
