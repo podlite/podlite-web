@@ -1,14 +1,14 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-      "lib": ["dom", "esnext"],
-      "module": "esnext",
-      "target": "es5",
-      "jsx": "react",
-      "esModuleInterop": true,
-      "downlevelIteration": true,
-      "allowJs": true,
-      "allowSyntheticDefaultImports": true
-    },
-    "references": [ ]
-  }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "target": "es5",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "references": []
+}

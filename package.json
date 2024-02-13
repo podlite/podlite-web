@@ -1,7 +1,7 @@
 {
   "name": "podlite-web",
   "description": "A minimal, lightweight starter for creating static blogs/sites using nexjs and Podlite markup language",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "private": true,
   "scripts": {
     "next_dev": "next dev",
@@ -16,7 +16,7 @@
     "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out 'public/!(.gitignore)' site",
     "process": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
     "dev": "npx nodemon --watch ./examples --watch ./pub -e pod6   --exec 'yarn clean && yarn process && next dev'",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'"
+    "format": "npx prettier --write '**/*.{js,jsx,ts,tsx,json,md,mjs}'"
   },
   "dependencies": {
     "next": "12.0.10",
@@ -24,8 +24,8 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@podlite/schema": "^0.0.12",
-    "@podlite/to-jsx": "^0.0.16",
+    "@podlite/schema": "^0.0.15",
+    "@podlite/to-jsx": "^0.0.19",
     "@types/jest": "^27.5.1",
     "@types/node": "17.0.17",
     "@types/react": "17.0.39",
@@ -42,7 +42,7 @@
     "next-images": "^1.8.4",
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
-    "podlite": "^0.0.25",
+    "podlite": "^0.0.28",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",

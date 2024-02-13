@@ -9,7 +9,7 @@
 =head1 👋 Welcome !
 =head2 This is demo page of L<podlite-web|https://github.com/podlite/podlite-web>! 
 
-podlite-web - a minimal, lightweight starter for creating static blogs/sites using nexjs and L<pod6|https://docs.raku.org/language/pod> markup language!
+podlite-web - a minimal, lightweight starter for creating static blogs/sites using nexjs and L<podlite|https://podlite.org/> markup language!
 
 
 =for Toc :title<Table if contents>
@@ -103,12 +103,12 @@ This is a logo of L<podlite|https://github.com/podlite> project.
 =Image logo.png
 This is a logo of L<podlite|https://github.com/podlite> project.
 
-You can try Pod6 here: L<Pod6 online| https://pod6.in>.
+You can try Podlite here: L<Podlite online| https://pod6.in>.
 
 Source of this page you can found L<here| https://github.com/podlite/podlite-web/blob/master/pub/index.pod6>
 
 =begin para :id<copyright> 
-© All rights reserved. 2022. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
+© All rights reserved. 2022-2024. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
 =end para
 
 =end pod

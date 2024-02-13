@@ -1,5 +1,5 @@
-import * as fs from "fs"
-import * as CRC32 from "crc-32" 
+import * as fs from 'fs'
+import * as CRC32 from 'crc-32'
 import {
   POSTS_PATH,
   DATA_PATH,
@@ -12,7 +12,7 @@ import {
   STYLES_LIB,
   SiteInfo,
   INDEX_PATH,
-} from "../src/constants"
+} from '../src/constants'
 import {
   getFromTree,
   getTextContentFromNode,
@@ -20,13 +20,13 @@ import {
   makeInterator,
   PodliteDocument,
   PodNode,
-} from "@podlite/schema"
-import { convertFileLinksToUrl, makeLinksMap, parseFiles } from "../src/node-utils"
-import { addUrl, makeAstFromSrc } from "../src/shared"
+} from '@podlite/schema'
+import { convertFileLinksToUrl, makeLinksMap, parseFiles } from '../src/node-utils'
+import { addUrl, makeAstFromSrc } from '../src/shared'
 
 const version = require('../package.json').version
-const pathFs = require("path")
-const glob = require("glob")
+const pathFs = require('path')
+const glob = require('glob')
 
 type pubRecord = {
   type: string
@@ -36,18 +36,17 @@ type pubRecord = {
   file: string
 }
 type publishRecord = pubRecord & {
-    title: string | undefined
-    publishUrl: string
-    sources: string[]
-  }
-
+  title: string | undefined
+  publishUrl: string
+  sources: string[]
+}
 
 export function isExistsPubdate(node: PodNode) {
   let isShouldBePublished = false
   const rules = {
-    ":block": (node, ctx, interator) => {
+    ':block': (node, ctx, interator) => {
       const config = makeAttrs(node, ctx)
-      if (config.exists("pubdate")) {
+      if (config.exists('pubdate')) {
         isShouldBePublished = true
         return
       }
@@ -83,11 +82,11 @@ allFiles.flat().map((record: pubRecord) => {
   })(record.node, {})
   // prepare publishUrl
   const conf = makeAttrs(record.node, {})
-  const publishUrl = conf.exists("puburl")
-    ? conf.getFirstValue("puburl")
-    // check old publishUrl attribute
-    : conf.exists("publishUrl")
-    ? conf.getFirstValue("publishUrl")
+  const publishUrl = conf.exists('puburl')
+    ? conf.getFirstValue('puburl')
+    : // check old publishUrl attribute
+    conf.exists('publishUrl')
+    ? conf.getFirstValue('publishUrl')
     : undefined
   nodes.push({ ...record, title, publishUrl, sources: [], description })
 })
@@ -110,16 +109,12 @@ let notPages = allItemForPublish
   .filter(a => !!a.pubdate)
   .filter(a => !isDateInFuture(a.pubdate))
 
-let Pages = allItemForPublish
-  .filter(a => a.publishUrl)
-  .filter(a => !(a.pubdate && isDateInFuture(a.pubdate)))
+let Pages = allItemForPublish.filter(a => a.publishUrl).filter(a => !(a.pubdate && isDateInFuture(a.pubdate)))
 
 const notPagesWithPublishAttrs = addUrl(notPages)
 
 // save additional info
-const nextPublishTime = (
-  allItemForPublish.filter(a => isDateInFuture(a.pubdate))[0] || {}
-).pubdate
+const nextPublishTime = (allItemForPublish.filter(a => isDateInFuture(a.pubdate))[0] || {}).pubdate
 // process images
 const getPathToOpen = (filepath, parentDocPath) => {
   const isRemoteReg = new RegExp(/^(https?|ftp):/)
@@ -127,25 +122,21 @@ const getPathToOpen = (filepath, parentDocPath) => {
   if (isRemote) {
     return { isRemote, path: filepath }
   }
-  const path = require("path")
+  const path = require('path')
   const docDirPath = path.dirname(parentDocPath)
   return {
     isRemote,
-    path: path.isAbsolute(filepath)
-      ? filepath
-      : path.normalize(path.join(docDirPath, filepath)),
+    path: path.isAbsolute(filepath) ? filepath : path.normalize(path.join(docDirPath, filepath)),
   }
 }
 const imagesMap = new Map()
 const componensMap = new Map()
-const processNode = (node: PodNode, file:string) => {
+const processNode = (node: PodNode, file: string) => {
   const rules = {
     // process JSX
     useReact: (node, ctx, interator) => {
       const text = getTextContentFromNode(node)
-      const importMatchResult = text.match(
-        /^\s*(?<component>\S+)\s*from\s*['"](?<source>\S+)['"]/
-      )
+      const importMatchResult = text.match(/^\s*(?<component>\S+)\s*from\s*['"](?<source>\S+)['"]/)
       if (importMatchResult) {
         //@ts-ignore
         const { component, source } = (
@@ -157,44 +148,38 @@ const processNode = (node: PodNode, file:string) => {
         // save absolute Component path and Component name
         const notDefaultImport = component.match(/{(.*)}/)
         if (notDefaultImport) {
-            const components = notDefaultImport[1].split(/\s*,\s*/)
-            // check if already exists
-            if (componensMap.has(path)) {
-                const savedComponents = componensMap.get(path)
-                const onlyUnique = (value, index, self) => self.indexOf(value) === index;
-                const newComponents = [...savedComponents, ...components].filter(onlyUnique)
-                componensMap.set(path, newComponents )
-            } else {
-                componensMap.set(path, components )
-            }
+          const components = notDefaultImport[1].split(/\s*,\s*/)
+          // check if already exists
+          if (componensMap.has(path)) {
+            const savedComponents = componensMap.get(path)
+            const onlyUnique = (value, index, self) => self.indexOf(value) === index
+            const newComponents = [...savedComponents, ...components].filter(onlyUnique)
+            componensMap.set(path, newComponents)
+          } else {
+            componensMap.set(path, components)
+          }
         } else {
-                componensMap.set(path, component)
-           
+          componensMap.set(path, component)
         }
       } else {
-          console.warn(`can't parse =React body. Expected =React Component from './somefile.tsx', but got: ${text}`)
+        console.warn(`can't parse =React body. Expected =React Component from './somefile.tsx', but got: ${text}`)
       }
       return
     },
     React: (node, ctx, interator) => {
-        const text = getTextContentFromNode(node)
-        const doc:PodliteDocument = makeAstFromSrc(text)
-        return { ...node, content: [interator( doc.content, ctx )] }
-      },
-    ":image": node => {
+      const text = getTextContentFromNode(node)
+      const doc: PodliteDocument = makeAstFromSrc(text)
+      return { ...node, content: [interator(doc.content, ctx)] }
+    },
+    ':image': node => {
       // process copy files to assets
-      const pathMod = require("path")
+      const pathMod = require('path')
       // '../assets/'
       const { path } = getPathToOpen(node.src, file)
       const { name, ext, dir } = pathMod.parse(path)
-      const variable_name ='i'+ path
-        .split("/")
-        .slice(1)
-        .join("_")
-        .replace(/\W+/g, "_")
-        .toLowerCase()
+      const variable_name = 'i' + path.split('/').slice(1).join('_').replace(/\W+/g, '_').toLowerCase()
       const newFileName = `${variable_name}${ext}`
-      const dstFilename = ASSETS_PATH + "/" + newFileName
+      const dstFilename = ASSETS_PATH + '/' + newFileName
       imagesMap.set(path, variable_name)
 
       return { ...node, src: variable_name }
@@ -202,9 +187,8 @@ const processNode = (node: PodNode, file:string) => {
   }
   return makeInterator(rules)(node, {})
 }
-const allRecords  = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages]).map(item => {
-
-   const node = processNode(item.node, item.file)
+const allRecords = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages]).map(item => {
+  const node = processNode(item.node, item.file)
   // process images inside description
   let extra = {} as { description?: PodNode }
   if (item.description) {
@@ -214,93 +198,95 @@ const allRecords  = convertFileLinksToUrl([...notPagesWithPublishAttrs, ...Pages
   return { ...item, node, ...extra }
 })
 
-const getStateVersion = (allREcords:typeof allRecords):string => {
-    return CRC32.str(allREcords.reduce((prev,current)=>{
+const getStateVersion = (allREcords: typeof allRecords): string => {
+  return (
+    CRC32.str(
+      allREcords.reduce((prev, current) => {
         return prev + CRC32.str(getTextContentFromNode(current.node))
-    }, "")) + "+v" + version
+      }, ''),
+    ) +
+    '+v' +
+    version
+  )
 }
 
-const controlJson = { 
-    stateVersion: getStateVersion(allRecords),
-    nextPublishTime: nextPublishTime }
-
-
-
+const controlJson = {
+  stateVersion: getStateVersion(allRecords),
+  nextPublishTime: nextPublishTime,
+}
 
 // try to get index.from already exists records
 const indexFilePath = `${POSTS_PATH}/${INDEX_PATH}`
 const collectlinksMap = makeLinksMap(allRecords)
 const indexPageData = (() => {
-    
-    if ( fs.existsSync(indexFilePath) ) {
-        return fs.readFileSync(indexFilePath, "utf8")
-    } else {
-        console.warn(`${indexFilePath} not found. Continue using default template`)
-        return defaultIndexPage
-    }
- })()
- const indexPageTree  = convertFileLinksToUrl(
-    [{
-        node: processNode( makeAstFromSrc (indexPageData ), indexFilePath),
-        publishUrl: "/",
-        file: indexFilePath,
-        type: "page",
-        pubdate:'',
-        description:'',
-        title:'',
-        sources:[]
-    }],
-    collectlinksMap
-    )[0].node
-  // collect site metadata like TITLE, SUBTITLE and attributes from pod
-  const [pod] = getFromTree(indexPageTree, "pod")
-  const attr = makeAttrs(pod, {})
-  const pageAttr = Object.fromEntries(
-    Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)])
-  )
-  const {postsPerPage, favicon, puburl, url, globalStyles } = pageAttr
-
-  // process favicon file
-  
-  const faviconPath = favicon ? pathFs.join(pathFs.dirname(indexFilePath),favicon) : 'src/favicon.png'
-  const { base, ext } = pathFs.parse(faviconPath)
-  const faviconFileName = `favicon${ext}`
-  fs.copyFileSync(faviconPath, `${PUBLIC_PATH}/${faviconFileName}`)
-
-
-  let title
-  let subtitle
-  let author
-
-  const pageNode = makeInterator({
-    TITLE: (node, ctx, interator) => {
-      title = getTextContentFromNode(node)
-    },
-    SUBTITLE: (node, ctx, interator) => {
-        subtitle = getTextContentFromNode(node)
-    },
-    AUTHOR: (node, ctx, interator) => {
-        const attr = makeAttrs(node, ctx)
-        author =  Object.fromEntries(
-            Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)])
-          )
-    },
-  })(indexPageTree, {})
-
-  let redirects:SiteInfo['redirects'] = []
-  notPagesWithPublishAttrs.map(item=>{
-        const {publishUrl, sources } = item
-        sources.forEach( src => {
-        redirects.push({source: src, destination: publishUrl, "statusCode": 308}) //permanent redirect
-        })
-  })
-  const siteData:SiteInfo = {
-        postsPerPage, favicon: faviconFileName, url:process.env.SITE_URL||url||puburl,
-        node:pageNode,
-        title,
-        globalStyles,
-        redirects
+  if (fs.existsSync(indexFilePath)) {
+    return fs.readFileSync(indexFilePath, 'utf8')
+  } else {
+    console.warn(`${indexFilePath} not found. Continue using default template`)
+    return defaultIndexPage
   }
+})()
+const indexPageTree = convertFileLinksToUrl(
+  [
+    {
+      node: processNode(makeAstFromSrc(indexPageData), indexFilePath),
+      publishUrl: '/',
+      file: indexFilePath,
+      type: 'page',
+      pubdate: '',
+      description: '',
+      title: '',
+      sources: [],
+    },
+  ],
+  collectlinksMap,
+)[0].node
+// collect site metadata like TITLE, SUBTITLE and attributes from pod
+const [pod] = getFromTree(indexPageTree, 'pod')
+const attr = makeAttrs(pod, {})
+const pageAttr = Object.fromEntries(Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)]))
+const { postsPerPage, favicon, puburl, url, globalStyles } = pageAttr
+
+// process favicon file
+
+const faviconPath = favicon ? pathFs.join(pathFs.dirname(indexFilePath), favicon) : 'src/favicon.png'
+const { base, ext } = pathFs.parse(faviconPath)
+const faviconFileName = `favicon${ext}`
+fs.copyFileSync(faviconPath, `${PUBLIC_PATH}/${faviconFileName}`)
+
+let title
+let subtitle
+let author
+
+const pageNode = makeInterator({
+  TITLE: (node, ctx, interator) => {
+    title = getTextContentFromNode(node)
+  },
+  SUBTITLE: (node, ctx, interator) => {
+    subtitle = getTextContentFromNode(node)
+  },
+  AUTHOR: (node, ctx, interator) => {
+    const attr = makeAttrs(node, ctx)
+    author = Object.fromEntries(Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)]))
+  },
+})(indexPageTree, {})
+
+let redirects: SiteInfo['redirects'] = []
+notPagesWithPublishAttrs.map(item => {
+  const { publishUrl, sources } = item
+  sources.forEach(src => {
+    redirects.push({ source: src, destination: publishUrl, statusCode: 308 }) //permanent redirect
+  })
+})
+const siteData: SiteInfo = {
+  postsPerPage,
+  favicon: faviconFileName,
+  url: process.env.SITE_URL || url || puburl,
+  node: pageNode,
+  title,
+  globalStyles,
+  redirects,
+}
 
 export type DataFeedContent = typeof dataJson
 const dataJson = {
@@ -313,24 +299,24 @@ const dataJson = {
 fs.writeFileSync(DATA_PATH, JSON.stringify(dataJson, null, 2))
 
 // process GlobalStyles
-    let stylesContent = '';
-    if ( siteData.globalStyles ) {
-        const pathFs = require("path")
-        const docDirPath = pathFs.dirname(STYLES_LIB)
-        const path = pathFs.relative(docDirPath, pathFs.join(pathFs.dirname(indexFilePath),siteData.globalStyles) )
-        stylesContent += `
+let stylesContent = ''
+if (siteData.globalStyles) {
+  const pathFs = require('path')
+  const docDirPath = pathFs.dirname(STYLES_LIB)
+  const path = pathFs.relative(docDirPath, pathFs.join(pathFs.dirname(indexFilePath), siteData.globalStyles))
+  stylesContent += `
             @import '${path}';
         `
-    } else {
-        const path = '@Styles/default'
-        stylesContent += `
+} else {
+  const path = '@Styles/default'
+  stylesContent += `
             @import '${path}';
         `
-    }
-    fs.writeFileSync(STYLES_LIB, stylesContent, "utf8")
+}
+fs.writeFileSync(STYLES_LIB, stylesContent, 'utf8')
 
 // process Images
-let libFileContent = ""
+let libFileContent = ''
 for (const key of imagesMap.keys()) {
   const variable_name = imagesMap.get(key)
   if (!fs.existsSync(key)) {
@@ -343,13 +329,13 @@ export { ${variable_name} }
 libFileContent += `
 export default {}
 `
-fs.writeFileSync(IMAGE_LIB, libFileContent, "utf8")
+fs.writeFileSync(IMAGE_LIB, libFileContent, 'utf8')
 
 // process Components
-let componensFileContent = ""
+let componensFileContent = ''
 for (const key of componensMap.keys()) {
   const componentName = componensMap.get(key)
-  componensFileContent += `import ${ Array.isArray(componentName) ? `{ ${componentName} }` : componentName } from "${key}"
+  componensFileContent += `import ${Array.isArray(componentName) ? `{ ${componentName} }` : componentName} from "${key}"
 export { ${componentName} }
         `
 }
@@ -357,12 +343,9 @@ componensFileContent += `
 export default {}
 `
 
-fs.writeFileSync(COMPONENTS_LIB, componensFileContent, "utf8")
+fs.writeFileSync(COMPONENTS_LIB, componensFileContent, 'utf8')
 
 // save control.json
-fs.writeFileSync(
-  `${PUBLIC_PATH}/control.json`,
-  JSON.stringify(controlJson, null, 2)
-)
+fs.writeFileSync(`${PUBLIC_PATH}/control.json`, JSON.stringify(controlJson, null, 2))
 
 console.warn(`Processed ${allFiles.length} files`)
