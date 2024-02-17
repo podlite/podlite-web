@@ -101,9 +101,9 @@ This is a logo of L<podlite|https://github.com/podlite> project.
 
 =end code
 =Image logo.png
-This is a logo of L<podlite|https://github.com/podlite> project.
+This is a logo of L<Podlite|https://github.com/podlite> project.
 
-You can try Podlite here: L<Podlite online| https://pod6.in>.
+You can try Podlite here: L<https://pod6.in>.
 
 Source of this page you can found L<here| https://github.com/podlite/podlite-web/blob/master/pub/index.pod6>
 

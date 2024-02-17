@@ -29,7 +29,7 @@ Here is demo page from `pub` directory.
 
 You can edit pub/\*.pod6 files and see changes after save.
 
-All features like `=Diagram`, `=Image` , `=Toc` for [Podlite editor](https://github.com/podlite/podlite-desktop) is available for podlite-web too:
+All features like `=Diagram`, `=Image` , `=toc` for [Podlite editor](https://github.com/podlite/podlite-desktop) is available for podlite-web too:
 ![Podlite editor Screenshot](./assets/podlite-editor.png)
 
 ### using Docker
@@ -113,7 +113,7 @@ yarn
 yarn export-zip > file.zip
 ```
 
-Explore `examples` dir for get more pod6 insights.
+Explore `examples` dir for get more Podlite insights.
 
 thank you!
 
