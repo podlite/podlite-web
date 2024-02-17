@@ -109,6 +109,7 @@ let notPages = allItemForPublish
   .filter(a => !!a.pubdate)
   .filter(a => !isDateInFuture(a.pubdate))
 
+console.log(JSON.stringify(notPages, null, 2))
 let Pages = allItemForPublish.filter(a => a.publishUrl).filter(a => !(a.pubdate && isDateInFuture(a.pubdate)))
 
 const notPagesWithPublishAttrs = addUrl(notPages)
@@ -210,11 +211,6 @@ const getStateVersion = (allREcords: typeof allRecords): string => {
   )
 }
 
-const controlJson = {
-  stateVersion: getStateVersion(allRecords),
-  nextPublishTime: nextPublishTime,
-}
-
 // try to get index.from already exists records
 const indexFilePath = `${POSTS_PATH}/${INDEX_PATH}`
 const collectlinksMap = makeLinksMap(allRecords)
@@ -286,6 +282,22 @@ const siteData: SiteInfo = {
   title,
   globalStyles,
   redirects,
+}
+
+const controlJson = {
+  stateVersion: getStateVersion([
+    ...allRecords,
+    {
+      node: indexPageTree,
+      pubdate: '',
+      file: '',
+      title: '',
+      type: '',
+      publishUrl: '',
+      sources: [''],
+    },
+  ]),
+  nextPublishTime: nextPublishTime,
 }
 
 export type DataFeedContent = typeof dataJson
