@@ -2,6 +2,9 @@
 
 =head1 Upcoming
 =head1 0.1.15
+=item * update dependencies
+=item *  =Mermaid, =picture support
+=head1 0.1.15
 =item * fix detect changes at index page
 =head1 0.1.14
 =item * C<=toc>, C<=markdown> are now standard blocks
