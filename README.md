@@ -29,7 +29,7 @@ Here is demo page from `pub` directory.
 
 You can edit pub/\*.pod6 files and see changes after save.
 
-All features like `=Diagram`, `=Image` , `=toc` for [Podlite editor](https://github.com/podlite/podlite-desktop) is available for podlite-web too:
+All features like `=Mermaid`, `=picture` , `=toc` for [Podlite editor](https://github.com/podlite/podlite-desktop) are available for podlite-web as well:
 ![Podlite editor Screenshot](./assets/podlite-editor.png)
 
 ### using Docker

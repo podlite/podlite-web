@@ -1,6 +1,8 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+=head1 0.1.17
+=item * update dependencies
 =head1 0.1.15
 =item * update dependencies
 =item *  =Mermaid, =picture support
