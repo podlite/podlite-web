@@ -1,7 +1,7 @@
 {
   "name": "podlite-web",
   "description": "A minimal, lightweight starter for creating static blogs/sites using nexjs and Podlite markup language",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "private": true,
   "scripts": {
     "next_dev": "next dev",
@@ -42,7 +42,7 @@
     "next-images": "^1.8.4",
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
-    "podlite": "^0.0.29",
+    "podlite": "^0.0.30",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",
