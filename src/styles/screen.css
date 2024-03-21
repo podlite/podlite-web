@@ -15,6 +15,7 @@ Variables
     --font-mono: ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
     --font-serif: Times,serif;
     --font-size: 19px;
+    --code-font-size: .875em;
     --font-s: 14px;
     --font-size-serif:  1rem;/* 18px; */
     --spacing: 1.5em;
@@ -27,6 +28,7 @@ Variables
     --spacing-width-max: 40rem;
     --spacing-width-tiny: 15rem;
     --spacing-width-xl: 38rem;
+    --color-indigo-1: #3451b2;
 }
 
 html#post {
@@ -149,8 +151,11 @@ h3 {
     margin: 0;
 }
 
-a {
+.toc  a {
     color: var(--color-default);
+}
+a {
+    color: var(--color-indigo-1);
     text-decoration-color: var(--color-dim);
     text-decoration-thickness: 0.5px;
     text-underline-offset: 0.05em;
@@ -201,6 +206,15 @@ small {
 
 time {
     font-feature-settings: 'tnum' 1;
+}
+
+p>code, :not(article, body, main, dl, li) > code {
+    color: #3451b2;
+    font-size: 0.825rem;
+    border-radius: 4px;
+    padding: 3px 6px;
+    background-color: rgba(142, 150, 170, .14);
+    transition: color .25s, background-color .5s;
 }
 
 /* -----------------------------------
@@ -290,7 +304,7 @@ Limit widths
 body>header, article>header,article>table, main>table,
 h1, h2, h3, h4, h5, h6, h7, time,
 p, blockquote, ol, ul, details, pre.code, figcaption, .caption,
-.split, .posts, #header, code pre, #body>header, section>header,dl, dt, article>footer,
+.split, .posts, #header, code pre, #body>header, section>header,dl, dt, article>footer, aside,
 article table /* rules for tables inside othe blocks*/
 {
     max-width: var(--spacing-width-max);
@@ -305,6 +319,7 @@ code pre, article>table, article table {
 }
 code pre {
     font-family: var(--font-mono);
+    font-size: var(--code-font-size);
     line-height: 1.2;
 }
 figure, audio, video, img {
