@@ -1,6 +1,6 @@
 # Podlite-web
 
-A minimal, lightweight starter for creating blogs/sites using nexjs and [Podlite](https://podlite.org/) markup language!
+📖 Create static websites with Next.js and the [Podlite](https://podlite.org/) markup language!
 
 ## QUICK GUIDE
 
