@@ -1,6 +1,6 @@
 {
   "name": "podlite-web",
-  "description": "A minimal, lightweight starter for creating static blogs/sites using nexjs and Podlite markup language",
+  "description": "📖 Create static websites with Next.js and the Podlite markup language.",
   "version": "0.1.18",
   "private": true,
   "scripts": {
