@@ -1,6 +1,8 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+=head1 0.1.19
+=item * update styles to support notifications blocks
 =head1 0.1.18
 =item * update dependencies
 =head1 0.1.17
