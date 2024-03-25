@@ -208,7 +208,7 @@ time {
     font-feature-settings: 'tnum' 1;
 }
 
-p>code, :not(article, body, main, dl, li) > code {
+p>code, :not(article, body, main, dl, li, blockquote, strong) > code {
     color: #3451b2;
     font-size: 0.825rem;
     border-radius: 4px;
