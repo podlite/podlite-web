@@ -153,6 +153,7 @@ h3 {
 
 .toc  a {
     color: var(--color-default);
+    text-decoration: none;
 }
 a {
     color: var(--color-indigo-1);
