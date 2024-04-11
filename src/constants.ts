@@ -21,6 +21,7 @@ export type SiteInfo = {
   title: 'Example'
   globalStyles?: string
   node: PodNode
+  footer: PodNode
   redirects: {
     source: string
     destination: string

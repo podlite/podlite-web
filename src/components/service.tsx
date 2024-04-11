@@ -76,7 +76,7 @@ export const Article = ({ title, node, shortUrl, key, publishUrl, pubdate }) => 
   )
 }
 
-export const Page = ({ title, node, shortUrl, key, publishUrl, pubdate }) => (
+export const Page = ({ title, node, shortUrl, key, publishUrl, pubdate }, footer) => (
   <>
     <article key={key}>
       <header>
@@ -91,10 +91,21 @@ export const Page = ({ title, node, shortUrl, key, publishUrl, pubdate }) => (
       </div>
       <></>
     </TestComponent>
+    {footer && getPostComponent(footer)}
   </>
 )
 
-export const ArticlesWithNavigation = ({ articles, prev, next }: { articles: any[]; prev?: any; next?: any }) => {
+export const ArticlesWithNavigation = ({
+  articles,
+  prev,
+  next,
+  footer,
+}: {
+  articles: any[]
+  prev?: any
+  next?: any
+  footer: any
+}) => {
   const makeLink = (title, url) => <Link href={url}>{title}</Link>
   return (
     <>
@@ -110,6 +121,7 @@ export const ArticlesWithNavigation = ({ articles, prev, next }: { articles: any
         }
         {next && makeLink(next.title || getTextContentFromNode(next.node), next.publishUrl)}
       </TestComponent>
+      {footer && getPostComponent(footer)}
     </>
   )
 }
@@ -122,7 +134,7 @@ export const LastArticles = ({ count = 1, id, children }) => {
   const prev = source()[articleIndex - 1]
   return (
     <>
-      <ArticlesWithNavigation articles={articles} prev={prev} />
+      <ArticlesWithNavigation footer="" articles={articles} prev={prev} />
     </>
   )
 }

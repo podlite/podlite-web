@@ -1,5 +1,5 @@
 import { ArticlesWithNavigation, Page } from '@Components/service'
-import { contentData, getPostComponent } from '../utils'
+import { contentData, getSiteInfo } from '../utils'
 
 export default function AnyPage({ slug }) {
   const checkSlug =
@@ -14,11 +14,16 @@ export default function AnyPage({ slug }) {
   const prev = allData[articleIndex - 1]
   const current: any = allData[articleIndex]
   const next = allData[articleIndex + 1]
+  const footer = getSiteInfo().footer
   // wrap all elements and add line link info
   return (
     <>
       <main>
-        {item.type === 'page' ? Page(item) : <ArticlesWithNavigation articles={[current]} prev={prev} next={next} />}
+        {item.type === 'page' ? (
+          Page(item, footer)
+        ) : (
+          <ArticlesWithNavigation footer={footer} articles={[current]} prev={prev} next={next} />
+        )}
       </main>
     </>
   )
