@@ -109,7 +109,6 @@ let notPages = allItemForPublish
   .filter(a => !!a.pubdate)
   .filter(a => !isDateInFuture(a.pubdate))
 
-console.log(JSON.stringify(notPages, null, 2))
 let Pages = allItemForPublish.filter(a => a.publishUrl).filter(a => !(a.pubdate && isDateInFuture(a.pubdate)))
 
 const notPagesWithPublishAttrs = addUrl(notPages)
