@@ -6,7 +6,7 @@ import { getData, getPostComponent } from '../utils'
 import { writeRss } from '../utils/rss'
 import { generateSitemap } from '../utils/sitemap'
 
-const Home = ({ title, node }: IndexProps) => {
+const Home = ({ title, node, footer }: IndexProps) => {
   const faviconFile = getData().siteInfo.favicon
   return (
     <div>
@@ -26,13 +26,14 @@ interface IndexProps {
   url?: string
   title: string
   node: PodNode
+  footer: PodNode
 }
 
 export async function getStaticProps(): Promise<{ props: IndexProps }> {
   writeRss()
   generateSitemap()
   generateRedirects()
-  const { title, node }: IndexProps = getData().siteInfo
-  return { props: { title, node } }
+  const { title, node, footer }: IndexProps = getData().siteInfo
+  return { props: { title, node, footer } }
 }
 export default Home
