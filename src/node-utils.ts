@@ -110,9 +110,7 @@ export function parseFiles(path: string) {
             file: f,
           }
         })
-      console.warn(
-        ` pages: ${pages.length} articles: ${articles.length}, notes: ${notes.length} from ${f}`
-      )
+      console.warn(` pages: ${pages.length} articles: ${articles.length}, notes: ${notes.length} from ${f}`)
       return [...pages, ...articles, ...notes].map(item => {
         return { ...item, file: f }
       })
