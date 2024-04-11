@@ -252,7 +252,7 @@ fs.copyFileSync(faviconPath, `${PUBLIC_PATH}/${faviconFileName}`)
 let title
 let subtitle
 let author
-
+let footer = ''
 const pageNode = makeInterator({
   TITLE: (node, ctx, interator) => {
     title = getTextContentFromNode(node)
@@ -263,6 +263,9 @@ const pageNode = makeInterator({
   AUTHOR: (node, ctx, interator) => {
     const attr = makeAttrs(node, ctx)
     author = Object.fromEntries(Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)]))
+  },
+  FOOTER: (node, ctx, interator) => {
+    footer = node.content
   },
 })(indexPageTree, {})
 
@@ -281,6 +284,7 @@ const siteData: SiteInfo = {
   title,
   globalStyles,
   redirects,
+  footer,
 }
 
 const controlJson = {
