@@ -41,9 +41,10 @@ Latest blog posts:
 
 =para All my writings: L<Table of contents|file:./content.pod6>
 
+=begin FOOTER
 =begin para :id<copyright> 
 © All rights reserved. 2024. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
 =end para
-
+=end FOOTER
 
 =end pod
