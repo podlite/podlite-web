@@ -1,7 +1,7 @@
 {
   "name": "podlite-web",
   "description": "📖 Create static websites with Next.js and the Podlite markup language.",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "private": true,
   "scripts": {
     "next_dev": "next dev",

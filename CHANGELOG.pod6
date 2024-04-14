@@ -1,6 +1,8 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+=head1 0.1.22
+=item1 * fix types
 =head1 0.1.21
 =item1 * add support for =FOOTER block, which adds content to each page
 =item1 * update styles for links in TOC

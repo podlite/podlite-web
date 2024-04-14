@@ -174,7 +174,7 @@ export const CookieConsent = ({ id, children, buttonCaption }) => {
     !process.browser
       ? 1
       : (document && document.cookie.indexOf(DISMISSED_COOKIE) > -1) ||
-        (window && window.navigator && window.navigator.CookiesOK)
+        ((window as any)?.navigator?.CookiesOK)
   const [showConsent, setShowConsent] = useState(!isCookieConsentDismissed())
   const onOkClick = () => {
     setCookie(DISMISSED_COOKIE, 'yes', 365, window.location.hostname, '/'), setShowConsent(false)
