@@ -4,7 +4,7 @@
 =head1 0.1.21
 =item1 * add support for =FOOTER block, which adds content to each page
 =item1 * update styles for links in TOC
-=item1 * support Google tag manager, :gtmId("GTM-XXXXX") attribure for site (index.pod6)
+=item1 * support Google tag manager, :gtmId("GTM-XXXXX") attribute for the site (index.pod6)
 =item1 * add C<CookieConsent> React component
 =head1 0.1.20
 =item * update styles for code block
