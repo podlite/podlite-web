@@ -2,6 +2,9 @@
 = :favicon<./logo.png>
 = :puburl<http://example.com>
 = :globalStyles("./styles.css")
+=comment
+ add the following propery to support Google tag manager:  :gtmId("GTM-XXXXX")
+
 =TITLE Podlite-web Starter Blog
 
 =useReact {HeaderCol,LastArticles} from '@Components/service'

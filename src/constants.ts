@@ -22,6 +22,7 @@ export type SiteInfo = {
   globalStyles?: string
   node: PodNode
   footer: PodNode
+  gtmId?: string // Google Tag Manager ID
   redirects: {
     source: string
     destination: string

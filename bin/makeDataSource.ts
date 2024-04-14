@@ -285,6 +285,7 @@ const siteData: SiteInfo = {
   globalStyles,
   redirects,
   footer,
+  gtmId,
 }
 
 const controlJson = {
