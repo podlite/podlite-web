@@ -1,0 +1,70 @@
+
+
+.CookieConsentStyles {
+ --globalnav-backdrop-filter: saturate(180%) blur(20px);
+ --globalnav-background: rgba(250, 250, 252, .8);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #605e5e;
+  text-align: center;
+  -webkit-backdrop-filter: var(--globalnav-backdrop-filter);
+  backdrop-filter: var(--globalnav-backdrop-filter);
+background: var(--globalnav-background);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap; 
+}
+.okButton {
+  background-color: #c87373;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+    border-radius: 12px;
+}
+
+
+@-webkit-keyframes slideUp {
+    0% {
+        -webkit-transform: translateY(66px);
+        transform: translateY(66px)
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        -webkit-transform: translateY(66px);
+        -ms-transform: translateY(66px);
+        transform: translateY(66px)
+    }
+
+    100% {
+        -webkit-transform: translateY(0);
+        -ms-transform: translateY(0);
+        transform: translateY(0)
+    }
+}
+
+.CookieConsentStyles {
+    animation-duration: 0.8s;
+    -webkit-animation-duration: 0.8s;
+    -moz-animation-duration: 0.8s;
+    -o-animation-duration: 0.8s;
+    -webkit-animation-name: slideUp;
+    animation-name: slideUp
+}

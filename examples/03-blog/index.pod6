@@ -7,7 +7,7 @@
 
 =TITLE Podlite-web Starter Blog
 
-=useReact {HeaderCol,LastArticles} from '@Components/service'
+=useReact {HeaderCol,LastArticles,CookieConsent} from '@Components/service'
 =begin React :component<HeaderCol> :id<menu> 
 =para L<About|file:./about.pod6>
 =para L<Now|file:./now.pod6>
@@ -48,6 +48,10 @@ Latest blog posts:
 =begin para :id<copyright> 
 © All rights reserved. 2024. L<CC BY-SA 4.0|https://creativecommons.org/licenses/by-sa/4.0/>. I<L<Made with podlite|https://github.com/podlite>>
 =end para
+=begin React :component<CookieConsent> :id<CookieConsent> :buttonCaption("Got it!")
+=begin para
+This website uses cookies for analytics. By continuing to use this site, you accept our use of cookies.
+=end React
 =end FOOTER
 
 =end pod

@@ -2,9 +2,12 @@ import { contentData, ContentRecord, getArticlesGroupedByYearMonth, getPostCompo
 import moment from 'moment'
 import 'moment/min/locales.min'
 import styles from './service.module.css'
+import cookieConsentStyles from './cookieConsentStyles.module.css'
+
 import Link from 'next/link'
 import { DataFeedContent } from 'bin/makeDataSource'
 import { getTextContentFromNode } from '@podlite/schema'
+import { useState } from 'react'
 export const TestComponent = ({ id, children }) => {
   var style = { '--count-columns ': children.length } as React.CSSProperties
   return (
@@ -154,4 +157,40 @@ export const HeaderCol = ({ id, children }: { id?: any; children: any }) => {
   )
 }
 
+export const CookieConsent = ({ id, children, buttonCaption }) => {
+  // Name of cookie to be set when dismissed
+  const DISMISSED_COOKIE = 'cookieconsent_dismissed'
+  const setCookie = (name, value, expiryDays, domain, path) => {
+    expiryDays = expiryDays || 365
+    let exdate = new Date()
+    exdate.setDate(exdate.getDate() + expiryDays)
+    let cookie = [name + '=' + value, 'expires=' + exdate.toUTCString(), 'path=' + path || '/']
+    if (domain) {
+      cookie.push('domain=' + domain)
+    }
+    if (document) document.cookie = cookie.join(';')
+  }
+  const isCookieConsentDismissed = () =>
+    !process.browser
+      ? 1
+      : (document && document.cookie.indexOf(DISMISSED_COOKIE) > -1) ||
+        (window && window.navigator && window.navigator.CookiesOK)
+  const [showConsent, setShowConsent] = useState(!isCookieConsentDismissed())
+  const onOkClick = () => {
+    setCookie(DISMISSED_COOKIE, 'yes', 365, window.location.hostname, '/'), setShowConsent(false)
+  }
+  return (
+    showConsent && (
+      <div>
+        <div id={id} className={cookieConsentStyles.CookieConsentStyles}>
+          <div className="content">{children}</div>
+          <div className={cookieConsentStyles.okButton} onClick={onOkClick}>
+            {buttonCaption || 'Got it!'}
+          </div>
+          <div />
+        </div>
+      </div>
+    )
+  )
+}
 export default TestComponent
