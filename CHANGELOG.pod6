@@ -1,6 +1,8 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+=head1 0.1.23
+=item1 * fix C<CookieConsent> align content
 =head1 0.1.22
 =item1 * fix types
 =head1 0.1.21

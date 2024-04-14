@@ -187,7 +187,6 @@ export const CookieConsent = ({ id, children, buttonCaption }) => {
           <div className={cookieConsentStyles.okButton} onClick={onOkClick}>
             {buttonCaption || 'Got it!'}
           </div>
-          <div />
         </div>
       </div>
     )
