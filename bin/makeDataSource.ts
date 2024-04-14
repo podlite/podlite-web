@@ -240,7 +240,7 @@ const indexPageTree = convertFileLinksToUrl(
 const [pod] = getFromTree(indexPageTree, 'pod')
 const attr = makeAttrs(pod, {})
 const pageAttr = Object.fromEntries(Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)]))
-const { postsPerPage, favicon, puburl, url, globalStyles } = pageAttr
+const { postsPerPage, favicon, puburl, url, globalStyles,gtmId} = pageAttr
 
 // process favicon file
 
