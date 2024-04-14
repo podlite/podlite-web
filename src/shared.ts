@@ -95,7 +95,6 @@ export const addUrl = (items: publishRecord[]) => {
     const sxd = base60.DateToSxg(pubDate)
     const type = i.type === 'note' ? 'n' : 'a'
     // make short name from title
-    //console.error(`process ${f}`)
     let words: string[] = (attrs.title || '').split(/\s/)
     let res = []
     while ([...res, words[0]].join(' ').length < 120) {
@@ -105,7 +104,6 @@ export const addUrl = (items: publishRecord[]) => {
     let shortTitle = res.join(' ')
     // translit only cyrillic
     const translit2 = /[а-яА-ЯЁё]/.test(shortTitle) ? translit(shortTitle, 5) : shortTitle
-    // console.log({title:attrs.TITLE, shortTitle, translit2})
     // make url clean
     const slug = ((translit2.replace(/`/, '') || '').replace(/\W+/g, '-') || '')
       .replace(/(^[-]+|[-]+$)/g, '')

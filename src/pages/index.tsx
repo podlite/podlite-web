@@ -15,8 +15,9 @@ const Home = ({ title, node, footer }: IndexProps) => {
         <meta name="description" content={title} />
         <link rel="shortcut icon" href={`/${faviconFile}`} />
       </Head>
-      <main id="body">{getPostComponent(node)}
-      {footer && getPostComponent(footer)}
+      <main id="body">
+        {getPostComponent(node)}
+        {footer && getPostComponent(footer)}
       </main>
     </div>
   )
