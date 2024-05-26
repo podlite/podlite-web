@@ -6,7 +6,7 @@
 =item1 * add support for formulas
 =item1 * add support for HTML entities in C<E<>> code
 =item1 * improve support for C<:nested>
-=itme1 * adjust C<:caption> fro C<=toc>
+=itme1 * adjust C<:caption> for C<=toc>
 
 =head1 0.1.23
 =item1 * fix C<CookieConsent> align content
