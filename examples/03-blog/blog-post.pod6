@@ -6,7 +6,7 @@
 Lorem Ipsum
 
 
-=for Diagram :caption<This is demo diagram>
+=for Mermaid :caption<This is demo diagram>
 graph LR
     A[Square Rect] -- Link text --> B((Circle))
     A --> C(Round Rect)

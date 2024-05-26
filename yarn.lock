@@ -932,11 +932,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@podlite/diagram@npm:^0.0.22":
-  version: 0.0.22
-  resolution: "@podlite/diagram@npm:0.0.22"
+"@podlite/diagram@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "@podlite/diagram@npm:0.0.23"
   dependencies:
-    "@podlite/schema": 0.0.18
+    "@podlite/schema": 0.0.19
     mermaid: 8.12.1
     react-is: ^17.0.2
   peerDependencies:
@@ -944,82 +944,98 @@ __metadata:
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
     react-is: "*"
-  checksum: 4f8c028cdc044d01f4c979608d180e3ee8d9c625b84d90676cbc11db1616df2030085dd89aff5f521dc38e4ae419e8c5b531b30386775d72be1edf6e5a54db86
+  checksum: f10c0db1e40310804bd4dfb2e3fc9631b5f3e6a1c4e95b863cbb799d4d92134313880f03047941ee1596fb5cebf431e6a33d6bedeac0f8acc765e9987c9c08d1
   languageName: node
   linkType: hard
 
-"@podlite/image@npm:^0.0.17":
-  version: 0.0.17
-  resolution: "@podlite/image@npm:0.0.17"
+"@podlite/formula@npm:0.0.1":
+  version: 0.0.1
+  resolution: "@podlite/formula@npm:0.0.1"
   dependencies:
-    "@podlite/schema": ^0.0.18
+    "@podlite/schema": 0.0.19
+    react-is: ^17.0.2
   peerDependencies:
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
-  checksum: 0f52d34ac29d06dd0804713692ad53b84c0a0b6cd18651cc36291e6fdb63c8a71b67bf59d8dfd0b38d2d7323ba82036b0f52f259bce5e1a4fa59a6a715a2c14a
+    react-is: "*"
+  checksum: 718f845a846cc99274f4ced81aa391aca1fc394dd28ca4706baf1c95af414678cde8261329a0c2039f9568bdd955c5f25a30570d64d6c0e3bfbe4e257398c4bc
   languageName: node
   linkType: hard
 
-"@podlite/markdown@npm:0.0.11":
-  version: 0.0.11
-  resolution: "@podlite/markdown@npm:0.0.11"
+"@podlite/image@npm:^0.0.18":
+  version: 0.0.18
+  resolution: "@podlite/image@npm:0.0.18"
   dependencies:
-    "@podlite/schema": 0.0.18
+    "@podlite/schema": ^0.0.19
+  peerDependencies:
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: 0734dff8e62a73b21c2989bbf430f45700684ef8d6eb524f57bc0488b61476c73688a65f8858800594e573b3c9202a60b5e3a2355e16b0d391f7f735a21cecd2
+  languageName: node
+  linkType: hard
+
+"@podlite/markdown@npm:0.0.12":
+  version: 0.0.12
+  resolution: "@podlite/markdown@npm:0.0.12"
+  dependencies:
+    "@podlite/schema": 0.0.19
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
     react-is: ^17.0.0
     remark-gfm: ^3.0.1
+    remark-math: 5.1.1
     remark-parse: ^10.0.1
-    unified: ^10.1.2
+    unified: 10.1.2
   peerDependencies:
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
-  checksum: 744df8bad9f394016e5d4849d94fe8d9550d5f128b03ca81e1f3aadce673f948a93f558dad17533ec9841d99e17536d574a2c871682671b1280de167ef791cd8
+  checksum: 7f5de2c27686a03a7c568fe220b50c83a3601be9cf6f172391241dba60c73c2bb8265841954004643468bbe4a11d1a764f2588b5e53cbb656a76217f109019dc
   languageName: node
   linkType: hard
 
-"@podlite/schema@npm:0.0.18, @podlite/schema@npm:^0.0.18":
-  version: 0.0.18
-  resolution: "@podlite/schema@npm:0.0.18"
+"@podlite/schema@npm:0.0.19, @podlite/schema@npm:^0.0.19":
+  version: 0.0.19
+  resolution: "@podlite/schema@npm:0.0.19"
   dependencies:
     ajv: ^7.2.3
     events: ^3.1.0
     json-pointer: ^0.6.1
     nanoid: 3.1.30
     slugify: ^1.6.6
-  checksum: df9199c3a105b16229c16d3e0db60174d3b6cfd4845c14266b9d8f4165e2b4e05692f3b4ecc7587c5438cc43e49deae0f36ae1739dd94e2a7e07a53901366757
+  checksum: abf1348609c156b75d1dfe321ff0319f65f601f1d76c98b4dff0cf65d5822f1b7a373e9c310ca26b9c7c7a5e2264ba1e83d936599213b9e5031f254a897cddf0
   languageName: node
   linkType: hard
 
-"@podlite/to-jsx@npm:^0.0.22":
-  version: 0.0.22
-  resolution: "@podlite/to-jsx@npm:0.0.22"
+"@podlite/to-jsx@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "@podlite/to-jsx@npm:0.0.23"
   dependencies:
-    "@podlite/diagram": ^0.0.22
-    "@podlite/schema": 0.0.18
-    podlite: 0.0.31
+    "@podlite/diagram": ^0.0.23
+    "@podlite/schema": 0.0.19
+    entities: ^4.5.0
+    podlite: 0.0.32
     react-is: ^17.0.0
   peerDependencies:
     "@podlite/diagram": "*"
     "@podlite/schema": "*"
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
-  checksum: 1324335b14f87ffe69569c598296ae10f722ddcff7be7b5e5941fc8ec4f2adec566909228868dd30e32fbfac53b54159a32aa82d36f4b2db6547b360cab67bde
+  checksum: 4a50df724719f792c590ca1e47929830f04a84a7ca6060993300fc0261df60bce00fbe5fbb26a7ff9384891be759fed58d6317311ae81969c15b7ab044ebb78d
   languageName: node
   linkType: hard
 
-"@podlite/toc@npm:0.0.11":
-  version: 0.0.11
-  resolution: "@podlite/toc@npm:0.0.11"
+"@podlite/toc@npm:0.0.12":
+  version: 0.0.12
+  resolution: "@podlite/toc@npm:0.0.12"
   dependencies:
-    "@podlite/schema": 0.0.18
+    "@podlite/schema": 0.0.19
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
     react-is: ^17.0.0
   peerDependencies:
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
-  checksum: 7ec1d6e477bd672d4a409807c1e9cba87b1943267dd6e5f9e1dad66726b453985165667c0c8fd34f3efa109330a6f775c101d278ba47327f5b6f33560777eb40
+  checksum: 6dee26747a3e2afe0cebbd2e52868a488565eb1a329b7b95a591956303566ae20859e36239ac437050bbc4d79d3ff689e037d308e91629fe08b0842c3eb0accf
   languageName: node
   linkType: hard
 
@@ -1211,6 +1227,13 @@ __metadata:
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
   checksum: e60b153664572116dfea673c5bda7778dbff150498f44f998e34b5886d8afc47f16799280e4b6e241c0472aef1bc36add771c569c68fc5125fc2ae519a3eb9ac
+  languageName: node
+  linkType: hard
+
+"@types/katex@npm:^0.16.0":
+  version: 0.16.7
+  resolution: "@types/katex@npm:0.16.7"
+  checksum: 4fd15d93553be97c02c064e16be18d7ccbabf66ec72a9dc7fd5bfa47f0c7581da2f942f693c7cb59499de4c843c2189796e49c9647d336cbd52b777b6722a95a
   languageName: node
   linkType: hard
 
@@ -2252,6 +2275,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "commander@npm:8.3.0"
+  checksum: 0f82321821fc27b83bd409510bb9deeebcfa799ff0bf5d102128b500b7af22872c0c92cb6a0ebc5a4cf19c6b550fba9cedfa7329d18c6442a625f851377bacf0
+  languageName: node
+  linkType: hard
+
 "commander@npm:^9.0.0":
   version: 9.0.0
   resolution: "commander@npm:9.0.0"
@@ -3090,6 +3120,13 @@ __metadata:
   version: 2.2.0
   resolution: "entities@npm:2.2.0"
   checksum: 19010dacaf0912c895ea262b4f6128574f9ccf8d4b3b65c7e8334ad0079b3706376360e28d8843ff50a78aabcb8f08f0a32dbfacdc77e47ed77ca08b713669b3
+  languageName: node
+  linkType: hard
+
+"entities@npm:^4.5.0":
+  version: 4.5.0
+  resolution: "entities@npm:4.5.0"
+  checksum: 853f8ebd5b425d350bffa97dd6958143179a5938352ccae092c62d1267c4e392a039be1bae7d51b6e4ffad25f51f9617531fedf5237f15df302ccfb452cbf2d7
   languageName: node
   linkType: hard
 
@@ -5458,6 +5495,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"katex@npm:^0.16.0":
+  version: 0.16.10
+  resolution: "katex@npm:0.16.10"
+  dependencies:
+    commander: ^8.3.0
+  bin:
+    katex: cli.js
+  checksum: 108e9d810e17840c43eef8d46171096f4cc97852bfd1e2dd1890d9b3435846816e3e98678a31d38bd064eb97eea83b18ff224cb65d5f9511b54ce7ff4359b591
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^3.0.0":
   version: 3.1.0
   resolution: "keyv@npm:3.1.0"
@@ -5854,6 +5902,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mdast-util-math@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "mdast-util-math@npm:2.0.2"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    longest-streak: ^3.0.0
+    mdast-util-to-markdown: ^1.3.0
+  checksum: 60b3c1ca8dd0f009504de17515249fa396818fd4d5f83ed2c9c4aa3523add080c9076b32299b9622a8b1eb6e249d65fd4a8c1f0ab231a7656396353c2898d0bd
+  languageName: node
+  linkType: hard
+
 "mdast-util-to-markdown@npm:^1.0.0, mdast-util-to-markdown@npm:^1.3.0":
   version: 1.3.0
   resolution: "mdast-util-to-markdown@npm:1.3.0"
@@ -6022,6 +6081,21 @@ __metadata:
     micromark-util-combine-extensions: ^1.0.0
     micromark-util-types: ^1.0.0
   checksum: b181479c87be38d5ae8d28e6dc52fab73c894fd2706876746f27a91fb186644ce03532a9c35dca2186327a0e2285cd5242ad0361dc89adedd4a50376ffd94e22
+  languageName: node
+  linkType: hard
+
+"micromark-extension-math@npm:^2.0.0":
+  version: 2.1.2
+  resolution: "micromark-extension-math@npm:2.1.2"
+  dependencies:
+    "@types/katex": ^0.16.0
+    katex: ^0.16.0
+    micromark-factory-space: ^1.0.0
+    micromark-util-character: ^1.0.0
+    micromark-util-symbol: ^1.0.0
+    micromark-util-types: ^1.0.0
+    uvu: ^0.5.0
+  checksum: cbfd1c1ab0e13579571f5af9982eed7c02630300fe3cf3f62b4457f6f3da007621b7d23bc53010f8e727267e6b4caa7bc1b923abd528209c4d8821d80fe4424d
   languageName: node
   linkType: hard
 
@@ -7076,8 +7150,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "podlite-web@workspace:."
   dependencies:
-    "@podlite/schema": ^0.0.18
-    "@podlite/to-jsx": ^0.0.22
+    "@podlite/schema": ^0.0.19
+    "@podlite/to-jsx": ^0.0.23
     "@types/jest": ^27.5.1
     "@types/node": 17.0.17
     "@types/react": 17.0.39
@@ -7095,7 +7169,7 @@ __metadata:
     next-images: ^1.8.4
     next-optimized-images: ^2.6.2
     nodemon: ^2.0.16
-    podlite: ^0.0.31
+    podlite: ^0.0.32
     prettier: ^2.5.1
     react: 17.0.2
     react-dom: 17.0.2
@@ -7109,20 +7183,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"podlite@npm:0.0.31, podlite@npm:^0.0.31":
-  version: 0.0.31
-  resolution: "podlite@npm:0.0.31"
+"podlite@npm:0.0.32, podlite@npm:^0.0.32":
+  version: 0.0.32
+  resolution: "podlite@npm:0.0.32"
   dependencies:
-    "@podlite/diagram": ^0.0.22
-    "@podlite/image": ^0.0.17
-    "@podlite/markdown": 0.0.11
-    "@podlite/schema": ^0.0.18
-    "@podlite/toc": 0.0.11
+    "@podlite/diagram": ^0.0.23
+    "@podlite/formula": 0.0.1
+    "@podlite/image": ^0.0.18
+    "@podlite/markdown": 0.0.12
+    "@podlite/schema": ^0.0.19
+    "@podlite/toc": 0.0.12
     nanoid: 3.1.30
   peerDependencies:
     react: ^16.0.0 || ^17.0.0
     react-dom: ^16.0.0 || ^17.0.0
-  checksum: 8cee037ede8f471a5e75a3e48c200e57a97a87069660286fa9e9bf1add1724c26aa41ea62739b8a6818b40f62ad6288361040312a7801bf9ef556866b79cf4b6
+  checksum: daf7b1efa9e88df8ef600927d85df716e7318a19603fca0d6af4747dcf9ebe350e37c79aee752556f689b1203092265b9f3f0d9860d3fe03995305057403d8e0
   languageName: node
   linkType: hard
 
@@ -7441,6 +7516,18 @@ __metadata:
     micromark-extension-gfm: ^2.0.0
     unified: ^10.0.0
   checksum: 02254f74d67b3419c2c9cf62d799ec35f6c6cd74db25c001361751991552a7ce86049a972107bff8122d85d15ae4a8d1a0618f3bc01a7df837af021ae9b2a04e
+  languageName: node
+  linkType: hard
+
+"remark-math@npm:5.1.1":
+  version: 5.1.1
+  resolution: "remark-math@npm:5.1.1"
+  dependencies:
+    "@types/mdast": ^3.0.0
+    mdast-util-math: ^2.0.0
+    micromark-extension-math: ^2.0.0
+    unified: ^10.0.0
+  checksum: 1baec5862e36bbb8645144a73740e63a3aed2d547a64b731bb1a0162658319679378fd70f3d3d534655c2a0fcc3f941adba31cca33808e134fa22202a5d314f9
   languageName: node
   linkType: hard
 
@@ -8506,7 +8593,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unified@npm:^10.0.0, unified@npm:^10.1.2":
+"unified@npm:10.1.2, unified@npm:^10.0.0":
   version: 10.1.2
   resolution: "unified@npm:10.1.2"
   dependencies:

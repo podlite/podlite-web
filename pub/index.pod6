@@ -12,20 +12,20 @@
 podlite-web - a minimal, lightweight starter for creating static blogs/sites using nexjs and L<podlite|https://podlite.org/> markup language!
 
 
-=for Toc :title<Table if contents>
+=for toc :title<Table if contents>
 head3
 
 It possible to create I<table of contents> for selected blocks:
 
 =begin code
-=for Toc :title<List of tables, images, diagrams>
-table, Image, Diagram
+=for toc :title<List of tables, images, diagrams>
+table, picture, Mermaid
 =end code
 
 will render to:
 
-=for Toc :title<List of tables, images, diagrams>
-table, Image, Diagram
+=for toc :title<List of tables, images, diagrams>
+table, picture, Mermaid
 
 =for code :allow(B)
 This I<is> a B<text>
@@ -76,10 +76,30 @@ Options B<are>:
 
 =end table
 
+=head3 Using formulas
+
+
+=begin code :allow<B>
+
+The solution to the quadratic equation B«F<» ax^2 + bx + c = 0 B«>» is given by the formula:
+
+=for B<formula> B<:caption<This is a demo formula>>
+x = \frac{{-b \pm \sqrt{{b^2 - 4ac}}}}{{2a}}
+
+=end code
+
+The solution to the quadratic equation F< ax^2 + bx + c = 0 > is given by the formula:
+
+=for formula :caption<This is a demo formula>
+x = \frac{{-b \pm \sqrt{{b^2 - 4ac}}}}{{2a}}
+
+
+
+
 =head3 Using diagrams
 
-=begin code
-=for Diagram :caption<This is demo diagram>
+=begin code :allow<B>
+=for B<Mermaid> :caption<This is a demo diagram>
 graph LR
     A[Square Rect] -- Link text --> B((Circle))
     A --> C(Round Rect)
@@ -87,7 +107,7 @@ graph LR
     C --> D
 =end code
 
-=for Diagram :caption<This is demo diagram>
+=for Mermaid :caption<This is a demo diagram>
 graph LR
     A[Square Rect] -- Link text --> B((Circle))
     A --> C(Round Rect)
@@ -96,11 +116,11 @@ graph LR
 
 =head3 Using images
 =begin code
-=Image logo.png
+=picture logo.png
 This is a logo of L<podlite|https://github.com/podlite> project.
 
 =end code
-=Image logo.png
+=picture logo.png
 This is a logo of L<Podlite|https://github.com/podlite> project.
 
 You can try Podlite here: L<https://pod6.in>.

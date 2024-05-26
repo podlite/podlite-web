@@ -32,7 +32,7 @@ Yet another project
 Most wanted project
 =end para
 =begin para
-=Image ./logo.png
+=picture ./logo.png
 This site is driven by L<Podlite|https://podlite.org> markup language.
 
 =end para

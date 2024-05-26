@@ -1,6 +1,13 @@
 =TITLE CHANGES 
 
 =head1 Upcoming
+
+=head1 0.1.24
+=item1 * add support for formulas
+=item1 * add support for HTML entities in C<E<>> code
+=item1 * improve support for C<:nested>
+=itme1 * adjust C<:caption> fro C<=toc>
+
 =head1 0.1.23
 =item1 * fix C<CookieConsent> align content
 =head1 0.1.22
