@@ -2,7 +2,6 @@ import React from 'react'
 import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn } from '@podlite/schema'
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
-import d from '../built/data.json'
 import * as img from '../built/images'
 import * as components from '../built/components'
 import { DataFeedContent } from '../bin/makeDataSource'
@@ -40,6 +39,7 @@ export type FeedContent = publishRecord & {
 }
 export type ContentRecord = Pick<FeedContent, 'publishUrl' | 'title' | 'node' | 'sources' | 'shortUrl'>
 export function getData(): DataFeedContent {
+  const d = require('../built/data.json')
   //@ts-ignore
   return d as DataFeedContent
   //   const data = fs.readFileSync(DATA_PATH, "utf8").toString()
@@ -63,7 +63,7 @@ export function contentData(): DataFeedContent['all'] {
     node,
     sources,
     pubdate,
-    shortUrl: sources[0],
+    shortUrl: sources[0] || false,
   }))
 }
 export function mapPathToImage(path: string): string | undefined {

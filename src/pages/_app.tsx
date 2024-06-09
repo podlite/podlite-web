@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const resultUrl = url || ''
   const router = useRouter()
   const pageview = url => {
-    (window as any)?.gtag?.('event', 'page_view', {
+    ;(window as any)?.gtag?.('event', 'page_view', {
       page_location: url,
     })
   }

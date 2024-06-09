@@ -38,13 +38,13 @@ function LoadGoogleTagManager() {
 }
 
 function InitGoogleTagManager() {
-    if (!GTM_ID) return null
-    return (
-      <>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+  if (!GTM_ID) return null
+  return (
+    <>
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
@@ -52,13 +52,12 @@ function InitGoogleTagManager() {
                 page_path: window.location.pathname,
               });
             `,
-          }}
-        />
-      </>
-    )
-  }
+        }}
+      />
+    </>
+  )
+}
 
-  
 function GoogleTagManagerNoScript() {
   if (!GTM_ID) return null
   return (
