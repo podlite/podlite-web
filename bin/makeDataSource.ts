@@ -22,19 +22,13 @@ import {
   PodNode,
 } from '@podlite/schema'
 import { convertFileLinksToUrl, makeLinksMap, parseFiles } from '../src/node-utils'
-import { addUrl, makeAstFromSrc } from '../src/shared'
+import { addUrl, makeAstFromSrc, pubRecord } from '../src/shared'
 
 const version = require('../package.json').version
 const pathFs = require('path')
 const glob = require('glob')
 
-type pubRecord = {
-  type: string
-  pubdate: string
-  node: PodNode
-  description: PodNode
-  file: string
-}
+
 type publishRecord = pubRecord & {
   title: string | undefined
   publishUrl: string
