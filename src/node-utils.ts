@@ -151,4 +151,21 @@ export function getParserTypeforFile(filePath: string): PartserTypes {
   return parserTypeMap[ext] || PARSER_TYPES.DEFAULT
 }
 
+export function parseFile(filePath: string) {
+  // check extension of file and parse it deepnds on mime type
+
+  const parser_type = getParserTypeforFile(filePath)
+  const typeToParserMap: { [key: string]: (src: string) => PodliteDocument } = {
+    [PARSER_TYPES.PODLITE]: (src: string) => {
+      return podlite({ importPlugins: true }).parse(src, { skipChain: 0, podMode: 1 })
+    },
+    [PARSER_TYPES.MARKDOWN]: (src: string) => {
+        return parseMd(src)
+    },
+    [PARSER_TYPES.DEFAULT]: (src: string) => {
+      return podlite({ importPlugins: true }).parse(src, { skipChain: 0, podMode: 0 })
+    },
+  }
+    const src = fs.readFileSync(filePath).toString()
+    return typeToParserMap[parser_type](src)
 }

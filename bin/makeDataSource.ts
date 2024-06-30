@@ -28,7 +28,6 @@ const version = require('../package.json').version
 const pathFs = require('path')
 const glob = require('glob')
 
-
 type publishRecord = pubRecord & {
   title: string | undefined
   publishUrl: string
