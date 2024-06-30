@@ -117,5 +117,5 @@ export function parseFiles(path: string) {
     })
     .flat()
     .filter(Boolean)
-  return allFiles
+  return allFiles as pubRecord[]
 }
