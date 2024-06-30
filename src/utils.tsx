@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React from 'react'
 import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn } from '@podlite/schema'
 import ReactDOMServer from 'react-dom/server'
