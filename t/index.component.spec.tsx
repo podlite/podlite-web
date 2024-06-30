@@ -33,3 +33,35 @@ it('collect links', () => {
     ]
   `)
 })
+
+// lets test pocess files depeends in their location
+it('process based on selectings', () => {
+  const config = {
+    plugins: [
+      {
+        name: 'blog.pub',
+        includePatterns: 'dir1/',
+      },
+      {
+        name: 'default',
+        excludePatterns: '.*', // reject all files by default
+      },
+    ],
+  }
+
+  const allFiles = ['t/dir1/index.component.spec.tsx', 't/test-linking/dst.pod6', 't/test-linking/src.pod6']
+  const results = separateFilesByPlugin(allFiles, config)
+  expect(results).toMatchInlineSnapshot(`
+    Object {
+      "blog.pub": Array [
+        "t/dir1/index.component.spec.tsx",
+      ],
+      "default": Array [],
+      "rejected": Array [
+        "t/test-linking/dst.pod6",
+        "t/test-linking/src.pod6",
+      ],
+    }
+  `)
+})
+
