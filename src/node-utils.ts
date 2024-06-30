@@ -119,3 +119,21 @@ export function parseFiles(path: string) {
     .filter(Boolean)
   return allFiles as pubRecord[]
 }
+const PARSER_TYPES = {
+  MARKDOWN: 'markdown' as const,
+  PODLITE: 'podlite' as const,
+  DEFAULT: 'default' as const,
+  ERROR: 'error' as const,
+}
+type PartserTypes = typeof PARSER_TYPES[keyof typeof PARSER_TYPES]
+
+export function getParserTypeforFile(filePath: string): PartserTypes {
+  const ext = path.extname(filePath).toLowerCase()
+  const parserTypeMap: { [key: string]: PartserTypes } = {
+    '.md': 'markdown',
+    '.markdown': 'markdown',
+    '.podlite': 'podlite',
+    '.pod6': 'podlite',
+  }
+  return parserTypeMap[ext] || 'default'
+}

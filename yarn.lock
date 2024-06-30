@@ -974,7 +974,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@podlite/markdown@npm:0.0.12":
+"@podlite/markdown@npm:0.0.12, @podlite/markdown@npm:^0.0.12":
   version: 0.0.12
   resolution: "@podlite/markdown@npm:0.0.12"
   dependencies:
@@ -7150,6 +7150,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "podlite-web@workspace:."
   dependencies:
+    "@podlite/markdown": ^0.0.12
     "@podlite/schema": ^0.0.19
     "@podlite/to-jsx": ^0.0.23
     "@types/jest": ^27.5.1
