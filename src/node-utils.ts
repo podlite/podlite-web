@@ -1,6 +1,19 @@
-import { getFromTree, getTextContentFromNode, makeAttrs, makeInterator, PodNode, Text } from '@podlite/schema'
+import {
+  getFromTree,
+  getTextContentFromNode,
+  makeAttrs,
+  makeInterator,
+  mkRootBlock,
+  PodliteDocument,
+  PodNode,
+  RootBlock,
+  Text,
+} from '@podlite/schema'
 import * as fs from 'fs'
+import path from 'path'
 import { getAllArticles, isExistsPubdate, makeAstFromSrc, pubRecord, publishRecord } from './shared'
+import { parseMd } from '@podlite/markdown'
+import { podlite } from 'podlite'
 
 const glob = require('glob')
 
@@ -130,10 +143,12 @@ type PartserTypes = typeof PARSER_TYPES[keyof typeof PARSER_TYPES]
 export function getParserTypeforFile(filePath: string): PartserTypes {
   const ext = path.extname(filePath).toLowerCase()
   const parserTypeMap: { [key: string]: PartserTypes } = {
-    '.md': 'markdown',
-    '.markdown': 'markdown',
-    '.podlite': 'podlite',
-    '.pod6': 'podlite',
+    '.md': PARSER_TYPES.MARKDOWN,
+    '.markdown': PARSER_TYPES.MARKDOWN,
+    '.podlite': PARSER_TYPES.PODLITE,
+    '.pod6': PARSER_TYPES.PODLITE,
   }
-  return parserTypeMap[ext] || 'default'
+  return parserTypeMap[ext] || PARSER_TYPES.DEFAULT
+}
+
 }
