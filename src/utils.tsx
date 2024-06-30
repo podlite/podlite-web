@@ -193,7 +193,7 @@ export function getPostComponent(podNode: PodNode) {
           }
         }
         return linkTo ? (
-          <a target="_blank" href={linkTo}>
+          <a target="_blank" rel="noreferrer" href={linkTo}>
             <Comp />
           </a>
         ) : (
