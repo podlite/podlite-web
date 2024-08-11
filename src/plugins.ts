@@ -61,43 +61,49 @@ export function filterFiles(
 
 /**
 =begin pod
-=head1 separateFilesByPlugin
+=head1 processPlugin
 
-This function categorizes an array of file paths based on a given configuration for plugins. Each plugin is associated with specific file patterns and exclude patterns, which determine if a file should be categorized under that plugin. The function iterates over the provided plugins, filters the files according to plugin-specific patterns, and then groups them under the plugin's name. Additionally, files that do not match any plugin's criteria are categorized under 'rejected'.
+The function `processPlugin` processes a collection of publishing records based on a given 
+plugin configuration. It filters the items to determine which ones match specified inclusion 
+and exclusion patterns. Items that match are processed by the provided plugin function, while
+ items that do not match are passed through unchanged. Finally, it returns a tuple containing 
+ the processed items and the result of calling the `onClose` function with a context object.
 
 =head2 Parameters
 
   =begin item
-  B<files>
+  B<pluginConf>
   
-  An array of strings representing file paths to be categorized.
+  An object of type `PluginConfig` that provides configuration for the plugin, including 
+  the plugin processing function, inclusion patterns, and exclusion patterns.
   =end item
   =begin item
-  B<cfg>
+  B<items>
   
-  An object of type Config, which contains an array of plugins. Each plugin has a name, filePatterns (to include), and excludePatterns (to exclude).
+  An array of `publishRecord` objects representing the items to be processed by the plugin.
   =end item
 
 =head2 Returns
 
-An object where each key is a plugin name and its value is an array of strings representing file paths that match the plugin's criteria. It also includes a 'rejected' key for files that do not match any plugin's criteria.
+A tuple where the first element is an array of `publishRecord` objects representing 
+the processed and unprocessed items, and the second element is an object resulting 
+from calling the plugin's `onClose` function with a context object. This object may 
+contain arbitrary data based on the plugin's implementation.
 
 =end pod
 */
-export function separateFilesByPlugin(files: string[], cfg: Config): Record<string, string[]> {
-  const result: Record<string, string[]> = {}
-
-  cfg.plugins.forEach(plugin => {
-    const filteredFiles = filterFiles(files, plugin.includePatterns, plugin.excludePatterns)
-    result[plugin.name] = [...(result[plugin.name] || []), ...filteredFiles]
-  })
-
-  result['rejected'] = files.filter(file => {
-    return !cfg.plugins.some(plugin => {
-      const filteredFiles = filterFiles([file], plugin.includePatterns, plugin.excludePatterns)
-      return filteredFiles.length > 0
-    })
-  })
-
-  return result
+export const processPlugin = (
+  pluginConf: PluginConfig,
+  items: publishRecord[],
+  ctx: { [name: string]: any } = {},
+): [publishRecord[], { [name: string]: any }] => {
+  const [processItems, onClose] = pluginConf.plugin
+  // process items
+  const allPaths = items.map(i => i.file)
+  const matchedPaths = filterFiles(allPaths, pluginConf.includePatterns || '.*', pluginConf.excludePatterns || [])
+  const matchedItems = items.filter(i => matchedPaths.includes(i.file))
+  const notMatchedPaths = allPaths.filter(i => !matchedPaths.includes(i))
+  const notMatchedItems = items.filter(i => notMatchedPaths.includes(i.file))
+  const nextState = [...notMatchedItems, ...processItems(matchedItems)]
+  return [nextState, onClose(ctx)]
 }
