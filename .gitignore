@@ -60,6 +60,7 @@ built
 out
 public
 pub*
-!pub
+# !pub
+!pubdate*
 site*
 
