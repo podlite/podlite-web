@@ -1,5 +1,15 @@
-interface PluginConfig {
-  name: string
+import { publishRecord } from './shared'
+
+export interface PodliteWebPluginContext {
+  [name: string]: any
+}
+export type PodliteWebPlugin = [
+  (rects: publishRecord[]) => publishRecord[],
+  (ctx: PodliteWebPluginContext) => { [name: string]: any },
+]
+export interface PluginConfig {
+  name?: string
+  plugin: PodliteWebPlugin
   includePatterns?: string | string[]
   excludePatterns?: string | string[]
 }
@@ -44,7 +54,7 @@ export function filterFiles(
   includePatterns?: string | string[],
   excludePatterns?: string | string[],
 ): string[] {
-  const patternArray = includePatterns ? (Array.isArray(includePatterns) ? includePatterns : [includePatterns]) : []
+  const patternArray = includePatterns ? (Array.isArray(includePatterns) ? includePatterns : [includePatterns]) : ['.*']
   const excludePatternArray = excludePatterns
     ? Array.isArray(excludePatterns)
       ? excludePatterns
