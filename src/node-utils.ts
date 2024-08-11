@@ -14,6 +14,7 @@ import path from 'path'
 import { getAllArticles, isExistsPubdate, makeAstFromSrc, pubRecord, publishRecord } from './shared'
 import { parseMd } from '@podlite/markdown'
 import { podlite } from 'podlite'
+import matter from 'gray-matter'
 
 const glob = require('glob')
 
@@ -168,4 +169,33 @@ export function parseFile(filePath: string) {
   }
     const src = fs.readFileSync(filePath).toString()
     return typeToParserMap[parser_type](src)
+}
+
+export function processFile(f: string, content?: string) {
+  const podlite_document = parseFile(f, content)
+  // now extract some extra meta inforamtion, like pubdate, puburl
+  const attr = ((f, node) => {
+    if (getParserTypeforFile(f) === PARSER_TYPES.MARKDOWN) {
+      // try to extract from markdown front matter
+      const { data } = matter(content || fs.readFileSync(f).toString())
+      return data
+    } else {
+      return getDocumentAttributes(podlite_document)
+    }
+  })(f, podlite_document)
+  // prepare attributes
+  const { title, description, subtitle, author, footer, puburl, pubdate } = attr
+  return {
+    type: 'page',
+    title,
+    description,
+    subtitle,
+    author,
+    footer,
+    publishUrl: puburl,
+    pubdate,
+    file: f,
+    sources: [],
+    node: podlite_document,
+  } as publishRecord
 }
