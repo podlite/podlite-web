@@ -152,23 +152,28 @@ export function getParserTypeforFile(filePath: string): PartserTypes {
   return parserTypeMap[ext] || PARSER_TYPES.DEFAULT
 }
 
-export function parseFile(filePath: string) {
+export function parseFile(filePath: string, fileContent?: string) {
   // check extension of file and parse it deepnds on mime type
 
   const parser_type = getParserTypeforFile(filePath)
   const typeToParserMap: { [key: string]: (src: string) => PodliteDocument } = {
     [PARSER_TYPES.PODLITE]: (src: string) => {
-      return podlite({ importPlugins: true }).parse(src, { skipChain: 0, podMode: 1 })
+      const podlite_processor = podlite({ importPlugins: true }).use({})
+      const tree = podlite_processor.parse(src, { skipChain: 0, podMode: 1 })
+      return podlite_processor.toAstResult(tree).interator as PodliteDocument
     },
     [PARSER_TYPES.MARKDOWN]: (src: string) => {
-        return parseMd(src)
+      const { content } = matter(src)
+      return parseMd(content)
     },
     [PARSER_TYPES.DEFAULT]: (src: string) => {
-      return podlite({ importPlugins: true }).parse(src, { skipChain: 0, podMode: 0 })
+      const podlite_processor = podlite({ importPlugins: true }).use({})
+      const tree = podlite_processor.parse(src, { skipChain: 0, podMode: 0 })
+      return podlite_processor.toAstResult(tree).interator as PodliteDocument
     },
   }
-    const src = fs.readFileSync(filePath).toString()
-    return typeToParserMap[parser_type](src)
+  const src = fileContent || fs.readFileSync(filePath).toString()
+  return typeToParserMap[parser_type](src)
 }
 
 export function processFile(f: string, content?: string) {
