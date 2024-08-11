@@ -168,5 +168,4 @@ This is a test para
     ]
   `)
   expect(ctx).toHaveProperty('nextPublishTime')
-
 })
