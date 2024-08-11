@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 /**
 =begin pod
@@ -21,14 +21,14 @@ Returns the factorial of the number n as a number. If n is 0 or 1, it returns 1.
 =end pod
 */
 function factorial(n: number): number {
-    if (n < 0) {
-        throw new Error("Factorial is not defined for negative numbers");
-    }
-    if (n === 0 || n === 1) {
-        return 1;
-    }
-    return n * factorial(n - 1);
+  if (n < 0) {
+    throw new Error('Factorial is not defined for negative numbers')
+  }
+  if (n === 0 || n === 1) {
+    return 1
+  }
+  return n * factorial(n - 1)
 }
 
-const num = 5;
-console.log(`Factorial of ${num} is ${factorial(num)}`);
+const num = 5
+console.log(`Factorial of ${num} is ${factorial(num)}`)
