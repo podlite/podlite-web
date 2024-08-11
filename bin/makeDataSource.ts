@@ -22,17 +22,17 @@ import {
   PodNode,
 } from '@podlite/schema'
 import { convertFileLinksToUrl, makeLinksMap, parseFiles } from '../src/node-utils'
-import { addUrl, makeAstFromSrc, pubRecord } from '../src/shared'
+import { addUrl, makeAstFromSrc, publishRecord, pubRecord } from '../src/shared'
 
 const version = require('../package.json').version
 const pathFs = require('path')
 const glob = require('glob')
 
-type publishRecord = pubRecord & {
-  title: string | undefined
-  publishUrl: string
-  sources: string[]
-}
+// type publishRecord = pubRecord & {
+//   title: string | undefined
+//   publishUrl: string
+//   sources: string[]
+// }
 
 export function isExistsPubdate(node: PodNode) {
   let isShouldBePublished = false
@@ -81,6 +81,7 @@ allFiles.flat().map((record: pubRecord) => {
     conf.exists('publishUrl')
     ? conf.getFirstValue('publishUrl')
     : undefined
+  // @ts-ignore
   nodes.push({ ...record, title, publishUrl, sources: [], description })
 })
 // now filter  out items for publish in future
