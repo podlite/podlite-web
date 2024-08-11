@@ -175,6 +175,120 @@ export function parseFile(filePath: string, fileContent?: string) {
   const src = fileContent || fs.readFileSync(filePath).toString()
   return typeToParserMap[parser_type](src)
 }
+export function getDocumentAttributes(node: PodliteDocument) {
+  // filling title
+  let title = ''
+  let description = ''
+  let subtitle
+  let author
+  let footer = ''
+  makeInterator({
+    NAME: (node, ctx, interator) => {
+      title = getTextContentFromNode(node)
+    },
+    TITLE: (node, ctx, interator) => {
+      title = getTextContentFromNode(node)
+    },
+    DESCRIPTION: (node, ctx, interator) => {
+      description = node.content
+    },
+    SUBTITLE: (node, ctx, interator) => {
+      subtitle = getTextContentFromNode(node)
+    },
+    AUTHOR: (node, ctx, interator) => {
+      const attr = makeAttrs(node, ctx)
+      author = Object.fromEntries(Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)]))
+    },
+    FOOTER: (node, ctx, interator) => {
+      footer = node.content
+    },
+  })(node, {})
+  const props = {
+    title,
+    description,
+    subtitle,
+    author,
+    footer,
+    puburl: undefined,
+    pubdate: undefined,
+  }
+  const [podnode] = getFromTree(node.content, 'pod')
+  if (podnode) {
+    // prepare publishUrl
+    const conf = makeAttrs(podnode, {})
+    props.puburl = conf.exists('puburl')
+      ? conf.getFirstValue('puburl')
+      : // check old publishUrl attribute
+      conf.exists('publishUrl')
+      ? conf.getFirstValue('publishUrl')
+      : undefined
+    const a_pubdate = conf.getFirstValue('pubdate')
+    // Due to cover some cases whan new Date fail on safari, i.e.
+    // new Date("2022-05-07 10:00:00").getFullYear() -> NaN
+    // convert to ISO 8601 "2022-05-07 10:00:00" -> "2022-05-07T10:00:00"
+    props.pubdate = a_pubdate?.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(:\d{2})?$/)
+      ? a_pubdate.replace(' ', 'T')
+      : a_pubdate
+  }
+  return props
+}
+export function getPublishAttributes(node: PodNode) {
+  // filling title
+  let title = ''
+  let description = ''
+  let subtitle
+  let author
+  let footer = ''
+  makeInterator({
+    NAME: (node, ctx, interator) => {
+      title = getTextContentFromNode(node)
+    },
+    TITLE: (node, ctx, interator) => {
+      title = getTextContentFromNode(node)
+    },
+    DESCRIPTION: (node, ctx, interator) => {
+      description = node.content
+    },
+    SUBTITLE: (node, ctx, interator) => {
+      subtitle = getTextContentFromNode(node)
+    },
+    AUTHOR: (node, ctx, interator) => {
+      const attr = makeAttrs(node, ctx)
+      author = Object.fromEntries(Object.keys(attr.asHash()).map(k => [k, attr.getFirstValue(k)]))
+    },
+    FOOTER: (node, ctx, interator) => {
+      footer = node.content
+    },
+  })(node, {})
+  const props = {
+    title,
+    description,
+    subtitle,
+    author,
+    footer,
+    puburl: undefined,
+    pubdate: undefined,
+  }
+  const podnode = node
+  if (podnode) {
+    // prepare publishUrl
+    const conf = makeAttrs(podnode, {})
+    props.puburl = conf.exists('puburl')
+      ? conf.getFirstValue('puburl')
+      : // check old publishUrl attribute
+      conf.exists('publishUrl')
+      ? conf.getFirstValue('publishUrl')
+      : undefined
+    const a_pubdate = conf.getFirstValue('pubdate')
+    // Due to cover some cases whan new Date fail on safari, i.e.
+    // new Date("2022-05-07 10:00:00").getFullYear() -> NaN
+    // convert to ISO 8601 "2022-05-07 10:00:00" -> "2022-05-07T10:00:00"
+    props.pubdate = a_pubdate?.match(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(:\d{2})?$/)
+      ? a_pubdate.replace(' ', 'T')
+      : a_pubdate
+  }
+  return props
+}
 
 export function processFile(f: string, content?: string) {
   const podlite_document = parseFile(f, content)
@@ -203,4 +317,16 @@ export function processFile(f: string, content?: string) {
     sources: [],
     node: podlite_document,
   } as publishRecord
+}
+export function parseSources(path: string): publishRecord[] {
+  let count = 0
+  const allFiles = glob
+    .sync(path)
+    .map((f: any) => {
+      count++
+      return processFile(f)
+    })
+    .flat()
+    .filter(Boolean)
+  return allFiles as publishRecord[]
 }
