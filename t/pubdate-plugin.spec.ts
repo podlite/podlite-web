@@ -154,7 +154,7 @@ This is a test para
         "sources": Array [
           "/n5XF1",
         ],
-        "title": undefined,
+        "title": null,
         "type": "n",
       },
       Object {

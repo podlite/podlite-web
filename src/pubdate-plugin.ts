@@ -72,7 +72,7 @@ export function getNotes(item: publishRecord): publishRecord[] {
       return {
         pubdate,
         type: 'note',
-        title: undefined,
+        title: null,
         node: mkRootBlock({}, [n]),
         description: n,
         file,
@@ -144,10 +144,4 @@ const plugin = (): PodliteWebPlugin => {
   return [onProcess, onExit]
 }
 
-/**
-1. process images
-2. process =useReact, =React
-3. process links convertFileLinksToUrl
-4. getStateVersion
-*/
 export default plugin

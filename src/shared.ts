@@ -12,7 +12,7 @@ export type pubRecord = {
   file: string
 }
 export type publishRecord = pubRecord & {
-  title: string | undefined
+  title: string | null
   publishUrl: string
   sources: string[]
   node: PodliteDocument
