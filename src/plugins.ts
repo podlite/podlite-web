@@ -117,3 +117,65 @@ export const processPlugin = (
   const nextState = [...notMatchedItems, ...processItems(matchedItems)]
   return [nextState, onClose(ctx)]
 }
+
+/**
+=begin pod
+=head1 composePlugins
+
+This function takes an array of PluginConfig objects and combines them into a single PluginConfig.
+It does this by sequentially processing each PluginConfig in the array with the next, 
+effectively composing their behaviors into a single plugin configuration. 
+Each PluginConfig is expected to modify a shared state and context. The composition 
+is achieved by chaining the plugin functions within each PluginConfig, so that the 
+output (both state and context) of one plugin function becomes the input to the next.
+
+=head2 Parameters
+
+  =begin item
+  B<configs>
+  
+  An array of PluginConfig objects. Each PluginConfig is an object that represents 
+  configuration for a plugin, which includes a plugin processing function and 
+  potentially other settings.
+  =end item
+
+=head2 Returns
+
+Returns a single PluginConfig object that represents the composed configuration 
+of all the PluginConfig objects passed in the 'configs' array. This resulting 
+PluginConfig can be used to process items with the combined logic of all the 
+plugins defined in the input array.
+
+=end pod
+*/
+export const composePlugins = (configs: PluginConfig[], inintCtx = {}): PluginConfig => {
+  const result = configs.reduce(
+    (acc, config) => {
+      if (acc.config?.plugin) {
+        const accCtx = acc.ctx || {}
+        let resultCtx = {}
+        const resultConfig: PluginConfig = {
+          plugin: [
+            items => {
+              const [processedAccState, processedAccCtx] = processPlugin(acc.config, items, accCtx)
+              const [processedState, processedCtx] = processPlugin(config, processedAccState, {
+                ...accCtx,
+                ...processedAccCtx,
+              })
+              resultCtx = { ...accCtx, ...processedAccCtx, ...processedCtx }
+              return processedState
+            },
+            () => {
+              return { ...accCtx, ...resultCtx }
+            },
+          ],
+        }
+        return { config: resultConfig, ctx: resultCtx }
+      } else {
+        return { config, ctx: inintCtx }
+      }
+    },
+    { config: {} as PluginConfig, ctx: {} },
+  )
+  return result.config
+}
