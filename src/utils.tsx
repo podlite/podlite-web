@@ -31,6 +31,7 @@ export type DataFeed = {
 }
 
 export type FeedContent = publishRecord & {
+  title: string | null
   number?: number
   sxd: string
   sequence?: number
