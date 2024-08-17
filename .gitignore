@@ -62,5 +62,7 @@ public
 pub*
 # !pub
 !pubdate*
+!publisher*
 site*
+!site-data*
 

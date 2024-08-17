@@ -1,5 +1,7 @@
 .github/*
 site*
+!t/*
+!src/*
 built/*
 .next
 
