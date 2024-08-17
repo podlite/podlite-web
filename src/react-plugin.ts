@@ -5,8 +5,6 @@ import { makeAstFromSrc, publishRecord } from './shared'
 import * as fs from 'fs'
 import { getPathToOpen } from './node-utils'
 
-
-
 const plugin = (): PodliteWebPlugin => {
   const componensMap = new Map()
   const outCtx: PodliteWebPluginContext = {}
