@@ -1,6 +1,6 @@
-import { getParserTypeforFile, parseFile, parseSources } from '../src/node-utils'
+import { getParserTypeforFile, parseFile, parseSources, processFile } from '../src/node-utils'
 import { validatePodliteAst } from '@podlite/schema'
-import { PluginConfig, PodliteWebPlugin, processPlugin } from 'src/plugins'
+import { composePlugins, PluginConfig, PodliteWebPlugin, processPlugin } from 'src/plugins'
 it('process files', () => {
   const glob = require('glob')
   const arr = glob.sync('./t/test-blog.pub/*')
@@ -111,7 +111,7 @@ it('parse Source:  podlite file', () => {
 
 // now lets make pipe tp process files
 
-it('make pipe depends on config', () => {
+it('processPlugin: run plugin using config', () => {
   const items = parseSources('t/test-parse/*')
 
   const testPlugin = ({ title = 'processed' }): PodliteWebPlugin => {
@@ -152,5 +152,54 @@ it('make pipe depends on config', () => {
       "test_title",
       "test_title",
     ]
+  `)
+})
+it('composePlugins: conpose several configs into one plugin', () => {
+  const testPlugin = ({ title = 'processed' }): PodliteWebPlugin => {
+    return [
+      items => {
+        return items.map(i => ({ ...i, title }))
+      },
+      ctx => ({ ...ctx, ...{ testPlugin: 1 } }),
+    ]
+  }
+  const upperCaseFied = ({ field = 'title' }): PodliteWebPlugin => {
+    return [
+      items => {
+        return items.map(i => {
+          const newItem = { ...i }
+          newItem[field] = newItem[field].toUpperCase()
+          return newItem
+        })
+      },
+      ctx => ({ ...ctx, ...{ upperCaseFied: 1 } }),
+    ]
+  }
+
+  const config1: PluginConfig = {
+    plugin: testPlugin({ title: 'TEST_title' }),
+    includePatterns: '.*',
+    excludePatterns: 'dir1/mod1',
+  }
+  const config2: PluginConfig = {
+    plugin: upperCaseFied({ field: 'title' }),
+    includePatterns: '.*',
+    excludePatterns: 'dir1/mod1',
+  }
+
+  // return result
+  const configComposed = composePlugins([config1, config2])
+  const file1 = `
+=begin pod 
+sdsd
+=end pod
+`
+  const files = [processFile('virtual/src.pod6', file1)]
+  const [res, ctx] = processPlugin(configComposed, files, {})
+  expect(ctx).toMatchInlineSnapshot(`
+    Object {
+      "testPlugin": 1,
+      "upperCaseFied": 1,
+    }
   `)
 })
