@@ -5,7 +5,6 @@ import { publishRecord } from './shared'
 import * as fs from 'fs'
 import { getPathToOpen } from './node-utils'
 
-
 const plugin = (): PodliteWebPlugin => {
   const outCtx: PodliteWebPluginContext = {}
   const imagesMap = new Map()
