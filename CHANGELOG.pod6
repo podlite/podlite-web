@@ -2,6 +2,17 @@
 
 =head1 Upcoming
 
+=head1 0.1.25
+
+=item API for plugins
+=item react plugin ( C<=useReact>, C<=React>)
+=item pubdate plugin ( publish document based on C<:pubdate> attribute)
+=item image plugin, links plugin 
+=item state-version plugin ( get a version for a set of documents )
+=item plugin for preparing data for publication 
+=item add support C<doc:> scheme for C<L<>>
+=item new cli tool based on plugins
+
 =head1 0.1.24
 =item1 * add support for formulas
 =item1 * add support for HTML entities in C<E<>> code
