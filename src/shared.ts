@@ -1,23 +1,25 @@
 import { getFromTree, makeAttrs, makeInterator, PodliteDocument, PodNode } from '@podlite/schema'
+import { publishRecord, pubRecord } from '@podlite/publisher'
+
 import { podlite as podlite_core } from 'podlite'
 // now we add base60 letters
 const translit = require('iso_9')
 const base60 = require('newbase60')
 
-export type pubRecord = {
-  type: string
-  pubdate: string // '2024-08-02T12:34:56Z' ISO 8601, 'Tue, 02 Aug 2024 12:34:56 GMT' RFC 2822
-  node: PodNode
-  description?: PodNode
-  file: string
-}
-export type publishRecord = pubRecord & {
-  title: string | null
-  publishUrl: string
-  sources: string[]
-  node: PodliteDocument
-  pubdate: string | undefined
-}
+// export type pubRecord = {
+//   type: string
+//   pubdate: string // '2024-08-02T12:34:56Z' ISO 8601, 'Tue, 02 Aug 2024 12:34:56 GMT' RFC 2822
+//   node: PodNode
+//   description?: PodNode
+//   file: string
+// }
+// export type publishRecord = pubRecord & {
+//   title: string | null
+//   publishUrl: string
+//   sources: string[]
+//   node: PodliteDocument
+//   pubdate: string | undefined
+// }
 export const makeAstFromSrc = (src: string) => {
   let podlite = podlite_core({ importPlugins: true }).use({})
   let tree = podlite.parse(src)

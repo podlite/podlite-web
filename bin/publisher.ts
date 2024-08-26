@@ -8,16 +8,15 @@
 
  */
 
+import { PluginConfig, composePlugins, processPlugin, parseSources } from '@podlite/publisher'
 import * as fs from 'fs'
 import { BUILT_PATH, INDEX_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
-import imagesPlugin from '../src/images-plugin'
-import linksPlugin from '../src/links-plugin'
-import { parseSources } from '../src/node-utils'
-import { composePlugins, PluginConfig, processPlugin } from '../src/plugins'
-import pubdatePlugin from '../src/pubdate-plugin'
-import reactPlugin from '../src/react-plugin'
-import siteDataPlugin from '../src/site-data-plugin'
-import stateVersionPlugin from '../src/state-version-plugin'
+import imagesPlugin from '@podlite/publisher/lib/images-plugin'
+import linksPlugin from '@podlite/publisher/lib/links-plugin'
+import pubdatePlugin from '@podlite/publisher/lib/pubdate-plugin'
+import reactPlugin from '@podlite/publisher/lib/react-plugin'
+import siteDataPlugin from '@podlite/publisher/lib/site-data-plugin'
+import stateVersionPlugin from '@podlite/publisher/lib/state-version-plugin'
 const glob = require('glob')
 // const fs = require('fs')
 const version = require('../package.json').version
