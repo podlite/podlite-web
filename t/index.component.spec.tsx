@@ -1,7 +1,9 @@
 import makeInterator from '@podlite/schema/lib/ast-inerator'
-import { addUrl, publishRecord } from '../src/shared'
-import { convertFileLinksToUrl, parseFiles } from '../src/node-utils'
+// import { convertFileLinksToUrl, parseFiles } from '../src/node-utils'
 import { getTextContentFromNode } from '@podlite/schema'
+import { parseFiles, publishRecord } from '@podlite/publisher'
+import {convertFileLinksToUrl} from '@podlite/publisher'
+import { addUrl } from 'src/shared'
 
 it('parseFiles', () => {
   const arr = parseFiles('./t/test-blog.pub/*')
