@@ -21,8 +21,17 @@ import {
   PodliteDocument,
   PodNode,
 } from '@podlite/schema'
-import { convertFileLinksToUrl, makeLinksMap, parseFiles } from '../src/node-utils'
-import { addUrl, makeAstFromSrc, publishRecord, pubRecord } from '../src/shared'
+// import { convertFileLinksToUrl, makeLinksMap, parseFiles } from '../src/node-utils'
+// import { addUrl, makeAstFromSrc, publishRecord, pubRecord } from '../src/shared'
+import {
+  addUrl,
+  convertFileLinksToUrl,
+  makeAstFromSrc,
+  makeLinksMap,
+  parseFiles,
+  publishRecord,
+  pubRecord,
+} from '@podlite/publisher'
 
 const version = require('../package.json').version
 const pathFs = require('path')
