@@ -4,4 +4,5 @@ site*
 !src/*
 built/*
 .next
+*.json
 
