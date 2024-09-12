@@ -7,7 +7,9 @@ export default function AnyPage(params) {
   return (
     <>
       <main>
-        {item.type === 'page' ? (
+        {item.template ? (
+          ProcessWithTemplate(item, footer)
+        ) : item.type === 'page' ? (
           Page(item, footer)
         ) : (
           <ArticlesWithNavigation footer={footer} articles={[current]} prev={prev} next={next} />
