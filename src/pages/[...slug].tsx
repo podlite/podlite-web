@@ -18,14 +18,16 @@ export default function AnyPage(params) {
 }
 
 export async function getStaticPaths() {
-  const paths = contentData().filter(({ publishUrl }) => publishUrl !== '/'). map(({ publishUrl }) => {
-    const slug = publishUrl.split('/').slice(1)
-    return {
-      params: {
-        slug,
-      },
-    }
-  })
+  const paths = contentData()
+    .filter(({ publishUrl }) => publishUrl !== '/')
+    .map(({ publishUrl }) => {
+      const slug = publishUrl.split('/').slice(1)
+      return {
+        params: {
+          slug,
+        },
+      }
+    })
 
   return { paths, fallback: false }
 }
