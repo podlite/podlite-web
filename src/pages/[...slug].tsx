@@ -1,4 +1,4 @@
-import { ArticlesWithNavigation, Page } from '@Components/service'
+import { ArticlesWithNavigation, Page, ProcessWithTemplate } from '@Components/service'
 import { contentData, getSiteInfo } from '../utils'
 
 export default function AnyPage(params) {
