@@ -1,5 +1,6 @@
 import { ArticlesWithNavigation, Page, ProcessWithTemplate } from '@Components/service'
-import { contentData, getSiteInfo } from '../utils'
+import { contentData } from 'src/serverside'
+import { getSiteInfo } from '../utils'
 
 export default function AnyPage(params) {
   const { slug, footer, item, current, prev, next, template } = params
