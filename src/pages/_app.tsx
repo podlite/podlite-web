@@ -2,26 +2,19 @@ import '../../built/styles.css'
 import * as img from '../../built/images'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
-import { contentData, getSiteInfo } from '../utils'
+import { getSiteInfo } from '../utils'
 import { getFromTree, getTextContentFromNode, Image } from '@podlite/schema'
 import { useEffect } from 'react'
 import { useRouter } from 'next/dist/client/router'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { slug = [] } = pageProps
-  const checkSlug =
-    slug =>
-    ({ publishUrl }) => {
-      const url = '/' + slug.join('/')
-      return publishUrl.match(url)
-    }
-  const item: any = contentData().find(checkSlug(slug))
+  const { slug = [], item } = pageProps
   const { title: siteTitle, url } = getSiteInfo()
   const title = `${item?.title || ''} ${siteTitle}`
   const [image] = getFromTree(item?.node, { type: 'image' }) as Array<Image>
   const metaImage = image?.src || null
   const description = getTextContentFromNode(item?.description || []) || title
-  const resultUrl = url || ''
+  const resultUrl = item?.publishUrl || url || ''
   const router = useRouter()
   const pageview = url => {
     ;(window as any)?.gtag?.('event', 'page_view', {

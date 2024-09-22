@@ -1,5 +1,5 @@
 import { Head, Html, Main, NextScript } from 'next/document'
-import { getData } from 'src/utils'
+import { getSiteInfo } from 'src/utils'
 
 export default function Document() {
   return (
@@ -17,7 +17,7 @@ export default function Document() {
   )
 }
 
-const GTM_ID = getData().siteInfo.gtmId
+const GTM_ID =getSiteInfo().gtmId
 
 function LoadGoogleTagManager() {
   if (!GTM_ID) return null

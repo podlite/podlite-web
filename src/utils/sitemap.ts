@@ -1,9 +1,10 @@
 import { PUBLIC_PATH } from '../constants'
 import * as fs from 'fs'
-import { contentData, ContentRecord, getData } from '../utils'
+import {  ContentRecord, getSiteInfo } from '../utils'
+import { contentData } from 'src/serverside'
 
 export function generateSitemap() {
-  const siteUrl = getData().siteInfo.url
+  const siteUrl = getSiteInfo().url
   function addPage(page: ContentRecord) {
     const path = page.publishUrl
     const route = path === '/index' ? '' : path

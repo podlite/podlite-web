@@ -40,41 +40,29 @@ export type FeedContent = publishRecord & {
   shortUrl?: string
 }
 export type ContentRecord = Pick<FeedContent, 'publishUrl' | 'title' | 'node' | 'sources' | 'shortUrl'>
-export function getData(): DataFeedContent {
-  const d = require('../built/data.json')
-  //@ts-ignore
-  return d as DataFeedContent
-  //   const data = fs.readFileSync(DATA_PATH, "utf8").toString()
-  //   return JSON.parse(data)
+export type DataFeedContent = {
+  all: publishRecord[]
+  siteInfo: SiteInfo
+  control: {
+    stateVersion: any
+    nextPublishTime: any
+  }
+  imagesMap: {
+    [k: string]: any
+  }
 }
-
 export function getSiteInfo(): DataFeedContent['siteInfo'] {
-  return getData().siteInfo
-}
-export function pageNames() {
-  const data = getData()
-  return data.all.map(post => post.publishUrl)
-}
 
-export function contentData(): DataFeedContent['all'] {
-  const data = getData()
-  return data.all.map(({ publishUrl, title, node, sources, pubdate, ...args }) => ({
-    ...args,
-    publishUrl,
-    title,
-    node,
-    sources,
-    pubdate,
-    shortUrl: sources[0] || false,
-  }))
+  const d = require('../built/siteInfo.json')
+  return d as DataFeedContent['siteInfo']
 }
 export function mapPathToImage(path: string): string | undefined {
-  const data = getData().imagesMap
+  const data = require('../built/imagesMap.json') as DataFeedContent['imagesMap']
   return data[path]
 }
 export function getArticlesGroupedByYearMonth() {
   //filter out pages
-  const source = contentData()
+  const source = [] // TODO:: need to fix instead of use contentData()
     .filter(({ type = '' }) => type !== 'page')
     .reverse()
 
