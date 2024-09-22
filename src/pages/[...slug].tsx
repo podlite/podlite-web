@@ -2,7 +2,10 @@ import { ArticlesWithNavigation, Page, ProcessWithTemplate } from '@Components/s
 import { contentData, getSiteInfo } from '../utils'
 
 export default function AnyPage(params) {
-  const { slug, footer, item, current, prev, next } = params
+  const { slug, footer, item, current, prev, next, template } = params
+  if (template) {
+    item.template = template
+  }
   // wrap all elements and add line link info
   return (
     <>
@@ -22,6 +25,7 @@ export default function AnyPage(params) {
 export async function getStaticPaths() {
   const paths = contentData()
     .filter(({ publishUrl }) => publishUrl !== '/')
+    .filter(({ publishUrl }) => publishUrl !== '/TEMPLATE')
     .map(({ publishUrl }) => {
       const slug = publishUrl.split('/').slice(1)
       return {
