@@ -8,7 +8,14 @@
 
  */
 
-import { PluginConfig, composePlugins, processPlugin, parseSources } from '@podlite/publisher'
+import {
+  PluginConfig,
+  composePlugins,
+  processPlugin,
+  parseSources,
+  PodliteWebPlugin,
+  publishRecord,
+} from '@podlite/publisher'
 import * as fs from 'fs'
 import { BUILT_PATH, INDEX_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
 import imagesPlugin from '@podlite/publisher/lib/images-plugin'
@@ -55,6 +62,30 @@ const public_path = options.public_path || PUBLIC_PATH
 
 const tctx = { testing: false }
 const makeConfigMainPlugin = () => {
+  const configSiteDataPlugin: PluginConfig = {
+    plugin: siteDataPlugin({
+      public_path,
+      indexFilePath: indexFilePath || `${files}/${INDEX_PATH}`,
+      built_path: built_path || BUILT_PATH,
+      site_url: site_url || process.env.SITE_URL,
+    }),
+    includePatterns: '.*',
+  }
+  const configPubdatePlugin: PluginConfig = {
+    plugin: pubdatePlugin(),
+    includePatterns: '.*',
+    excludePatterns: indexFilePath,
+  }
+  const configImagesPlugin: PluginConfig = {
+    plugin: imagesPlugin(),
+    includePatterns: '.*',
+  }
+  const configLinksPlugin: PluginConfig = {
+    plugin: linksPlugin(),
+    includePatterns: '.*',
+  }
+  const configReactPlugin: PluginConfig = {
+    plugin: reactPlugin(),
     includePatterns: '.*',
   }
   const configBreadcrumbPlugin: PluginConfig = {
