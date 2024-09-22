@@ -103,8 +103,50 @@ const makeConfigMainPlugin = () => {
     configStateVersionPlugin,
     configBreadcrumbPlugin,
     configSiteDataPlugin,
+  ]
+
+  if (preset === 'pubdate') {
+    plugins.unshift(configPubdatePlugin)
+  }
+  return composePlugins(plugins, tctx)
+}
+
+;(async () => {
+  let customPlugin = ({ rootdir }): any => [(a: publishRecord[]) => a, all => all] as PodliteWebPlugin
+  if (options.directory) {
+    // if we get directory option
+    // lets try to find config file in that directory named podlite-web.config.js
+    // and import it
+    const resolvedModulePath = path.resolve(process.cwd(), `${options.directory}/podlite-web.config.js`)
+
+    if (fs.existsSync(resolvedModulePath)) {
+      customPlugin = require(resolvedModulePath).plugin
+      console.log(customPlugin({ rootdir: options.directory }))
+    } else {
+      console.warn(`config file not found: ${resolvedModulePath}`)
+    }
+  }
+
+//   const makeCustomPlugin: PluginConfig = {
+//     plugin: customPlugin({ rootdir: options.directory }),
+//     includePatterns: '.*',
+//   }
+
+  const makeCustomPlugin: PluginConfig = customPlugin({ rootdir: options.directory })
+
+  const makeHighlighterPlugin: PluginConfig = {
+    plugin: await highlighterPlugin({ rootdir: options.directory }),
+    includePatterns: '.*',
+  }
 
   //parse files
   const items = glob
-  .sync(files).map( i => parseSources(i) ).flat()
-  const [res, ctx] = processPlugin(makeConfigMainPlugin(), items, tctx)
+    .sync(files)
+    .map(i => parseSources(i))
+    .flat()
+  const [res, ctx] = processPlugin(
+    composePlugins([makeCustomPlugin, makeHighlighterPlugin, makeConfigMainPlugin()], tctx),
+    items,
+    tctx,
+  )
+})()
