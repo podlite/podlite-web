@@ -49,7 +49,13 @@ export async function getStaticProps({ params }) {
   const prev = allData[articleIndex - 1] || false
   const current: any = allData[articleIndex] || false
   const next = allData[articleIndex + 1] || false
-
+  let template
+  if ( item.template_file) {
+    template = contentData().find(({file})=> file === item.template_file)
+  } else {
+    console.log('no template found')
+  
+  }
   const footer = getSiteInfo().footer
-  return { props: { slug, footer, item, prev, current, next } }
+  return { props: { slug, footer, item, prev, current, next, template } }
 }
