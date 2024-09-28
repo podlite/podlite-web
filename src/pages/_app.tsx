@@ -34,6 +34,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
         <meta name="description" content={description} />
         <meta property="og:site_name" content={siteTitle} />
