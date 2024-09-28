@@ -137,11 +137,6 @@ const makeConfigMainPlugin = () => {
     }
   }
 
-  //   const makeCustomPlugin: PluginConfig = {
-  //     plugin: customPlugin({ rootdir: options.directory }),
-  //     includePatterns: '.*',
-  //   }
-
   const makeCustomPlugin: PluginConfig = customPlugin({ rootdir: options.directory })
 
   const makeHighlighterPlugin: PluginConfig = {
