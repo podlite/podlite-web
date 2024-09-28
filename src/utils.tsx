@@ -1,24 +1,31 @@
 /* eslint-disable react/display-name */
-import React from 'react'
-import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn } from '@podlite/schema'
+import React, { useEffect, useState } from 'react'
+import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
+//@ts-ignore
 import * as components from '../built/components'
-import { DataFeedContent } from '../bin/makeDataSource'
 import Link from 'next/link'
 import { DATA_PATH } from './constants'
+import { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
+import { getLangFromFilename, pubRecord } from '@podlite/publisher'
+import { codeToHtml } from '@Components/shiki'
+
 // POSTS_PATH is useful when you want to get the path to a specific file
-type pubRecord = {
-  type: string
-  pubdate: string
-  node: PodNode
-  description: PodNode
-  file: string
-}
-type publishRecord = pubRecord & {
-  title: string | undefined
+// type pubRecord = {
+//   type: string
+//   pubdate: string | number
+//   node: PodNode
+//   description: PodNode
+//   file: string
+// }
+type publishRecord = Omit<pubRecord, 'pubdate'> & {
+  title: string | null
   publishUrl: string
+  sources: string[]
+  node: PodliteDocument
+  pubdate?: string | null
 }
 export type DataFeed = {
   all: FeedContent[]
@@ -52,7 +59,6 @@ export type DataFeedContent = {
   }
 }
 export function getSiteInfo(): DataFeedContent['siteInfo'] {
-
   const d = require('../built/siteInfo.json')
   return d as DataFeedContent['siteInfo']
 }
@@ -75,8 +81,8 @@ export function getArticlesGroupedByYearMonth() {
       },
       rest,
     ) => {
-      const year = new Date(rest.pubdate).getFullYear()
-      const month = new Date(rest.pubdate).getMonth()
+      const year = new Date(rest.pubdate ? rest.pubdate : new Date()).getFullYear()
+      const month = new Date(rest.pubdate ? rest.pubdate : new Date()).getMonth()
       const { [year]: months = {}, ...other } = acc
       const { [month]: monthRecords = [], ...otherMonth } = months
       return {
@@ -92,13 +98,65 @@ export function getArticlesGroupedByYearMonth() {
   return groupedByYearMonth
 }
 
-export function getPostComponent(podNode: PodNode) {
+export function getPostComponent(podNode: PodNode, template?: publishRecord) {
   const plugins = (makeComponent): Partial<Rules> => {
     const mkComponent = src => (writer, processor) => (node, ctx, interator) => {
       // check if node.content defined
       return makeComponent(src, node, 'content' in node ? interator(node.content, { ...ctx }) : [])
     }
+    const hcode = mkComponent(({ children, key, ...node }, ctx) => {
+      const conf = makeAttrs(node, ctx)
+      let caption
+      if (conf.exists('caption')) {
+        caption = conf.getFirstValue('caption')
+      }
+      const data1 = conf.getFirstValue('_highlighted_code_')
+      const lang1 = conf.getFirstValue('_highlighted_code_lang_')
+      const lang =
+        conf.getFirstValue('lang') ||
+        // try to detect default language
+        // (filename)=>getLangFromFilename(filename )
+        (filename => lang1)()
+      // Create a highlighter instance
+      const [data, setData] = useState(null)
+      const fetchData = async () => {
+        try {
+          console.log('call codeToHtml lang:' + lang)
+          const html = await codeToHtml({ code: getTextContentFromNode(node.content), language: lang || 'text' })
+          setData(html)
+        } catch (e) {
+          console.error('error highlite ' + e)
+        } finally {
+        }
+      }
+      useEffect(() => {
+        if (lang) {
+          fetchData()
+        }
+      }, [])
 
+      return (
+        <>
+          {data ? (
+            <>
+              <p>
+                <caption className="caption">{caption}</caption>
+              </p>
+              <code key={key} className="shiki" dangerouslySetInnerHTML={{ __html: data || '' }} />
+            </>
+          ) : (
+            <>
+              <p>
+                <caption className="caption">{caption}</caption>
+              </p>
+              <code key={key}>
+                <pre>{children}</pre>
+              </code>
+            </>
+          )}
+        </>
+      )
+    })
     return {
       //process only content nodes
       root: () => (node, ctx, interator) => {
@@ -110,6 +168,12 @@ export function getPostComponent(podNode: PodNode) {
       },
       //@ts-ignore
       TITLE: () => () => null,
+      //@ts-ignore
+      SUBTITLE: () => () => null,
+      //@ts-ignore
+      FOOTER: () => () => null,
+      //@ts-ignore
+      HEADER: () => () => null,
       //@ts-ignore
       DESCRIPTION: () => () => null,
       'L<>': setFn((node, ctx) => {
@@ -135,8 +199,17 @@ export function getPostComponent(podNode: PodNode) {
           acc[name] = conf.getFirstValue(name)
           return acc
         }, {})
+
         if (components[componentName]) {
-          return makeComponent(components[componentName], { ...props }, interator(node.content, ctx))
+          return makeComponent(
+            components[componentName],
+            {
+              ...props,
+              ...{ item: template },
+              ...{ renderNode: node => getPostComponent(node, template), getThisNode: () => node },
+            },
+            interator(node.content, ctx),
+          )
         } else {
           return (
             <div style={{ color: 'red' }}>
@@ -149,6 +222,18 @@ export function getPostComponent(podNode: PodNode) {
           )
         }
       },
+      code1: () => (node, ctx, interator) => {
+        const conf = makeAttrs(node, ctx)
+        const code = getTextContentFromNode(node)
+        const lang = conf.getFirstValue('lang')
+        return (
+          <pre>
+            <code className={lang}>{code}</code>
+          </pre>
+        )
+      },
+      ':code': hcode,
+      code: hcode,
     }
   }
   const node = {

@@ -61,14 +61,16 @@ export const Contents = ({ locale = 'en' }) => {
   return <div className="details">{res}</div>
 }
 
-export const Article = ({ title, node, shortUrl, key, publishUrl, pubdate }) => {
+export const Article = item => {
+  const { title, node, shortUrl, key, publishUrl, pubdate, subtitle } = item
   const [_, domain = ''] = getSiteInfo().url.split(/\/\//)
   return (
     <article key={key}>
       <header>
         <h1>{title}</h1>
+        {subtitle && <div className="abstract">{subtitle}</div>}
       </header>
-      {getPostComponent(node)}
+      {getPostComponent(node, item)}
       <footer>
         <a href={shortUrl}>
           {domain}
@@ -80,25 +82,47 @@ export const Article = ({ title, node, shortUrl, key, publishUrl, pubdate }) => 
   )
 }
 
-export const Page = ({ title, node, shortUrl, key, publishUrl, pubdate }, footer) => (
-  <>
-    <article key={key}>
-      <header>
-        <h1>{title}</h1>
-      </header>
-      {getPostComponent(node)}
-    </article>
-    <TestComponent id="nav">
-      <></>
-      <div className="navigate">
-        &nbsp;<Link href="/">↑</Link>&nbsp;
-      </div>
-      <></>
-    </TestComponent>
-    {footer && getPostComponent(footer)}
-  </>
-)
-
+export const Page = (item, footer) => {
+  const { title, node, shortUrl, key, publishUrl, pubdate, subtitle } = item
+  return (
+    <>
+      <article key={key}>
+        <header>
+          <h1>{title}</h1>
+          {subtitle && <div className="abstract">{subtitle}</div>}
+        </header>
+        {getPostComponent(node, item)}
+      </article>
+      <TestComponent id="nav">
+        <></>
+        <div className="navigate">
+          &nbsp;<Link href="/">↑</Link>&nbsp;
+        </div>
+        <></>
+      </TestComponent>
+      {footer && getPostComponent(footer, item)}
+    </>
+  )
+}
+export const ProcessWithTemplate = (item, default_footer) => {
+  const { id, title, subtitle, footer, template, header } = item
+  const { footer: footer_tempalte, header: header_tempalte } = template
+  const renderFooter = footer_tempalte || footer || default_footer
+  const renderHeader = header_tempalte || header
+  return (
+    <>
+      {renderHeader && getPostComponent(renderHeader, item)}
+      {/* <article key={id}>
+        <header>
+          <h1>{title}</h1>
+          {subtitle && <div className="abstract">{subtitle}</div>}
+        </header> */}
+      {getPostComponent(item.template.node, item)}
+      {/* </article> */}
+      {renderFooter && getPostComponent(renderFooter, item)}
+    </>
+  )
+}
 export const ArticlesWithNavigation = ({
   articles,
   prev,
@@ -131,14 +155,21 @@ export const ArticlesWithNavigation = ({
 }
 
 export const LastArticles = ({ count = 1, id, children }) => {
-  const source = () => contentData().filter(({ type = '' }: any) => type !== 'page')
-  const articles = source().reverse().slice(0, count)
-  const lastArticleUrl = articles[articles.length - 1].publishUrl
-  const articleIndex = source().findIndex(({ publishUrl }) => publishUrl === lastArticleUrl)
-  const prev = source()[articleIndex - 1]
+  const { articles: articles10, prev: prev1 } = require('../../built/lastArticles.json') as {
+    articles: publishRecord[]
+    prev: any
+  }
+  const articles = articles10.slice(0, count)
+  // TODO:: restore functionality
+  //   const source = () => contentData().filter(({ type = '' }: any) => type !== 'page')
+  //   const articles = source().reverse().slice(0, count)
+  //   const lastArticleUrl = articles[articles.length - 1].publishUrl
+  //   const articleIndex = source().findIndex(({ publishUrl }) => publishUrl === lastArticleUrl)
+  //   const prev = source()[articleIndex - 1]
+  const prev = null
   return (
     <>
-      <ArticlesWithNavigation footer="" articles={articles} prev={prev} />
+      <ArticlesWithNavigation footer="" articles={articles.slice(0, count)} prev={prev} />
     </>
   )
 }
