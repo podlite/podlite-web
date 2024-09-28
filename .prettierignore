@@ -5,4 +5,5 @@ site*
 built/*
 .next
 *.json
-
+pub*
+out*
