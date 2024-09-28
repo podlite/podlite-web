@@ -17,6 +17,7 @@ import {
   publishRecord,
 } from '@podlite/publisher'
 import * as fs from 'fs'
+import path from 'path'
 import { BUILT_PATH, INDEX_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
 import imagesPlugin from '@podlite/publisher/lib/images-plugin'
 import linksPlugin from '@podlite/publisher/lib/links-plugin'
@@ -25,9 +26,11 @@ import reactPlugin from '@podlite/publisher/lib/react-plugin'
 import siteDataPlugin from '@podlite/publisher/lib/site-data-plugin'
 import stateVersionPlugin from '@podlite/publisher/lib/state-version-plugin'
 import breadcrumbPlugin from '@podlite/publisher/lib/breadcrumb-plugin'
+import termsIndexPlugin from '@podlite/publisher/lib/terms-index-plugin'
+
+import highlighterPlugin from '../src/highlighter-plugin'
 
 const glob = require('glob')
-// const fs = require('fs')
 const version = require('../package.json').version
 const { Command } = require('commander')
 const program = new Command()
@@ -39,25 +42,26 @@ program
   .option('-s, --site_url [site_url]', 'site url', 'http://example.com')
   .option('-p, --public_path [public_path]', 'public path', './public')
   .option('-v, --verbose', 'verbose output')
-   // preset plugins
+  .option('-d, --directory [path to project directory]', 'path to sources to build from')
+  // preset plugins
   .option('-preset, --preset [preset]', 'preset plugins (pubdate, everything)')
   .argument('[path to dir...]', 'path to posts')
 
 program.parse()
 
 program.parse(process.argv)
-const options = program.opts();
+const options = program.opts()
 const site_url = options.site_url || process.env.SITE_URL
 // reverse args to able to override default values publisher command from  package.json
 const [files] = (program.args || [POSTS_PATH]).reverse()
 console.log(JSON.stringify(options, null, 2))
 const preset = options.preset
 
- if (!['pubdate', 'everything'].includes(preset)) {
-    program.error(`--preset ${preset} not valide`, { exitCode: 2, code: '--preset' });
- }
+if (!['pubdate', 'everything'].includes(preset)) {
+  program.error(`--preset ${preset} not valide`, { exitCode: 2, code: '--preset' })
+}
 const indexFilePath = options.index
-const built_path = options.built_path  || BUILT_PATH
+const built_path = options.built_path || BUILT_PATH
 const public_path = options.public_path || PUBLIC_PATH
 
 const tctx = { testing: false }
@@ -92,6 +96,11 @@ const makeConfigMainPlugin = () => {
     plugin: breadcrumbPlugin(),
     includePatterns: '.*',
   }
+  const configTermsIndexPlugin: PluginConfig = {
+    plugin: termsIndexPlugin({ built_path }),
+    includePatterns: '.*',
+  }
+
   const configStateVersionPlugin: PluginConfig = {
     plugin: stateVersionPlugin(),
     includePatterns: '.*',
@@ -102,6 +111,7 @@ const makeConfigMainPlugin = () => {
     configLinksPlugin,
     configStateVersionPlugin,
     configBreadcrumbPlugin,
+    configTermsIndexPlugin,
     configSiteDataPlugin,
   ]
 
@@ -127,10 +137,10 @@ const makeConfigMainPlugin = () => {
     }
   }
 
-//   const makeCustomPlugin: PluginConfig = {
-//     plugin: customPlugin({ rootdir: options.directory }),
-//     includePatterns: '.*',
-//   }
+  //   const makeCustomPlugin: PluginConfig = {
+  //     plugin: customPlugin({ rootdir: options.directory }),
+  //     includePatterns: '.*',
+  //   }
 
   const makeCustomPlugin: PluginConfig = customPlugin({ rootdir: options.directory })
 
