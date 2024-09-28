@@ -17,7 +17,7 @@ export default function Document() {
   )
 }
 
-const GTM_ID =getSiteInfo().gtmId
+const GTM_ID = getSiteInfo().gtmId
 
 function LoadGoogleTagManager() {
   if (!GTM_ID) return null
