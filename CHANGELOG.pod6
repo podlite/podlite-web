@@ -2,6 +2,13 @@
 
 =head1 Upcoming
 
+=head1 0.2.1
+
+=item move to plugins architecture
+=item add support template file for page
+=item add index of terms React component
+=item highlight code modules
+
 =head1 0.1.25
 
 =item API for plugins
