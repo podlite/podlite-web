@@ -21,9 +21,11 @@
     "paths": {
       "@Components/*": ["src/components/*"],
       "@Styles/*": ["src/styles/*"],
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+    //   "@myproject/*": ["pub1/*"],
+    //   "raku-knowledge/*": ["pub-raku-knowledge/src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "src/**/*.ts", "src/**/*.tsx"],
+ "exclude": ["node_modules"]
 }

@@ -12,6 +12,7 @@
 }
 .row {
     display: flex;
+    width: 100%;
 }
 /* .row:after {
     content: "";

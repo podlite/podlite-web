@@ -210,7 +210,9 @@ time {
     font-feature-settings: 'tnum' 1;
 }
 
-p>code, :not(article, body, main, dl, li, blockquote, strong) > code {
+p>code, :not(article, body, main, dl, li, blockquote, strong) > code
+ code:not([style*="shiki"]) > code
+{
     color: #3451b2;
     font-size: 0.825rem;
     border-radius: 4px;
@@ -219,6 +221,9 @@ p>code, :not(article, body, main, dl, li, blockquote, strong) > code {
     transition: color .25s, background-color .5s;
 }
 
+code.shiki {
+    /* background-color: white; */
+}
 /* -----------------------------------
 Block Elements
 -------------------------------------- */

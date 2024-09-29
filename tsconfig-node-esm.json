@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // "module": "commonjs",
+    "module": "ESNext",
+"moduleResolution": "node",
+        "jsx": "react",
+    "strict": false,
+    "isolatedModules": false,
+    "downlevelIteration": true
+  },
+  "ts-node": {
+    // "esm": true,
+    "experimentalSpecifierResolution": "node"
+}
+}
