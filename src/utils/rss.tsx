@@ -1,7 +1,9 @@
 import { DataFeedContent } from '../../bin/makeDataSource'
 import { DATA_PATH, PUBLIC_PATH } from '../constants'
+import { getSiteInfo } from '../utils'
 import * as fs from 'fs'
-import { convertPodNodeToHtml as convertPodNodeToHtml, getData } from '../utils'
+import { convertPodNodeToHtml as convertPodNodeToHtml } from '../utils'
+import { getData } from 'src/serverside'
 
 export function getRssForData(data: DataFeedContent) {
   const conf = data.siteInfo
@@ -33,9 +35,6 @@ ${pages
 `
 }
 export function writeRss() {
-  //   const dataFeed: DataFeedContent = JSON.parse(
-  //     fs.readFileSync(DATA_PATH).toString()
-  //   )
   const dataFeed = getData()
   const pages = dataFeed.all
     .filter(a => a.pubdate)
@@ -46,6 +45,7 @@ export function writeRss() {
     })
     .reverse()
     .splice(0, 10)
-  const rss = getRssForData({ ...dataFeed, all: pages })
+  //@ts-ignore
+  const rss = getRssForData({ ...dataFeed, all: pages, siteInfo: getSiteInfo() })
   fs.writeFileSync(`${PUBLIC_PATH}/rss.xml`, rss)
 }
