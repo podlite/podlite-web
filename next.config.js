@@ -55,6 +55,7 @@ module.exports = withPlugins([
       )
       config.resolve.symlinks = false
     //   config.optimization.minimize = false
+       config.optimization.minimize = true
       config.optimization.splitChunks = {
         chunks: 'all',
       }

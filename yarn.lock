@@ -584,6 +584,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jest/expect-utils@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "@jest/expect-utils@npm:29.7.0"
+  dependencies:
+    jest-get-type: ^29.6.3
+  checksum: 75eb177f3d00b6331bcaa057e07c0ccb0733a1d0a1943e1d8db346779039cb7f103789f16e502f888a3096fb58c2300c38d1f3748b36a7fa762eb6f6d1b160ed
+  languageName: node
+  linkType: hard
+
 "@jest/expect@npm:^28.1.0":
   version: 28.1.0
   resolution: "@jest/expect@npm:28.1.0"
@@ -665,6 +674,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jest/schemas@npm:^29.6.3":
+  version: 29.6.3
+  resolution: "@jest/schemas@npm:29.6.3"
+  dependencies:
+    "@sinclair/typebox": ^0.27.8
+  checksum: 910040425f0fc93cd13e68c750b7885590b8839066dfa0cd78e7def07bbb708ad869381f725945d66f2284de5663bbecf63e8fdd856e2ae6e261ba30b1687e93
+  languageName: node
+  linkType: hard
+
 "@jest/source-map@npm:^28.0.2":
   version: 28.0.2
   resolution: "@jest/source-map@npm:28.0.2"
@@ -734,6 +752,20 @@ __metadata:
     "@types/yargs": ^17.0.8
     chalk: ^4.0.0
   checksum: 22705aed92a76d45465a6c51147bc71c1fbd300b912ebad2769e3ff7fd51c1938017e29fcea52e00c00dab7130697359b2a2c2be6ee601e37c8b1042a2c4040e
+  languageName: node
+  linkType: hard
+
+"@jest/types@npm:^29.6.3":
+  version: 29.6.3
+  resolution: "@jest/types@npm:29.6.3"
+  dependencies:
+    "@jest/schemas": ^29.6.3
+    "@types/istanbul-lib-coverage": ^2.0.0
+    "@types/istanbul-reports": ^3.0.0
+    "@types/node": "*"
+    "@types/yargs": ^17.0.8
+    chalk: ^4.0.0
+  checksum: a0bcf15dbb0eca6bdd8ce61a3fb055349d40268622a7670a3b2eb3c3dbafe9eb26af59938366d520b86907b9505b0f9b29b85cec11579a9e580694b87cd90fcc
   languageName: node
   linkType: hard
 
@@ -967,6 +999,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pagefind/default-ui@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@pagefind/default-ui@npm:1.1.1"
+  checksum: 2dbca2d676b92298c457e427fae6c86743928f22208df9b0623fc46cb1a7e1d7963281a38060ee7b394d29768db98f01fbae77c32fac8c90be845557a13513df
+  languageName: node
+  linkType: hard
+
 "@pagefind/linux-arm64@npm:1.1.1":
   version: 1.1.1
   resolution: "@pagefind/linux-arm64@npm:1.1.1"
@@ -1011,6 +1050,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@podlite/diagram@npm:^0.0.26":
+  version: 0.0.26
+  resolution: "@podlite/diagram@npm:0.0.26"
+  dependencies:
+    "@podlite/schema": 0.0.22
+    mermaid: 8.12.1
+    react-is: ^17.0.2
+  peerDependencies:
+    mermaid: "*"
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+    react-is: "*"
+  checksum: 561bf3e2c1d87812e0df3bbe2b4350aebd3e678741ffdf353bde24b4671bab1c3484cbaeb7ccfa8227b5bf9335563aaf72624f25345f97fcfed8ecdecffbc361
+  languageName: node
+  linkType: hard
+
 "@podlite/formula@npm:0.0.3":
   version: 0.0.3
   resolution: "@podlite/formula@npm:0.0.3"
@@ -1022,6 +1077,20 @@ __metadata:
     react-dom: ^16.0.0 || ^17.0.0
     react-is: "*"
   checksum: 212c8dbd24b36c07faf5c9fd73916050af3aacd45f5985083bb2dab1daa88bb69f118450e5e2a895de475eff79fde384d4227dad2830646b4ff557207ca0ffe7
+  languageName: node
+  linkType: hard
+
+"@podlite/formula@npm:0.0.4":
+  version: 0.0.4
+  resolution: "@podlite/formula@npm:0.0.4"
+  dependencies:
+    "@podlite/schema": 0.0.22
+    react-is: ^17.0.2
+  peerDependencies:
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+    react-is: "*"
+  checksum: 2492e53e16044d91f69106153391fec3a37fe784bd96dae65375062c3e872935f0ac58d6554eb3c30b9bce104ae20b594c9c63b7c63662d3f09fa0cf5d20bade
   languageName: node
   linkType: hard
 
@@ -1037,7 +1106,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@podlite/markdown@npm:0.0.14, @podlite/markdown@npm:^0.0.14":
+"@podlite/image@npm:^0.0.21":
+  version: 0.0.21
+  resolution: "@podlite/image@npm:0.0.21"
+  dependencies:
+    "@podlite/schema": ^0.0.22
+  peerDependencies:
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: c1e5b1006bccc86656c9498199f9a9e4520968f7882295903513e0503d3bc823a9f4d05429f0159a90458fe863544934f2893a91ef7811ba1e716c93fbd489d2
+  languageName: node
+  linkType: hard
+
+"@podlite/markdown@npm:0.0.14":
   version: 0.0.14
   resolution: "@podlite/markdown@npm:0.0.14"
   dependencies:
@@ -1056,6 +1137,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@podlite/markdown@npm:0.0.15, @podlite/markdown@npm:^0.0.15":
+  version: 0.0.15
+  resolution: "@podlite/markdown@npm:0.0.15"
+  dependencies:
+    "@podlite/schema": 0.0.22
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+    react-is: ^17.0.0
+    remark-gfm: ^3.0.1
+    remark-math: 5.1.1
+    remark-parse: ^10.0.1
+    unified: 10.1.2
+  peerDependencies:
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: 459942e6d5eff36be21269813c1560b52caeb1be999c3ab75267d41eeb402adb22fea6f6c7af9b03bae72f248d1fbc70947b86ead997a868ae40dad4c13d34d0
+  languageName: node
+  linkType: hard
+
 "@podlite/publisher@npm:^0.0.2":
   version: 0.0.2
   resolution: "@podlite/publisher@npm:0.0.2"
@@ -1069,6 +1169,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@podlite/publisher@npm:^0.0.3":
+  version: 0.0.3
+  resolution: "@podlite/publisher@npm:0.0.3"
+  dependencies:
+    "@podlite/schema": 0.0.22
+    crc-32: ^1.2.2
+    gray-matter: ^4.0.3
+    iso_9: ^1.0.4
+    newbase60: ^1.3.1
+  checksum: b6dcca8fb807c9ef82fee4f52e9fd1ef741f5dfe35c420515d17b0ba715ac367823793689c5c4efc05b4e7aab2bceecc58b3dc0d6aaf3a779e6366454bd694db
+  languageName: node
+  linkType: hard
+
 "@podlite/schema@npm:0.0.21, @podlite/schema@npm:^0.0.21":
   version: 0.0.21
   resolution: "@podlite/schema@npm:0.0.21"
@@ -1079,6 +1192,19 @@ __metadata:
     nanoid: 3.1.30
     slugify: ^1.6.6
   checksum: bd87e27dddb7adb7f07f8e5b71b16dc024af8b345a0a1651ac5b8862eed380974b78dd224c02d8526ec5387807e5b670c3dd46fa855de4b622fa956811e2519d
+  languageName: node
+  linkType: hard
+
+"@podlite/schema@npm:0.0.22, @podlite/schema@npm:^0.0.22":
+  version: 0.0.22
+  resolution: "@podlite/schema@npm:0.0.22"
+  dependencies:
+    ajv: ^7.2.3
+    events: ^3.1.0
+    json-pointer: ^0.6.1
+    nanoid: 3.1.30
+    slugify: ^1.6.6
+  checksum: 8db948d20d545b3740b87a9adfa08f7a1a9de308d468087bea8a4fa39cf61e295f1c44d4723b14df9ffae263807160d22984b69fb263bf2f37a614401c710b1f
   languageName: node
   linkType: hard
 
@@ -1100,6 +1226,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@podlite/to-jsx@npm:^0.0.26":
+  version: 0.0.26
+  resolution: "@podlite/to-jsx@npm:0.0.26"
+  dependencies:
+    "@podlite/diagram": ^0.0.26
+    "@podlite/schema": 0.0.22
+    entities: ^4.5.0
+    podlite: 0.0.35
+    react-is: ^17.0.0
+  peerDependencies:
+    "@podlite/diagram": "*"
+    "@podlite/schema": "*"
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: d6f9c72edae64adbd5a125dde806b46a32fd78dd255ec3b51eb0197cb1053eab0df195c9c37cf71e8bd7e36dd8a2bb38b55ec2cecc87c4224f383b33ab3664cd
+  languageName: node
+  linkType: hard
+
 "@podlite/toc@npm:0.0.14":
   version: 0.0.14
   resolution: "@podlite/toc@npm:0.0.14"
@@ -1112,6 +1256,21 @@ __metadata:
     react: "^16.0.0 || ^17.0.0 "
     react-dom: ^16.0.0 || ^17.0.0
   checksum: 9dace071c9cc291a1afeb8a4cbeb131c84e4f20584a2f6cc82fef2fbc80b7a6ade8f64d3b3752ea95dd996302d561148271a4c6f415f2120188fa067799e5fa8
+  languageName: node
+  linkType: hard
+
+"@podlite/toc@npm:0.0.15":
+  version: 0.0.15
+  resolution: "@podlite/toc@npm:0.0.15"
+  dependencies:
+    "@podlite/schema": 0.0.22
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+    react-is: ^17.0.0
+  peerDependencies:
+    react: "^16.0.0 || ^17.0.0 "
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: a079b2888bb9a68addb2f0881239611434a54f78f65fc694fd0af78c459eed2dbd1282b23807f8328855d2625482d48c6764636bc88882c2a5d9168d8036443b
   languageName: node
   linkType: hard
 
@@ -1222,6 +1381,13 @@ __metadata:
   version: 0.23.5
   resolution: "@sinclair/typebox@npm:0.23.5"
   checksum: c96056d35d9cb862aeb635ff8873e2e7633e668dd544e162aee2690a82c970d0b3f90aa2b3501fe374dfa8e792388559a3e3a86712b23ebaef10061add534f47
+  languageName: node
+  linkType: hard
+
+"@sinclair/typebox@npm:^0.27.8":
+  version: 0.27.8
+  resolution: "@sinclair/typebox@npm:0.27.8"
+  checksum: 00bd7362a3439021aa1ea51b0e0d0a0e8ca1351a3d54c606b115fdcc49b51b16db6e5f43b4fe7a28c38688523e22a94d49dd31168868b655f0d4d50f032d07a1
   languageName: node
   linkType: hard
 
@@ -1404,6 +1570,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jest@npm:^29.4.0":
+  version: 29.5.13
+  resolution: "@types/jest@npm:29.5.13"
+  dependencies:
+    expect: ^29.0.0
+    pretty-format: ^29.0.0
+  checksum: 875ac23c2398cdcf22aa56c6ba24560f11d2afda226d4fa23936322dde6202f9fdbd2b91602af51c27ecba223d9fc3c1e33c9df7e47b3bf0e2aefc6baf13ce53
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.8":
   version: 7.0.9
   resolution: "@types/json-schema@npm:7.0.9"
@@ -1454,6 +1630,13 @@ __metadata:
   version: 17.0.18
   resolution: "@types/node@npm:17.0.18"
   checksum: 6c4edfc2b3ba2342a9c3d56e934c5245948ab752f4dc04bd6790b9603e6ebc53bc4f5befc3662e207f7dba2ddd17ccf657f915e319ea7cdd4f77b851079d1611
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:16.11.13":
+  version: 16.11.13
+  resolution: "@types/node@npm:16.11.13"
+  checksum: 7c9d62c024537d7c9f2229097b9e7a93a60bc60efbc9171977f172819e229b01d0b6ed276d335996d39b0096aed2cefa58c4a34b264d712ae3595449e8d96ab7
   languageName: node
   linkType: hard
 
@@ -3152,6 +3335,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"diff-sequences@npm:^29.6.3":
+  version: 29.6.3
+  resolution: "diff-sequences@npm:29.6.3"
+  checksum: f4914158e1f2276343d98ff5b31fc004e7304f5470bf0f1adb2ac6955d85a531a6458d33e87667f98f6ae52ebd3891bb47d420bb48a5bd8b7a27ee25b20e33aa
+  languageName: node
+  linkType: hard
+
 "diff@npm:^4.0.1":
   version: 4.0.2
   resolution: "diff@npm:4.0.2"
@@ -3814,6 +4004,19 @@ __metadata:
     jest-message-util: ^28.1.0
     jest-util: ^28.1.0
   checksum: 53bfa2e094a7d5b270ce9a8dafc5432d51bb369287502acd373b66fe01072260bacd1f83bf741d5de49b008406781ab879a0247f5f6fc10d3f32fbe5a3ccfbdf
+  languageName: node
+  linkType: hard
+
+"expect@npm:^29.0.0":
+  version: 29.7.0
+  resolution: "expect@npm:29.7.0"
+  dependencies:
+    "@jest/expect-utils": ^29.7.0
+    jest-get-type: ^29.6.3
+    jest-matcher-utils: ^29.7.0
+    jest-message-util: ^29.7.0
+    jest-util: ^29.7.0
+  checksum: 9257f10288e149b81254a0fda8ffe8d54a7061cd61d7515779998b012579d2b8c22354b0eb901daf0145f347403da582f75f359f4810c007182ad3fb318b5c0c
   languageName: node
   linkType: hard
 
@@ -5384,6 +5587,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-diff@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest-diff@npm:29.7.0"
+  dependencies:
+    chalk: ^4.0.0
+    diff-sequences: ^29.6.3
+    jest-get-type: ^29.6.3
+    pretty-format: ^29.7.0
+  checksum: 08e24a9dd43bfba1ef07a6374e5af138f53137b79ec3d5cc71a2303515335898888fa5409959172e1e05de966c9e714368d15e8994b0af7441f0721ee8e1bb77
+  languageName: node
+  linkType: hard
+
 "jest-docblock@npm:^28.0.2":
   version: 28.0.2
   resolution: "jest-docblock@npm:28.0.2"
@@ -5431,6 +5646,13 @@ __metadata:
   version: 28.0.2
   resolution: "jest-get-type@npm:28.0.2"
   checksum: 5281d7c89bc8156605f6d15784f45074f4548501195c26e9b188742768f72d40948252d13230ea905b5349038865a1a8eeff0e614cc530ff289dfc41fe843abd
+  languageName: node
+  linkType: hard
+
+"jest-get-type@npm:^29.6.3":
+  version: 29.6.3
+  resolution: "jest-get-type@npm:29.6.3"
+  checksum: 88ac9102d4679d768accae29f1e75f592b760b44277df288ad76ce5bf038c3f5ce3719dea8aa0f035dac30e9eb034b848ce716b9183ad7cc222d029f03e92205
   languageName: node
   linkType: hard
 
@@ -5491,6 +5713,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-matcher-utils@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest-matcher-utils@npm:29.7.0"
+  dependencies:
+    chalk: ^4.0.0
+    jest-diff: ^29.7.0
+    jest-get-type: ^29.6.3
+    pretty-format: ^29.7.0
+  checksum: d7259e5f995d915e8a37a8fd494cb7d6af24cd2a287b200f831717ba0d015190375f9f5dc35393b8ba2aae9b2ebd60984635269c7f8cff7d85b077543b7744cd
+  languageName: node
+  linkType: hard
+
 "jest-message-util@npm:^28.1.0":
   version: 28.1.0
   resolution: "jest-message-util@npm:28.1.0"
@@ -5505,6 +5739,23 @@ __metadata:
     slash: ^3.0.0
     stack-utils: ^2.0.3
   checksum: a224f9dbb53b5ad857918938f94c6e5d9c64ccdd42e0780b3b485d66bd93c82cff7dd91fbe274273efb69533d79808f9c98622b23d70ec027e8619a20e283773
+  languageName: node
+  linkType: hard
+
+"jest-message-util@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest-message-util@npm:29.7.0"
+  dependencies:
+    "@babel/code-frame": ^7.12.13
+    "@jest/types": ^29.6.3
+    "@types/stack-utils": ^2.0.0
+    chalk: ^4.0.0
+    graceful-fs: ^4.2.9
+    micromatch: ^4.0.4
+    pretty-format: ^29.7.0
+    slash: ^3.0.0
+    stack-utils: ^2.0.3
+  checksum: a9d025b1c6726a2ff17d54cc694de088b0489456c69106be6b615db7a51b7beb66788bea7a59991a019d924fbf20f67d085a445aedb9a4d6760363f4d7d09930
   languageName: node
   linkType: hard
 
@@ -5674,6 +5925,20 @@ __metadata:
     graceful-fs: ^4.2.9
     picomatch: ^2.2.3
   checksum: 14c2ee1c24c6efa2d7adfe81ece8b9bbda78fa871f40bed80db72726166e96f7fb22bf1d9fb1689fb433b9bcd748027eb1ee5f0851a12f1aa1c49ee0bd4d7508
+  languageName: node
+  linkType: hard
+
+"jest-util@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest-util@npm:29.7.0"
+  dependencies:
+    "@jest/types": ^29.6.3
+    "@types/node": "*"
+    chalk: ^4.0.0
+    ci-info: ^3.2.0
+    graceful-fs: ^4.2.9
+    picomatch: ^2.2.3
+  checksum: 042ab4980f4ccd4d50226e01e5c7376a8556b472442ca6091a8f102488c0f22e6e8b89ea874111d2328a2080083bf3225c86f3788c52af0bd0345a00eb57a3ca
   languageName: node
   linkType: hard
 
@@ -7610,10 +7875,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "podlite-web@workspace:."
   dependencies:
-    "@podlite/markdown": ^0.0.14
-    "@podlite/publisher": ^0.0.2
-    "@podlite/schema": ^0.0.21
-    "@podlite/to-jsx": ^0.0.25
+    "@podlite/markdown": ^0.0.15
+    "@podlite/publisher": ^0.0.3
+    "@podlite/schema": ^0.0.22
+    "@podlite/to-jsx": ^0.0.26
     "@rollup/plugin-commonjs": ^26.0.1
     "@rollup/plugin-json": ^6.1.0
     "@rollup/plugin-node-resolve": ^15.2.3
@@ -7639,7 +7904,7 @@ __metadata:
     next-optimized-images: ^2.6.2
     nodemon: ^2.0.16
     pagefind: ^1.1.1
-    podlite: ^0.0.34
+    podlite: ^0.0.35
     prettier: ^2.5.1
     react: 17.0.2
     react-dom: 17.0.2
@@ -7669,6 +7934,24 @@ __metadata:
     react: ^16.0.0 || ^17.0.0
     react-dom: ^16.0.0 || ^17.0.0
   checksum: 1b6d2f5bff73312aa6356c51ced7c8a8acd53d427f46481b9f148f8f0eabee0efe5980589106e37c6f92258981859f6eb3245140bd18cf34e98c96ef68c44353
+  languageName: node
+  linkType: hard
+
+"podlite@npm:0.0.35, podlite@npm:^0.0.35":
+  version: 0.0.35
+  resolution: "podlite@npm:0.0.35"
+  dependencies:
+    "@podlite/diagram": ^0.0.26
+    "@podlite/formula": 0.0.4
+    "@podlite/image": ^0.0.21
+    "@podlite/markdown": 0.0.15
+    "@podlite/schema": ^0.0.22
+    "@podlite/toc": 0.0.15
+    nanoid: 3.1.30
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0
+    react-dom: ^16.0.0 || ^17.0.0
+  checksum: c8a1aefcd398a56e2937a30907611b3c80e87181eaeea515f9b094407f238f21c7087248547c415626e661d015d4b1dce170f2f99ed974be6c6b5b4e74443844
   languageName: node
   linkType: hard
 
@@ -7713,6 +7996,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"prettier@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "prettier@npm:3.3.3"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: bc8604354805acfdde6106852d14b045bb20827ad76a5ffc2455b71a8257f94de93f17f14e463fe844808d2ccc87248364a5691488a3304f1031326e62d9276e
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:^27.0.0, pretty-format@npm:^27.5.1":
   version: 27.5.1
   resolution: "pretty-format@npm:27.5.1"
@@ -7733,6 +8025,17 @@ __metadata:
     ansi-styles: ^5.0.0
     react-is: ^18.0.0
   checksum: c1018099f8f800693449df96c05c243d94e01f7429b6617e1064a1a69b4d715637fc3c579061fbc31548b87d92af74a7933c6eb3856da6f30b29c0ff67004ce0
+  languageName: node
+  linkType: hard
+
+"pretty-format@npm:^29.0.0, pretty-format@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "pretty-format@npm:29.7.0"
+  dependencies:
+    "@jest/schemas": ^29.6.3
+    ansi-styles: ^5.0.0
+    react-is: ^18.0.0
+  checksum: 032c1602383e71e9c0c02a01bbd25d6759d60e9c7cf21937dde8357aa753da348fcec5def5d1002c9678a8524d5fe099ad98861286550ef44de8808cc61e43b6
   languageName: node
   linkType: hard
 
@@ -7813,6 +8116,29 @@ __metadata:
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
   languageName: node
   linkType: hard
+
+"raku-knowledge@workspace:pub-raku-knowledge":
+  version: 0.0.0-use.local
+  resolution: "raku-knowledge@workspace:pub-raku-knowledge"
+  dependencies:
+    "@pagefind/default-ui": ^1.1.1
+    "@podlite/markdown": 0.0.14
+    "@podlite/publisher": ^0.0.2
+    "@podlite/to-jsx": ^0.0.25
+    "@types/jest": ^29.4.0
+    "@types/node": 16.11.13
+    "@types/react": 17.0.39
+    crc-32: ^1.2.2
+    jest: ^28.1.0
+    jest-serializer-html: ^7.1.0
+    next: 12.0.10
+    podlite: ^0.0.34
+    prettier: ^3.3.3
+    ts-jest: 28.0.3
+    ts-node: 10.5.0
+    typescript: 4.5.5
+  languageName: unknown
+  linkType: soft
 
 "raw-loader@npm:^2.0.0":
   version: 2.0.0
@@ -8951,7 +9277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:^28.0.3":
+"ts-jest@npm:28.0.3, ts-jest@npm:^28.0.3":
   version: 28.0.3
   resolution: "ts-jest@npm:28.0.3"
   dependencies:
@@ -8999,7 +9325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.5.0":
+"ts-node@npm:10.5.0, ts-node@npm:^10.5.0":
   version: 10.5.0
   resolution: "ts-node@npm:10.5.0"
   dependencies:

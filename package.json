@@ -11,7 +11,7 @@
     "test": "jest",
     "lint": "next lint",
     "postinstall": "yarn config set --home enableTelemetry 0 && next telemetry disable",
-    "export": "yarn process \"$@\" && yarn build && next export -o out && yarn makeindex",
+    "export": "yarn process \"$@\" && yarn install && yarn build && next export -o out && yarn makeindex",
     "export-tgz": "yarn export \"$@\" >/dev/null && mv out site && tar czf -  site | cat",
     "export-zip": "yarn export \"$@\" && mv out site && zip -r - site | cat",
     "ci": "rimraf node_modules && yarn",
@@ -20,7 +20,7 @@
     "process": "yarn ci && yarn clean && yarn && yarn publisher_path  \"$@\" ",
     "format": "npx prettier --write '**/*.{js,jsx,ts,tsx,json,md,mjs}'",
     "publisher": "npx tsx bin/publisher.ts -s 'https://example.org' -b ./built -p ./public -i ./pub/index.pod6 './pub/**/*.{pod6,podlite}'",
-    "publisher_path": "yarn  attach_path ${0:-pub}  ; yarn publisher  -i ${0}/index.pod6  -d ${0}  \"$@\" ${0}'/**/*.{pod6,podlite}' && ( ( [ -e ${0}/package.json ] && cd ${0} && yarn post_plugin ) ; true ) &&  yarn ci",
+    "publisher_path": "yarn  attach_path ${0:-pub}; yarn publisher  -i ${0}/index.pod6  -d ${0}  \"$@\" ${0}'/**/*.{pod6,podlite}' && ( ( [ -e ${0}/package.json ] && cd ${0} && yarn post_plugin ) ; true ) &&  yarn ci",
     "attach_path": "node ./bin/attachExternal.mjs ${0} && (cd ${0} && yarn && yarn build_plugin)"
   },
   "dependencies": {
@@ -30,10 +30,10 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@podlite/markdown": "^0.0.14",
-    "@podlite/publisher": "^0.0.2",
-    "@podlite/schema": "^0.0.21",
-    "@podlite/to-jsx": "^0.0.25",
+    "@podlite/markdown": "^0.0.15",
+    "@podlite/publisher": "^0.0.3",
+    "@podlite/schema": "^0.0.22",
+    "@podlite/to-jsx": "^0.0.26",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -57,7 +57,7 @@
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
     "pagefind": "^1.1.1",
-    "podlite": "^0.0.34",
+    "podlite": "^0.0.35",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",
