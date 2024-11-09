@@ -139,19 +139,25 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord) {
         <>
           {data ? (
             <>
+              {caption ? (
               <p>
                 <caption className="caption">{caption}</caption>
               </p>
+              ):null}
               <code key={key} className="shiki" dangerouslySetInnerHTML={{ __html: data || '' }} />
             </>
           ) : (
             <>
+              {caption ? (
               <p>
                 <caption className="caption">{caption}</caption>
               </p>
+              ):null}
+              <pre>
               <code key={key}>
-                <pre>{children}</pre>
+                {children}
               </code>
+              </pre>
             </>
           )}
         </>
