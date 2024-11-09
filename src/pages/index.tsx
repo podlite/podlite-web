@@ -41,7 +41,7 @@ const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
   )
 }
 interface SiteProps extends Partial<DataFeedContent['siteInfo']> {}
-interface IndexProps {
+export interface IndexProps {
   url?: string
   title: string
   node: PodNode
