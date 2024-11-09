@@ -15,7 +15,7 @@
     "export-tgz": "yarn export \"$@\" >/dev/null && mv out site && tar czf -  site | cat",
     "export-zip": "yarn export \"$@\" && mv out site && zip -r - site | cat",
     "ci": "rimraf node_modules && yarn",
-    "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out 'public/!(.gitignore)' site",
+    "clean": "rimraf 'built/!(.gitignore)' 'public/assets/!(.gitignore)' .next out 'public/!(.gitignore|robots.txt)' site",
     "process__": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
     "process": "yarn ci && yarn clean && yarn && yarn publisher_path  \"$@\" ",
     "format": "npx prettier --write '**/*.{js,jsx,ts,tsx,json,md,mjs}'",
