@@ -58,9 +58,10 @@ yarn-error.log*
 data
 built
 out
-public
+public/*
+!/public/robots.txt
 pub*
-# !pub
+!/public
 !pubdate*
 !publisher*
 site*
