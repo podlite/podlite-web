@@ -1,15 +1,25 @@
 import { ArticlesWithNavigation, Page, ProcessWithTemplate } from '@Components/service'
+import { publishRecord } from '@podlite/publisher'
+import Head from 'next/head'
 import { contentData } from 'src/serverside'
+import { IndexProps } from '.'
 import { getSiteInfo } from '../utils'
 
 export default function AnyPage(params) {
-  const { slug, footer, item, current, prev, next, template } = params
+  const { siteTitle, favicon, slug, footer, item, current, prev, next, template } = params
   if (template) {
     item.template = template
   }
   // wrap all elements and add line link info
   return (
     <>
+      <Head>
+        <title>
+          {(item as publishRecord).title} - {siteTitle}
+        </title>
+        <meta name="description" content={siteTitle + ' ' + (item as publishRecord).title} />
+        <link rel="shortcut icon" href={`/${favicon}`} />
+      </Head>
       <main>
         {item.template ? (
           ProcessWithTemplate(item, footer)
@@ -54,13 +64,14 @@ export async function getStaticProps({ params }) {
   const prev = allData[articleIndex - 1] || false
   const current: any = allData[articleIndex] || false
   const next = allData[articleIndex + 1] || false
+  const { title: siteTitle, favicon }: IndexProps = getSiteInfo()
   let template = null
   if (item.template_file) {
     //@ts-ignore
     template = contentData().find(({ file }) => file === item.template_file)
   } else {
-    console.log('no template found')
+    console.warn('no template found')
   }
   const footer = getSiteInfo().footer
-  return { props: { slug, footer, item, prev, current, next, template } }
+  return { props: { slug, footer, item, prev, current, next, template, siteTitle, favicon } }
 }
