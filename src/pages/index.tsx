@@ -49,17 +49,19 @@ export interface IndexProps {
   favicon: string
   item: publishRecord
   template?: publishRecord | null
+  templateFile?: string | null
 }
 
 export async function getStaticProps(): Promise<{ props: IndexProps }> {
   writeRss()
   generateSitemap()
   generateRedirects()
-  const { title, node, footer, favicon, item }: IndexProps = getSiteInfo()
+  const { title, node, footer, favicon, item, templateFile }: IndexProps = getSiteInfo()
   let template: publishRecord | null = null
-  if (item.template_file) {
+  const template_file = item.template_file || templateFile
+  if (template_file) {
     // @ts-ignore
-    template = contentData().find(({ file }) => file === item.template_file) || null
+    template = contentData().find(({ file }) => file.endsWith(template_file)) || null
   } else {
     console.log('no template found')
   }

@@ -64,11 +64,12 @@ export async function getStaticProps({ params }) {
   const prev = allData[articleIndex - 1] || false
   const current: any = allData[articleIndex] || false
   const next = allData[articleIndex + 1] || false
-  const { title: siteTitle, favicon }: IndexProps = getSiteInfo()
+  const { title: siteTitle, favicon, templateFile }: IndexProps = getSiteInfo()
   let template = null
-  if (item.template_file) {
+  const template_file = item.template_file || templateFile
+  if (template_file) {
     //@ts-ignore
-    template = contentData().find(({ file }) => file === item.template_file)
+    template = contentData().find(({ file }) => file.endsWith(template_file)) || null
   } else {
     console.warn('no template found')
   }
