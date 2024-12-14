@@ -212,7 +212,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord) {
             {
               ...props,
               ...{ item: template },
-              ...{ renderNode: node => getPostComponent(node, template), getThisNode: () => node },
+              ...{ renderNode: node => getPostComponent(node, template), getThisNode: () => node, getOpt: () => opt },
             },
             interator(node.content, ctx),
           )
