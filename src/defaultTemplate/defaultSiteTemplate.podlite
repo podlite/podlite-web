@@ -1,0 +1,7 @@
+=begin pod
+
+=useReact {Test} from './components'
+=begin React :component<Test> :id<menu>
+=end React
+
+=end pod
