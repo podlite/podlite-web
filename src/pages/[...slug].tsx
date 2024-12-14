@@ -66,13 +66,16 @@ export async function getStaticProps({ params }) {
   const next = allData[articleIndex + 1] || false
   const { title: siteTitle, favicon, templateFile }: IndexProps = getSiteInfo()
   let template = null
-  const template_file = item.template_file || templateFile
+  const template_file = item.template_file || templateFile || 'defaultTemplate/defaultSiteTemplate.podlite'
   if (template_file) {
     //@ts-ignore
     template = contentData().find(({ file }) => file.endsWith(template_file)) || null
-  } else {
-    console.warn('no template found')
+
+    if (!template) {
+      console.error(`Template not found. Processed file: ${item.file} Template file:${template_file}`)
+      process.exit(1)
+    }
   }
   const footer = getSiteInfo().footer
-  return { props: { slug, footer, item, prev, current, next, template, siteTitle, favicon } }
+  return { props: { footer, item, template, siteTitle, favicon } }
 }

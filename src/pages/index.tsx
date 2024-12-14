@@ -56,14 +56,19 @@ export async function getStaticProps(): Promise<{ props: IndexProps }> {
   writeRss()
   generateSitemap()
   generateRedirects()
-  const { title, node, footer, favicon, item, templateFile }: IndexProps = getSiteInfo()
+  const { title, node, footer, favicon, templateFile }: IndexProps = getSiteInfo()
+  const item: any = contentData().find(({ publishUrl }) => publishUrl === '/')
   let template: publishRecord | null = null
-  const template_file = item.template_file || templateFile
+
+  const template_file = item.template_file || templateFile || 'defaultTemplate/defaultSiteTemplate.podlite'
   if (template_file) {
-    // @ts-ignore
+    //@ts-ignore
     template = contentData().find(({ file }) => file.endsWith(template_file)) || null
-  } else {
-    console.log('no template found')
+
+    if (!template) {
+      console.error(`Template not found. Processed file: ${item.file} Template file:${template_file}`)
+      process.exit(1)
+    }
   }
   return { props: { title, node, footer, favicon, item, template } }
 }
