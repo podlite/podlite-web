@@ -76,7 +76,7 @@ export function getArticlesGroupedByYearMonth() {
     (
       acc: {
         [year: number]: {
-          [month: number]: DataFeedContent['all']
+          [month: number]: publishRecord[]
         }
       },
       rest,

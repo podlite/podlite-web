@@ -30,7 +30,7 @@ export const Contents = ({ locale = 'en' }) => {
 
   const res: JSX.Element[] = []
   for (const year of Object.keys(groupedByYearMonth).sort((a, b) => parseInt(b, 10) - parseInt(a, 10))) {
-    const months: DataFeedContent['all'] = groupedByYearMonth[year]
+    const months: publishRecord[]= groupedByYearMonth[year]
     let isYearAlreadyPut = false
     for (const month of Object.keys(months).sort((a, b) => parseInt(b, 10) - parseInt(a, 10))) {
       const monthRecord = (
