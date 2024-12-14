@@ -17,8 +17,8 @@ export function getAllPages(): publishRecord[] {
   return d as publishRecord[]
 }
 
-let cachedContentData: DataFeedContent['all'] | null = null
-export function contentData(): DataFeedContent['all'] {
+let cachedContentData: publishRecord[] | null = null
+export function contentData(): publishRecord[] {
   const res =
     cachedContentData ||
     getAllPages().map(({ publishUrl, title, node, sources, pubdate = null, ...args }) => ({
