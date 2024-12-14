@@ -6,7 +6,7 @@ import cookieConsentStyles from './cookieConsentStyles.module.css'
 
 import Link from 'next/link'
 import { DataFeedContent } from 'bin/makeDataSource'
-import { getTextContentFromNode } from '@podlite/schema'
+import { getFromTree, getTextContentFromNode } from '@podlite/schema'
 import { useState } from 'react'
 import { publishRecord } from '@podlite/publisher'
 export const TestComponent = ({ id, children }) => {
@@ -24,9 +24,18 @@ export const TestComponent = ({ id, children }) => {
   )
 }
 
-export const Contents = ({ locale = 'en' }) => {
+export const Contents = ({ locale = 'en', getThisNode }) => {
   moment.locale(locale)
-  const groupedByYearMonth = getArticlesGroupedByYearMonth()
+  // get embeded json in =data blocks
+  const [content] = getFromTree(getThisNode(), 'data').map(n => JSON.parse(getTextContentFromNode(n)))
+  if (!content) {
+    console.warn(
+      `[React =Contents composnent] not found JSON. usually it defined by use =Include =Include doc:PLUGIN_DATA#articles `,
+    )
+    return null
+  }
+
+  const groupedByYearMonth = getArticlesGroupedByYearMonth(content)
 
   const res: JSX.Element[] = []
   for (const year of Object.keys(groupedByYearMonth).sort((a, b) => parseInt(b, 10) - parseInt(a, 10))) {
@@ -154,22 +163,23 @@ export const ArticlesWithNavigation = ({
   )
 }
 
-export const LastArticles = ({ count = 1, id, children }) => {
-  const { articles: articles10, prev: prev1 } = require('../../built/lastArticles.json') as {
-    articles: publishRecord[]
-    prev: any
+export const LastArticles = ({ count = 1, id, children, getThisNode, renderNode, getOpt }) => {
+  // get embeded json in =data blocks
+  const [content] = getFromTree(getThisNode(), 'data').map(n => JSON.parse(getTextContentFromNode(n)))
+  if (!content) {
+    console.warn(
+      `[React =Contents composnent] not found JSON. usually it defined by use  =Include doc:PLUGIN_DATA#articles `,
+    )
+    return null
   }
-  const articles = articles10.slice(0, count)
-  // TODO:: restore functionality
-  //   const source = () => contentData().filter(({ type = '' }: any) => type !== 'page')
-  //   const articles = source().reverse().slice(0, count)
-  //   const lastArticleUrl = articles[articles.length - 1].publishUrl
-  //   const articleIndex = source().findIndex(({ publishUrl }) => publishUrl === lastArticleUrl)
-  //   const prev = source()[articleIndex - 1]
-  const prev = null
+  const source = () => content.filter(({ type = '' }: any) => type !== 'page')
+  const articles = source().reverse().slice(0, count)
+  const lastArticleUrl = articles[articles.length - 1].publishUrl
+  const articleIndex = source().findIndex(({ publishUrl }) => publishUrl === lastArticleUrl)
+  const prev = source()[articleIndex - 1]
   return (
     <>
-      <ArticlesWithNavigation footer="" articles={articles.slice(0, count)} prev={prev} />
+      <ArticlesWithNavigation footer="" renderNode={renderNode} articles={articles.slice(0, count)} prev={prev} />
     </>
   )
 }
