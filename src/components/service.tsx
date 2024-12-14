@@ -39,7 +39,7 @@ export const Contents = ({ locale = 'en', getThisNode }) => {
 
   const res: JSX.Element[] = []
   for (const year of Object.keys(groupedByYearMonth).sort((a, b) => parseInt(b, 10) - parseInt(a, 10))) {
-    const months: publishRecord[]= groupedByYearMonth[year]
+    const months: publishRecord[] = groupedByYearMonth[year]
     let isYearAlreadyPut = false
     for (const month of Object.keys(months).sort((a, b) => parseInt(b, 10) - parseInt(a, 10))) {
       const monthRecord = (
@@ -70,49 +70,6 @@ export const Contents = ({ locale = 'en', getThisNode }) => {
   return <div className="details">{res}</div>
 }
 
-export const Article = item => {
-  const { title, node, shortUrl, key, publishUrl, pubdate, subtitle } = item
-  const [_, domain = ''] = getSiteInfo().url.split(/\/\//)
-  return (
-    <article key={key}>
-      <header>
-        <h1>{title}</h1>
-        {subtitle && <div className="abstract">{subtitle}</div>}
-      </header>
-      {getPostComponent(node, item)}
-      <footer>
-        <a href={shortUrl}>
-          {domain}
-          {shortUrl}
-        </a>
-        <Link href={publishUrl}>{moment(pubdate).format('H:mm on YYYY-MM-DD')}</Link>
-      </footer>
-    </article>
-  )
-}
-
-export const Page = (item, footer) => {
-  const { title, node, shortUrl, key, publishUrl, pubdate, subtitle } = item
-  return (
-    <>
-      <article key={key}>
-        <header>
-          <h1>{title}</h1>
-          {subtitle && <div className="abstract">{subtitle}</div>}
-        </header>
-        {getPostComponent(node, item)}
-      </article>
-      <TestComponent id="nav">
-        <></>
-        <div className="navigate">
-          &nbsp;<Link href="/">↑</Link>&nbsp;
-        </div>
-        <></>
-      </TestComponent>
-      {footer && getPostComponent(footer, item)}
-    </>
-  )
-}
 export const ProcessWithTemplate = (item, default_footer) => {
   const { id, title, subtitle, footer, template, header } = item
   const { footer: footer_tempalte, header: header_tempalte } = template
@@ -120,33 +77,33 @@ export const ProcessWithTemplate = (item, default_footer) => {
   const renderHeader = header_tempalte || header
   return (
     <>
-      {renderHeader && getPostComponent(renderHeader, item)}
-      {/* <article key={id}>
-        <header>
-          <h1>{title}</h1>
-          {subtitle && <div className="abstract">{subtitle}</div>}
-        </header> */}
-      {getPostComponent(item.template.node, item)}
-      {/* </article> */}
-      {renderFooter && getPostComponent(renderFooter, item)}
+      {/* TODO: Deprecate =FOOTER and =HEADER 👇 */}
+      {/* {renderHeader && getPostComponent(renderHeader, item)} */}
+      {getPostComponent(item.template.node, item, { footer: default_footer })}
+      {/* TODO: Deprecate =FOOTER and =HEADER 👇 */}
+      {/* {renderFooter && getPostComponent(renderFooter, item)} */}
     </>
   )
 }
-export const ArticlesWithNavigation = ({
+
+const ArticlesWithNavigation = ({
   articles,
   prev,
   next,
   footer,
+  renderNode,
 }: {
-  articles: any[]
+  articles: publishRecord[]
   prev?: any
   next?: any
   footer: any
+  renderNode: any
 }) => {
   const makeLink = (title, url) => <Link href={url}>{title}</Link>
   return (
     <>
-      {articles.map(({ publishUrl, ...args }: any) => Article({ key: publishUrl, publishUrl, ...args }))}
+      {articles.map(({ publishUrl, node, ...args }: any) => getPostComponent(node, { publishUrl, node, ...args }))}
+
       <TestComponent id="nav">
         {prev && makeLink(prev.title || getTextContentFromNode(prev.node), prev.publishUrl)}
         {

@@ -1,3 +1,4 @@
+import { ProcessWithTemplate } from '@Components/service'
 import { publishRecord } from '@podlite/publisher'
 import { PodNode } from '@podlite/schema'
 import Head from 'next/head'
@@ -12,18 +13,6 @@ const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
   if (template) {
     item.template = template
   }
-  const processTemplate = (item: publishRecord, template: publishRecord) => {
-    const { footer: footer_tempalte, header: header_tempalte } = template
-    const renderFooter = footer_tempalte
-    const renderHeader = header_tempalte
-    return (
-      <>
-        {renderHeader && getPostComponent(renderHeader, item)}
-        {getPostComponent(item?.template?.node || item.node, item)}
-        {renderFooter && getPostComponent(renderFooter, item)}
-      </>
-    )
-  }
   return (
     <div>
       <Head>
@@ -31,12 +20,7 @@ const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
         <meta name="description" content={title} />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
-      <main id="body">
-        {template && processTemplate(item, template)}
-
-        {!template && getPostComponent(node)}
-        {!template && footer && getPostComponent(footer)}
-      </main>
+      <main id="body">{ProcessWithTemplate(item, footer)}</main>
     </div>
   )
 }

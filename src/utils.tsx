@@ -66,11 +66,9 @@ export function mapPathToImage(path: string): string | undefined {
   const data = require('../built/imagesMap.json') as DataFeedContent['imagesMap']
   return data[path]
 }
-export function getArticlesGroupedByYearMonth() {
+export function getArticlesGroupedByYearMonth(pages: publishRecord[]) {
   //filter out pages
-  const source = [] // TODO:: need to fix instead of use contentData()
-    .filter(({ type = '' }) => type !== 'page')
-    .reverse()
+  const source = pages.filter(({ type = '' }) => type !== 'page').reverse()
 
   const groupedByYearMonth = source.reduce(
     (
@@ -98,7 +96,7 @@ export function getArticlesGroupedByYearMonth() {
   return groupedByYearMonth
 }
 
-export function getPostComponent(podNode: PodNode, template?: publishRecord) {
+export function getPostComponent(podNode: PodNode, template?: publishRecord, opt?: any) {
   const plugins = (makeComponent): Partial<Rules> => {
     const mkComponent = src => (writer, processor) => (node, ctx, interator) => {
       // check if node.content defined
@@ -140,23 +138,21 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord) {
           {data ? (
             <>
               {caption ? (
-              <p>
-                <caption className="caption">{caption}</caption>
-              </p>
-              ):null}
+                <p>
+                  <caption className="caption">{caption}</caption>
+                </p>
+              ) : null}
               <code key={key} className="shiki" dangerouslySetInnerHTML={{ __html: data || '' }} />
             </>
           ) : (
             <>
               {caption ? (
-              <p>
-                <caption className="caption">{caption}</caption>
-              </p>
-              ):null}
+                <p>
+                  <caption className="caption">{caption}</caption>
+                </p>
+              ) : null}
               <pre>
-              <code key={key}>
-                {children}
-              </code>
+                <code key={key}>{children}</code>
               </pre>
             </>
           )}
