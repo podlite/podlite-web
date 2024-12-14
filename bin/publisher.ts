@@ -15,10 +15,11 @@ import {
   parseSources,
   PodliteWebPlugin,
   publishRecord,
+  processFile,
 } from '@podlite/publisher'
 import * as fs from 'fs'
 import path from 'path'
-import { BUILT_PATH, INDEX_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
+import { BUILT_PATH, INDEX_PATH, PAGES_FILE_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
 import imagesPlugin from '@podlite/publisher/lib/images-plugin'
 import linksPlugin from '@podlite/publisher/lib/links-plugin'
 import pubdatePlugin from '@podlite/publisher/lib/pubdate-plugin'
@@ -27,6 +28,11 @@ import siteDataPlugin from '@podlite/publisher/lib/site-data-plugin'
 import stateVersionPlugin from '@podlite/publisher/lib/state-version-plugin'
 import breadcrumbPlugin from '@podlite/publisher/lib/breadcrumb-plugin'
 import termsIndexPlugin from '@podlite/publisher/lib/terms-index-plugin'
+import includeResolvePlugin from '@podlite/publisher/lib/include-resolve-plugin'
+import dumpPagesPlugin from '@podlite/publisher/lib/dump-pages-plugin'
+import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
+import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
+
 
 import highlighterPlugin from '../src/highlighter-plugin'
 
@@ -75,6 +81,14 @@ const makeConfigMainPlugin = () => {
     }),
     includePatterns: '.*',
   }
+
+  const configDumpPagesPlugin: PluginConfig = {
+    plugin: dumpPagesPlugin({
+      built_path: built_path || BUILT_PATH,
+    }),
+    includePatterns: '.*',
+  }
+
   const configPubdatePlugin: PluginConfig = {
     plugin: pubdatePlugin(),
     includePatterns: '.*',
@@ -96,8 +110,18 @@ const makeConfigMainPlugin = () => {
     plugin: breadcrumbPlugin(),
     includePatterns: '.*',
   }
+  const configNavigatePlugin: PluginConfig = {
+    plugin: navigatePlugin(),
+    includePatterns: '.*',
+  }
+  
   const configTermsIndexPlugin: PluginConfig = {
     plugin: termsIndexPlugin({ built_path }),
+    includePatterns: '.*',
+  }
+
+  const configIncludeResolvePluginPlugin: PluginConfig = {
+    plugin: includeResolvePlugin(),
     includePatterns: '.*',
   }
 
@@ -105,19 +129,36 @@ const makeConfigMainPlugin = () => {
     plugin: stateVersionPlugin(),
     includePatterns: '.*',
   }
+
+    // pricess defult template 
+    const tempalteFilepath = `${PAGES_FILE_PATH}/src/defaultTemplate/defaultSiteTemplate.podlite`
+    const templateContent = fs.readFileSync(tempalteFilepath, 'utf-8')
+    const templateDoc = processFile(tempalteFilepath, templateContent, "text/podlite")
+  
+    const makedocInjectorPlugin: PluginConfig = {
+      plugin: docsInjectorPlugin({ docs: [templateDoc] }),
+      includePatterns: '.*',
+    }
+  
+  
   const plugins = [
+    makedocInjectorPlugin,
     configReactPlugin,
     configImagesPlugin,
     configLinksPlugin,
     configStateVersionPlugin,
     configBreadcrumbPlugin,
+    configNavigatePlugin,
     configTermsIndexPlugin,
     configSiteDataPlugin,
+    configIncludeResolvePluginPlugin,
+    configDumpPagesPlugin
   ]
 
   if (preset === 'pubdate') {
     plugins.unshift(configPubdatePlugin)
   }
+
   return composePlugins(plugins, tctx)
 }
 
@@ -144,11 +185,13 @@ const makeConfigMainPlugin = () => {
     includePatterns: '.*',
   }
 
+
   //parse files
   const items = glob
     .sync(files)
     .map(i => parseSources(i))
     .flat()
+
   const [res, ctx] = processPlugin(
     composePlugins([makeCustomPlugin, makeHighlighterPlugin, makeConfigMainPlugin()], tctx),
     items,
