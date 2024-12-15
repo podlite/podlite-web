@@ -2,6 +2,15 @@
 
 =head1 Upcoming
 
+=head1 0.2.2
+
+=item average page size optimization (reduction up to 2-3 times)
+=item add default template C<src/defaultTemplate/defaultSiteTemplate.podlite>
+=item add support for C<:templateFile>  configuration attribute for site in C<index.pod6>
+=item add C<meta>, C<link> and C<title> for each page
+=item add default C<robots.txt>
+=item fix filtering pages for publish ( now depends on publishUrl)
+
 =head1 0.2.1
 
 =item move to plugins architecture
@@ -31,7 +40,7 @@
 =head1 0.1.22
 =item1 * fix types
 =head1 0.1.21
-=item1 * add support for =FOOTER block, which adds content to each page
+=item1 * add support for C<=FOOTER> block, which adds content to each page
 =item1 * update styles for links in TOC
 =item1 * support Google tag manager, :gtmId("GTM-XXXXX") attribute for the site (index.pod6)
 =item1 * add C<CookieConsent> React component
