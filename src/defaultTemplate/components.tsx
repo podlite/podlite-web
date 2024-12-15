@@ -4,7 +4,7 @@ import { getTextContentFromNode } from '@podlite/schema'
 import moment from 'moment'
 import { getSiteInfo } from 'src/utils'
 
-export const Test = ({ id: er, children, item, renderNode, getOpt }) => {
+export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, getOpt }) => {
   const { id, title, subtitle, footer, template, header, shortUrl, publishUrl, pubdate } = item
   const [_, domain = ''] = getSiteInfo().url.split(/\/\//)
   const { footer: default_footer } = getOpt() || { footer: null }
