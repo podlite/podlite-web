@@ -2,6 +2,10 @@
 
 =head1 Upcoming
 
+=head1 0.2.3
+
+=item fix rss.xml file generation
+
 =head1 0.2.2
 
 =item average page size optimization (reduction up to 2-3 times)
