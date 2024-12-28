@@ -9,7 +9,6 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
   const [_, domain = ''] = getSiteInfo().url.split(/\/\//)
   const { footer: default_footer } = getOpt() || { footer: null }
   const result_footer = footer || default_footer
-  console.log('Tempalte rendring ' + publishUrl)
   // special renedring for root page
   if (publishUrl === '/') {
     return (
@@ -27,11 +26,16 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
       </header>
       {item && renderNode(item.node)}
       <footer>
-        <a href={shortUrl}>
-          {domain}
-          {shortUrl}
-        </a>
-        <Link href={publishUrl}>{moment(pubdate).format('H:mm on YYYY-MM-DD')}</Link>
+        {shortUrl && (
+          <>
+            <a href={shortUrl}>
+              {domain}
+              {shortUrl}
+            </a>
+
+            <Link href={publishUrl}>{moment(pubdate).format('H:mm on YYYY-MM-DD')}</Link>
+          </>
+        )}
       </footer>
     </article>
   )
@@ -41,9 +45,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
         <Article />
         <TestComponent id="nav">
           <></>
-          <div className="navigate">
-            &nbsp;<Link href="/">↑</Link>&nbsp;
-          </div>
+          <div className="navigate">{/* &nbsp; */}</div>
           <></>
         </TestComponent>
         {result_footer && renderNode(result_footer)}
