@@ -26,7 +26,7 @@ Variables
     --spacing-xl: calc(2.5 * var(--spacing));
     --spacing-xxl: calc(5 * var(--spacing));
     --spacing-col: calc(6 * var(--spacing));
-    --spacing-width-max: 40rem;
+    --spacing-width-max: 42rem;
     --spacing-width-tiny: 15rem;
     --spacing-width-xl: 38rem;
     --color-indigo-1: #3451b2;
@@ -212,7 +212,7 @@ time {
 
 /* inline cocde */
 p>code, :not(article, body, main, dl, li, blockquote, strong) > code
- code:not([style*="shiki"]) > code
+ code:not([style*="shiki"]) > code, :not(pre)>code:not([class*="shiki"])
 {
     color: #3451b2;
     font-size: 0.825rem;
@@ -314,7 +314,8 @@ h1, h2, h3, h4, h5, h6, h7, time,
 p, blockquote, ol, ul, details, pre.code, figcaption, .caption,
 .split, .posts, #header,  pre, #body>header, section>header,dl, dt, article>footer, aside,
 code pre, /* delete this rule */
-article table /* rules for tables inside othe blocks*/
+article table /* rules for tables inside other blocks*/,
+body table
 {
     max-width: var(--spacing-width-max);
     margin-left: auto;

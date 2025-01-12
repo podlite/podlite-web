@@ -42,6 +42,7 @@
   }
   table caption {
     margin-bottom: 0.8em;
+    caption-side: bottom;
   }
   
   table tbody tr:hover {
