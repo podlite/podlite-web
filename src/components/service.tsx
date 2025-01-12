@@ -30,7 +30,7 @@ export const Contents = ({ locale = 'en', getThisNode }) => {
   const [content] = getFromTree(getThisNode(), 'data').map(n => JSON.parse(getTextContentFromNode(n)))
   if (!content) {
     console.warn(
-      `[React =Contents composnent] not found JSON. usually it defined by use =Include =Include doc:PLUGIN_DATA#articles `,
+      `[React =Contents composnent] not found JSON. usually it defined by use =include doc:PLUGIN_DATA#articles `,
     )
     return null
   }
@@ -125,7 +125,7 @@ export const LastArticles = ({ count = 1, id, children, getThisNode, renderNode,
   const [content] = getFromTree(getThisNode(), 'data').map(n => JSON.parse(getTextContentFromNode(n)))
   if (!content) {
     console.warn(
-      `[React =Contents composnent] not found JSON. usually it defined by use  =Include doc:PLUGIN_DATA#articles `,
+      `[React =Contents composnent] not found JSON. usually it defined by use  =include doc:PLUGIN_DATA#articles `,
     )
     return null
   }
