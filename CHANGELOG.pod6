@@ -2,6 +2,12 @@
 
 =head1 Upcoming
 
+=head1 0.2.4
+
+=item moved to node v22
+=item fix CSS styles
+=item fix default template for C<pages>
+
 =head1 0.2.3
 
 =item fix rss.xml file generation
