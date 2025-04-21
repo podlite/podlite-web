@@ -49,6 +49,7 @@ program
   .option('-p, --public_path [public_path]', 'public path', './public')
   .option('-v, --verbose', 'verbose output')
   .option('-d, --directory [path to project directory]', 'path to sources to build from')
+  .option('-g, --glob [glob argument]', 'mask for files to process')
   // preset plugins
   .option('-preset, --preset [preset]', 'preset plugins (pubdate, everything)')
   .argument('[path to dir...]', 'path to posts')
@@ -59,8 +60,8 @@ program.parse(process.argv)
 const options = program.opts()
 const site_url = options.site_url || process.env.SITE_URL
 // reverse args to able to override default values publisher command from  package.json
-const [files] = (program.args || [POSTS_PATH]).reverse()
-console.log(JSON.stringify(options, null, 2))
+const [files] = options.glob ? [(options.directory || POSTS_PATH ) + "/" + options.glob] : (program.args || [POSTS_PATH]).reverse()
+console.log(JSON.stringify({...options,files}, null, 2))
 const preset = options.preset
 
 if (!['pubdate', 'everything'].includes(preset)) {
@@ -188,7 +189,7 @@ const makeConfigMainPlugin = () => {
 
   //parse files
   const items = glob
-    .sync(files)
+    .sync(files,{ ignore: '**/node_modules/**', nodir: true })
     .map(i => parseSources(i))
     .flat()
 
