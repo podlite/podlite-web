@@ -36,6 +36,7 @@ ${pages
 }
 export function writeRss() {
   const pages = getAllPages()
+    .filter(i=>i.publishUrl)
     .filter(a => a.pubdate)
     .filter(page => page.description)
     .sort((a, b) => {

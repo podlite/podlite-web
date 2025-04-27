@@ -45,7 +45,6 @@ const plugin = (): PodliteWebPlugin => {
   const onProcess = (recs: publishRecord[]) => {
     const res = recs.map(item => {
       const node = processNode(item.node, item.file)
-      console.log(JSON.stringify(node, null, 2))
 
       // process images inside description
       let extra = {} as { description?: PodNode }
