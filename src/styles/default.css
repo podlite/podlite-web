@@ -1,4 +1,6 @@
-@import './pod6.css';
+@import 'node_modules/@podlite/to-jsx/lib/podlite.css';
+@import 'node_modules/@podlite/editor-react/lib/podlite-vars.css';
 @import './screen.css';
 @import './global.css';
+@import 'node_modules/@podlite/editor-react/lib/editor.css';
 @import 'node_modules/@podlite/formula/lib/default.css';

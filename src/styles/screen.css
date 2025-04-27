@@ -3,9 +3,7 @@ Variables
 -------------------------------------- */
 
 :root {
-    /* --color-bg: #242120; */
-     /* --color-bg: #f6f2f1; */ 
-     
+    
     --color-bg: #ffffff; 
     --color-highlight: #0e0d0a;
     --color-default: #434342;

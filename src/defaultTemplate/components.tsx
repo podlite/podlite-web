@@ -102,25 +102,3 @@ export const TestComponent = ({ id, children }) => {
   )
 }
 
-// export const Page = (item, footer) => {
-//   const { title, node, shortUrl, key, publishUrl, pubdate, subtitle } = item
-//   return (
-//     <>
-//       <article key={key}>
-//         <header>
-//           <h1>{title}</h1>
-//           {subtitle && <div className="abstract">{subtitle}</div>}
-//         </header>
-//         {getPostComponent(node, item)}
-//       </article>
-//       <TestComponent id="nav">
-//         <></>
-//         <div className="navigate">
-//           &nbsp;<Link href="/">↑</Link>&nbsp;
-//         </div>
-//         <></>
-//       </TestComponent>
-//       {footer && getPostComponent(footer, item)}
-//     </>
-//   )
-// }

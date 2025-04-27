@@ -31,7 +31,13 @@ async function updateNextConfigFile(workspace_path) {
   if (workspace_path) {
     const dstPackageData = await fse.readFile(path.resolve(workspace_path, './package.json'), 'utf8')
     const { name, ...packageDataOther } = JSON.parse(dstPackageData)
-    return replaceContent(packageData, `config.resolve.alias['${name}'] = path.resolve('${workspace_path}/src')`)
+    const isSrcExists = fse.existsSync(path.resolve(workspace_path, './src'))
+    return replaceContent(
+      packageData,
+      isSrcExists
+        ? `config.resolve.alias['${name}'] = path.resolve('${workspace_path}/src')`
+        : `config.resolve.alias['${name}'] = path.resolve('${workspace_path}')`,
+    )
   }
   return replaceContent(packageData, `config.resolve.alias['@NONE'] = path.resolve('./src')`)
 }
