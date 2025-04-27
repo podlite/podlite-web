@@ -26,6 +26,7 @@ export const codeToHtml = async ({ code, language }: { code: string; language: s
   // await highlighter.loadLanguage('bash')
   // await highlighter.loadLanguage('html')
   await highlighter.loadLanguage('raku')
+  await highlighter.loadLanguage(language)
   // await highlighter.loadLanguage('yaml')
   // await highlighter.loadLanguage('markdown')
 

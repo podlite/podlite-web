@@ -9,6 +9,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
   const [_, domain = ''] = getSiteInfo().url.split(/\/\//)
   const { footer: default_footer } = getOpt() || { footer: null }
   const result_footer = footer || default_footer
+
   // special renedring for root page
   if (publishUrl === '/') {
     return (
@@ -101,4 +102,3 @@ export const TestComponent = ({ id, children }) => {
     </div>
   )
 }
-
