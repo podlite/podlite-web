@@ -160,6 +160,7 @@ thank you!
 - [podlite.org](https://podlite.org)
 - [pod6.in](https://pod6.in/)
 - [github.com/podlite](https://github.com/podlite/)
+- [Funding the ongoing development](https://opencollective.com/podlite)
 
 </td></tr></table>
 </div>

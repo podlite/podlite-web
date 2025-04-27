@@ -1,15 +1,15 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
 import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
+import { Editor2 as Editor, WindowWrapper } from '@podlite/editor-react'
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
 //@ts-ignore
 import * as components from '../built/components'
 import Link from 'next/link'
-import { DATA_PATH } from './constants'
 import { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
-import { getLangFromFilename, pubRecord } from '@podlite/publisher'
+import { pubRecord } from '@podlite/publisher'
 import { codeToHtml } from '@Components/shiki'
 
 // POSTS_PATH is useful when you want to get the path to a specific file
@@ -137,23 +137,15 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         <>
           {data ? (
             <>
-              {caption ? (
-                <p>
-                  <caption className="caption">{caption}</caption>
-                </p>
-              ) : null}
               <code key={key} className="shiki" dangerouslySetInnerHTML={{ __html: data || '' }} />
+              {caption ? <div className="caption">{caption}</div> : null}
             </>
           ) : (
             <>
-              {caption ? (
-                <p>
-                  <caption className="caption">{caption}</caption>
-                </p>
-              ) : null}
               <pre>
                 <code key={key}>{children}</code>
               </pre>
+              {caption ? <div className="caption">{caption}</div> : null}
             </>
           )}
         </>
@@ -201,7 +193,6 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
           acc[name] = conf.getFirstValue(name)
           return acc
         }, {})
-
         if (components[componentName]) {
           return makeComponent(
             components[componentName],
@@ -224,6 +215,33 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
           )
         }
       },
+      PodLite: setFn((node, ctx) => {
+        const conf = makeAttrs(node, ctx)
+        const variables = Object.keys(conf.asHash()).filter(name => name !== 'component')
+        const props = variables.reduce((acc, name) => {
+          acc[name] = conf.getFirstValue(name)
+          return acc
+        }, {})
+        const caption = conf.exists('caption') ? conf.getFirstValue('caption') : null
+        const text = getTextContentFromNode(node)
+
+        return mkComponent(({ children, key }) => (
+          <div className="editor-block" key={`${key}-code-div`}>
+            <WindowWrapper title={caption}>
+            <Editor
+              height={'500px'}
+              value={text}
+              enablePreview={true}
+              previewWidth={'50%'}
+              basicSetup={{ defaultKeymap: false }}
+              readOnly={false}
+              isFullscreen={false}
+              {...props}
+            />
+            </WindowWrapper>
+          </div>
+        ))
+      }),
       code1: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
         const code = getTextContentFromNode(node)
@@ -288,6 +306,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       return children
     }
   }
+
   return <Podlite plugins={plugins} tree={node} wrapElement={wrapFunction} />
 }
 export function convertPodNodeToHtml(node: PodNode): string {

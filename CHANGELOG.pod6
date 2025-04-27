@@ -2,6 +2,13 @@
 
 =head1 Upcoming
 
+=head1 0.2.5
+
+=item add support for embeding Podlite editor via C<=PodLite> 
+=item fix sitemap and rss generation
+=item refactor styles
+=item added an extra command line option to specify a glob pattern for matching files to process
+
 =head1 0.2.4
 
 =item moved to node v22

@@ -1,13 +1,18 @@
 {
   "name": "podlite-web",
   "description": "📖 Create static websites with Next.js and the Podlite markup language.",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": true,
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/podlite"
+  },
   "scripts": {
     "next_dev": "next dev",
     "build": "next telemetry disable &&NODE_OPTIONS=--max_old_space_size=4096 next build",
     "makeindex": "rm -rf out_index && cp -Rp out out_index && find ./out_index -type f ! -name \"*.html\" ! -name \"*.HTML\" -delete && find ./out_index -type f -name '*.*' -exec sh -c 'mv \"$0\" \"${0%.*}\"' '{}' \\; && pagefind --site ./out_index --output-path ./out/pagefind --glob '**/*' && cp -Rp ./out/pagefind ./public/pagefind && rm -rf out_index",
     "start": "yarn process \"$@\" && yarn build && next start",
+    "dev": "yarn process \"$@\" &&  next dev",
     "test": "jest",
     "lint": "next lint",
     "postinstall": "yarn config set --home enableTelemetry 0 && next telemetry disable",
@@ -21,7 +26,7 @@
     "format": "npx prettier --write '**/*.{js,jsx,ts,tsx,json,md,mjs}'",
     "publisher": "npx tsx bin/publisher.ts -s 'https://example.org' -b ./built -p ./public -i ./pub/index.pod6 './pub/**/*.{pod6,podlite}'",
     "publisher_path": "yarn  attach_path ${0:-pub}; yarn publisher  -i ${0}/index.pod6  -d ${0}  \"$@\" ${0}'/**/*.{pod6,podlite}' && ( ( [ -e ${0}/package.json ] && cd ${0} && yarn post_plugin ) ; true ) &&  yarn ci",
-    "attach_path": "node ./bin/attachExternal.mjs ${0} && (cd ${0} && yarn && yarn build_plugin)"
+    "attach_path": "node ./bin/attachExternal.mjs ${0} && (cd ${0} && yarn && ( yarn build_plugin ; true ) )"
   },
   "dependencies": {
     "fs-extra": "^11.2.0",
@@ -30,10 +35,11 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@podlite/markdown": "^0.0.18",
-    "@podlite/publisher": "^0.0.6",
-    "@podlite/schema": "^0.0.25",
-    "@podlite/to-jsx": "^0.0.29",
+    "@podlite/editor-react": "^0.0.33",
+    "@podlite/markdown": "^0.0.20",
+    "@podlite/publisher": "^0.0.8",
+    "@podlite/schema": "^0.0.27",
+    "@podlite/to-jsx": "^0.0.31",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -57,7 +63,7 @@
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
     "pagefind": "^1.1.1",
-    "podlite": "^0.0.38",
+    "podlite": "^0.0.40",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",
