@@ -131,7 +131,7 @@ export const LastArticles = ({ count = 1, id, children, getThisNode, renderNode,
   }
   const source = () => content.filter(({ type = '' }: any) => type !== 'page')
   const articles = source().reverse().slice(0, count)
-  const lastArticleUrl = articles[articles.length - 1].publishUrl
+  const lastArticleUrl = articles[articles.length - 1]?.publishUrl
   const articleIndex = source().findIndex(({ publishUrl }) => publishUrl === lastArticleUrl)
   const prev = source()[articleIndex - 1]
   return (
