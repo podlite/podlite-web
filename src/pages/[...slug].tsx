@@ -1,5 +1,6 @@
 import { ProcessWithTemplate } from '@Components/service'
 import { publishRecord } from '@podlite/publisher'
+import { getTextContentFromNode } from '@podlite/schema'
 import Head from 'next/head'
 import { contentData } from 'src/serverside'
 import { IndexProps } from '.'
@@ -18,7 +19,14 @@ export default function AnyPage(params) {
         <title>
           {(item as publishRecord).title} - {siteTitle}
         </title>
-        <meta name="description" content={siteTitle + ' ' + (item as publishRecord).title} />
+        <meta
+          name="description"
+          content={
+            item.description
+              ? getTextContentFromNode(item.description)
+              : siteTitle + ' ' + (item as publishRecord).title
+          }
+        />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
       <main>{ProcessWithTemplate(item, footer)}</main>

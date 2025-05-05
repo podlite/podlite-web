@@ -228,16 +228,16 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         return mkComponent(({ children, key }) => (
           <div className="editor-block" key={`${key}-code-div`}>
             <WindowWrapper title={caption}>
-            <Editor
-              height={'500px'}
-              value={text}
-              enablePreview={true}
-              previewWidth={'50%'}
-              basicSetup={{ defaultKeymap: false }}
-              readOnly={false}
-              isFullscreen={false}
-              {...props}
-            />
+              <Editor
+                height={'500px'}
+                value={text}
+                enablePreview={true}
+                previewWidth={'50%'}
+                basicSetup={{ defaultKeymap: false }}
+                readOnly={false}
+                isFullscreen={false}
+                {...props}
+              />
             </WindowWrapper>
           </div>
         ))

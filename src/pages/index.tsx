@@ -1,6 +1,6 @@
 import { ProcessWithTemplate } from '@Components/service'
 import { publishRecord } from '@podlite/publisher'
-import { PodNode } from '@podlite/schema'
+import { getTextContentFromNode, PodNode } from '@podlite/schema'
 import Head from 'next/head'
 import { contentData } from 'src/serverside'
 import { generateRedirects } from 'src/utils/redirects'
@@ -17,7 +17,7 @@ const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
     <div>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={title} />
+        <meta name="description" content={item.description ? getTextContentFromNode(item.description) : title} />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
       <main id="body">{ProcessWithTemplate(item, footer)}</main>
