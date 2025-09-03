@@ -1,8 +1,8 @@
 #!/bin/bash
 
-if [ $* = "bash" ]
+if [ "$1" = "bash" ] || [ "$1" = "sh" ] || [ "$1" = "/bin/bash" ] || [ "$1" = "/bin/sh" ]; then
 then
-    exec "/bin/bash"
+    exec "$@"
 else
     yarn $@
 fi
