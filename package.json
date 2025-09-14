@@ -1,7 +1,7 @@
 {
   "name": "podlite-web",
   "description": "📖 Create static websites with Next.js and the Podlite markup language.",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "private": true,
   "funding": {
     "type": "opencollective",
@@ -36,11 +36,11 @@
     "tsx": "4.19.4"
   },
   "devDependencies": {
-    "@podlite/editor-react": "^0.0.35",
-    "@podlite/markdown": "^0.0.22",
-    "@podlite/publisher": "^0.0.10",
-    "@podlite/schema": "^0.0.29",
-    "@podlite/to-jsx": "^0.0.33",
+    "@podlite/editor-react": "^0.0.36",
+    "@podlite/markdown": "^0.0.23",
+    "@podlite/publisher": "^0.0.11",
+    "@podlite/schema": "^0.0.30",
+    "@podlite/to-jsx": "^0.0.34",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -64,7 +64,7 @@
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
     "pagefind": "^1.1.1",
-    "podlite": "^0.0.42",
+    "podlite": "^0.0.43",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",
