@@ -223,19 +223,24 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
           return acc
         }, {})
         const caption = conf.exists('caption') ? conf.getFirstValue('caption') : null
+        const size = conf.exists('size') ? conf.getFirstValue('size') : null
+        // :!enablePreview or :enablePreview
+        const enablePreview = conf.exists('enablePreview') ? conf.getFirstValue('enablePreview') : true;
+        const enableAutocompletion = conf.exists('enableAutocompletion') ? conf.getFirstValue('enableAutocompletion') : false;
         const text = getTextContentFromNode(node)
 
         return mkComponent(({ children, key }) => (
-          <div className="editor-block" key={`${key}-code-div`}>
+          <div className={`editor-block ${size}`} key={`${key}-code-div`}>
             <WindowWrapper title={caption}>
               <Editor
                 height={'500px'}
                 value={text}
-                enablePreview={true}
+                enablePreview={enablePreview}
                 previewWidth={'50%'}
                 basicSetup={{ defaultKeymap: false }}
                 readOnly={false}
                 isFullscreen={false}
+                enableAutocompletion={enableAutocompletion}
                 {...props}
               />
             </WindowWrapper>
