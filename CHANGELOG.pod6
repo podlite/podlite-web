@@ -2,6 +2,12 @@
 
 =head1 Upcoming
 
+=head1 0.2.11
+
+=item style fixes
+=item added `!enablePreview`, `:enablePreview`, `size`, and `enableAutocompletion` options for embeddable page editor
+
+
 =head1 0.2.10
 
 =item * update dependencies
