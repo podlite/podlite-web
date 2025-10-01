@@ -2,7 +2,13 @@
 
 =head1 Upcoming
 
-=head1 0.2.11
+=head1 0.9.12
+
+=item fix processing symlilnks
+=item fix docker image
+
+
+=head1 0.9.11
 
 =item style fixes
 =item added `!enablePreview`, `:enablePreview`, `size`, and `enableAutocompletion` options for embeddable page editor
