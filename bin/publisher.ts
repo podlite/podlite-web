@@ -190,7 +190,9 @@ const makeConfigMainPlugin = () => {
   //parse files
   const items = glob
     .sync(files,{ ignore: '**/node_modules/**', nodir: true })
-    .map(i => parseSources(i))
+    // force exclude node_modules ( this happens when we use symlinks )
+    .filter((f:string)=> !f.split(path.sep).includes('node_modules'))
+    .map((i:string) => parseSources(i))
     .flat()
 
   const [res, ctx] = processPlugin(
