@@ -68,4 +68,7 @@ site*
 !site-data*
 out*
 
-
+# symlinks to external directories
+podlite*
+*-site
+digitalGarden
