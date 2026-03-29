@@ -38,6 +38,10 @@ This site is driven by L<Podlite|https://podlite.org> markup language.
 =end para
 =end React
 
+=begin code :lang<js>
+
+const ok = `${test}`
+=end code
 Latest blog posts:
 =begin React :component<LastArticles> :count(2)
 =end React

@@ -2,6 +2,9 @@
 
 =head1 Upcoming
 
+=item fix image_block stretching to full screen width — small images now stay at natural size, large images capped at 38rem
+=item add C<:enableFolding> attribute support for C<=PodLite> embedded editor (default C<false>)
+
 =head1 0.9.14
 
 =item update dependencies

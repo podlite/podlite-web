@@ -34,8 +34,6 @@ import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
 
 
-import highlighterPlugin from '../src/highlighter-plugin'
-
 const glob = require('glob')
 const version = require('../package.json').version
 const { Command } = require('commander')
@@ -181,11 +179,6 @@ const makeConfigMainPlugin = () => {
 
   const makeCustomPlugin: PluginConfig = customPlugin({ rootdir: options.directory })
 
-  const makeHighlighterPlugin: PluginConfig = {
-    plugin: await highlighterPlugin({ rootdir: options.directory }),
-    includePatterns: '.*',
-  }
-
 
   //parse files
   const items = glob
@@ -196,7 +189,7 @@ const makeConfigMainPlugin = () => {
     .flat()
 
   const [res, ctx] = processPlugin(
-    composePlugins([makeCustomPlugin, makeHighlighterPlugin, makeConfigMainPlugin()], tctx),
+    composePlugins([makeCustomPlugin, makeConfigMainPlugin()], tctx),
     items,
     tctx,
   )

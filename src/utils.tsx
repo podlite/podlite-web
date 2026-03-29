@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
 import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
-import { Editor2 as Editor, WindowWrapper } from '@podlite/editor-react'
+import { Editor2 as Editor, HighlightedCode, WindowWrapper } from '@podlite/editor-react'
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
@@ -10,7 +10,6 @@ import * as components from '../built/components'
 import Link from 'next/link'
 import { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
 import { pubRecord } from '@podlite/publisher'
-import { codeToHtml } from '@Components/shiki'
 
 // POSTS_PATH is useful when you want to get the path to a specific file
 // type pubRecord = {
@@ -102,55 +101,12 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       // check if node.content defined
       return makeComponent(src, node, 'content' in node ? interator(node.content, { ...ctx }) : [])
     }
-    const hcode = mkComponent(({ children, key, ...node }, ctx) => {
-      const conf = makeAttrs(node, ctx)
-      let caption
-      if (conf.exists('caption')) {
-        caption = conf.getFirstValue('caption')
-      }
-      const data1 = conf.getFirstValue('_highlighted_code_')
-      const lang1 = conf.getFirstValue('_highlighted_code_lang_')
-      const lang =
-        conf.getFirstValue('lang') ||
-        // try to detect default language
-        // (filename)=>getLangFromFilename(filename )
-        (filename => lang1)()
-      // Create a highlighter instance
-      const [data, setData] = useState(null)
-      const fetchData = async () => {
-        try {
-          console.log('call codeToHtml lang:' + lang)
-          const html = await codeToHtml({ code: getTextContentFromNode(node.content), language: lang || 'text' })
-          setData(html)
-        } catch (e) {
-          console.error('error highlite ' + e)
-        } finally {
-        }
-      }
-      useEffect(() => {
-        if (lang) {
-          fetchData()
-        }
-      }, [])
+      const hcode = mkComponent(({ children, key, ...node }, ctx) => (
+        <HighlightedCode node={node} keyProp={key} ctx={ctx}>
+          {children}
+        </HighlightedCode>
+      ))
 
-      return (
-        <>
-          {data ? (
-            <>
-              <code key={key} className="shiki" dangerouslySetInnerHTML={{ __html: data || '' }} />
-              {caption ? <div className="caption">{caption}</div> : null}
-            </>
-          ) : (
-            <>
-              <pre>
-                <code key={key}>{children}</code>
-              </pre>
-              {caption ? <div className="caption">{caption}</div> : null}
-            </>
-          )}
-        </>
-      )
-    })
     return {
       //process only content nodes
       root: () => (node, ctx, interator) => {
@@ -225,8 +181,11 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         const caption = conf.exists('caption') ? conf.getFirstValue('caption') : null
         const size = conf.exists('size') ? conf.getFirstValue('size') : null
         // :!enablePreview or :enablePreview
-        const enablePreview = conf.exists('enablePreview') ? conf.getFirstValue('enablePreview') : true;
-        const enableAutocompletion = conf.exists('enableAutocompletion') ? conf.getFirstValue('enableAutocompletion') : false;
+        const enablePreview = conf.exists('enablePreview') ? conf.getFirstValue('enablePreview') : true
+        const enableAutocompletion = conf.exists('enableAutocompletion')
+          ? conf.getFirstValue('enableAutocompletion')
+          : false
+        const enableFolding = conf.exists('enableFolding') ? conf.getFirstValue('enableFolding') : false
         const text = getTextContentFromNode(node)
 
         return mkComponent(({ children, key }) => (
@@ -241,6 +200,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
                 readOnly={false}
                 isFullscreen={false}
                 enableAutocompletion={enableAutocompletion}
+                enableFolding={enableFolding}
                 {...props}
               />
             </WindowWrapper>

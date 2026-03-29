@@ -241,14 +241,20 @@ figure, video, audio {
 }
 
 figure img {
-    width: 100%;
+    display: block;
+    max-width: 100%;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* TODO: Remove in future, due to change to figure */
 div.image_block img {
-    width: 100%;
+    display: block;
+    max-width: 100%;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* -----------------------------------
@@ -332,7 +338,7 @@ code pre, /* delete this rule */
     font-size: var(--code-font-size);
     line-height: 1.2;
 }
-figure, audio, video, img {
+figure, audio, video, img, div.image_block {
     max-width: var(--spacing-width-xl);
     margin-left: auto;
     margin-right: auto;
