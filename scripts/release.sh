@@ -69,7 +69,7 @@ echo "→ Committing..."
 TAG="v$(node -e "console.log(require('./package.json').version)")"
 git add -A
 git commit -m "release: ${TAG}"
-git push origin main
+git push origin master
 
 # Step 7: Generate release notes
 echo "→ Generating release notes..."
@@ -96,7 +96,7 @@ echo "→ Creating GitHub Release..."
 gh release create "${TAG}" \
   --title "${TAG}" \
   --notes-file "$NOTES_FILE" \
-  --target main
+  --target master
 
 rm -f "$NOTES_FILE"
 
