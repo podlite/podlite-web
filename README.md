@@ -1,123 +1,94 @@
-# Podlite-web
+<p align="center">
+  <img src="./assets/podlite-mark-web.svg" width="200" alt="Podlite Web">
+</p>
+<h1 align="center">Podlite Web</h1>
+<p align="center">static site generator powered by Podlite markup</p>
 
-📖 Create static websites with Next.js and the [Podlite](https://podlite.org/) markup language!
+<p align="center">
 
-## QUICK GUIDE
+[![npm](https://img.shields.io/npm/v/podlite-web)](https://www.npmjs.com/package/podlite-web)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-### using yarn
+</p>
 
-It is recommended to install Yarn through the npm package manager, which comes bundled with Node.js when you install it on your system.
-
-Once you have npm installed you can run the following both to install and upgrade Yarn:
-
-```sh
-npm install --global yarn
-```
-
-and then:
+## Quick Start
 
 ```sh
 yarn && yarn dev
 ```
 
-- open link [http://localhost:3000](http://localhost:3000) after
+Open [http://localhost:3000](http://localhost:3000) — demo site from `pub` directory.
 
-Here is demo page from `pub` directory.
-
-![Podlite-Web demo page Screenshot](./assets/demopage1.png)
-![Podlite-Web demo page Screenshot](./assets/demopage2.png)
-
-You can edit pub/\*.pod6 files and see changes after save.
-
-All features like `=Mermaid`, `=picture` , `=toc` for [Podlite editor](https://github.com/podlite/podlite-desktop) are available for podlite-web as well:
-![Podlite editor Screenshot](./assets/podlite-editor.png)
-
-### using Docker
-
-- make `index.pod6` with the following content:
-
-```
-=begin pod
-=TITLE Personal blog
-
-🚧 Web site is under construction. 🚧
-=end pod
-```
-
-run the command:
+### Using Docker
 
 ```sh
-docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000  podlite/podlite-web dev
+docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 podlite/podlite-web dev
 ```
 
-- open link [http://localhost:3000](http://localhost:3000)
-- after edit `index.pod6` web page will reload automatically
+Edit `index.pod6` and the page reloads automatically.
 
-#### Export to zipped static site
+### Export to static site
 
 ```sh
 docker run --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > site.zip
 ```
 
-#### Advance configuration
+## Screenshots
 
-- using `https://example.com` as domain name
-- customize Time Zone
-- change default `index.pod6` path to subdirectory
+![Podlite-Web demo page](./assets/demopage1.png)
+![Podlite-Web demo page](./assets/demopage2.png)
+
+## Features
+
+- static website generation with Next.js and Podlite markup
+- live reload on file save
+- embedded Podlite editor with live preview
+- `=Mermaid` diagrams, `=picture` images/video, `=toc` table of contents
+- `=markdown` blocks for familiar Markdown syntax
+- Docker support for zero-config setup
+- export to zipped static site
+
+## Examples
+
+```sh
+# minimal site
+POSTS_PATH='examples/01-minimal' yarn dev
+
+# multi-page with links
+POSTS_PATH='examples/02-pages' yarn dev
+
+# blog with notes and React components
+POSTS_PATH='examples/03-blog' yarn dev
+```
+
+## Advanced Configuration
+
+- custom domain: `SITE_URL=https://example.com`
+- timezone: `TZ=Europe/London`
+- custom content path: `POSTS_PATH='path/to/content'`
 
 ```sh
 cd examples/01-minimal
 docker run --rm -v ${PWD}:/app/pub -p 3000:3000 \
--e 'SITE_URL=https://example.com' \
--e 'TZ=Europe/London' \
-podlite/podlite-web export-zip > site.zip
+  -e 'SITE_URL=https://example.com' \
+  -e 'TZ=Europe/London' \
+  podlite/podlite-web export-zip > site.zip
 ```
 
-## Run examples
-
-### Run minimal site
+## Develop
 
 ```sh
-POSTS_PATH='examples/01-minimal'  yarn dev
-```
-
-### Make links between pages
-
-```sh
-POSTS_PATH='examples/02-pages'  yarn dev
-```
-
-### Blog with standalone pages and Notes from Diary
-
-This example contains integration with `React` components, customize styles and publish notes from Diary document.
-
-```sh
-POSTS_PATH='examples/03-blog'  yarn dev
-```
-
-## 💻 Develop
-
-### Setup the repo
-
-```sh
+# install dependencies
 yarn
-```
 
-### Develop
+# run dev server
+yarn dev
 
-`yarn dev` will spin up the demosite from `pub` directory and watch changes to the files.
-
-### Export to zip
-
-```sh
+# export to zip
 yarn export-zip > file.zip
 ```
 
-Explore `examples` dir for get more Podlite insights.
-
-thank you!
-
-## Useful links related to Podlite markup language
+## Links
 
 <div align="center">
 <table border=0><tr><td valign=top><div align="center">
@@ -127,7 +98,7 @@ thank you!
 </div>
 
 - [Source](https://github.com/podlite/podlite-specs)
-- [in HTML](https://podlite.org/specification)
+- [HTML](https://podlite.org/specification)
 - [Discussions](https://github.com/podlite/podlite-specs/discussions)
 
 <div align="center">
@@ -142,46 +113,46 @@ thank you!
 
 </td><td valign=top><div align="center">
 
-##### publishing system
+##### publishing
 
 </div>
 
 - [Podlite-web](https://github.com/podlite/podlite-web)
 - [How-to article](https://zahatski.com/2022/8/23/1/start-you-own-blog-site-with-podlite-for-web)
-- [Issues](https://github.com/podlite/podlite-specs/issues)
 - [Changelog](https://github.com/podlite/podlite-web/releases)
-- [Practical case: Raku knowledge base ](https://raku-knowledge-base.podlite.org/)
 
 </td><td valign=top><div align="center">
-  
-##### desktop viewer/editor
+
+##### desktop editor
 
 </div>
 
-- [Podlite-desktop](https://github.com/podlite/podlite-desktop)
 - [Releases](https://github.com/podlite/podlite-desktop/releases)
 - [Issues](https://github.com/podlite/podlite-desktop/issues)
-- Stores:
-     - [Linux](https://snapcraft.io/podlite)
-     - [Windows](https://www.microsoft.com/store/apps/9NVNT9SNQJM8)
-     - [Mac App](https://apps.apple.com/us/app/podlite/id1526511053)
+- Stores: [Mac](https://apps.apple.com/us/app/podlite/id1526511053) · [Windows](https://www.microsoft.com/store/apps/9NVNT9SNQJM8) · [Linux](https://snapcraft.io/podlite)
+
 </td><td valign=top><div align="center">
 
-##### online resurces
+##### resources
 
- </div>
+</div>
 
-- [Roadmap](https://podlite.org/#Roadmap)
-- [github.com/podlite](https://github.com/podlite/)&nbsp;🤩
 - [podlite.org](https://podlite.org)
 - [pod6.in](https://pod6.in/)
-- [Podlite project updates](https://podlite.org/contents)
-- [Funding the ongoing development](https://opencollective.com/podlite)
+- [github.com/podlite](https://github.com/podlite/)
+- [Funding](https://opencollective.com/podlite)
 
 </td></tr></table>
 </div>
 
+<p align="center">
+  <a href="https://podlite.org"><img src="./assets/podlite-mark-mono.svg" width="80" alt="Podlite"></a>
+</p>
+
+## Author
+
+Copyright (c) 2022–2026 Alexandr Zahatski
+
 ## License
 
-This project is licensed under the terms of the
-[MIT license](/LICENSE).
+Released under a MIT License.

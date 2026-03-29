@@ -1,9 +1,61 @@
 <div align="center">
 
-[![Podlite](https://github.com/zag/specs/raw/podlite-specification/assets/podlite_logo_256x256.png)](https://podlite.org)
+[![Podlite Web](https://raw.githubusercontent.com/podlite/podlite-web/main/assets/podlite-mark-web.svg)](https://podlite.org)
 
-**podlite-web — Create static websites with the Podlite markup language.**
+**podlite-web — static site generator powered by Podlite markup**
 
-[Documentation](https://github.com/podlite/podlite-web#readme) · [Docker Hub](https://hub.docker.com/r/podlite/podlite-web) · [Issues](https://github.com/podlite/podlite-web/issues) · [Podlite Spec](https://podlite.org/specification) · [Funding](https://opencollective.com/podlite)
+<table border=0><tr><td valign=top><div align="center">
+
+##### specification
+
+</div>
+
+- [Source](https://github.com/podlite/podlite-specs)
+- [HTML](https://podlite.org/specification)
+- [Discussions](https://github.com/podlite/podlite-specs/discussions)
+
+<div align="center">
+
+##### implementation
+
+</div>
+
+- [Source](https://github.com/podlite/podlite)
+- [Changelog](https://github.com/podlite/podlite/releases)
+- [Issues](https://github.com/podlite/podlite/issues)
+
+</td><td valign=top><div align="center">
+
+##### publishing
+
+</div>
+
+- [Podlite-web](https://github.com/podlite/podlite-web)
+- [Docker Hub](https://hub.docker.com/r/podlite/podlite-web)
+- [How-to article](https://zahatski.com/2022/8/23/1/start-you-own-blog-site-with-podlite-for-web)
+- [Changelog](https://github.com/podlite/podlite-web/releases)
+
+</td><td valign=top><div align="center">
+
+##### desktop editor
+
+</div>
+
+- [Releases](https://github.com/podlite/podlite-desktop/releases)
+- [Issues](https://github.com/podlite/podlite-desktop/issues)
+- Stores: [Mac](https://apps.apple.com/us/app/podlite/id1526511053) · [Windows](https://www.microsoft.com/store/apps/9NVNT9SNQJM8) · [Linux](https://snapcraft.io/podlite)
+
+</td><td valign=top><div align="center">
+
+##### resources
+
+</div>
+
+- [podlite.org](https://podlite.org)
+- [pod6.in](https://pod6.in/)
+- [github.com/podlite](https://github.com/podlite/)
+- [Funding](https://opencollective.com/podlite)
+
+</td></tr></table>
 
 </div>
