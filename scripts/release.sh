@@ -58,8 +58,8 @@ echo "→ Updating changelog..."
 node scripts/extract-changelog.mjs --update
 
 # Step 5: Build and test
-echo "→ Building..."
-yarn build
+# echo "→ Building..."
+# yarn build
 
 echo "→ Running tests..."
 yarn test
