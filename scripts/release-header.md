@@ -1,6 +1,6 @@
 <div align="center">
 
-[![Podlite Web](https://raw.githubusercontent.com/podlite/podlite-web/main/assets/podlite-mark-web.svg)](https://podlite.org)
+[![Podlite Web](https://raw.githubusercontent.com/podlite/podlite-web/master/assets/podlite-mark-web.svg)](https://podlite.org)
 
 **podlite-web — static site generator powered by Podlite markup**
 
