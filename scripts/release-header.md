@@ -1,8 +1,11 @@
 <div align="center">
 
-[![Podlite Web](https://raw.githubusercontent.com/podlite/podlite-web/master/assets/podlite-mark-web.svg)](https://podlite.org)
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/podlite/podlite-web/master/assets/podlite-mark-web-dark.svg">
+<img src="https://raw.githubusercontent.com/podlite/podlite-web/master/assets/podlite-mark-web.svg" width="350" alt="Podlite Web">
+</picture>
 
-**podlite-web — static site generator powered by Podlite markup**
+*static site generator powered by Podlite markup*
 
 <table border=0><tr><td valign=top><div align="center">
 

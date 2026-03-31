@@ -1,8 +1,10 @@
 <p align="center">
-  <img src="./assets/podlite-mark-web.svg" width="200" alt="Podlite Web">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/podlite-mark-web-dark.svg">
+    <img src="./assets/podlite-mark-web.svg" width="350" alt="Podlite Web">
+  </picture>
 </p>
-<h1 align="center">Podlite Web</h1>
-<p align="center">static site generator powered by Podlite markup</p>
+<p align="center"><em>static site generator powered by Podlite markup</em></p>
 
 <p align="center">
 
