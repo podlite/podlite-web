@@ -7,10 +7,7 @@
 <p align="center"><em>static site generator powered by Podlite markup</em></p>
 
 <p align="center">
-
-[![npm](https://img.shields.io/npm/v/podlite-web)](https://www.npmjs.com/package/podlite-web)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
 </p>
 
 ## Quick Start
@@ -147,9 +144,6 @@ yarn export-zip > file.zip
 </td></tr></table>
 </div>
 
-<p align="center">
-  <a href="https://podlite.org"><img src="./assets/podlite-mark-mono.svg" width="80" alt="Podlite"></a>
-</p>
 
 ## Author
 

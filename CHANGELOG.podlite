@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item bump podlite monorepo deps to 0.0.60 — pulls in C<header> MIME parameter for CSV/TSV C<=data> blocks (C<@podlite/schema 0.0.40>) and recursive C<:folded> head section grouping with CSS margin fix (C<@podlite/to-jsx 0.0.44>)
+
 =head1 0.9.15
 
 =item fix image_block stretching to full screen width — small images now stay at natural size, large images capped at 38rem
