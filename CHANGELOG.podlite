@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item bump podlite monorepo deps to 0.0.61
+
 =head1 0.9.16
 
 =item bump podlite monorepo deps to 0.0.60 — pulls in C<header> MIME parameter for CSV/TSV C<=data> blocks (C<@podlite/schema 0.0.40>) and recursive C<:folded> head section grouping with CSS margin fix (C<@podlite/to-jsx 0.0.44>)
