@@ -74,6 +74,30 @@ docker run --rm -v ${PWD}:/app/pub -p 3000:3000 \
   podlite/podlite-web export-zip > site.zip
 ```
 
+## Themes
+
+A theme bundles header-image styling and layout defaults. Select one with the `:theme<>` attribute on `=begin pod`:
+
+```podlite
+=begin pod
+= :theme<portrait-avatar>
+= :puburl<https://example.com>
+
+=TITLE My Blog
+=end pod
+```
+
+The themes live in `src/styles/themes/`:
+
+- **portrait-avatar** — round, grayscale header image; for sites with an author photo
+- **product** — for emblem or logo headers; sets `#header img { max-width: 51% }`
+- **docs** — placeholder for documentation sites
+- **minimal** — no overrides; the default look
+
+Theme styles load first, then `:globalStyles<>` (if set) overrides them.
+
+`@import "@Styles/themes/<name>.css"` from `page.styles.css` keeps working; `:theme<>` is the same effect declared on the pod.
+
 ## Develop
 
 ```sh
