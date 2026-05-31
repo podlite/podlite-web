@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item extract header-img portrait styling to C<@Styles/themes/portrait-avatar.css>; default is neutral. Sites relying on the previous default add C<@import "@Styles/themes/portrait-avatar.css"> to their C<page.styles.css>
+
 =head1 0.9.18
 
 =item bump podlite 

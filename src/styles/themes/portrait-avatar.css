@@ -1,0 +1,8 @@
+#body>header img {
+    display: block;
+    border-radius: 100%;
+    height: calc(4 * var(--spacing));
+    width: auto;
+    filter: grayscale(1);
+    background-color: lightgrey;
+}
