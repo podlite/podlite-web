@@ -1,0 +1,5 @@
+/* Product theme — sites with emblem or logo header, not portrait photo */
+
+#header img {
+    max-width: 51%;
+}
