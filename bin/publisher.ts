@@ -125,7 +125,7 @@ const makeConfigMainPlugin = () => {
   }
 
   const configStateVersionPlugin: PluginConfig = {
-    plugin: stateVersionPlugin(),
+    plugin: stateVersionPlugin(version),
     includePatterns: '.*',
   }
 
