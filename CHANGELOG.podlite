@@ -2,6 +2,10 @@
 
 =head1 Upcoming
 
+=item render external images (absolute, protocol-relative, and C<data:> urls) with a plain C<< <img> >> instead of looking them up in the prebuilt image map
+
+=item degrade a missing local image to a small inline placeholder with a build warning instead of injecting a heading into the page
+
 =head1 0.10.2
 
 =item include C<podlite-web> version in C<control.json> C<stateVersion> via C<@podlite/publisher>'s C<appVersion> param; result format C<<crc>+v<publisher>+app<web>>

@@ -5,6 +5,7 @@ import { Editor2 as Editor, HighlightedCode, WindowWrapper } from '@podlite/edit
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
+import { isExternalImageSrc } from './image-src'
 //@ts-ignore
 import * as components from '../built/components'
 import Link from 'next/link'
@@ -235,6 +236,17 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
     if (typeof node !== 'string' && 'type' in node && node.type == 'image') {
       const imageName = node.src
       const linkTo = ctx.link
+      // external images (badges, remote assets) are not in the prebuilt map
+      if (imageName && isExternalImageSrc(imageName)) {
+        const Ext = () => <img src={imageName} alt={'alt' in node ? node.alt : ''} />
+        return linkTo ? (
+          <a target="_blank" rel="noreferrer" href={linkTo}>
+            <Ext />
+          </a>
+        ) : (
+          <Ext />
+        )
+      }
       if (imageName && img[imageName]) {
         const placeholder = !node.src.endsWith('gif') ? 'blur' : 'empty'
         const Comp = () => {
@@ -260,11 +272,8 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
           <Comp />
         )
       } else {
-        return (
-          <>
-            <h1>image {imageName} not found</h1>
-          </>
-        )
+        console.warn(`[podlite-web] image not found: ${imageName}`)
+        return <span className="image-missing">{('alt' in node && node.alt) || imageName || 'image'}</span>
       }
       return children
     } else {
