@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item render external links as plain anchors so archived urls with a second scheme in the path no longer fail the router during export
+
 =item render external images (absolute, protocol-relative, and C<data:> urls) with a plain C<< <img> >> instead of looking them up in the prebuilt image map
 
 =item degrade a missing local image to a small inline placeholder with a build warning instead of injecting a heading into the page

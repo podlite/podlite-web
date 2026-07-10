@@ -5,7 +5,7 @@ import { Editor2 as Editor, HighlightedCode, WindowWrapper } from '@podlite/edit
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
-import { isExternalImageSrc } from './image-src'
+import { isExternalImageSrc, isExternalUrl } from './image-src'
 //@ts-ignore
 import * as components from '../built/components'
 import Link from 'next/link'
@@ -134,12 +134,19 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         }
         const text_content = getTextContentFromNode(node)
         //TODO: fix links to anchors
-        return mkComponent(({ children, key }) => (
-          <Link href={meta?.trim().replace(/\s/g, '-') || '#'} key={key}>
-            {text_content}
-            {/* {Array.isArray(children) ? children[0] : children} */}
-          </Link>
-        ))
+        const href = meta?.trim().replace(/\s/g, '-') || '#'
+        return mkComponent(({ children, key }) =>
+          isExternalUrl(href) ? (
+            <a href={href} key={key}>
+              {text_content}
+            </a>
+          ) : (
+            <Link href={href} key={key}>
+              {text_content}
+              {/* {Array.isArray(children) ? children[0] : children} */}
+            </Link>
+          ),
+        )
       }),
       React: () => (node, ctx, interator) => {
         const conf = makeAttrs(node, ctx)
