@@ -1,4 +1,8 @@
+const path = require('path')
 module.exports = {
+  moduleNameMapper: {
+    '^mermaid$': path.resolve(__dirname, 'jest-mermaid-stub.js'),
+  },
   moduleDirectories: ['node_modules'],
   modulePaths: ['<rootDir>'],
   snapshotSerializers: ['jest-serializer-html'],

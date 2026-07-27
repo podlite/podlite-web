@@ -1,4 +1,4 @@
-import makeInterator from '@podlite/schema/lib/ast-inerator'
+import { makeInterator } from '@podlite/schema'
 // import { convertFileLinksToUrl, parseFiles } from '../src/node-utils'
 import { getTextContentFromNode, PodNode } from '@podlite/schema'
 import {

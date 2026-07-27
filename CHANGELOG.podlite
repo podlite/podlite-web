@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item bump C<@podlite/*> toolchain to the v0.0.73 release (C<schema 0.0.53>, C<to-jsx 0.0.57> with the render safety-net, C<markdown 0.0.46>, C<podlite 0.0.66>)
+
 =item render external links as plain anchors so archived urls with a second scheme in the path no longer fail the router during export
 
 =item render external images (absolute, protocol-relative, and C<data:> urls) with a plain C<< <img> >> instead of looking them up in the prebuilt image map

@@ -37,11 +37,11 @@
     "tsx": "4.19.4"
   },
   "devDependencies": {
-    "@podlite/editor-react": "^0.0.50",
-    "@podlite/markdown": "^0.0.37",
-    "@podlite/publisher": "^0.0.25",
-    "@podlite/schema": "^0.0.44",
-    "@podlite/to-jsx": "^0.0.48",
+    "@podlite/editor-react": "^0.0.59",
+    "@podlite/markdown": "^0.0.46",
+    "@podlite/publisher": "^0.0.34",
+    "@podlite/schema": "^0.0.53",
+    "@podlite/to-jsx": "^0.0.57",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -65,7 +65,7 @@
     "next-optimized-images": "^2.6.2",
     "nodemon": "^2.0.16",
     "pagefind": "^1.1.1",
-    "podlite": "^0.0.57",
+    "podlite": "^0.0.66",
     "prettier": "^2.5.1",
     "react-modal": "^3.14.4",
     "rimraf": "^3.0.2",
@@ -75,5 +75,8 @@
     "ts-node": "^10.5.0",
     "typescript": "4.5.5"
   },
-  "packageManager": "yarn@3.1.1"
+  "packageManager": "yarn@3.1.1",
+  "workspaces": [
+    "pub"
+  ]
 }
