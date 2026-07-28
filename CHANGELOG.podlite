@@ -2,7 +2,10 @@
 
 =head1 Upcoming
 
-=item bump C<@podlite/*> toolchain to the v0.0.73 release (C<schema 0.0.53>, C<to-jsx 0.0.57> with the render safety-net, C<markdown 0.0.46>, C<podlite 0.0.66>)
+=item upgrade to next 14 and react 18 — static export via C<output: 'export'>, swc minifier
+=item drop next-optimized-images and next-compose-plugins; assets served via built-in webpack rules
+=item import C<@podlite/to-jsx> and C<@podlite/editor-react> css in C<_app> (packages no longer auto-load it)
+=item bump C<@podlite/*> toolchain (to-jsx 0.0.59, editor-react 0.0.61, publisher 0.0.35, schema 0.0.54, markdown 0.0.47, podlite 0.0.67)
 
 =item render external links as plain anchors so archived urls with a second scheme in the path no longer fail the router during export
 

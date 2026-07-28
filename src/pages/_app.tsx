@@ -1,3 +1,6 @@
+import '@podlite/to-jsx/podlite.css'
+import '@podlite/editor-react/Editor.css'
+import '@podlite/editor-react/podlite-vars.css'
 import '../../built/styles.css'
 import * as img from '../../built/images'
 import Head from 'next/head'
