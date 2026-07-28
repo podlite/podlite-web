@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.3
+
 =item upgrade to next 14 and react 18 — static export via C<output: 'export'>, swc minifier
 =item drop next-optimized-images and next-compose-plugins; assets served via built-in webpack rules
 =item import C<@podlite/to-jsx> and C<@podlite/editor-react> css in C<_app> (packages no longer auto-load it)
