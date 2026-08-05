@@ -7,6 +7,11 @@ module.exports = {
     unoptimized: true,
   },
   reactStrictMode: true,
+  // a full export of tens of thousands of pages exhausts memory with the default worker fan-out
+  experimental: {
+    cpus: 2,
+    webpackBuildWorker: false,
+  },
   webpack: config => {
     const assetRegex = new RegExp(`.(png|jpe?g|gif|woff|woff2|ico|svg|mp4)$`)
     config.resolve.alias['@Components'] = path.resolve('./src/components')
