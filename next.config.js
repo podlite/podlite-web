@@ -9,7 +9,7 @@ module.exports = {
   reactStrictMode: true,
   // a full export of tens of thousands of pages exhausts memory with the default worker fan-out
   experimental: {
-    cpus: 2,
+    cpus: 1,
     webpackBuildWorker: false,
   },
   webpack: config => {
