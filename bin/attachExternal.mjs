@@ -42,16 +42,38 @@ async function updateNextConfigFile(workspace_path) {
   return replaceContent(packageData, `config.resolve.alias['@NONE'] = path.resolve('./src')`)
 }
 
+async function detach() {
+  {
+    const packageData = await addWorkspace([])
+    const targetPath = path.resolve(packagePath, './package.json')
+    console.log(`[${script} detach ] Writing to ${targetPath}`)
+    await fse.writeFile(targetPath, JSON.stringify(packageData, null, 2), 'utf8')
+  }
+  {
+    const targetPath = path.resolve(packagePath, './next.config.js')
+    const configData = await fse.readFile(targetPath, 'utf8')
+    console.log(`[${script} detach ] Writing to ${targetPath}`)
+    await fse.writeFile(targetPath, configData.replace(/\/\/@@[\s\S]*?\/\/@@/, '//@@\n//@@'), 'utf8')
+  }
+}
+
 async function run() {
   const program = new Command()
   program.name('attachExternal').description('service tool')
 
   program
     //.option('-d, --index [path]', 'path to index file', 'index.podlite')
+    .option('--detach', 'restore the files this tool rewrites to their unattached state')
     .argument('[path to dir...]', 'path to posts')
 
   program.parse(process.argv)
   const [atpath] = program.args
+
+  if (program.opts().detach) {
+    await detach()
+    return
+  }
+
   console.log('path', atpath)
   try {
     if (!fse.existsSync(atpath + '/package.json')) {
