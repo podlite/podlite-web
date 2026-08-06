@@ -2,6 +2,7 @@
 
 =head1 Upcoming
 
+=item name the page and the closest publish url when a slug resolves to nothing, instead of failing on an undefined record
 =item let next handle image imports — the extra asset rule wrote a js module under the image url, so pages linked a file that was not an image
 =item install dependencies after attaching an external site, so its workspace resolves during the build
 =item add C<detach_path> to restore the workspace list and the config alias block that an external-site build rewrites

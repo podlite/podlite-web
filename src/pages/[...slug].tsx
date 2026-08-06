@@ -60,6 +60,19 @@ export async function getStaticProps({ params }) {
       return publishUrl === url
     }
   const item: any = contentData().find(checkSlug(slug))
+
+  if (!item) {
+    const url = '/' + slug.join('/')
+    const near: any = contentData().find(
+      ({ publishUrl }: any) => typeof publishUrl === 'string' && publishUrl.replace(/\/+$/, '') === url,
+    )
+    console.error(
+      `Page not found for ${url} among ${contentData().length} records.` +
+        (near ? ` Closest publish url: ${JSON.stringify(near.publishUrl)} in ${near.file}` : ''),
+    )
+    process.exit(1)
+  }
+
   const allData = item.type !== 'page' ? contentData().filter(({ type = '' }: any) => type !== 'page') : contentData()
   const articleIndex = allData.findIndex(checkSlug(slug))
   const { title: siteTitle, favicon, templateFile }: IndexProps = getSiteInfo()
