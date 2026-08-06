@@ -2,6 +2,7 @@
 
 =head1 Upcoming
 
+=item install dependencies after attaching an external site, so its workspace resolves during the build
 =item add C<detach_path> to restore the workspace list and the config alias block that an external-site build rewrites
 =item clear the leftover workspace entry that made every yarn command fail in a published image
 
