@@ -13,7 +13,8 @@ module.exports = {
     webpackBuildWorker: false,
   },
   webpack: config => {
-    const assetRegex = new RegExp(`.(png|jpe?g|gif|woff|woff2|ico|svg|mp4)$`)
+    // images are handled by next itself; emitting them here again produced a js module under an image url
+    const assetRegex = /\.(woff|woff2|mp4)$/
     config.resolve.alias['@Components'] = path.resolve('./src/components')
     config.resolve.alias['@Styles'] = path.resolve('./src/styles')
     // This content will be replaced

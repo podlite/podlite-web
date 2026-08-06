@@ -3,6 +3,7 @@ import '@podlite/editor-react/Editor.css'
 import '@podlite/editor-react/podlite-vars.css'
 import '../../built/styles.css'
 import * as img from '../../built/images'
+import { assetUrl } from '../image-src'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { getSiteInfo } from '../utils'
@@ -46,8 +47,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
         {metaImage && img[metaImage] && (
           <>
-            <meta property="og:image" content={resultUrl + img[metaImage]} />
-            <meta name="twitter:image" content={resultUrl + img[metaImage]} />
+            <meta property="og:image" content={resultUrl + assetUrl(img[metaImage])} />
+            <meta name="twitter:image" content={resultUrl + assetUrl(img[metaImage])} />
           </>
         )}
         <meta name="twitter:description" content={description} />

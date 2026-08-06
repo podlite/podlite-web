@@ -5,7 +5,7 @@ import { Editor2 as Editor, HighlightedCode, WindowWrapper } from '@podlite/edit
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
-import { isExternalImageSrc, isExternalUrl } from './image-src'
+import { assetUrl, isExternalImageSrc, isExternalUrl } from './image-src'
 //@ts-ignore
 import * as components from '../built/components'
 import Link from 'next/link'
@@ -263,12 +263,12 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
                 {' '}
                 <video controls>
                   {' '}
-                  <source src={img[imageName]} type="video/mp4" />{' '}
+                  <source src={assetUrl(img[imageName])} type="video/mp4" />{' '}
                 </video>
               </div>
             )
           } else {
-            return <img className="shadow_DISABLED" src={img[imageName]} />
+            return <img className="shadow_DISABLED" src={assetUrl(img[imageName])} />
           }
         }
         return linkTo ? (
