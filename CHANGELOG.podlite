@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item create the output directories before publishing, so a published image can build an external site
+
 =head1 0.10.4
 
 =item bump the C<@podlite> toolchain to the v0.0.77 release — a link keeps its target when the display text is formatted

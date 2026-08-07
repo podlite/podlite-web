@@ -69,6 +69,11 @@ const indexFilePath = options.index
 const built_path = options.built_path || BUILT_PATH
 const public_path = options.public_path || PUBLIC_PATH
 
+// a published image ships without these; the plugins below write into them
+for (const dir of [built_path, public_path, `${public_path}/assets`]) {
+  fs.mkdirSync(dir, { recursive: true })
+}
+
 const tctx = { testing: false }
 const makeConfigMainPlugin = () => {
   const configSiteDataPlugin: PluginConfig = {
