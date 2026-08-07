@@ -1308,15 +1308,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/expect-utils@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "@jest/expect-utils@npm:29.7.0"
-  dependencies:
-    jest-get-type: ^29.6.3
-  checksum: 75eb177f3d00b6331bcaa057e07c0ccb0733a1d0a1943e1d8db346779039cb7f103789f16e502f888a3096fb58c2300c38d1f3748b36a7fa762eb6f6d1b160ed
-  languageName: node
-  linkType: hard
-
 "@jest/expect@npm:^28.1.0":
   version: 28.1.0
   resolution: "@jest/expect@npm:28.1.0"
@@ -1398,15 +1389,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/schemas@npm:^29.6.3":
-  version: 29.6.3
-  resolution: "@jest/schemas@npm:29.6.3"
-  dependencies:
-    "@sinclair/typebox": ^0.27.8
-  checksum: 910040425f0fc93cd13e68c750b7885590b8839066dfa0cd78e7def07bbb708ad869381f725945d66f2284de5663bbecf63e8fdd856e2ae6e261ba30b1687e93
-  languageName: node
-  linkType: hard
-
 "@jest/source-map@npm:^28.0.2":
   version: 28.0.2
   resolution: "@jest/source-map@npm:28.0.2"
@@ -1476,20 +1458,6 @@ __metadata:
     "@types/yargs": ^17.0.8
     chalk: ^4.0.0
   checksum: 22705aed92a76d45465a6c51147bc71c1fbd300b912ebad2769e3ff7fd51c1938017e29fcea52e00c00dab7130697359b2a2c2be6ee601e37c8b1042a2c4040e
-  languageName: node
-  linkType: hard
-
-"@jest/types@npm:^29.6.3":
-  version: 29.6.3
-  resolution: "@jest/types@npm:29.6.3"
-  dependencies:
-    "@jest/schemas": ^29.6.3
-    "@types/istanbul-lib-coverage": ^2.0.0
-    "@types/istanbul-reports": ^3.0.0
-    "@types/node": "*"
-    "@types/yargs": ^17.0.8
-    chalk: ^4.0.0
-  checksum: a0bcf15dbb0eca6bdd8ce61a3fb055349d40268622a7670a3b2eb3c3dbafe9eb26af59938366d520b86907b9505b0f9b29b85cec11579a9e580694b87cd90fcc
   languageName: node
   linkType: hard
 
@@ -1771,13 +1739,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/env@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/env@npm:12.0.10"
-  checksum: 22e9200919a58eeb9ab03e18504ef689120075cb0301189b1f76d96d98cb73de448a54f96d2b388b1f3b6c08bf55021144f0c2bffd0b69720d6b23e1fd2cf27a
-  languageName: node
-  linkType: hard
-
 "@next/env@npm:14.2.35":
   version: 14.2.35
   resolution: "@next/env@npm:14.2.35"
@@ -1794,31 +1755,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-android-arm64@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-android-arm64@npm:12.0.10"
-  conditions: os=android & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@next/swc-darwin-arm64@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-darwin-arm64@npm:12.0.10"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@next/swc-darwin-arm64@npm:14.2.33":
   version: 14.2.33
   resolution: "@next/swc-darwin-arm64@npm:14.2.33"
   conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@next/swc-darwin-x64@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-darwin-x64@npm:12.0.10"
-  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -1829,30 +1769,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-arm-gnueabihf@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-linux-arm-gnueabihf@npm:12.0.10"
-  conditions: os=linux & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@next/swc-linux-arm64-gnu@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-linux-arm64-gnu@npm:12.0.10"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@next/swc-linux-arm64-gnu@npm:14.2.33":
   version: 14.2.33
   resolution: "@next/swc-linux-arm64-gnu@npm:14.2.33"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@next/swc-linux-arm64-musl@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-linux-arm64-musl@npm:12.0.10"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
@@ -1864,23 +1783,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-linux-x64-gnu@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-linux-x64-gnu@npm:12.0.10"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@next/swc-linux-x64-gnu@npm:14.2.33":
   version: 14.2.33
   resolution: "@next/swc-linux-x64-gnu@npm:14.2.33"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@next/swc-linux-x64-musl@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-linux-x64-musl@npm:12.0.10"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -1892,13 +1797,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-win32-arm64-msvc@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-win32-arm64-msvc@npm:12.0.10"
-  conditions: os=win32 & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@next/swc-win32-arm64-msvc@npm:14.2.33":
   version: 14.2.33
   resolution: "@next/swc-win32-arm64-msvc@npm:14.2.33"
@@ -1906,24 +1804,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/swc-win32-ia32-msvc@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-win32-ia32-msvc@npm:12.0.10"
-  conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@next/swc-win32-ia32-msvc@npm:14.2.33":
   version: 14.2.33
   resolution: "@next/swc-win32-ia32-msvc@npm:14.2.33"
   conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@next/swc-win32-x64-msvc@npm:12.0.10":
-  version: 12.0.10
-  resolution: "@next/swc-win32-x64-msvc@npm:12.0.10"
-  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -1995,13 +1879,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pagefind/default-ui@npm:^1.1.1":
-  version: 1.5.2
-  resolution: "@pagefind/default-ui@npm:1.5.2"
-  checksum: 103c622183bd493c932cd261917e90da870d04d8e436d56a1afd51c01623b35fdc8c67a8d429d6b4e6b68cd6a9cfdfa9c752f465217136b1de357f4b1e6c31fe
-  languageName: node
-  linkType: hard
-
 "@pagefind/linux-arm64@npm:1.1.1":
   version: 1.1.1
   resolution: "@pagefind/linux-arm64@npm:1.1.1"
@@ -2030,11 +1907,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@podlite/diagram@npm:^0.0.58":
-  version: 0.0.58
-  resolution: "@podlite/diagram@npm:0.0.58"
+"@podlite/diagram@npm:^0.0.61":
+  version: 0.0.61
+  resolution: "@podlite/diagram@npm:0.0.61"
   dependencies:
-    "@podlite/schema": 0.0.54
+    "@podlite/schema": 0.0.57
     mermaid: ^11.15.0
     react-is: ^18.0.0
   peerDependencies:
@@ -2042,45 +1919,13 @@ __metadata:
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
     react-is: "*"
-  checksum: 1875111b2d6e98b8fe37e31002cf67490ea8aa02d4c83a77049c9f50cb8799d085eee69dea1f547dff25690e87e785586d3ea01fad09ecd3d770fa57617942cf
+  checksum: 02a6670c778d8532d044d1227baeb397ce410c6b26d3756336b8b9286f2eefba1360aba472ad5395aa5f2bcfce11f2e2d1761a4eb863006d6db83f4191726b7c
   languageName: node
   linkType: hard
 
-"@podlite/diagram@npm:^0.0.59":
-  version: 0.0.59
-  resolution: "@podlite/diagram@npm:0.0.59"
-  dependencies:
-    "@podlite/schema": 0.0.55
-    mermaid: ^11.15.0
-    react-is: ^18.0.0
-  peerDependencies:
-    mermaid: "*"
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: "*"
-  checksum: 2bade38370976d11a6e7023212500fa62683ce995932afde98181a07446c24a534525a6dc5e9e91aa510bc778e4ee36328bda373a2819c0c9a6bf4a64ec64ba7
-  languageName: node
-  linkType: hard
-
-"@podlite/diagram@npm:^0.0.60":
-  version: 0.0.60
-  resolution: "@podlite/diagram@npm:0.0.60"
-  dependencies:
-    "@podlite/schema": 0.0.56
-    mermaid: ^11.15.0
-    react-is: ^18.0.0
-  peerDependencies:
-    mermaid: "*"
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: "*"
-  checksum: cea257e2be0fe1097b8c394c12bc21ce4cd00b4314a77a3a5f7875ebfb80df1b45921c3383943bbf0095b7b64202e103798a0d1ec85063276df29a820d857fa3
-  languageName: node
-  linkType: hard
-
-"@podlite/editor-react@npm:^0.0.62":
-  version: 0.0.62
-  resolution: "@podlite/editor-react@npm:0.0.62"
+"@podlite/editor-react@npm:^0.0.63":
+  version: 0.0.63
+  resolution: "@podlite/editor-react@npm:0.0.63"
   dependencies:
     "@codemirror/autocomplete": ^6.18.6
     "@codemirror/lang-markdown": ^6.5.1
@@ -2099,206 +1944,73 @@ __metadata:
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 768814eb72268082eee253b652fc1dc1bdb2e52ac3cc90a6cecb733dd43c1f0b923ab3ac96c434c7f676bce06ab307b2ccb3ddd7511c5e0f342df37b330edafa
+  checksum: 70643c4b1788511385cf05691fa848740bdca2ef609403128b57dff9982c549e554bbb7f992111386a9504cd84e298d6c3a0bde5d5cc4769f7da470bea53179b
   languageName: node
   linkType: hard
 
-"@podlite/formula@npm:0.0.36":
-  version: 0.0.36
-  resolution: "@podlite/formula@npm:0.0.36"
+"@podlite/formula@npm:0.0.39":
+  version: 0.0.39
+  resolution: "@podlite/formula@npm:0.0.39"
   dependencies:
-    "@podlite/schema": 0.0.54
+    "@podlite/schema": 0.0.57
     react-is: ^18.0.0
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
     react-is: "*"
-  checksum: 4f21cd501368318c712155e729ab9fb8664ace16e70a7f7986188ee52ecced5f0fe8aad33e6a3fcb4d45c7897b4d056bae90710846589c31ef25ad6bc2fa4130
+  checksum: 71286a7faf7df75489e4322f89cc9a8b8f42c88d21441bd2bf0e83a901befbed46066d99751c36c876a953cbfc8e7a02c32a8370ac9970708aafdce9c1bed5e6
   languageName: node
   linkType: hard
 
-"@podlite/formula@npm:0.0.37":
-  version: 0.0.37
-  resolution: "@podlite/formula@npm:0.0.37"
-  dependencies:
-    "@podlite/schema": 0.0.55
-    react-is: ^18.0.0
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: "*"
-  checksum: 012f2d140ca4af18e512ec5efff5128d4aaba2ee9e501e6896fbe498798b0fa87ff0b111aa65d6aa9c01cfd95d89628bed7abe35dc9a30ee1aa7fba7661536f4
-  languageName: node
-  linkType: hard
-
-"@podlite/formula@npm:0.0.38":
-  version: 0.0.38
-  resolution: "@podlite/formula@npm:0.0.38"
-  dependencies:
-    "@podlite/schema": 0.0.56
-    react-is: ^18.0.0
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: "*"
-  checksum: 5dba078bcd55d0553f62884e40fdc2ceba062e55efa239002a41faba7597571c38e92053a02b78ffeb58311853724e0996cb8825c033ad54aa2e8e5c2b6c0507
-  languageName: node
-  linkType: hard
-
-"@podlite/image@npm:^0.0.53":
-  version: 0.0.53
-  resolution: "@podlite/image@npm:0.0.53"
-  dependencies:
-    "@podlite/schema": ^0.0.54
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: e72c6650b220ffcf7f7ca08822b54594e14ae59abce56188632feaa5b31c37ea347332083ae8a2d2baa8a763a4f3021515dda51389777191eb9aced289695018
-  languageName: node
-  linkType: hard
-
-"@podlite/image@npm:^0.0.54":
-  version: 0.0.54
-  resolution: "@podlite/image@npm:0.0.54"
-  dependencies:
-    "@podlite/schema": ^0.0.55
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 91c0a8863032ab967a88be9f4575f8c72826e37513cfcce36fa5a6b35feecbb11f6252d077814bdaac81b8261876761d02a11437448c2dee7dc1aa131088b93b
-  languageName: node
-  linkType: hard
-
-"@podlite/image@npm:^0.0.55":
-  version: 0.0.55
-  resolution: "@podlite/image@npm:0.0.55"
-  dependencies:
-    "@podlite/schema": ^0.0.56
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: afa96c926b5261d88dc9cfe23700c9fac0a1eab6b3139bd285e2ec48c195797c7417db32abc1428a48d1df92a3d2b46d514a20b5ee4bc690b4e41fa4dda72355
-  languageName: node
-  linkType: hard
-
-"@podlite/markdown@npm:0.0.47, @podlite/markdown@npm:^0.0.47":
-  version: 0.0.47
-  resolution: "@podlite/markdown@npm:0.0.47"
-  dependencies:
-    "@podlite/schema": 0.0.54
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: ^18.0.0
-    remark-gfm: ^3.0.1
-    remark-math: 5.1.1
-    remark-parse: ^10.0.1
-    unified: 10.1.2
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 15d8c2ef5d309f8e4c771d8a4c3d2d28c5c4f85d58d81f4a93dbf6cb1eeb86d1eff9049dc9d3022e3679292d5e3a93aa04b06cd1168fb65c94995323347ecd66
-  languageName: node
-  linkType: hard
-
-"@podlite/markdown@npm:0.0.48":
-  version: 0.0.48
-  resolution: "@podlite/markdown@npm:0.0.48"
-  dependencies:
-    "@podlite/schema": 0.0.55
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: ^18.0.0
-    remark-gfm: ^3.0.1
-    remark-math: 5.1.1
-    remark-parse: ^10.0.1
-    unified: 10.1.2
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: ce9f49162234a5781723c4587fcb0b8a9612666bc63455dfc9b41f8766ea83325ba72634a1630eb88a7371f6f50238f1337282ccf5e87962252dc40cac146e1c
-  languageName: node
-  linkType: hard
-
-"@podlite/markdown@npm:0.0.49, @podlite/markdown@npm:^0.0.49":
-  version: 0.0.49
-  resolution: "@podlite/markdown@npm:0.0.49"
-  dependencies:
-    "@podlite/schema": 0.0.56
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: ^18.0.0
-    remark-gfm: ^3.0.1
-    remark-math: 5.1.1
-    remark-parse: ^10.0.1
-    unified: 10.1.2
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 2ad96927db50a963b442aabca8d91f5fc37dda01006d4d1bbb924e9ed050a79a1373d7c4747327d1ea202b84692aa1b5546d19658d450dee8f6d8c92145d22e7
-  languageName: node
-  linkType: hard
-
-"@podlite/publisher@npm:^0.0.35":
-  version: 0.0.35
-  resolution: "@podlite/publisher@npm:0.0.35"
-  dependencies:
-    "@podlite/markdown": 0.0.47
-    "@podlite/schema": 0.0.54
-    crc-32: ^1.2.2
-    gray-matter: ^4.0.3
-    iso_9: ^1.0.4
-    newbase60: ^1.3.1
-    podlite: 0.0.67
-  checksum: 4bee5f83aa1b58371d00de9d0900c1c473981c6769337af2d4a9fcd60f31872d68b8d56eef6719c7f3a145b1806cf2db67ca06263f0c0a9de8879c9ed32578b7
-  languageName: node
-  linkType: hard
-
-"@podlite/publisher@npm:^0.0.37":
-  version: 0.0.37
-  resolution: "@podlite/publisher@npm:0.0.37"
-  dependencies:
-    "@podlite/markdown": 0.0.49
-    "@podlite/schema": 0.0.56
-    crc-32: ^1.2.2
-    gray-matter: ^4.0.3
-    iso_9: ^1.0.4
-    newbase60: ^1.3.1
-    podlite: 0.0.69
-  checksum: c03d8674cc938c162b2e311433e62a32904e1ce3cc7fb771765af7777c59ac291890a5d00bd1f4a9b7eb1f49369696467bcda7727e70ee44e34c2cf1d750126d
-  languageName: node
-  linkType: hard
-
-"@podlite/schema@npm:0.0.54, @podlite/schema@npm:^0.0.54":
-  version: 0.0.54
-  resolution: "@podlite/schema@npm:0.0.54"
-  dependencies:
-    ajv: ^7.2.3
-    entities: ^4.5.0
-    events: ^3.1.0
-    json-pointer: ^0.6.1
-    nanoid: 3.1.30
-    slugify: ^1.6.6
-  checksum: f2a9556668d998ff4afda815b8cdc3d0b5824cfb0c114134bbc9c60c6fa3863fafb3b4af9ddc3ce693e0fd801fd06651042d047078432f2aaf97571e181b233c
-  languageName: node
-  linkType: hard
-
-"@podlite/schema@npm:0.0.55, @podlite/schema@npm:^0.0.55":
-  version: 0.0.55
-  resolution: "@podlite/schema@npm:0.0.55"
-  dependencies:
-    ajv: ^7.2.3
-    entities: ^4.5.0
-    events: ^3.1.0
-    json-pointer: ^0.6.1
-    nanoid: 3.1.30
-    slugify: ^1.6.6
-  checksum: 8fc054f817fdbde6c8d8af408d9f6450ce942807ea8da6ca1ceb7818cf6815d2467e27d0e2c44c2c89cafb779a7d51e6d7f93facd06bdea35fc49a64633b05c6
-  languageName: node
-  linkType: hard
-
-"@podlite/schema@npm:0.0.56, @podlite/schema@npm:^0.0.56":
+"@podlite/image@npm:^0.0.56":
   version: 0.0.56
-  resolution: "@podlite/schema@npm:0.0.56"
+  resolution: "@podlite/image@npm:0.0.56"
+  dependencies:
+    "@podlite/schema": ^0.0.57
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18
+    react-dom: ^16.0.0 || ^17.0.0 || ^18
+  checksum: f51b21da4a9d141419e526f7b6c2c821039345f05c0ca4e349fa58305bc01fcc57107d63319e1d5c3fc576d12864ed3805d5055b76a0d97d739b46a86f662691
+  languageName: node
+  linkType: hard
+
+"@podlite/markdown@npm:0.0.50, @podlite/markdown@npm:^0.0.50":
+  version: 0.0.50
+  resolution: "@podlite/markdown@npm:0.0.50"
+  dependencies:
+    "@podlite/schema": 0.0.57
+    react: ^16.0.0 || ^17.0.0 || ^18
+    react-dom: ^16.0.0 || ^17.0.0 || ^18
+    react-is: ^18.0.0
+    remark-gfm: ^3.0.1
+    remark-math: 5.1.1
+    remark-parse: ^10.0.1
+    unified: 10.1.2
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0 || ^18
+    react-dom: ^16.0.0 || ^17.0.0 || ^18
+  checksum: 674347d29590c5c71bf4e8a5fb8c8b01ffa498c810dd07b8aa107401f0d6be54456338e615462ce345755bbbe8e5281d148c9c129c367cf00c536cf5063b0799
+  languageName: node
+  linkType: hard
+
+"@podlite/publisher@npm:^0.0.38":
+  version: 0.0.38
+  resolution: "@podlite/publisher@npm:0.0.38"
+  dependencies:
+    "@podlite/markdown": 0.0.50
+    "@podlite/schema": 0.0.57
+    crc-32: ^1.2.2
+    gray-matter: ^4.0.3
+    iso_9: ^1.0.4
+    newbase60: ^1.3.1
+    podlite: 0.0.70
+  checksum: dc58fc639824be41e89bc6726466034d261e93111133393697c0bee6272c77a63bb82b12496cf714fceaa80e28e6f900dc462655c5ec5b07730051f833dcbbe2
+  languageName: node
+  linkType: hard
+
+"@podlite/schema@npm:0.0.57, @podlite/schema@npm:^0.0.57":
+  version: 0.0.57
+  resolution: "@podlite/schema@npm:0.0.57"
   dependencies:
     ajv: ^7.2.3
     entities: ^4.5.0
@@ -2306,18 +2018,18 @@ __metadata:
     json-pointer: ^0.6.1
     nanoid: 3.1.30
     slugify: ^1.6.6
-  checksum: 0ca4db070f3bc52ee069d06d31a51f33fb015daa44d07db2f1836e7992184f7ae111b3bfb8af44d02d7570ab1c85755462dd6b836e21d853d48d753706042139
+  checksum: 73824f29e4a3f4b47b9aa50f08588adafd752eb23bb43586c1436f776a35abb844df740a595811ba199665527f8f622b8d5d34131dac99b172c2a425a08c0cc6
   languageName: node
   linkType: hard
 
-"@podlite/to-jsx@npm:^0.0.59":
-  version: 0.0.59
-  resolution: "@podlite/to-jsx@npm:0.0.59"
+"@podlite/to-jsx@npm:^0.0.61":
+  version: 0.0.61
+  resolution: "@podlite/to-jsx@npm:0.0.61"
   dependencies:
-    "@podlite/diagram": ^0.0.59
-    "@podlite/schema": 0.0.55
+    "@podlite/diagram": ^0.0.61
+    "@podlite/schema": 0.0.57
     entities: ^4.5.0
-    podlite: 0.0.68
+    podlite: 0.0.70
     react-is: ^18.0.0
     shiki: ^3.21.0
   peerDependencies:
@@ -2325,71 +2037,22 @@ __metadata:
     "@podlite/schema": "*"
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: d3519505bc43ac7550248070f8dcee2e42faa3cc9c78d7e6a18f56505108b71e7059475b1499cc23df133ac85877797862b993181558eda81c89deed0ea040a3
+  checksum: 4cf3619b80515889e801dbf849fed5f3ad43c2412a80d48bd1b85ec7f21d109d1c05f8f001dbb9049a5b6e089f42eb0e0fe219bee57b5a5b11a142a089d6c17e
   languageName: node
   linkType: hard
 
-"@podlite/to-jsx@npm:^0.0.60":
-  version: 0.0.60
-  resolution: "@podlite/to-jsx@npm:0.0.60"
+"@podlite/toc@npm:0.0.50":
+  version: 0.0.50
+  resolution: "@podlite/toc@npm:0.0.50"
   dependencies:
-    "@podlite/diagram": ^0.0.60
-    "@podlite/schema": 0.0.56
-    entities: ^4.5.0
-    podlite: 0.0.69
-    react-is: ^18.0.0
-    shiki: ^3.21.0
-  peerDependencies:
-    "@podlite/diagram": "*"
-    "@podlite/schema": "*"
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 47f0d0c7f23e11b8911f82adda9a3c7bd663005a07241c97b000c59062ab48e37198a40f5d4c0be7544cf787d939065eea827b040c96af8bd6bc6412fd9e959f
-  languageName: node
-  linkType: hard
-
-"@podlite/toc@npm:0.0.47":
-  version: 0.0.47
-  resolution: "@podlite/toc@npm:0.0.47"
-  dependencies:
-    "@podlite/schema": 0.0.54
+    "@podlite/schema": 0.0.57
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
     react-is: ^18.0.0
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 8b1ec12a02103718f1909dfdd7b9a13c77695df73d0507bbbccdca513aa41b8604fedfa2c71844dea96b017f6e44d1b1886dc279cf144aa8d55e2db7be550cf8
-  languageName: node
-  linkType: hard
-
-"@podlite/toc@npm:0.0.48":
-  version: 0.0.48
-  resolution: "@podlite/toc@npm:0.0.48"
-  dependencies:
-    "@podlite/schema": 0.0.55
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: ^18.0.0
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 4b7389c871dc2b11c008158e8f237c8f00a4d978ab17163afd8e1794d7e3f026e0fcec629f585ff7d95e62b3b75b7c28cdf721f8d12b18127ea7a3b68821858b
-  languageName: node
-  linkType: hard
-
-"@podlite/toc@npm:0.0.49":
-  version: 0.0.49
-  resolution: "@podlite/toc@npm:0.0.49"
-  dependencies:
-    "@podlite/schema": 0.0.56
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-    react-is: ^18.0.0
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  checksum: 1edd80452d8a1afd10d48bdbc085dce3a2d12b18fa28f82fd113e95fcdbe5de86e224a3f40b783f72f286aa29c94d40c2b7f4953d0704f3e49317bc874e636e1
+  checksum: d14b416013cb56706fbcbbdd094d362c02a242cce2d55938d6d9d29124978c57214746375822e6e8875a4756aec34304a4e0844772de681b88b419bbf6ca333b
   languageName: node
   linkType: hard
 
@@ -2559,13 +2222,6 @@ __metadata:
   version: 0.23.5
   resolution: "@sinclair/typebox@npm:0.23.5"
   checksum: c96056d35d9cb862aeb635ff8873e2e7633e668dd544e162aee2690a82c970d0b3f90aa2b3501fe374dfa8e792388559a3e3a86712b23ebaef10061add534f47
-  languageName: node
-  linkType: hard
-
-"@sinclair/typebox@npm:^0.27.8":
-  version: 0.27.12
-  resolution: "@sinclair/typebox@npm:0.27.12"
-  checksum: f670bb7aeea4873ea3f0fef2004f81a22026e0e2b17634365c2a22bb61499e42bf5cf84562093819a342652f46241cbc8733c2de9d6477e387b0a4848e1de760
   languageName: node
   linkType: hard
 
@@ -3044,16 +2700,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jest@npm:^29.4.0":
-  version: 29.5.14
-  resolution: "@types/jest@npm:29.5.14"
-  dependencies:
-    expect: ^29.0.0
-    pretty-format: ^29.0.0
-  checksum: 18dba4623f26661641d757c63da2db45e9524c9be96a29ef713c703a9a53792df9ecee9f7365a0858ddbd6440d98fe6b65ca67895ca5884b73cbc7ffc11f3838
-  languageName: node
-  linkType: hard
-
 "@types/json5@npm:^0.0.29":
   version: 0.0.29
   resolution: "@types/json5@npm:0.0.29"
@@ -3109,13 +2755,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.13":
-  version: 16.11.13
-  resolution: "@types/node@npm:16.11.13"
-  checksum: 7c9d62c024537d7c9f2229097b9e7a93a60bc60efbc9171977f172819e229b01d0b6ed276d335996d39b0096aed2cefa58c4a34b264d712ae3595449e8d96ab7
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:17.0.17":
   version: 17.0.17
   resolution: "@types/node@npm:17.0.17"
@@ -3155,17 +2794,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.39":
-  version: 17.0.39
-  resolution: "@types/react@npm:17.0.39"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: bf04d3c2894559012710d595553e12b422d3b91cd8f4f7e122d8cb044ba9c2ba17f6e8a4e09581359cc5509ddc59cd8c8fabd6774f3505a40a45393f074d6e6e
-  languageName: node
-  linkType: hard
-
 "@types/react@npm:18.3.12":
   version: 18.3.12
   resolution: "@types/react@npm:18.3.12"
@@ -3189,13 +2817,6 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: e99fc7cc6265407987b30deda54c1c24bb1478803faf6037557a774b2f034c5b097ffd65847daa87e82a61a250d919f35c3588654b0fdaa816906650f596d1b0
-  languageName: node
-  linkType: hard
-
-"@types/scheduler@npm:*":
-  version: 0.26.0
-  resolution: "@types/scheduler@npm:0.26.0"
-  checksum: 295ede5e7f991c7c52f9ed8e58d3076526be9a560e59ae11bf1c1414f9755a17bd750f3bfed4657b118283d1eb082bb27dcbe2eadf335a982b0c3b6a562771c2
   languageName: node
   linkType: hard
 
@@ -3938,17 +3559,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001283, caniuse-lite@npm:^1.0.30001579":
-  version: 1.0.30001806
-  resolution: "caniuse-lite@npm:1.0.30001806"
-  checksum: 4b4a970fbd7cb7b8ee6b5068336f7afa7d9cc65ff444080630ab363dcb44205994f68897c7685dc3de4f04dd1f65ec395e50790a594d0470db4894bedf5cb379
-  languageName: node
-  linkType: hard
-
 "caniuse-lite@npm:^1.0.30001332":
   version: 1.0.30001751
   resolution: "caniuse-lite@npm:1.0.30001751"
   checksum: d11e25c44e40c21e7b7492a25c9fd60f4c04e94aa265573f7c487666f5e1b5ca3ed09d09560336f959237063616255cb294d415511bb6cf0486eb2cb6a3a4318
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001579":
+  version: 1.0.30001806
+  resolution: "caniuse-lite@npm:1.0.30001806"
+  checksum: 4b4a970fbd7cb7b8ee6b5068336f7afa7d9cc65ff444080630ab363dcb44205994f68897c7685dc3de4f04dd1f65ec395e50790a594d0470db4894bedf5cb379
   languageName: node
   linkType: hard
 
@@ -4895,13 +4516,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"diff-sequences@npm:^29.6.3":
-  version: 29.6.3
-  resolution: "diff-sequences@npm:29.6.3"
-  checksum: f4914158e1f2276343d98ff5b31fc004e7304f5470bf0f1adb2ac6955d85a531a6458d33e87667f98f6ae52ebd3891bb47d420bb48a5bd8b7a27ee25b20e33aa
-  languageName: node
-  linkType: hard
-
 "diff@npm:^4.0.1":
   version: 4.0.2
   resolution: "diff@npm:4.0.2"
@@ -5644,19 +5258,6 @@ __metadata:
     jest-message-util: ^28.1.0
     jest-util: ^28.1.0
   checksum: 53bfa2e094a7d5b270ce9a8dafc5432d51bb369287502acd373b66fe01072260bacd1f83bf741d5de49b008406781ab879a0247f5f6fc10d3f32fbe5a3ccfbdf
-  languageName: node
-  linkType: hard
-
-"expect@npm:^29.0.0":
-  version: 29.7.0
-  resolution: "expect@npm:29.7.0"
-  dependencies:
-    "@jest/expect-utils": ^29.7.0
-    jest-get-type: ^29.6.3
-    jest-matcher-utils: ^29.7.0
-    jest-message-util: ^29.7.0
-    jest-util: ^29.7.0
-  checksum: 9257f10288e149b81254a0fda8ffe8d54a7061cd61d7515779998b012579d2b8c22354b0eb901daf0145f347403da582f75f359f4810c007182ad3fb318b5c0c
   languageName: node
   linkType: hard
 
@@ -6951,18 +6552,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "jest-diff@npm:29.7.0"
-  dependencies:
-    chalk: ^4.0.0
-    diff-sequences: ^29.6.3
-    jest-get-type: ^29.6.3
-    pretty-format: ^29.7.0
-  checksum: 08e24a9dd43bfba1ef07a6374e5af138f53137b79ec3d5cc71a2303515335898888fa5409959172e1e05de966c9e714368d15e8994b0af7441f0721ee8e1bb77
-  languageName: node
-  linkType: hard
-
 "jest-docblock@npm:^28.0.2":
   version: 28.0.2
   resolution: "jest-docblock@npm:28.0.2"
@@ -7010,13 +6599,6 @@ __metadata:
   version: 28.0.2
   resolution: "jest-get-type@npm:28.0.2"
   checksum: 5281d7c89bc8156605f6d15784f45074f4548501195c26e9b188742768f72d40948252d13230ea905b5349038865a1a8eeff0e614cc530ff289dfc41fe843abd
-  languageName: node
-  linkType: hard
-
-"jest-get-type@npm:^29.6.3":
-  version: 29.6.3
-  resolution: "jest-get-type@npm:29.6.3"
-  checksum: 88ac9102d4679d768accae29f1e75f592b760b44277df288ad76ce5bf038c3f5ce3719dea8aa0f035dac30e9eb034b848ce716b9183ad7cc222d029f03e92205
   languageName: node
   linkType: hard
 
@@ -7077,18 +6659,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-matcher-utils@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "jest-matcher-utils@npm:29.7.0"
-  dependencies:
-    chalk: ^4.0.0
-    jest-diff: ^29.7.0
-    jest-get-type: ^29.6.3
-    pretty-format: ^29.7.0
-  checksum: d7259e5f995d915e8a37a8fd494cb7d6af24cd2a287b200f831717ba0d015190375f9f5dc35393b8ba2aae9b2ebd60984635269c7f8cff7d85b077543b7744cd
-  languageName: node
-  linkType: hard
-
 "jest-message-util@npm:^28.1.0":
   version: 28.1.0
   resolution: "jest-message-util@npm:28.1.0"
@@ -7103,23 +6673,6 @@ __metadata:
     slash: ^3.0.0
     stack-utils: ^2.0.3
   checksum: a224f9dbb53b5ad857918938f94c6e5d9c64ccdd42e0780b3b485d66bd93c82cff7dd91fbe274273efb69533d79808f9c98622b23d70ec027e8619a20e283773
-  languageName: node
-  linkType: hard
-
-"jest-message-util@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "jest-message-util@npm:29.7.0"
-  dependencies:
-    "@babel/code-frame": ^7.12.13
-    "@jest/types": ^29.6.3
-    "@types/stack-utils": ^2.0.0
-    chalk: ^4.0.0
-    graceful-fs: ^4.2.9
-    micromatch: ^4.0.4
-    pretty-format: ^29.7.0
-    slash: ^3.0.0
-    stack-utils: ^2.0.3
-  checksum: a9d025b1c6726a2ff17d54cc694de088b0489456c69106be6b615db7a51b7beb66788bea7a59991a019d924fbf20f67d085a445aedb9a4d6760363f4d7d09930
   languageName: node
   linkType: hard
 
@@ -7289,20 +6842,6 @@ __metadata:
     graceful-fs: ^4.2.9
     picomatch: ^2.2.3
   checksum: 14c2ee1c24c6efa2d7adfe81ece8b9bbda78fa871f40bed80db72726166e96f7fb22bf1d9fb1689fb433b9bcd748027eb1ee5f0851a12f1aa1c49ee0bd4d7508
-  languageName: node
-  linkType: hard
-
-"jest-util@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "jest-util@npm:29.7.0"
-  dependencies:
-    "@jest/types": ^29.6.3
-    "@types/node": "*"
-    chalk: ^4.0.0
-    ci-info: ^3.2.0
-    graceful-fs: ^4.2.9
-    picomatch: ^2.2.3
-  checksum: 042ab4980f4ccd4d50226e01e5c7376a8556b472442ca6091a8f102488c0f22e6e8b89ea874111d2328a2080083bf3225c86f3788c52af0bd0345a00eb57a3ca
   languageName: node
   linkType: hard
 
@@ -8543,7 +8082,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.30, nanoid@npm:^3.3.6":
+"nanoid@npm:^3.3.6":
   version: 3.3.16
   resolution: "nanoid@npm:3.3.16"
   bin:
@@ -8570,68 +8109,6 @@ __metadata:
   version: 1.3.1
   resolution: "newbase60@npm:1.3.1"
   checksum: 40483a596b93341f5302c1daf98b5bf9221be080bfc39476f35fc907badf967f683dfc4437dbfc93070531d259586888b1f49503577dec921954931c486cecfb
-  languageName: node
-  linkType: hard
-
-"next@npm:12.0.10":
-  version: 12.0.10
-  resolution: "next@npm:12.0.10"
-  dependencies:
-    "@next/env": 12.0.10
-    "@next/swc-android-arm64": 12.0.10
-    "@next/swc-darwin-arm64": 12.0.10
-    "@next/swc-darwin-x64": 12.0.10
-    "@next/swc-linux-arm-gnueabihf": 12.0.10
-    "@next/swc-linux-arm64-gnu": 12.0.10
-    "@next/swc-linux-arm64-musl": 12.0.10
-    "@next/swc-linux-x64-gnu": 12.0.10
-    "@next/swc-linux-x64-musl": 12.0.10
-    "@next/swc-win32-arm64-msvc": 12.0.10
-    "@next/swc-win32-ia32-msvc": 12.0.10
-    "@next/swc-win32-x64-msvc": 12.0.10
-    caniuse-lite: ^1.0.30001283
-    postcss: 8.4.5
-    styled-jsx: 5.0.0
-    use-subscription: 1.5.1
-  peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0
-    react: ^17.0.2 || ^18.0.0-0
-    react-dom: ^17.0.2 || ^18.0.0-0
-    sass: ^1.3.0
-  dependenciesMeta:
-    "@next/swc-android-arm64":
-      optional: true
-    "@next/swc-darwin-arm64":
-      optional: true
-    "@next/swc-darwin-x64":
-      optional: true
-    "@next/swc-linux-arm-gnueabihf":
-      optional: true
-    "@next/swc-linux-arm64-gnu":
-      optional: true
-    "@next/swc-linux-arm64-musl":
-      optional: true
-    "@next/swc-linux-x64-gnu":
-      optional: true
-    "@next/swc-linux-x64-musl":
-      optional: true
-    "@next/swc-win32-arm64-msvc":
-      optional: true
-    "@next/swc-win32-ia32-msvc":
-      optional: true
-    "@next/swc-win32-x64-msvc":
-      optional: true
-  peerDependenciesMeta:
-    fibers:
-      optional: true
-    node-sass:
-      optional: true
-    sass:
-      optional: true
-  bin:
-    next: dist/bin/next
-  checksum: e92ff09c1f831a5131c4ca6bd5b917bf2ed0ba6c176fe10109096bbd35b5a72e6d8015aa6dc95d635175b4f3d58b1130471c2797088292dec58b10eb38d66662
   languageName: node
   linkType: hard
 
@@ -9162,11 +8639,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "podlite-web@workspace:."
   dependencies:
-    "@podlite/editor-react": ^0.0.62
-    "@podlite/markdown": ^0.0.49
-    "@podlite/publisher": ^0.0.37
-    "@podlite/schema": ^0.0.56
-    "@podlite/to-jsx": ^0.0.60
+    "@podlite/editor-react": ^0.0.63
+    "@podlite/markdown": ^0.0.50
+    "@podlite/publisher": ^0.0.38
+    "@podlite/schema": ^0.0.57
+    "@podlite/to-jsx": ^0.0.61
     "@rollup/plugin-commonjs": ^26.0.1
     "@rollup/plugin-json": ^6.1.0
     "@rollup/plugin-node-resolve": ^15.2.3
@@ -9190,7 +8667,7 @@ __metadata:
     next: 14.2.35
     nodemon: ^2.0.16
     pagefind: ^1.1.1
-    podlite: ^0.0.69
+    podlite: ^0.0.70
     prettier: ^2.5.1
     react: 18.3.1
     react-dom: 18.3.1
@@ -9205,63 +8682,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"podlite@npm:0.0.67, podlite@npm:^0.0.67":
-  version: 0.0.67
-  resolution: "podlite@npm:0.0.67"
+"podlite@npm:0.0.70, podlite@npm:^0.0.70":
+  version: 0.0.70
+  resolution: "podlite@npm:0.0.70"
   dependencies:
-    "@podlite/diagram": ^0.0.58
-    "@podlite/formula": 0.0.36
-    "@podlite/image": ^0.0.53
-    "@podlite/markdown": 0.0.47
-    "@podlite/schema": ^0.0.54
-    "@podlite/toc": 0.0.47
+    "@podlite/diagram": ^0.0.61
+    "@podlite/formula": 0.0.39
+    "@podlite/image": ^0.0.56
+    "@podlite/markdown": 0.0.50
+    "@podlite/schema": ^0.0.57
+    "@podlite/toc": 0.0.50
     nanoid: 3.1.30
   peerDependencies:
     react: ^16.0.0 || ^17.0.0 || ^18
     react-dom: ^16.0.0 || ^17.0.0 || ^18
   bin:
     podlite: ./bin/podlite.js
-  checksum: 794590c86e6243af7f77b5d23c33c6039c6e072b99205e217b06915029bad6e93e698d8020a462904205afd0cfbfba987fc04d3ea9feb11343df525dab586770
-  languageName: node
-  linkType: hard
-
-"podlite@npm:0.0.68":
-  version: 0.0.68
-  resolution: "podlite@npm:0.0.68"
-  dependencies:
-    "@podlite/diagram": ^0.0.59
-    "@podlite/formula": 0.0.37
-    "@podlite/image": ^0.0.54
-    "@podlite/markdown": 0.0.48
-    "@podlite/schema": ^0.0.55
-    "@podlite/toc": 0.0.48
-    nanoid: 3.1.30
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  bin:
-    podlite: ./bin/podlite.js
-  checksum: d2859d010a32e205a18ebc72fd16f63f2f9c28a30960e56aa2e73d3170b1d2819f63fdfc06390dfefd84c0acc32b321cb8452d2522b52b11c9459eb52f206fc1
-  languageName: node
-  linkType: hard
-
-"podlite@npm:0.0.69, podlite@npm:^0.0.69":
-  version: 0.0.69
-  resolution: "podlite@npm:0.0.69"
-  dependencies:
-    "@podlite/diagram": ^0.0.60
-    "@podlite/formula": 0.0.38
-    "@podlite/image": ^0.0.55
-    "@podlite/markdown": 0.0.49
-    "@podlite/schema": ^0.0.56
-    "@podlite/toc": 0.0.49
-    nanoid: 3.1.30
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18
-    react-dom: ^16.0.0 || ^17.0.0 || ^18
-  bin:
-    podlite: ./bin/podlite.js
-  checksum: 495c9161fc0b1d2ec108561192513343342efbbe1ec3ebc8109610669f293a8d02b28800ee14f3e4f5a7fd29392e2443b7f4b9cae531c6001491936655afb880
+  checksum: ce95c4e71a0d1f9f9ec526ad884d67c6d114d8598c3dbf901b01efc92bb645570bb317696d998d7e62b27df70bf2989a3c2df728a18a814da21a75786ddd3d43
   languageName: node
   linkType: hard
 
@@ -9293,17 +8730,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:8.4.5":
-  version: 8.4.5
-  resolution: "postcss@npm:8.4.5"
-  dependencies:
-    nanoid: ^3.1.30
-    picocolors: ^1.0.0
-    source-map-js: ^1.0.1
-  checksum: b78abdd89c10f7b48f4bdcd376104a19d6e9c7495ab521729bdb3df315af6c211360e9f06887ad3bc0ab0f61a04b91d68ea11462997c79cced58b9ccd66fac07
-  languageName: node
-  linkType: hard
-
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -9327,15 +8753,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.3.3":
-  version: 3.9.6
-  resolution: "prettier@npm:3.9.6"
-  bin:
-    prettier: bin/prettier.cjs
-  checksum: 3fb6a3b6462b05afb825697a3fdcdd9bd1480c11d10d655b7ddbcaf2560beb695caffbe155b5020466005aa06bff74a61ba9c16e602bff849331b62f5db26cdf
-  languageName: node
-  linkType: hard
-
 "pretty-format@npm:^27.0.0, pretty-format@npm:^27.5.1":
   version: 27.5.1
   resolution: "pretty-format@npm:27.5.1"
@@ -9356,17 +8773,6 @@ __metadata:
     ansi-styles: ^5.0.0
     react-is: ^18.0.0
   checksum: c1018099f8f800693449df96c05c243d94e01f7429b6617e1064a1a69b4d715637fc3c579061fbc31548b87d92af74a7933c6eb3856da6f30b29c0ff67004ce0
-  languageName: node
-  linkType: hard
-
-"pretty-format@npm:^29.0.0, pretty-format@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "pretty-format@npm:29.7.0"
-  dependencies:
-    "@jest/schemas": ^29.6.3
-    ansi-styles: ^5.0.0
-    react-is: ^18.0.0
-  checksum: 032c1602383e71e9c0c02a01bbd25d6759d60e9c7cf21937dde8357aa753da348fcec5def5d1002c9678a8524d5fe099ad98861286550ef44de8808cc61e43b6
   languageName: node
   linkType: hard
 
@@ -9454,29 +8860,6 @@ __metadata:
   checksum: b676f8c040cdc5b12723ad2f91414d267605b26419d5c821ff03befa817ddd10e238d22b25d604920340fd73efd8ba795465a0377c4adf45a4a41e4234e42dc4
   languageName: node
   linkType: hard
-
-"raku-knowledge@workspace:pub":
-  version: 0.0.0-use.local
-  resolution: "raku-knowledge@workspace:pub"
-  dependencies:
-    "@pagefind/default-ui": ^1.1.1
-    "@podlite/markdown": ^0.0.47
-    "@podlite/publisher": ^0.0.35
-    "@podlite/to-jsx": ^0.0.59
-    "@types/jest": ^29.4.0
-    "@types/node": 16.11.13
-    "@types/react": 17.0.39
-    crc-32: ^1.2.2
-    jest: ^28.1.0
-    jest-serializer-html: ^7.1.0
-    next: 12.0.10
-    podlite: ^0.0.67
-    prettier: ^3.3.3
-    ts-jest: 28.0.3
-    ts-node: 10.5.0
-    typescript: 5.9.3
-  languageName: unknown
-  linkType: soft
 
 "rc@npm:^1.2.8":
   version: 1.2.8
@@ -10108,7 +9491,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
+"source-map-js@npm:^1.0.2":
   version: 1.2.1
   resolution: "source-map-js@npm:1.2.1"
   checksum: 4eb0cd997cdf228bc253bcaff9340afeb706176e64868ecd20efbe6efea931465f43955612346d6b7318789e5265bdc419bc7669c1cebe3db0eb255f57efa76b
@@ -10325,20 +9708,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"styled-jsx@npm:5.0.0":
-  version: 5.0.0
-  resolution: "styled-jsx@npm:5.0.0"
-  peerDependencies:
-    react: ">= 16.8.0 || 17.x.x || 18.x.x"
-  peerDependenciesMeta:
-    "@babel/core":
-      optional: true
-    babel-plugin-macros:
-      optional: true
-  checksum: 4958238ac8b8e90ac7d906aca3821e3ffb0c70c34c78b87d27f0f11c830c8237c8f4c0e7952dc51373d6fa097b16a023dcc7c9ededd402d8483b5ed2d8cefda9
-  languageName: node
-  linkType: hard
-
 "styled-jsx@npm:5.1.1":
   version: 5.1.1
   resolution: "styled-jsx@npm:5.1.1"
@@ -10531,7 +9900,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-jest@npm:28.0.3, ts-jest@npm:^28.0.3":
+"ts-jest@npm:^28.0.3":
   version: 28.0.3
   resolution: "ts-jest@npm:28.0.3"
   dependencies:
@@ -10579,7 +9948,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.5.0, ts-node@npm:^10.5.0":
+"ts-node@npm:^10.5.0":
   version: 10.5.0
   resolution: "ts-node@npm:10.5.0"
   dependencies:
@@ -10918,17 +10287,6 @@ __metadata:
   dependencies:
     prepend-http: ^2.0.0
   checksum: 1040e357750451173132228036aff1fd04abbd43eac1fb3e4fca7495a078bcb8d33cb765fe71ad7e473d9c94d98fd67adca63bd2716c815a2da066198dd37217
-  languageName: node
-  linkType: hard
-
-"use-subscription@npm:1.5.1":
-  version: 1.5.1
-  resolution: "use-subscription@npm:1.5.1"
-  dependencies:
-    object-assign: ^4.1.1
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0
-  checksum: 96e64977a573244fd11350a3141b2cf57fb72dd9dd902f387c8a0a565d0a948bc81588bd7378c6ef6defc0d1119f37f73aac4a7a287c8443abd444bd4e7bbea8
   languageName: node
   linkType: hard
 
