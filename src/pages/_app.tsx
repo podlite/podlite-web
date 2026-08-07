@@ -4,6 +4,7 @@ import '@podlite/editor-react/podlite-vars.css'
 import '../../built/styles.css'
 import * as img from '../../built/images'
 import { assetUrl } from '../image-src'
+import { pageDescription } from '../page-description'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { getSiteInfo } from '../utils'
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const title = `${item?.title || ''} ${siteTitle}`
   const [image] = getFromTree(item?.node, { type: 'image' }) as Array<Image>
   const metaImage = image?.src || null
-  const description = getTextContentFromNode(item?.description || []) || title
+  const description = getTextContentFromNode(item?.description || []) || pageDescription(item?.node, title)
   const resultUrl = item?.publishUrl || url || ''
   const router = useRouter()
   const pageview = url => {

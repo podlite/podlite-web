@@ -1,4 +1,5 @@
 import { ProcessWithTemplate } from '@Components/service'
+import { pageDescription } from '../page-description'
 import { publishRecord } from '@podlite/publisher'
 import { getTextContentFromNode, PodNode } from '@podlite/schema'
 import Head from 'next/head'
@@ -17,7 +18,7 @@ const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
     <div>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={item.description ? getTextContentFromNode(item.description) : title} />
+        <meta name="description" content={item.description ? getTextContentFromNode(item.description) : pageDescription(item.node, title)} />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
       <main id="body">{ProcessWithTemplate(item, footer)}</main>

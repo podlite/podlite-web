@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item describe a page by its first sentence when it has no description of its own, instead of repeating the title
+
 =item create the output directories before publishing, so a published image can build an external site
 
 =head1 0.10.4

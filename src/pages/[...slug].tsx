@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { contentData } from 'src/serverside'
 import { IndexProps } from '.'
 import { getSiteInfo } from '../utils'
+import { pageDescription } from '../page-description'
 
 export default function AnyPage(params) {
   const { siteTitle, favicon, footer, item, template } = params
@@ -24,7 +25,7 @@ export default function AnyPage(params) {
           content={
             item.description
               ? getTextContentFromNode(item.description)
-              : siteTitle + ' ' + (item as publishRecord).title
+              : pageDescription(item.node, siteTitle + ' ' + (item as publishRecord).title)
           }
         />
         <link rel="shortcut icon" href={`/${favicon}`} />
