@@ -130,7 +130,7 @@ const makeConfigMainPlugin = () => {
   }
 
   const configStateVersionPlugin: PluginConfig = {
-    plugin: stateVersionPlugin(version),
+    plugin: stateVersionPlugin(version, indexFilePath || `${files}/${INDEX_PATH}`),
     includePatterns: '.*',
   }
 
