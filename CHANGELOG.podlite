@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.5
+
 =item bump the C<@podlite> toolchain to the v0.0.78 release — a heading anchor is shaped by the output rules, a link inside the document finds its heading, and a table row splits on two spaces
 
 =item describe a page by its first sentence when it has no description of its own, instead of repeating the title
