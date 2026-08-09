@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.6
+
 =item bump the C<@podlite> toolchain to the v0.0.80 release — a heading in a markdown file now reads with the same weight and colour as one in a podlite file, a markup code may be delimited by a run of angles, and a document holding the space-preserving code exports instead of stopping
 
 =item pass the index file to the state-version plugin, so styles, favicon and images count towards the published state version and a change in them is noticed
