@@ -2,6 +2,9 @@
 
 =head1 Upcoming
 
+=item read one page record at a time instead of the whole list: the site build stopped at a corpus of 648 MB, where turning the list into a single string went past what the engine allows
+=item drop two unused declarations in the page builder that filtered the whole list on every page and threw the result away
+
 =head1 0.10.6
 
 =item bump the C<@podlite> toolchain to the v0.0.80 release — a heading in a markdown file now reads with the same weight and colour as one in a podlite file, a markup code may be delimited by a run of angles, and a document holding the space-preserving code exports instead of stopping

@@ -3,7 +3,7 @@ import { pageDescription } from '../page-description'
 import { publishRecord } from '@podlite/publisher'
 import { getTextContentFromNode, PodNode } from '@podlite/schema'
 import Head from 'next/head'
-import { contentData } from 'src/serverside'
+import { contentData, getPage, readRecord } from 'src/serverside'
 import { generateRedirects } from 'src/utils/redirects'
 import { DataFeedContent } from '../../bin/makeDataSource'
 import { getPostComponent, getSiteInfo } from '../utils'
@@ -42,13 +42,14 @@ export async function getStaticProps(): Promise<{ props: IndexProps }> {
   generateSitemap()
   generateRedirects()
   const { title, node, footer, favicon, templateFile }: IndexProps = getSiteInfo()
-  const item: any = contentData().find(({ publishUrl }) => publishUrl === '/')
+  const item: any = getPage('/')
   let template: publishRecord | null = null
 
   const template_file = item.template_file || templateFile || 'defaultTemplate/defaultSiteTemplate.podlite'
   if (template_file) {
     //@ts-ignore
-    template = contentData().find(({ file }) => file.endsWith(template_file)) || null
+    const templateRecord = contentData().find(({ file }) => file.endsWith(template_file))
+    template = templateRecord ? readRecord(templateRecord) : null
 
     if (!template) {
       console.error(`Template not found. Processed file: ${item.file} Template file:${template_file}`)

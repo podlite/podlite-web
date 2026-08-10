@@ -3,7 +3,7 @@ import { PUBLIC_PATH } from '../constants'
 import { getSiteInfo } from '../utils'
 import * as fs from 'fs'
 import { convertPodNodeToHtml as convertPodNodeToHtml } from '../utils'
-import { getAllPages } from 'src/serverside'
+import { getAllPages, getPage } from 'src/serverside'
 
 export function getRssForData(data: DataFeedContent) {
   const conf = data.siteInfo
@@ -38,6 +38,7 @@ export function writeRss() {
   const pages = getAllPages()
     .filter(i => i.publishUrl)
     .filter(a => a.pubdate)
+    .map(page => getPage(page.publishUrl) || page)
     .filter(page => page.description)
     .sort((a, b) => {
       //@ts-ignore

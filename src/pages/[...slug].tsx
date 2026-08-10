@@ -2,7 +2,7 @@ import { ProcessWithTemplate } from '@Components/service'
 import { publishRecord } from '@podlite/publisher'
 import { getTextContentFromNode } from '@podlite/schema'
 import Head from 'next/head'
-import { contentData } from 'src/serverside'
+import { contentData, getPage, readRecord } from 'src/serverside'
 import { IndexProps } from '.'
 import { getSiteInfo } from '../utils'
 import { pageDescription } from '../page-description'
@@ -56,11 +56,12 @@ export async function getStaticProps({ params }) {
 
   const checkSlug =
     slug =>
-    ({ publishUrl }) => {
+    ({ publishUrl }: { publishUrl?: string | null }) => {
       const url = '/' + slug.join('/')
       return publishUrl === url
     }
-  const item: any = contentData().find(checkSlug(slug))
+  const found: any = contentData().find(checkSlug(slug))
+  const item: any = found ? getPage(found.publishUrl) : null
 
   if (!item) {
     const url = '/' + slug.join('/')
@@ -74,14 +75,13 @@ export async function getStaticProps({ params }) {
     process.exit(1)
   }
 
-  const allData = item.type !== 'page' ? contentData().filter(({ type = '' }: any) => type !== 'page') : contentData()
-  const articleIndex = allData.findIndex(checkSlug(slug))
   const { title: siteTitle, favicon, templateFile }: IndexProps = getSiteInfo()
-  let template = null
+  let template: publishRecord | null = null
   const template_file = item.template_file || templateFile || 'defaultTemplate/defaultSiteTemplate.podlite'
   if (template_file) {
     //@ts-ignore
-    template = contentData().find(({ file }) => file.endsWith(template_file)) || null
+    const templateRecord = contentData().find(({ file }) => file.endsWith(template_file))
+    template = templateRecord ? readRecord(templateRecord) : null
 
     if (!template) {
       console.error(`Template not found. Processed file: ${item.file} Template file:${template_file}`)
