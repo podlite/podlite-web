@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.7
+
 =item bump the C<@podlite> toolchain to the v0.0.81 release, where page records are written one per line with an index of their places
 
 =item read one page record at a time instead of the whole list: the site build stopped at a corpus of 648 MB, where turning the list into a single string went past what the engine allows
