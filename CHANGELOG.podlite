@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the feed states the language the site declares in C<:language>, falling back to english
+
 =head1 0.10.7
 
 =item bump the C<@podlite> toolchain to the v0.0.81 release, where page records are written one per line with an index of their places

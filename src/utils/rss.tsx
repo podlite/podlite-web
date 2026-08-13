@@ -15,7 +15,7 @@ export function getRssForData(data: DataFeedContent) {
       <atom:link href="${conf.url}/rss.xml" rel="self" type="application/rss+xml"/>
       <link>${conf.url}</link>
       <description>${conf.title}</description>
-      <language>ru</language>
+      <language>${conf.language ?? 'en'}</language>
 ${pages
   .map(
     post => `      <item>
