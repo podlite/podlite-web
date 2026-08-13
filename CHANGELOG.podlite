@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item move to the v0.0.83 toolchain, where an image with an unreadable orientation no longer stops the build
+
 =head1 0.10.8
 
 =item the feed states the language the site declares in C<:language>, falling back to english
