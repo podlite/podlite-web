@@ -268,7 +268,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
               </div>
             )
           } else {
-            return <img className="shadow_DISABLED" src={assetUrl(img[imageName])} />
+            return <img className="shadow_DISABLED" src={assetUrl(img[imageName])} alt={'alt' in node ? node.alt : ''} />
           }
         }
         return linkTo ? (
