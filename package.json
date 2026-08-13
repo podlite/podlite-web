@@ -74,5 +74,9 @@
     "ts-node": "^10.5.0",
     "typescript": "5.9.3"
   },
+  "resolutions": {
+    "@codemirror/state": "6.7.1",
+    "@codemirror/view": "6.43.8"
+  },
   "packageManager": "yarn@3.1.1"
 }

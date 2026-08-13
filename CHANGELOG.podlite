@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the embedded editor renders again: the bundle carries one copy of the CodeMirror state and view packages instead of three
+
 =head1 0.10.9
 
 =item move to the v0.0.83 toolchain, where an image with an unreadable orientation no longer stops the build
