@@ -209,6 +209,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
                 isFullscreen={false}
                 enableAutocompletion={enableAutocompletion}
                 enableFolding={enableFolding}
+                autoFocus={false}
                 {...props}
               />
             </WindowWrapper>

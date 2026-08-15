@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item keep the focus where it was when a page carries an embedded editor: the editor no longer takes it on mount, so the page stops jumping to it
+
 =item find the page template even when the pubdate preset is on: a template carries no publication date and used to be dropped before the lookup
 
 =item let a site template draw the page body: the component that renders a page is exported from the shared components, and the default template reaches it by the same path
