@@ -1,10 +1,10 @@
 /**
  * 
  * 
- * ts-node -P tsconfig-node.json bin/publisher.ts  -b ./built -p ./public -i examples/03-blog/index.pod6 'examples/03-blog/' 
+ * ts-node -P tsconfig-node.json bin/publisher.ts  -b ./built -p ./public 'examples/03-blog/' 
  * 
- * ts-node -P tsconfig-node.json bin/publisher.ts  -b ./built -p ./public -i site2/03-zag.ru-site/index.pod6 'site2/*.{pod6,podlite}'
- * ts-node -P tsconfig-node.json bin/publisher.ts  -s 'https://zag.im' -b ./built -p ./public -i site2/03-zag.ru-site/index.pod6 'site2/*.{pod6,podlite}'
+ * ts-node -P tsconfig-node.json bin/publisher.ts  -b ./built -p ./public 'site2/*.{podlite,pod6}'
+ * ts-node -P tsconfig-node.json bin/publisher.ts  -s 'https://zag.im' -b ./built -p ./public 'site2/*.{podlite,pod6}'
 
  */
 
@@ -19,7 +19,7 @@ import {
 } from '@podlite/publisher'
 import * as fs from 'fs'
 import path from 'path'
-import { BUILT_PATH, INDEX_PATH, PAGES_FILE_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
+import { BUILT_PATH, INDEX_NAMES, PAGES_FILE_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
 import imagesPlugin from '@podlite/publisher/lib/images-plugin'
 import linksPlugin from '@podlite/publisher/lib/links-plugin'
 import pubdatePlugin from '@podlite/publisher/lib/pubdate-plugin'
@@ -42,7 +42,7 @@ const program = new Command()
 program.name('publisher').description('CLI for podlite publishing suite').version(version)
 
 program
-  .option('-i, --index [path]', 'path to index file', 'index.podlite')
+  .option('-i, --index [path]', 'path to index file')
   .option('-b, --built_path [built_path]', 'path to built', './built')
   .option('-s, --site_url [site_url]', 'site url', 'http://example.com')
   .option('-p, --public_path [public_path]', 'public path', './public')
@@ -66,7 +66,20 @@ const preset = options.preset
 if (!['pubdate', 'everything'].includes(preset)) {
   program.error(`--preset ${preset} not valide`, { exitCode: 2, code: '--preset' })
 }
-const indexFilePath = options.index
+// Sites written before the .podlite extension still name their index index.pod6.
+// The path is matched against the parsed records as a string, so the directory
+// has to keep the shape it was given, which path.join would normalise away.
+const resolveIndex = (): string => {
+  if (options.index) return options.index
+  const dir = options.directory || files
+  const found = INDEX_NAMES.map(name => `${dir}/${name}`).find(p => fs.existsSync(p))
+  if (found) return found
+  program.error(`index file not found in ${dir}, looked for ${INDEX_NAMES.join(' and ')}`, {
+    exitCode: 2,
+    code: '--index',
+  })
+}
+const indexFilePath = resolveIndex()
 const built_path = options.built_path || BUILT_PATH
 const public_path = options.public_path || PUBLIC_PATH
 
@@ -93,7 +106,7 @@ const makeConfigMainPlugin = () => {
   const configSiteDataPlugin: PluginConfig = {
     plugin: siteDataPlugin({
       public_path,
-      indexFilePath: indexFilePath || `${files}/${INDEX_PATH}`,
+      indexFilePath,
       built_path: built_path || BUILT_PATH,
       site_url: site_url || process.env.SITE_URL,
     }),
@@ -145,7 +158,7 @@ const makeConfigMainPlugin = () => {
   }
 
   const configStateVersionPlugin: PluginConfig = {
-    plugin: stateVersionPlugin(version, indexFilePath || `${files}/${INDEX_PATH}`),
+    plugin: stateVersionPlugin(version, indexFilePath),
     includePatterns: '.*',
   }
 

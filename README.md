@@ -10,27 +10,40 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
 </p>
 
+Built with it: [podlite.org](https://podlite.org), which is this project's own site, [axona.app](https://axona.app), and the [Raku knowledge base](https://raku-knowledge-base.podlite.org), which publishes 2274 documents.
+
 ## Quick Start
 
-```sh
-yarn && yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) — demo site from `pub` directory.
-
-### Using Docker
+Run it from the directory holding your `index.podlite`:
 
 ```sh
-docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 podlite/podlite-web dev
+docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 \
+  podlite/podlite-web dev ./pub --preset everything
 ```
 
-Edit `index.pod6` and the page reloads automatically.
+Open [http://localhost:3000](http://localhost:3000). Edit `index.podlite` and the page reloads automatically.
+
+Both the content path and `--preset` are required. See [Presets](#presets).
+
+The index is looked up as `index.podlite`, then `index.pod6`. Documents may carry either extension.
 
 ### Export to static site
 
 ```sh
-docker run --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > site.zip
+docker run --rm -v ${PWD}:/app/pub podlite/podlite-web \
+  export-zip ./pub -s 'https://example.com' --preset everything > site.zip
 ```
+
+`export-tgz` writes a gzipped tarball instead; `export` leaves the site in `/app/out`.
+
+## Presets
+
+A preset decides which documents become pages.
+
+- **`everything`** — every document is published. Use it while writing, and for sites that are not a blog.
+- **`pubdate`** — only documents carrying a publication date, and only once that date has passed. This is what a blog wants.
+
+There is no default: a run without `--preset` stops with `--preset undefined not valide`.
 
 ## Screenshots
 
@@ -44,6 +57,7 @@ docker run --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > site.zip
 - embedded Podlite editor with live preview
 - `=Mermaid` diagrams, `=picture` images/video, `=toc` table of contents
 - `=markdown` blocks for familiar Markdown syntax
+- a page template and React components of your own, kept next to the content
 - Docker support for zero-config setup
 - export to zipped static site
 
@@ -51,28 +65,54 @@ docker run --rm -v ${PWD}:/app/pub podlite/podlite-web export-zip > site.zip
 
 ```sh
 # minimal site
-POSTS_PATH='examples/01-minimal' yarn dev
+yarn dev examples/01-minimal --preset everything
 
 # multi-page with links
-POSTS_PATH='examples/02-pages' yarn dev
+yarn dev examples/02-pages --preset everything
 
 # blog with notes and React components
-POSTS_PATH='examples/03-blog' yarn dev
+yarn dev examples/03-blog --preset pubdate
 ```
 
 ## Advanced Configuration
 
-- custom domain: `SITE_URL=https://example.com`
+- custom domain: `-s https://example.com`, or `SITE_URL` in the environment
 - timezone: `TZ=Europe/London`
-- custom content path: `POSTS_PATH='path/to/content'`
+- index file other than the one found by default: `-i path/to/index.podlite`
+- file mask: `-g '**/*.{podlite,pod6}'`
 
 ```sh
 cd examples/01-minimal
-docker run --rm -v ${PWD}:/app/pub -p 3000:3000 \
-  -e 'SITE_URL=https://example.com' \
+docker run --rm -v ${PWD}:/app/pub \
   -e 'TZ=Europe/London' \
-  podlite/podlite-web export-zip > site.zip
+  podlite/podlite-web export-zip ./pub -s 'https://example.com' --preset everything > site.zip
 ```
+
+## Site template and components
+
+A site can draw its own page, and keep its React components next to the content without a package of its own.
+
+Declare the template on the root block of `index.podlite`:
+
+```podlite
+=begin pod
+= :templateFile<src/template.podlite>
+=end pod
+```
+
+The template renders the whole page, so anything it declares sits above the title. It reaches the page body through the shared component:
+
+```podlite
+=useReact {DefaultTemplateComponent} from '@Components/service'
+```
+
+Components of your own live beside the content and are imported by path:
+
+```podlite
+=useReact SiteNav from './components/sitenav'
+```
+
+The import map is keyed by path, so declare each component once: the same name reached through two paths collides. A path is resolved when it starts with `./` or `/`.
 
 ## Themes
 
@@ -104,11 +144,17 @@ Theme styles load first, then `:globalStyles<>` (if set) overrides them.
 # install dependencies
 yarn
 
-# run dev server
-yarn dev
+# run dev server against a content directory
+yarn dev examples/01-minimal --preset everything
 
 # export to zip
-yarn export-zip > file.zip
+yarn export-zip examples/01-minimal -s 'https://example.com' --preset everything > file.zip
+```
+
+A local run attaches the content directory: it adds the directory to `workspaces` in `package.json` and writes an alias into `next.config.js`. Restore both when you are done:
+
+```sh
+yarn detach_path
 ```
 
 ## Links

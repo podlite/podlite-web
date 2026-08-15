@@ -4,7 +4,7 @@
 =head2 Make static pages
 
 Each satic page have contantly defined url. It posible by using C<:puburl> attribute for C<=pod> block.
-For example, lets check for example C<about.pod6>:
+For example, lets check for example C<about.podlite>:
 
 =begin code :allow<Z B I>
 Z<>=begin pod :pubdate('2012-08-08 23:00:00') B<:puburl>Z<></about>
@@ -30,18 +30,18 @@ will be avalable at url C</2022/8/6/1/blog-post>.
 For now, let's make a link to the About page.
 This is done by using C<L<>> fromatting code: 
 =begin code
-Please check L<About page|file:./about.pod6>
+Please check L<About page|file:./about.podlite>
 =end code
 
 This link between files process to web link on site. 
 Links to files are converted into links between web pages  during publication.
 It be rendered as:
 
-Please check L<About page|file:./about.pod6>
+Please check L<About page|file:./about.podlite>
 
 Here is a few examples:
 
-Please check L<Now page|file:./now.pod6>
+Please check L<Now page|file:./now.podlite>
 
-This is a link to L<blog-post.pod6| file:./blog-post.pod6>
+This is a link to L<blog-post.podlite| file:./blog-post.podlite>
 =end pod

@@ -3,7 +3,8 @@ import path from 'path'
 
 // export const POSTS_PATH = path.join(process.cwd(), "/data")
 export const POSTS_PATH = process.env.POSTS_PATH || path.join(process.cwd(), '/pub')
-export const INDEX_PATH = process.env.INDEX_PATH || 'index.pod6'
+export const INDEX_NAMES = ['index.podlite', 'index.pod6']
+export const INDEX_PATH = process.env.INDEX_PATH || INDEX_NAMES[0]
 
 export const BUILT_PATH = path.join(process.cwd(), '/built')
 export const DATA_PATH = path.join(process.cwd(), '/built/data.json')

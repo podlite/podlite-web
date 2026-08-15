@@ -6,6 +6,6 @@
 So a website with a link that says “B<now>” goes to a page that tells you B<what this person is focused on at this point in their life>. For short, we call it a “now page”.
 
 
-Please check L<About page|file:./about.pod6>
+Please check L<About page|file:./about.podlite>
 
 =end pod

@@ -9,9 +9,9 @@
 
 =useReact {HeaderCol,LastArticles,CookieConsent} from '@Components/service'
 =begin React :component<HeaderCol> :id<menu> 
-=para L<About|file:./about.pod6>
-=para L<Now|file:./now.pod6>
-=para L<Table of contents|file:./content.pod6>
+=para L<About|file:./about.podlite>
+=para L<Now|file:./now.podlite>
+=para L<Table of contents|file:./content.podlite>
 =para L<github | https://github.com/podlite>
 =para L<twitter | https://twitter.com>
 =end React
@@ -46,7 +46,7 @@ Latest blog posts:
 =begin React :component<LastArticles> :count(2)
 =end React
 
-=para All my writings: L<Table of contents|file:./content.pod6>
+=para All my writings: L<Table of contents|file:./content.podlite>
 
 =begin FOOTER
 =begin para :id<copyright> 

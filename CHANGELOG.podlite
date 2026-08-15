@@ -2,6 +2,12 @@
 
 =head1 Upcoming
 
+=item find the index as C<index.podlite>, falling back to C<index.pod6>: a site no longer has to name it with the older extension, and one written with it keeps building unchanged
+
+=item report the names that were looked for when neither index is present
+
+=item the bundled examples are written with the C<.podlite> extension
+
 =item the list of records draws one link per entry: a link held another link, which the browser cannot parse, so react rebuilt the whole page and the layout changed after loading
 
 =item the cookie notice decides whether to appear after it is mounted, so the served page and the first render agree
