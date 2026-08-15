@@ -6,6 +6,8 @@
 
 =item images carry the alt text declared in the document, and an empty alt when none is declared
 
+=item move to the v0.0.84 toolchain, which reports a table whose rows disagree on the number of cells
+
 =head1 0.10.9
 
 =item move to the v0.0.83 toolchain, where an image with an unreadable orientation no longer stops the build
