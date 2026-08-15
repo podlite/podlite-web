@@ -1,6 +1,6 @@
 =begin pod
 
-=useReact {DefaultTemplateComponent} from './components'
+=useReact {DefaultTemplateComponent} from '@Components/service'
 =begin React :component<DefaultTemplateComponent> :id<menu>
 =end React
 

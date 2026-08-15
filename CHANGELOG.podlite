@@ -4,6 +4,8 @@
 
 =item find the page template even when the pubdate preset is on: a template carries no publication date and used to be dropped before the lookup
 
+=item let a site template draw the page body: the component that renders a page is exported from the shared components, and the default template reaches it by the same path
+
 =head1 0.10.10
 
 =item the embedded editor renders again: the bundle carries one copy of the CodeMirror state and view packages instead of three

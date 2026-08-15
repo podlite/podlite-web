@@ -190,4 +190,9 @@ export const CookieConsent = ({ id, children, buttonCaption }) => {
     )
   )
 }
+// A site template has to draw the page body, and this is the only component
+// that does it. Component imports are keyed by path, so a second path to the
+// same name collides — every template reaches it through here.
+export { DefaultTemplateComponent } from '../defaultTemplate/components'
+
 export default TestComponent
