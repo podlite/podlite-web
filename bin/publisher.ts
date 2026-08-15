@@ -32,6 +32,7 @@ import includeResolvePlugin from '@podlite/publisher/lib/include-resolve-plugin'
 import dumpPagesPlugin from '@podlite/publisher/lib/dump-pages-plugin'
 import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
+import { getFromTree, makeAttrs } from '@podlite/schema'
 
 
 const glob = require('glob')
@@ -74,6 +75,19 @@ for (const dir of [built_path, public_path, `${public_path}/assets`]) {
   fs.mkdirSync(dir, { recursive: true })
 }
 
+// A template is not a page: it carries no publish date, so the pubdate preset
+// would drop it before anything can look it up.
+const declaredTemplateFile = (): string | undefined => {
+  if (!indexFilePath || !fs.existsSync(indexFilePath)) return undefined
+  try {
+    const record = processFile(indexFilePath, fs.readFileSync(indexFilePath).toString())
+    const [pod] = getFromTree(record.node, 'pod')
+    return pod ? makeAttrs(pod, {}).getFirstValue('templateFile') : undefined
+  } catch {
+    return undefined
+  }
+}
+
 const tctx = { testing: false }
 const makeConfigMainPlugin = () => {
   const configSiteDataPlugin: PluginConfig = {
@@ -93,10 +107,11 @@ const makeConfigMainPlugin = () => {
     includePatterns: '.*',
   }
 
+  const templateFile = declaredTemplateFile()
   const configPubdatePlugin: PluginConfig = {
     plugin: pubdatePlugin(),
     includePatterns: '.*',
-    excludePatterns: indexFilePath,
+    excludePatterns: templateFile ? [indexFilePath, templateFile] : indexFilePath,
   }
   const configImagesPlugin: PluginConfig = {
     plugin: imagesPlugin(),
