@@ -1,7 +1,8 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
 import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
-import { Editor2 as Editor, HighlightedCode, WindowWrapper } from '@podlite/editor-react'
+import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
+import dynamic from 'next/dynamic'
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
 import * as img from '../built/images'
@@ -11,6 +12,10 @@ import * as components from '../built/components'
 import Link from 'next/link'
 import { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
 import { pubRecord } from '@podlite/publisher'
+
+// The editor draws nothing without a window, so a server-rendered page and the
+// first client render disagree, and react rebuilds the whole page to recover.
+const Editor = dynamic(() => import('@podlite/editor-react').then(m => m.Editor2), { ssr: false })
 
 // POSTS_PATH is useful when you want to get the path to a specific file
 // type pubRecord = {

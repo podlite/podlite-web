@@ -7,7 +7,7 @@ import cookieConsentStyles from './cookieConsentStyles.module.css'
 import Link from 'next/link'
 import { DataFeedContent } from 'bin/makeDataSource'
 import { getFromTree, getTextContentFromNode } from '@podlite/schema'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { publishRecord } from '@podlite/publisher'
 export const TestComponent = ({ id, children }) => {
   var style = { '--count-columns ': children.length } as React.CSSProperties
@@ -54,11 +54,9 @@ export const Contents = ({ locale = 'en', getThisNode }) => {
           </h3>
           {months[month].map(({ publishUrl, title, pubdate, node }) => (
             <Link href={publishUrl} key={publishUrl}>
-              <a href={publishUrl}>
-                <p>{title || getTextContentFromNode(node)}</p>
-                <hr />
-                <time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time>
-              </a>
+              <p>{title || getTextContentFromNode(node)}</p>
+              <hr />
+              <time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time>
             </Link>
           ))}
         </>
@@ -170,10 +168,13 @@ export const CookieConsent = ({ id, children, buttonCaption }) => {
     if (document) document.cookie = cookie.join(';')
   }
   const isCookieConsentDismissed = () =>
-    !process.browser
-      ? 1
-      : (document && document.cookie.indexOf(DISMISSED_COOKIE) > -1) || (window as any)?.navigator?.CookiesOK
-  const [showConsent, setShowConsent] = useState(!isCookieConsentDismissed())
+    document.cookie.indexOf(DISMISSED_COOKIE) > -1 || (window as any)?.navigator?.CookiesOK
+  // The cookie is only readable in the browser, so the first render has to match
+  // the server's and decide afterwards.
+  const [showConsent, setShowConsent] = useState(false)
+  useEffect(() => {
+    if (!isCookieConsentDismissed()) setShowConsent(true)
+  }, [])
   const onOkClick = () => {
     setCookie(DISMISSED_COOKIE, 'yes', 365, window.location.hostname, '/'), setShowConsent(false)
   }
