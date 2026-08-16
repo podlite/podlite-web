@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item read the site address from C<SITE_URL> when no C<-s> is given: the flag carried a default that shadowed the variable, so setting it had no effect
+
 =item find the index as C<index.podlite>, falling back to C<index.pod6>: a site no longer has to name it with the older extension, and one written with it keeps building unchanged
 
 =item report the names that were looked for when neither index is present

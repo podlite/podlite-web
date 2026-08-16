@@ -44,7 +44,7 @@ program.name('publisher').description('CLI for podlite publishing suite').versio
 program
   .option('-i, --index [path]', 'path to index file')
   .option('-b, --built_path [built_path]', 'path to built', './built')
-  .option('-s, --site_url [site_url]', 'site url', 'http://example.com')
+  .option('-s, --site_url [site_url]', 'site url')
   .option('-p, --public_path [public_path]', 'public path', './public')
   .option('-v, --verbose', 'verbose output')
   .option('-d, --directory [path to project directory]', 'path to sources to build from')
@@ -57,7 +57,7 @@ program.parse()
 
 program.parse(process.argv)
 const options = program.opts()
-const site_url = options.site_url || process.env.SITE_URL
+const site_url = options.site_url || process.env.SITE_URL || 'http://example.com'
 // reverse args to able to override default values publisher command from  package.json
 const [files] = options.glob ? [(options.directory || POSTS_PATH ) + "/" + options.glob] : (program.args || [POSTS_PATH]).reverse()
 console.log(JSON.stringify({...options,files}, null, 2))
@@ -108,7 +108,7 @@ const makeConfigMainPlugin = () => {
       public_path,
       indexFilePath,
       built_path: built_path || BUILT_PATH,
-      site_url: site_url || process.env.SITE_URL,
+      site_url,
     }),
     includePatterns: '.*',
   }

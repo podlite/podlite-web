@@ -25,7 +25,7 @@
     "process__": "yarn clean && mkdir -p built && ts-node -P tsconfig-node.json bin/makeDataSource.ts",
     "process": "yarn ci && yarn clean && yarn && yarn publisher_path  \"$@\" ",
     "format": "npx prettier --write '**/*.{js,jsx,ts,tsx,json,md,mjs}'",
-    "publisher": "npx tsx bin/publisher.ts -s 'https://example.org' -b ./built -p ./public './pub/**/*.{pod6,podlite}'",
+    "publisher": "npx tsx bin/publisher.ts -b ./built -p ./public './pub/**/*.{podlite,pod6}'",
     "publisher_path": "yarn  attach_path ${0:-pub}; yarn install; yarn publisher  -d ${0}  \"$@\" ${0}'/**/*.{pod6,podlite}' && ( ( [ -e ${0}/package.json ] && cd ${0} && yarn post_plugin ) ; true ) &&  yarn ci",
     "attach_path": "node ./bin/attachExternal.mjs ${0} && (cd ${0} && yarn && ( yarn build_plugin ; true ) )",
     "detach_path": "node ./bin/attachExternal.mjs --detach"

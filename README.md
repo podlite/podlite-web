@@ -21,11 +21,26 @@ docker run -it --rm -v ${PWD}:/app/pub -p 3000:3000 \
   podlite/podlite-web dev ./pub --preset everything
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Edit `index.podlite` and the page reloads automatically.
+Open [http://localhost:3000](http://localhost:3000).
 
-Both the content path and `--preset` are required. See [Presets](#presets).
+Both the content path and `--preset` are required. See [Presets](#presets). The index is looked up as `index.podlite`, then `index.pod6`; documents may carry either extension.
 
-The index is looked up as `index.podlite`, then `index.pod6`. Documents may carry either extension.
+Content is processed once, when the server starts. Editing a document means restarting the container; the dev server watches the code, not the content.
+
+A site can be one file:
+
+```podlite
+=begin pod
+= :puburl<https://example.com>
+
+=TITLE My site
+
+=head1 Hello
+
+Written in Podlite, published as HTML.
+=end pod
+```
+
 
 ### Export to static site
 
@@ -45,22 +60,6 @@ A preset decides which documents become pages.
 
 There is no default: a run without `--preset` stops with `--preset undefined not valide`.
 
-## Screenshots
-
-![Podlite-Web demo page](./assets/demopage1.png)
-![Podlite-Web demo page](./assets/demopage2.png)
-
-## Features
-
-- static website generation with Next.js and Podlite markup
-- live reload on file save
-- embedded Podlite editor with live preview
-- `=Mermaid` diagrams, `=picture` images/video, `=toc` table of contents
-- `=markdown` blocks for familiar Markdown syntax
-- a page template and React components of your own, kept next to the content
-- Docker support for zero-config setup
-- export to zipped static site
-
 ## Examples
 
 ```sh
@@ -76,7 +75,7 @@ yarn dev examples/03-blog --preset pubdate
 
 ## Advanced Configuration
 
-- custom domain: `-s https://example.com`, or `SITE_URL` in the environment
+- custom domain: `-s https://example.com`, or `SITE_URL` in the environment; the flag wins
 - timezone: `TZ=Europe/London`
 - index file other than the one found by default: `-i path/to/index.podlite`
 - file mask: `-g '**/*.{podlite,pod6}'`
@@ -85,7 +84,8 @@ yarn dev examples/03-blog --preset pubdate
 cd examples/01-minimal
 docker run --rm -v ${PWD}:/app/pub \
   -e 'TZ=Europe/London' \
-  podlite/podlite-web export-zip ./pub -s 'https://example.com' --preset everything > site.zip
+  -e 'SITE_URL=https://example.com' \
+  podlite/podlite-web export-zip ./pub --preset everything > site.zip
 ```
 
 ## Site template and components
@@ -157,6 +157,23 @@ A local run attaches the content directory: it adds the directory to `workspaces
 yarn detach_path
 ```
 
+## What it does
+
+- turns a folder of Podlite and Markdown documents into a static site
+- gives each page a fixed address from `:puburl`, or one built from its publication date
+- holds a post back until its publication date has passed, under the `pubdate` preset
+- writes `sitemap.xml`, `rss.xml` and `robots.txt`, and builds a search index
+- embeds the Podlite editor in a page, with the preview beside it
+- renders `=Mermaid` diagrams, `=picture` images and video, `=toc` contents, `=markdown` blocks
+- takes a page template and React components kept next to the content, with no package of their own
+
+## What it looks like
+
+The demo site: a post with its table of contents, and the editor embedded in a page.
+
+![A published post with a table of contents](./assets/demopage1.png)
+![The Podlite editor embedded in a page, preview on the right](./assets/demopage2.png)
+
 ## Links
 
 <div align="center">
@@ -187,7 +204,6 @@ yarn detach_path
 </div>
 
 - [Podlite-web](https://github.com/podlite/podlite-web)
-- [How-to article](https://zahatski.com/2022/8/23/1/start-you-own-blog-site-with-podlite-for-web)
 - [Changelog](https://github.com/podlite/podlite-web/releases)
 
 </td><td valign=top><div align="center">
