@@ -2,8 +2,12 @@ import { Head, Html, Main, NextScript } from 'next/document'
 import { getSiteInfo } from 'src/utils'
 
 export default function Document() {
+  // A site declares its language with :language on the root block. English is
+  // the fallback: a reading program needs some language to choose a voice, and
+  // no attribute at all leaves it guessing.
+  const { language } = getSiteInfo()
   return (
-    <Html className="bg-default">
+    <Html lang={language || 'en'} className="bg-default">
       <Head>
         <LoadGoogleTagManager />
         <InitGoogleTagManager />

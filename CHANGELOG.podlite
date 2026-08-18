@@ -2,6 +2,14 @@
 
 =head1 Upcoming
 
+=item declare the page language on the root element, taken from the site's C<:language> attribute and falling back to English
+
+=item add a canonical address and the Open Graph title, description and address, so a shared link carries the page instead of a bare URL
+
+=item build the address of a shared image from the site address: it was built from the page path, which gave a path where an address was needed
+
+=item collapse the line break a title or description carries from the source, so it is not shown inside a meta tag
+
 =head1 0.10.11
 
 =item read the site address from C<SITE_URL> when no C<-s> is given: the flag carried a default that shadowed the variable, so setting it had no effect
