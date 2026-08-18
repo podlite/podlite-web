@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item describe the page for a search engine with structured data: an entry with a date is an article and carries its headline and date, anything else is a page
+
 =item declare the page language on the root element, taken from the site's C<:language> attribute and falling back to English
 
 =item add a canonical address and the Open Graph title, description and address, so a shared link carries the page instead of a bare URL

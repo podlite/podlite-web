@@ -5,6 +5,7 @@ import '../../built/styles.css'
 import * as img from '../../built/images'
 import { assetUrl } from '../image-src'
 import { pageDescription } from '../page-description'
+import { structuredData } from '../structured-data'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { getSiteInfo } from '../utils'
@@ -31,6 +32,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   const siteUrl = (url || '').replace(/\/$/, '')
   const pageUrl = siteUrl + (item?.publishUrl || '')
   const resultUrl = siteUrl
+  const imageUrl = metaImage && img[metaImage] ? siteUrl + assetUrl(img[metaImage]) : undefined
+  const jsonLd = structuredData({ item, title, pageTitle, description, pageUrl, siteTitle, siteUrl, imageUrl })
+
   const router = useRouter()
   const pageview = url => {
     ;(window as any)?.gtag?.('event', 'page_view', {
@@ -69,6 +73,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           </>
         )}
         <meta name="twitter:description" content={description} />
+        {/* The angle bracket is escaped so that a title holding a closing tag
+            cannot end the script early. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
+        />
       </Head>
       <Component {...pageProps} />
     </>
