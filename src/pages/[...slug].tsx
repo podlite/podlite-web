@@ -17,9 +17,9 @@ export default function AnyPage(params) {
   return (
     <>
       <Head>
-        <title>
-          {(item as publishRecord).title} - {siteTitle}
-        </title>
+        {/* One child, not three: React separates adjacent text nodes with
+            comment markers, and inside a title those are shown as text. */}
+        <title>{`${(item as publishRecord).title} - ${siteTitle}`}</title>
         <meta
           name="description"
           content={

@@ -316,6 +316,13 @@ body table
     margin-left: auto;
     margin-right: auto;
 }
+/* A table shrinks to its content, so the auto margins above centred it inside
+the column while the text around it stayed flush left. Hold it to the same edge
+as the text. */
+article>table, article table, body table, main>table {
+    margin-left: 0;
+}
+
 /* -----------------------------------
 Handle overflow for code blocks
 */
