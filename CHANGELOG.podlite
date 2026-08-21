@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.12
+
 =item describe the page for a search engine with structured data: an entry with a date is an article and carries its headline and date, anything else is a page
 
 =item declare the page language on the root element, taken from the site's C<:language> attribute and falling back to English
