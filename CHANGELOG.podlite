@@ -4,6 +4,8 @@
 
 =item a table keeps the left edge of the text: the previous release held it against the edge of the article instead, which on a wide window left it hundreds of pixels away from the paragraph above it. The offset is now taken from the parent, so a table that sits inside the column keeps its edge as before
 
+=item the caption of a narrow table reads as a sentence again: it used to be squeezed to the width of the table and fell into a column of single words, taller than the table it described. A table that carries a caption is now laid out as a block, which frees the caption to take the width of the text column and leaves the grid, its columns and its markup untouched. The caption is drawn above the table, where a table caption conventionally sits
+
 =head1 0.10.12
 
 =item describe the page for a search engine with structured data: an entry with a date is an article and carries its headline and date, anything else is a page

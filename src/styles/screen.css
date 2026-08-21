@@ -331,6 +331,27 @@ article>table, article table, body table, main>table {
     margin-right: auto;
 }
 
+/* A caption is a box of the table's own width, so a table narrower than its
+caption has nowhere to put the text: the browser can only shrink the caption to
+its longest word, and the caption falls into a column of single words taller
+than the table it describes.
+
+The table box is what binds them, so that is what changes here — not the markup.
+The rows keep their table boxes and are wrapped in one anonymous table, which
+leaves the grid, its column widths and the whole accessibility tree exactly as
+they were: the table keeps the table role, its name still comes from the
+caption, and the cells stay cells. Only tables that carry a caption are touched.
+
+The caption moves above the table: block layout has no caption-side, and a
+caption is required to be the first child of its table. Above is where a table
+caption conventionally sits, and it is the price of leaving the markup alone. */
+article table:has(> caption), body table:has(> caption), main>table:has(> caption) {
+    display: block;
+}
+table > caption {
+    display: block;
+}
+
 /* -----------------------------------
 Handle overflow for code blocks
 */
