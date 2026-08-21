@@ -316,40 +316,50 @@ body table
     margin-left: auto;
     margin-right: auto;
 }
-/* The auto margins above do two jobs at once. For an element that fills the
-column they place the column itself inside a wider article; for a table, which
-shrinks to its content, they centre the table inside that column, and it stops
-sharing its left edge with the text.
-
-Zeroing the left margin only looks right when the parent is the column: a table
-that is a direct child of a wide article then lands on the article's edge,
-hundreds of pixels left of the text. So take the offset the column already has —
-half the slack when the parent is wider, and nothing when the parent is the
-column — and leave the right side to auto. */
-article>table, article table, body table, main>table {
-    margin-left: max(0px, calc((100% - var(--spacing-width-max)) / 2));
-    margin-right: auto;
-}
-
 /* A caption is a box of the table's own width, so a table narrower than its
 caption has nowhere to put the text: the browser can only shrink the caption to
-its longest word, and the caption falls into a column of single words taller
-than the table it describes.
+its longest word, and it falls into a column of single words taller than the
+table it describes.
 
-The table box is what binds them, so that is what changes here — not the markup.
-The rows keep their table boxes and are wrapped in one anonymous table, which
-leaves the grid, its column widths and the whole accessibility tree exactly as
-they were: the table keeps the table role, its name still comes from the
-caption, and the cells stay cells. Only tables that carry a caption are touched.
-
-The caption moves above the table: block layout has no caption-side, and a
-caption is required to be the first child of its table. Above is where a table
-caption conventionally sits, and it is the price of leaving the markup alone. */
-article table:has(> caption), body table:has(> caption), main>table:has(> caption) {
-    display: block;
+Taking the caption out of the flow keeps it out of the table's width, so the
+grid, its columns and the whole accessibility tree stay as they were, and the
+caption sits under the table centred on it. The space it needs is reserved
+exactly, because a caption held to one line has a known height. */
+article table:has(> caption), main table:has(> caption) {
+    position: relative;
+    margin-bottom: calc(1lh + var(--spacing-s) + 0.4em);
 }
-table > caption {
-    display: block;
+table > caption.caption {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+    text-align: center;
+    margin: var(--spacing-s) 0 0;
+}
+
+/* One line does not fit a narrow screen at any alignment. There the table
+becomes a block and the caption an ordinary line above it: it wraps to the
+column and nothing is cut off. */
+@media (max-width: 640px) {
+    article table:has(> caption), main table:has(> caption) {
+        display: block;
+        position: static;
+        margin-bottom: 0;
+    }
+    table > caption.caption {
+        position: static;
+        display: block;
+        transform: none;
+        width: auto;
+        white-space: normal;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 /* -----------------------------------

@@ -2,9 +2,9 @@
 
 =head1 Upcoming
 
-=item a table keeps the left edge of the text: the previous release held it against the edge of the article instead, which on a wide window left it hundreds of pixels away from the paragraph above it. The offset is now taken from the parent, so a table that sits inside the column keeps its edge as before
+=item a table is placed in the text column again: the previous release held it against the edge of the article, which on a wide window left it hundreds of pixels away from the paragraph above it. A table as wide as the column keeps the edge of the text, a narrower one is centred in the column
 
-=item the caption of a narrow table reads as a sentence again: it used to be squeezed to the width of the table and fell into a column of single words, taller than the table it described. A table that carries a caption is now laid out as a block, which frees the caption to take the width of the text column and leaves the grid, its columns and its markup untouched. The caption is drawn above the table, where a table caption conventionally sits
+=item the caption of a narrow table reads as a sentence again: it used to be squeezed to the width of the table and fell into a column of single words, taller than the table it described. The caption is now drawn under the table and centred on it, and the space it needs is reserved exactly; the grid, its columns and the markup are untouched. On a screen too narrow for one line the caption moves above the table and wraps to the column
 
 =head1 0.10.12
 
