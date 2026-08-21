@@ -316,11 +316,19 @@ body table
     margin-left: auto;
     margin-right: auto;
 }
-/* A table shrinks to its content, so the auto margins above centred it inside
-the column while the text around it stayed flush left. Hold it to the same edge
-as the text. */
+/* The auto margins above do two jobs at once. For an element that fills the
+column they place the column itself inside a wider article; for a table, which
+shrinks to its content, they centre the table inside that column, and it stops
+sharing its left edge with the text.
+
+Zeroing the left margin only looks right when the parent is the column: a table
+that is a direct child of a wide article then lands on the article's edge,
+hundreds of pixels left of the text. So take the offset the column already has —
+half the slack when the parent is wider, and nothing when the parent is the
+column — and leave the right side to auto. */
 article>table, article table, body table, main>table {
-    margin-left: 0;
+    margin-left: max(0px, calc((100% - var(--spacing-width-max)) / 2));
+    margin-right: auto;
 }
 
 /* -----------------------------------

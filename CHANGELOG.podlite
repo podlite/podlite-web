@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a table keeps the left edge of the text: the previous release held it against the edge of the article instead, which on a wide window left it hundreds of pixels away from the paragraph above it. The offset is now taken from the parent, so a table that sits inside the column keeps its edge as before
+
 =head1 0.10.12
 
 =item describe the page for a search engine with structured data: an entry with a date is an article and carries its headline and date, anything else is a page
