@@ -182,7 +182,7 @@ const makeConfigMainPlugin = () => {
     console.log(`spec versions: ${versions.map(v => `${v.prefix}${v.state === 'current' ? ' (current)' : ''}`).join(', ')}`)
   }
   const configSpecVersionsPlugin: PluginConfig = {
-    plugin: specVersionsPlugin({ contentDir, versions }),
+    plugin: specVersionsPlugin({ contentDir, versions, builtPath: built_path || BUILT_PATH }),
     includePatterns: '.*',
   }
 

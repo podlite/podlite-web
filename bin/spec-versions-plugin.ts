@@ -3,6 +3,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 export const CONFIG_NAME = 'spec-versions.json'
+export const ARTIFACT_NAME = 'versions.json'
 
 type VersionEntry = {
   prefix: string
@@ -83,9 +84,10 @@ export const readVersions = (contentDir: string): VersionInfo[] => {
     const prefix = entry.prefix
     if (!prefix) throw new Error(`${CONFIG_NAME}: entry "${entry.ref}" has no prefix`)
     const isCurrent = at === currentAt
-    // Order carries the state: above the current version is what is not released
-    // yet, below it is what has been superseded.
-    const state = isCurrent ? 'current' : entry.state || (at < currentAt ? 'upcoming' : 'past')
+    // The list is read the way time runs: oldest first, newest last. So what
+    // stands after the current version is not released yet, what stands before
+    // it has been superseded.
+    const state = isCurrent ? 'current' : entry.state || (at > currentAt ? 'upcoming' : 'past')
     const dir = dirFor(prefix, isCurrent)
     const home = repo || config.repo
     return {
@@ -106,10 +108,14 @@ export const readVersions = (contentDir: string): VersionInfo[] => {
 const versionOf = (file: string, contentDir: string, versions: VersionInfo[]) =>
   versions.find(v => file.startsWith(`${contentDir}/${v.dir}/`) || file.includes(`/${v.dir}/`))
 
-type Params = { contentDir: string; versions: VersionInfo[] }
+type Params = { contentDir: string; versions: VersionInfo[]; builtPath: string }
 
-const plugin = ({ contentDir, versions }: Params): PodliteWebPlugin => {
+const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin => {
   const outCtx: PodliteWebPluginContext = {}
+  // Addresses that answer with a document asking to stay out of the index. The
+  // page index carries named fields only, and what a plugin knows about a record
+  // cannot be found there later, so it is written out next to it.
+  const noindex: string[] = []
 
   const mark = (item: publishRecord, version: VersionInfo, extra: object) => ({
     ...item,
@@ -150,6 +156,7 @@ const plugin = ({ contentDir, versions }: Params): PodliteWebPlugin => {
             index: false,
           }),
         )
+        noindex.push(versioned)
         continue
       }
       out.push(
@@ -159,6 +166,7 @@ const plugin = ({ contentDir, versions }: Params): PodliteWebPlugin => {
           index: version.index,
         }),
       )
+      if (!version.index) noindex.push(versioned)
     }
 
     const listed = versions.map(({ refName, prefix, label, state, index, sha, sourceUrl }, at) => ({
@@ -186,7 +194,15 @@ ${JSON.stringify(listed)}
     return out
   }
 
-  const onExit = ctx => ({ ...ctx, ...outCtx })
+  // The artifact is written on every build, empty list included: a site that
+  // drops its version config would otherwise keep the previous run's answer.
+  const onExit = ctx => {
+    if (!ctx.testing) {
+      const artifact = { versions: outCtx.specVersions || [], noindex }
+      fs.writeFileSync(path.join(builtPath, ARTIFACT_NAME), JSON.stringify(artifact))
+    }
+    return { ...ctx, ...outCtx }
+  }
   return [onProcess, onExit]
 }
 

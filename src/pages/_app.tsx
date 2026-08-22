@@ -31,9 +31,25 @@ function MyApp({ Component, pageProps }: AppProps) {
   // carried an image nobody could fetch.
   const siteUrl = (url || '').replace(/\/$/, '')
   const pageUrl = siteUrl + (item?.publishUrl || '')
+  // The same document may answer at more than one address: a version of it at
+  // its own permanent one, the current version at the short one. Whoever put it
+  // there says which address is the one to keep and whether this copy asks to be
+  // indexed; a page nobody versioned keeps answering for itself.
+  const version = item?.pluginsData?.version
+  const canonicalUrl = version?.canonical ? siteUrl + version.canonical : pageUrl
+  const askedOutOfIndex = version ? version.index === false : false
   const resultUrl = siteUrl
   const imageUrl = metaImage && img[metaImage] ? siteUrl + assetUrl(img[metaImage]) : undefined
-  const jsonLd = structuredData({ item, title, pageTitle, description, pageUrl, siteTitle, siteUrl, imageUrl })
+  const jsonLd = structuredData({
+    item,
+    title,
+    pageTitle,
+    description,
+    pageUrl: canonicalUrl,
+    siteTitle,
+    siteUrl,
+    imageUrl,
+  })
 
   const router = useRouter()
   const pageview = url => {
@@ -57,11 +73,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
         <meta name="description" content={description} />
-        <link rel="canonical" href={pageUrl} />
+        <link rel="canonical" href={canonicalUrl} />
+        {askedOutOfIndex && <meta name="robots" content="noindex, follow" />}
         <meta property="og:site_name" content={siteTitle} />
         <meta property="og:title" content={title.trim()} />
         <meta property="og:description" content={description} />
-        <meta property="og:url" content={pageUrl} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={title} />
