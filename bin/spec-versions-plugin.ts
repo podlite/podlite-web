@@ -84,6 +84,12 @@ export const readVersions = (contentDir: string): VersionInfo[] => {
     const prefix = entry.prefix
     if (!prefix) throw new Error(`${CONFIG_NAME}: entry "${entry.ref}" has no prefix`)
     const isCurrent = at === currentAt
+    if (!fs.existsSync(path.join(contentDir, dirFor(prefix, isCurrent)))) {
+      throw new Error(
+        `${CONFIG_NAME}: "${prefix}" is declared but ${dirFor(prefix, isCurrent)} is not there. ` +
+          `Whoever builds the site clones every declared ref before the build.`,
+      )
+    }
     // The list is read the way time runs: oldest first, newest last. So what
     // stands after the current version is not released yet, what stands before
     // it has been superseded.
@@ -167,6 +173,18 @@ const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin =
         }),
       )
       if (!version.index) noindex.push(versioned)
+    }
+
+    // A declared version that produced no page would still be listed by the
+    // picker, and its link would answer with nothing. That happens when the
+    // source of a version does not parse the way the current toolchain reads it,
+    // and it happens without a word, so the build says it here instead.
+    const empty = versions.filter(v => !out.some(r => r.pluginsData?.version?.prefix === v.prefix))
+    if (empty.length) {
+      throw new Error(
+        `${CONFIG_NAME}: ${empty.map(v => `"${v.prefix}" (${v.dir})`).join(', ')} produced no page. ` +
+          `The directory is there, so the source is read differently than the current toolchain expects.`,
+      )
     }
 
     const listed = versions.map(({ refName, prefix, label, state, index, sha, sourceUrl }, at) => ({

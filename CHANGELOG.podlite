@@ -10,6 +10,8 @@
 
 =item the list of versions is handed to the site as data, so the picker and the line of state are drawn by the site
 
+=item the build stops when a declared version has no directory to read, and when a version that has one produces no page: both used to pass quietly and leave the picker pointing at an address that answers with nothing
+
 =item a table is placed in the text column again: the previous release held it against the edge of the article, which on a wide window left it hundreds of pixels away from the paragraph above it. A table as wide as the column keeps the edge of the text, a narrower one is centred in the column
 
 =item the caption of a narrow table reads as a sentence again: it used to be squeezed to the width of the table and fell into a column of single words, taller than the table it described. The caption is now drawn under the table and centred on it, and the space it needs is reserved exactly; the grid, its columns and the markup are untouched. On a screen too narrow for one line the caption moves above the table and wraps to the column
