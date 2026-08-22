@@ -33,6 +33,7 @@ import dumpPagesPlugin from '@podlite/publisher/lib/dump-pages-plugin'
 import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
 import specVersionsPlugin, { readVersions } from './spec-versions-plugin'
+import { runLint } from 'podlite/lib/lint/index'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
 
@@ -51,6 +52,8 @@ program
   .option('-d, --directory [path to project directory]', 'path to sources to build from')
   .option('-g, --glob [glob argument]', 'mask for files to process')
   // preset plugins
+  .option('--no-lint', 'skip the lint report over the sources')
+  .option('--lint-strict', 'stop the build when lint reports a problem')
   .option('-preset, --preset [preset]', 'preset plugins (pubdate, everything)')
   .argument('[path to dir...]', 'path to posts')
 
@@ -208,6 +211,20 @@ const makeConfigMainPlugin = () => {
   return composePlugins(plugins, tctx)
 }
 
+// A source that names an address or a date must come out of the parse carrying
+// it. When it does not the document fell apart on the way, and the page it
+// declared disappears without a word.
+const URL_ATTR = /^\s*=(?:begin|for)\s+\w+[^\n]*:(?:puburl|publishUrl)(?![\w-])/m
+const DATE_ATTR = /^\s*=(?:begin|for)\s+\w+[^\n]*:pubdate(?![\w-])/m
+
+// the name must end here: :pubdate_NONE is how a page is taken off publication
+const lostInParse = (file: string, records: publishRecord[]): string | null => {
+  const text = fs.readFileSync(file).toString()
+  if (URL_ATTR.test(text) && !records.some(r => r.publishUrl)) return 'an address'
+  if (DATE_ATTR.test(text) && !records.some(r => r.pubdate)) return 'a date'
+  return null
+}
+
 ;(async () => {
   let customPlugin = ({ rootdir }): any => [(a: publishRecord[]) => a, all => all] as PodliteWebPlugin
   if (options.directory) {
@@ -228,12 +245,30 @@ const makeConfigMainPlugin = () => {
 
 
   //parse files
-  const items = glob
+  const sources = glob
     .sync(files,{ ignore: '**/node_modules/**', nodir: true })
     // force exclude node_modules ( this happens when we use symlinks )
     .filter((f:string)=> !f.split(path.sep).includes('node_modules'))
-    .map((i:string) => parseSources(i))
-    .flat()
+
+  if (options.lint) {
+    const code = runLint(sources, { strict: false, format: 'text' })
+    if (code !== 0 && options.lintStrict) {
+      program.error('lint reported problems, and --lint-strict is on', { exitCode: 1, code: '--lint-strict' })
+    }
+  }
+
+  const parsed = sources.map((file: string) => ({ file, records: [parseSources(file)].flat() as publishRecord[] }))
+  const lost = parsed
+    .map(({ file, records }) => ({ file, what: lostInParse(file, records) }))
+    .filter(({ what }) => what)
+  if (lost.length) {
+    program.error(
+      `the parse lost what these sources declare:\n${lost.map(l => `  ${l.file} declares ${l.what}`).join('\n')}`,
+      { exitCode: 1, code: 'lost-in-parse' },
+    )
+  }
+
+  const items = parsed.map(({ records }) => records).flat()
 
   const [res, ctx] = processPlugin(
     composePlugins([makeCustomPlugin, makeConfigMainPlugin()], tctx),

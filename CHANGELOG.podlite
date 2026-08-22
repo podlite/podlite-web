@@ -2,6 +2,10 @@
 
 =head1 Upcoming
 
+=item the build stops when a source declares an address or a date and the parse comes back without it: such a page used to disappear from the site without a word
+
+=item the build reports what the linter finds in the sources on every run; C<--no-lint> skips the report, C<--lint-strict> stops the build on a problem
+
 =item a site may declare several versions of a mounted document in C<spec-versions.json>: every entry names the address prefix and the branch or tag it is built from, and the file names the current one. Versions are read in the order they are written, oldest first
 
 =item the current version answers at the address it has always answered at and once more at its own permanent address; the second copy points its canonical link at the first and asks to stay out of the index
