@@ -32,6 +32,7 @@ import includeResolvePlugin from '@podlite/publisher/lib/include-resolve-plugin'
 import dumpPagesPlugin from '@podlite/publisher/lib/dump-pages-plugin'
 import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
+import specVersionsPlugin, { readVersions } from './spec-versions-plugin'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
 
@@ -173,7 +174,20 @@ const makeConfigMainPlugin = () => {
     }
   
   
+  // Versions are read from the content directory: the runner clones each one
+  // there, and the same file tells the build which of them is the current one.
+  const contentDir = options.directory || POSTS_PATH
+  const versions = readVersions(contentDir)
+  if (versions.length) {
+    console.log(`spec versions: ${versions.map(v => `${v.prefix}${v.state === 'current' ? ' (current)' : ''}`).join(', ')}`)
+  }
+  const configSpecVersionsPlugin: PluginConfig = {
+    plugin: specVersionsPlugin({ contentDir, versions }),
+    includePatterns: '.*',
+  }
+
   const plugins = [
+    configSpecVersionsPlugin,
     makedocInjectorPlugin,
     configReactPlugin,
     configImagesPlugin,
