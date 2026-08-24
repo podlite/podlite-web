@@ -111,6 +111,19 @@ export const readVersions = (contentDir: string): VersionInfo[] => {
   })
 }
 
+// The attribute goes into the record's tree, not into the file. The copy is
+// structural down to the pod block: the twin of a page shares the same tree, and
+// pushing into it would mark the original too.
+const withAttrs = (item: publishRecord, names: string[]): publishRecord => {
+  if (!names.length) return item
+  const content = [...(item.node.content || [])]
+  const at = content.findIndex((n: any) => n && n.name === 'pod')
+  if (at < 0) return item
+  const pod: any = content[at]
+  content[at] = { ...pod, config: [...(pod.config || []), ...names.map(name => ({ name, value: true, type: 'boolean' }))] }
+  return { ...item, node: { ...item.node, content } }
+}
+
 const versionOf = (file: string, contentDir: string, versions: VersionInfo[]) =>
   versions.find(v => file.startsWith(`${contentDir}/${v.dir}/`) || file.includes(`/${v.dir}/`))
 
@@ -118,11 +131,6 @@ type Params = { contentDir: string; versions: VersionInfo[]; builtPath: string }
 
 const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin => {
   const outCtx: PodliteWebPluginContext = {}
-  // Addresses that answer with a document asking to stay out of the index. The
-  // page index carries named fields only, and what a plugin knows about a record
-  // cannot be found there later, so it is written out next to it.
-  const noindex: string[] = []
-
   const mark = (item: publishRecord, version: VersionInfo, extra: object) => ({
     ...item,
     pluginsData: {
@@ -154,25 +162,24 @@ const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin =
         // The current version answers at the address it declares, and once more
         // at its own permanent one. The second copy points its canonical link at
         // the first, so the two never compete as separate documents.
-        out.push(mark(item, version, { role: 'current', canonical: item.publishUrl, index: true }))
+        out.push(mark(item, version, { role: 'current', canonical: item.publishUrl }))
         out.push(
-          mark({ ...item, publishUrl: versioned }, version, {
+          mark(withAttrs({ ...item, publishUrl: versioned }, ['noindex', 'nosearch']), version, {
             role: 'permalink',
             canonical: item.publishUrl,
-            index: false,
           }),
         )
-        noindex.push(versioned)
         continue
       }
+      // a superseded version stays findable by a search engine and out of the
+      // search on the site, where it would answer next to the current one
+      const closed = version.state === 'upcoming' ? ['noindex', 'nosearch'] : version.index ? ['nosearch'] : ['noindex', 'nosearch']
       out.push(
-        mark({ ...item, publishUrl: versioned }, version, {
+        mark(withAttrs({ ...item, publishUrl: versioned }, closed), version, {
           role: version.state,
           canonical: versioned,
-          index: version.index,
         }),
       )
-      if (!version.index) noindex.push(versioned)
     }
 
     // A declared version that produced no page would still be listed by the
@@ -216,7 +223,7 @@ ${JSON.stringify(listed)}
   // drops its version config would otherwise keep the previous run's answer.
   const onExit = ctx => {
     if (!ctx.testing) {
-      const artifact = { versions: outCtx.specVersions || [], noindex }
+      const artifact = { versions: outCtx.specVersions || [] }
       fs.writeFileSync(path.join(builtPath, ARTIFACT_NAME), JSON.stringify(artifact))
     }
     return { ...ctx, ...outCtx }
