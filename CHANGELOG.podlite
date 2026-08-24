@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item move to the 0.0.87 toolchain
+
 =item a version of a mounted document declares its own answer: the permanent twin of the current version and a version not released yet stay out of both, a superseded version stays out of the search on the site
 
 =item the search on the site skips a page that asks to stay out of it
