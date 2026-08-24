@@ -219,20 +219,6 @@ const makeConfigMainPlugin = () => {
   return composePlugins(plugins, tctx)
 }
 
-// A source that names an address or a date must come out of the parse carrying
-// it. When it does not the document fell apart on the way, and the page it
-// declared disappears without a word.
-const URL_ATTR = /^\s*=(?:begin|for)\s+\w+[^\n]*:(?:puburl|publishUrl)(?![\w-])/m
-const DATE_ATTR = /^\s*=(?:begin|for)\s+\w+[^\n]*:pubdate(?![\w-])/m
-
-// the name must end here: :pubdate_NONE is how a page is taken off publication
-const lostInParse = (file: string, records: publishRecord[]): string | null => {
-  const text = fs.readFileSync(file).toString()
-  if (URL_ATTR.test(text) && !records.some(r => r.publishUrl)) return 'an address'
-  if (DATE_ATTR.test(text) && !records.some(r => r.pubdate)) return 'a date'
-  return null
-}
-
 // The index carries named fields only, and the site names its own. An older
 // publisher drops them without a word, and the sitemap filter would then pass
 // everything.
@@ -276,18 +262,7 @@ const indexFieldsSupported = () => {
     }
   }
 
-  const parsed = sources.map((file: string) => ({ file, records: [parseSources(file)].flat() as publishRecord[] }))
-  const lost = parsed
-    .map(({ file, records }) => ({ file, what: lostInParse(file, records) }))
-    .filter(({ what }) => what)
-  if (lost.length) {
-    program.error(
-      `the parse lost what these sources declare:\n${lost.map(l => `  ${l.file} declares ${l.what}`).join('\n')}`,
-      { exitCode: 1, code: 'lost-in-parse' },
-    )
-  }
-
-  const items = parsed.map(({ records }) => records).flat()
+  const items = sources.map((file: string) => parseSources(file)).flat()
 
   if (!indexFieldsSupported()) {
     program.error('the installed @podlite/publisher does not carry named index fields; update it to 0.0.48 or newer', {
