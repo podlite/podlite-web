@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the search on the site skips a page that asks to stay out of it
+
 =item a page may ask to stay out of a search engine with C<:noindex> and out of the search on the site with C<:nosearch>; the answer travels with the record, and the sitemap reads it from there
 
 =item the build stops when a source declares an address or a date and the parse comes back without it: such a page used to disappear from the site without a word

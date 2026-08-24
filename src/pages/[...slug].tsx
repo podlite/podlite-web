@@ -30,7 +30,9 @@ export default function AnyPage(params) {
         />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
-      <main>{ProcessWithTemplate(item, footer)}</main>
+      <main data-pagefind-ignore={item?.indexing?.search === false ? true : undefined}>
+        {ProcessWithTemplate(item, footer)}
+      </main>
     </>
   )
 }

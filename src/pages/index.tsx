@@ -6,6 +6,7 @@ import Head from 'next/head'
 import { contentData, getPage, readRecord } from 'src/serverside'
 import { generateRedirects } from 'src/utils/redirects'
 import { DataFeedContent } from '../../bin/makeDataSource'
+import { Indexing } from '../../bin/indexing-policy-plugin'
 import { getPostComponent, getSiteInfo } from '../utils'
 import { writeRss } from '../utils/rss'
 import { generateSitemap } from '../utils/sitemap'
@@ -21,7 +22,7 @@ const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
         <meta name="description" content={item.description ? getTextContentFromNode(item.description) : pageDescription(item.node, title)} />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
-      <main id="body">{ProcessWithTemplate(item, footer)}</main>
+      <main id="body" data-pagefind-ignore={item?.indexing?.search === false ? true : undefined}>{ProcessWithTemplate(item, footer)}</main>
     </div>
   )
 }
@@ -32,7 +33,7 @@ export interface IndexProps {
   node: PodNode
   footer: PodNode
   favicon: string
-  item: publishRecord
+  item: publishRecord & { indexing?: Indexing }
   template?: publishRecord | null
   templateFile?: string | null
 }
