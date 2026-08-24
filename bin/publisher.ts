@@ -33,6 +33,7 @@ import dumpPagesPlugin from '@podlite/publisher/lib/dump-pages-plugin'
 import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
 import specVersionsPlugin, { readVersions } from './spec-versions-plugin'
+import indexingPolicyPlugin, { INDEX_FIELD } from './indexing-policy-plugin'
 import { runLint } from 'podlite/lib/lint/index'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
@@ -120,7 +121,13 @@ const makeConfigMainPlugin = () => {
   const configDumpPagesPlugin: PluginConfig = {
     plugin: dumpPagesPlugin({
       built_path: built_path || BUILT_PATH,
+      indexFields: [INDEX_FIELD],
     }),
+    includePatterns: '.*',
+  }
+
+  const configIndexingPolicyPlugin: PluginConfig = {
+    plugin: indexingPolicyPlugin(),
     includePatterns: '.*',
   }
 
@@ -191,6 +198,7 @@ const makeConfigMainPlugin = () => {
 
   const plugins = [
     configSpecVersionsPlugin,
+    configIndexingPolicyPlugin,
     makedocInjectorPlugin,
     configReactPlugin,
     configImagesPlugin,
@@ -223,6 +231,17 @@ const lostInParse = (file: string, records: publishRecord[]): string | null => {
   if (URL_ATTR.test(text) && !records.some(r => r.publishUrl)) return 'an address'
   if (DATE_ATTR.test(text) && !records.some(r => r.pubdate)) return 'a date'
   return null
+}
+
+// The index carries named fields only, and the site names its own. An older
+// publisher drops them without a word, and the sitemap filter would then pass
+// everything.
+const indexFieldsSupported = () => {
+  try {
+    return typeof require('@podlite/publisher/lib/dump-pages-plugin').buildPagesIndex === 'function'
+  } catch {
+    return false
+  }
 }
 
 ;(async () => {
@@ -269,6 +288,13 @@ const lostInParse = (file: string, records: publishRecord[]): string | null => {
   }
 
   const items = parsed.map(({ records }) => records).flat()
+
+  if (!indexFieldsSupported()) {
+    program.error('the installed @podlite/publisher does not carry named index fields; update it to 0.0.48 or newer', {
+      exitCode: 1,
+      code: 'index-fields',
+    })
+  }
 
   const [res, ctx] = processPlugin(
     composePlugins([makeCustomPlugin, makeConfigMainPlugin()], tctx),

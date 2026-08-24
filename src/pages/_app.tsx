@@ -37,7 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   // indexed; a page nobody versioned keeps answering for itself.
   const version = item?.pluginsData?.version
   const canonicalUrl = version?.canonical ? siteUrl + version.canonical : pageUrl
-  const askedOutOfIndex = version ? version.index === false : false
+  const askedOutOfIndex = item?.indexing?.robots === false
   const resultUrl = siteUrl
   const imageUrl = metaImage && img[metaImage] ? siteUrl + assetUrl(img[metaImage]) : undefined
   const jsonLd = structuredData({

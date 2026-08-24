@@ -5,6 +5,7 @@ import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
 import dynamic from 'next/dynamic'
 import ReactDOMServer from 'react-dom/server'
 import Podlite from '@podlite/to-jsx'
+import { Indexing } from '../bin/indexing-policy-plugin'
 import * as img from '../built/images'
 import { assetUrl, isExternalImageSrc, isExternalUrl } from './image-src'
 //@ts-ignore
@@ -51,7 +52,9 @@ export type FeedContent = publishRecord & {
   sources?: string[]
   shortUrl?: string
 }
-export type ContentRecord = Pick<FeedContent, 'publishUrl' | 'title' | 'node' | 'sources' | 'shortUrl'>
+export type ContentRecord = Pick<FeedContent, 'publishUrl' | 'title' | 'node' | 'sources' | 'shortUrl'> & {
+  indexing?: Indexing
+}
 export type DataFeedContent = {
   all: publishRecord[]
   siteInfo: SiteInfo
