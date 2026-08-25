@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a site may name the repositories its content comes from, and the build fetches them itself: the checkouts live beside the build, the content directory is left to the author, and a source declared as not required is skipped with a word instead of stopping the build
+
 =head1 0.10.14
 
 =item the check that stopped the build when a source declared a date the parse came back without is withdrawn: it asked the record before the plugins had made the page, so a paragraph carrying C<:pubdate> - a published note by design - stopped a site that builds

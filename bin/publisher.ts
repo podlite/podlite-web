@@ -34,6 +34,7 @@ import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
 import specVersionsPlugin, { readVersions } from './spec-versions-plugin'
 import indexingPolicyPlugin, { INDEX_FIELD } from './indexing-policy-plugin'
+import { Prepared, prepareMounts } from './mounts'
 import { runLint } from 'podlite/lib/lint/index'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
@@ -53,6 +54,8 @@ program
   .option('-d, --directory [path to project directory]', 'path to sources to build from')
   .option('-g, --glob [glob argument]', 'mask for files to process')
   // preset plugins
+  .option('--offline', 'use the sources already prepared, do not reach the network')
+  .option('--mounts-only', 'prepare the sources the site declares and stop')
   .option('--no-lint', 'skip the lint report over the sources')
   .option('--lint-strict', 'stop the build when lint reports a problem')
   .option('-preset, --preset [preset]', 'preset plugins (pubdate, everything)')
@@ -107,7 +110,7 @@ const declaredTemplateFile = (): string | undefined => {
 }
 
 const tctx = { testing: false }
-const makeConfigMainPlugin = () => {
+const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
   const configSiteDataPlugin: PluginConfig = {
     plugin: siteDataPlugin({
       public_path,
@@ -187,12 +190,12 @@ const makeConfigMainPlugin = () => {
   // Versions are read from the content directory: the runner clones each one
   // there, and the same file tells the build which of them is the current one.
   const contentDir = options.directory || POSTS_PATH
-  const versions = readVersions(contentDir)
+  const versions = readVersions(contentDir, mountsPrepared)
   if (versions.length) {
     console.log(`spec versions: ${versions.map(v => `${v.prefix}${v.state === 'current' ? ' (current)' : ''}`).join(', ')}`)
   }
   const configSpecVersionsPlugin: PluginConfig = {
-    plugin: specVersionsPlugin({ contentDir, versions, builtPath: built_path || BUILT_PATH }),
+    plugin: specVersionsPlugin({ versions, builtPath: built_path || BUILT_PATH }),
     includePatterns: '.*',
   }
 
@@ -239,8 +242,13 @@ const indexFieldsSupported = () => {
     const resolvedModulePath = path.resolve(process.cwd(), `${options.directory}/podlite-web.config.js`)
 
     if (fs.existsSync(resolvedModulePath)) {
-      customPlugin = require(resolvedModulePath).plugin
-      console.log(customPlugin({ rootdir: options.directory }))
+      // A site may keep only data in its config, mounted sources and versions,
+      // and never write a plugin of its own.
+      const site = require(resolvedModulePath)
+      if (typeof site.plugin === 'function') {
+        customPlugin = site.plugin
+        console.log(customPlugin({ rootdir: options.directory }))
+      }
     } else {
       console.warn(`config file not found: ${resolvedModulePath}`)
     }
@@ -248,10 +256,15 @@ const indexFieldsSupported = () => {
 
   const makeCustomPlugin: PluginConfig = customPlugin({ rootdir: options.directory })
 
+  // Sources the site declares are fetched here, before the walk: the walk cannot
+  // see a file that is not on disk yet, and the plugin chain runs later still.
+  const mounts = prepareMounts(options.directory || POSTS_PATH, options.offline)
+  if (options.mountsOnly) return
+  const mountMasks = mounts.filter(m => m.dir).map(m => `${m.dir}/**/*.{podlite,pod6}`)
 
   //parse files
-  const sources = glob
-    .sync(files,{ ignore: '**/node_modules/**', nodir: true })
+  const sources = [files, ...mountMasks]
+    .flatMap((mask: string) => glob.sync(mask, { ignore: '**/node_modules/**', nodir: true }))
     // force exclude node_modules ( this happens when we use symlinks )
     .filter((f:string)=> !f.split(path.sep).includes('node_modules'))
 
@@ -272,7 +285,7 @@ const indexFieldsSupported = () => {
   }
 
   const [res, ctx] = processPlugin(
-    composePlugins([makeCustomPlugin, makeConfigMainPlugin()], tctx),
+    composePlugins([makeCustomPlugin, makeConfigMainPlugin(mounts)], tctx),
     items,
     tctx,
   )
