@@ -2,6 +2,9 @@
 
 =head1 Upcoming
 
+=item last entries, archive, feed and search markup now ask one predicate instead of four copies of a test that answered a different question
+=item a page that carries a date no longer shows up in the feed as an entry
+
 =head1 0.10.15
 
 =item a mounted source may be given a section of the site with C<prefix>, and a source used as a version may not carry one: the address is built by one rule or the other

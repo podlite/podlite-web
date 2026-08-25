@@ -12,7 +12,7 @@ import { assetUrl, isExternalImageSrc, isExternalUrl } from './image-src'
 import * as components from '../built/components'
 import Link from 'next/link'
 import { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
-import { pubRecord } from '@podlite/publisher'
+import { isEntry, pubRecord } from '@podlite/publisher'
 
 // The editor draws nothing without a window, so a server-rendered page and the
 // first client render disagree, and react rebuilds the whole page to recover.
@@ -76,7 +76,7 @@ export function mapPathToImage(path: string): string | undefined {
 }
 export function getArticlesGroupedByYearMonth(pages: publishRecord[]) {
   //filter out pages
-  const source = pages.filter(({ type = '' }) => type !== 'page').reverse()
+  const source = pages.filter(isEntry).reverse()
 
   const groupedByYearMonth = source.reduce(
     (
@@ -110,11 +110,11 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       // check if node.content defined
       return makeComponent(src, node, 'content' in node ? interator(node.content, { ...ctx }) : [])
     }
-      const hcode = mkComponent(({ children, key, ...node }, ctx) => (
-        <HighlightedCode node={node} keyProp={key} ctx={ctx}>
-          {children}
-        </HighlightedCode>
-      ))
+    const hcode = mkComponent(({ children, key, ...node }, ctx) => (
+      <HighlightedCode node={node} keyProp={key} ctx={ctx}>
+        {children}
+      </HighlightedCode>
+    ))
 
     return {
       //process only content nodes
@@ -277,7 +277,9 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
               </div>
             )
           } else {
-            return <img className="shadow_DISABLED" src={assetUrl(img[imageName])} alt={'alt' in node ? node.alt : ''} />
+            return (
+              <img className="shadow_DISABLED" src={assetUrl(img[imageName])} alt={'alt' in node ? node.alt : ''} />
+            )
           }
         }
         return linkTo ? (

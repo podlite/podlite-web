@@ -1,7 +1,10 @@
+import { isEntry } from '@podlite/publisher'
+
 type Source = {
   title?: string | null
   type?: string
   pubdate?: string
+  isPage?: boolean
 }
 
 type Params = {
@@ -15,9 +18,7 @@ type Params = {
   imageUrl?: string
 }
 
-// A blog entry carries a date, a page does not; that is the only distinction the
-// record supports, so it is the only one drawn here.
-export const isArticle = (item?: Source): boolean => Boolean(item?.pubdate) && item?.type !== 'page'
+export const isArticle = (item?: Source): boolean => (item ? isEntry(item) : false)
 
 export const structuredData = ({
   item,

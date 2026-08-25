@@ -2,6 +2,7 @@ import styles from '../components/service.module.css'
 import Link from 'next/link'
 import { getTextContentFromNode } from '@podlite/schema'
 import moment from 'moment'
+import { isEntry } from '@podlite/publisher'
 import { getSiteInfo } from 'src/utils'
 
 export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, getOpt }) => {
@@ -40,7 +41,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
       </footer>
     </article>
   )
-  if (item.type === 'page') {
+  if (!isEntry(item)) {
     return (
       <>
         <Article />

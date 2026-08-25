@@ -1,5 +1,6 @@
 import { DataFeedContent } from '../../bin/makeDataSource'
 import { PUBLIC_PATH } from '../constants'
+import { isEntry } from '@podlite/publisher'
 import { getSiteInfo } from '../utils'
 import * as fs from 'fs'
 import { convertPodNodeToHtml as convertPodNodeToHtml } from '../utils'
@@ -37,7 +38,7 @@ ${pages
 export function writeRss() {
   const pages = getAllPages()
     .filter(i => i.publishUrl)
-    .filter(a => a.pubdate)
+    .filter(isEntry)
     .map(page => getPage(page.publishUrl) || page)
     .filter(page => page.description)
     .sort((a, b) => {
