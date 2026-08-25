@@ -1,30 +1,24 @@
 import { PodliteWebPlugin, PodliteWebPluginContext, processFile, publishRecord } from '@podlite/publisher'
 import * as fs from 'fs'
 import * as path from 'path'
+import { Prepared, readSiteConfig } from './mounts'
 
-export const CONFIG_NAME = 'spec-versions.json'
 export const ARTIFACT_NAME = 'versions.json'
 
 type VersionEntry = {
   prefix: string
-  ref: string
+  mount: string
   label?: string
   index?: boolean
   state?: 'upcoming' | 'past'
 }
 
-type VersionsConfig = {
-  repo?: string
-  default: string
-  versions: VersionEntry[]
-}
-
 export type VersionInfo = {
-  ref: string
-  refName: string
   prefix: string
+  mount: string
   label: string
   dir: string
+  ref: string
   state: 'current' | 'upcoming' | 'past'
   index: boolean
   url: string
@@ -32,83 +26,47 @@ export type VersionInfo = {
   sha?: string
 }
 
-// The default version keeps the directory the build has always used, so the
-// change guard, which reads the commit of pub/spec, goes on working unchanged.
-const DEFAULT_DIR = 'spec'
-const dirFor = (prefix: string, isCurrent: boolean) => (isCurrent ? DEFAULT_DIR : `${DEFAULT_DIR}--${prefix}`)
-
-// A ref may be written as a github address, so that it can be pasted from the
-// browser. Everything after /tree/ is the ref name: a name may contain slashes
-// and a path inside the repository cannot be told from one, so paths are not
-// accepted. A release address carries the tag after /releases/tag/.
-const parseRef = (ref: string): { refName: string; repo?: string } => {
-  const asUrl = ref.match(/^https?:\/\/[^/]+\/([^/]+\/[^/]+?)(?:\.git)?\/(?:tree|releases\/tag)\/(.+)$/)
-  if (!asUrl) return { refName: ref }
-  const [, owner, name] = asUrl
-  return { refName: name.replace(/\/$/, ''), repo: `https://github.com/${owner}` }
-}
-
-// A checkout carries its commit in .git; reading it avoids spawning git in the
-// build image, where the directory may be a shallow clone.
-const shaOf = (dir: string): string | undefined => {
-  try {
-    const head = fs.readFileSync(path.join(dir, '.git', 'HEAD'), 'utf8').trim()
-    if (!head.startsWith('ref:')) return head
-    const ref = head.slice(4).trim()
-    const direct = path.join(dir, '.git', ref)
-    if (fs.existsSync(direct)) return fs.readFileSync(direct, 'utf8').trim()
-    const packed = path.join(dir, '.git', 'packed-refs')
-    if (!fs.existsSync(packed)) return undefined
-    const line = fs
-      .readFileSync(packed, 'utf8')
-      .split('\n')
-      .find(l => l.endsWith(` ${ref}`))
-    return line ? line.split(' ')[0] : undefined
-  } catch {
-    return undefined
-  }
-}
-
-export const readVersions = (contentDir: string): VersionInfo[] => {
-  const configPath = path.join(contentDir, CONFIG_NAME)
-  if (!fs.existsSync(configPath)) return []
-  const config: VersionsConfig = JSON.parse(fs.readFileSync(configPath, 'utf8'))
-  // The current version is named by its prefix, which is what the address and
-  // the picker are built from; naming it by ref is accepted as well.
-  const currentAt = config.versions.findIndex(v => v.prefix === config.default || v.ref === config.default)
+// A version names the mount it is built from; where that mount sits on disk is
+// the business of the step that prepared it.
+export const readVersions = (contentDir: string, mounts: Prepared[]): VersionInfo[] => {
+  const { versions } = readSiteConfig(contentDir)
+  if (!versions || !versions.entries?.length) return []
+  const entries: VersionEntry[] = versions.entries
+  const currentAt = entries.findIndex(v => v.prefix === versions.default)
   if (currentAt < 0) {
-    throw new Error(`${CONFIG_NAME}: default "${config.default}" is not among the declared versions`)
+    throw new Error(`podlite-web.config.js: default "${versions.default}" is not among the declared versions`)
   }
-  return config.versions.map((entry, at) => {
-    const { refName, repo } = parseRef(entry.ref)
-    const prefix = entry.prefix
-    if (!prefix) throw new Error(`${CONFIG_NAME}: entry "${entry.ref}" has no prefix`)
-    const isCurrent = at === currentAt
-    if (!fs.existsSync(path.join(contentDir, dirFor(prefix, isCurrent)))) {
-      throw new Error(
-        `${CONFIG_NAME}: "${prefix}" is declared but ${dirFor(prefix, isCurrent)} is not there. ` +
-          `Whoever builds the site clones every declared ref before the build.`,
-      )
-    }
-    // The list is read the way time runs: oldest first, newest last. So what
-    // stands after the current version is not released yet, what stands before
-    // it has been superseded.
-    const state = isCurrent ? 'current' : entry.state || (at > currentAt ? 'upcoming' : 'past')
-    const dir = dirFor(prefix, isCurrent)
-    const home = repo || config.repo
-    return {
-      ref: entry.ref,
-      refName,
-      prefix,
-      label: entry.label || prefix,
-      dir,
-      state,
-      index: entry.index !== undefined ? entry.index : state !== 'upcoming',
-      url: `/${prefix}`,
-      sourceUrl: home ? `${home}/tree/${refName}` : undefined,
-      sha: shaOf(path.join(contentDir, dir)),
-    }
-  })
+  return entries
+    .map((entry, at) => {
+      const mount = mounts.find(m => m.name === entry.mount)
+      if (!mount) {
+        throw new Error(`podlite-web.config.js: version "${entry.prefix}" names mount "${entry.mount}", which is not declared`)
+      }
+      // A version whose optional mount was skipped is left out of the list: a
+      // picker that offers it would link to an address that answers with nothing.
+      if (!mount.dir) {
+        console.warn(`version ${entry.prefix} is left out: its mount "${entry.mount}" is not available`)
+        return null
+      }
+      const isCurrent = at === currentAt
+      // The list is read the way time runs: oldest first, newest last. So what
+      // stands after the current version is not released yet, what stands before
+      // it has been superseded.
+      const state = isCurrent ? 'current' : entry.state || (at > currentAt ? 'upcoming' : 'past')
+      return {
+        prefix: entry.prefix,
+        mount: entry.mount,
+        label: entry.label || entry.prefix,
+        dir: mount.dir,
+        ref: mount.ref,
+        state,
+        index: entry.index !== undefined ? entry.index : state !== 'upcoming',
+        url: `/${entry.prefix}`,
+        sourceUrl: `${mount.repo.replace(/\.git$/, '')}/tree/${mount.ref}`,
+        sha: mount.sha || undefined,
+      } as VersionInfo
+    })
+    .filter(Boolean) as VersionInfo[]
 }
 
 // The attribute goes into the record's tree, not into the file. The copy is
@@ -124,12 +82,11 @@ const withAttrs = (item: publishRecord, names: string[]): publishRecord => {
   return { ...item, node: { ...item.node, content } }
 }
 
-const versionOf = (file: string, contentDir: string, versions: VersionInfo[]) =>
-  versions.find(v => file.startsWith(`${contentDir}/${v.dir}/`) || file.includes(`/${v.dir}/`))
+const versionOf = (file: string, versions: VersionInfo[]) => versions.find(v => file.startsWith(`${v.dir}/`))
 
-type Params = { contentDir: string; versions: VersionInfo[]; builtPath: string }
+type Params = { versions: VersionInfo[]; builtPath: string }
 
-const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin => {
+const plugin = ({ versions, builtPath }: Params): PodliteWebPlugin => {
   const outCtx: PodliteWebPluginContext = {}
   const mark = (item: publishRecord, version: VersionInfo, extra: object) => ({
     ...item,
@@ -139,7 +96,7 @@ const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin =
         prefix: version.prefix,
         label: version.label,
         state: version.state,
-        ref: version.refName,
+        ref: version.ref,
         sha: version.sha,
         sourceUrl: version.sourceUrl,
         ...extra,
@@ -152,7 +109,7 @@ const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin =
 
     const out: publishRecord[] = []
     for (const item of recs) {
-      const version = versionOf(item.file, contentDir, versions)
+      const version = versionOf(item.file, versions)
       if (!version || !item.publishUrl) {
         out.push(item)
         continue
@@ -189,13 +146,13 @@ const plugin = ({ contentDir, versions, builtPath }: Params): PodliteWebPlugin =
     const empty = versions.filter(v => !out.some(r => r.pluginsData?.version?.prefix === v.prefix))
     if (empty.length) {
       throw new Error(
-        `${CONFIG_NAME}: ${empty.map(v => `"${v.prefix}" (${v.dir})`).join(', ')} produced no page. ` +
-          `The directory is there, so the source is read differently than the current toolchain expects.`,
+        `${empty.map(v => `"${v.prefix}" (${v.dir})`).join(', ')} produced no page. ` +
+          `The checkout is there, so the source is read differently than the current toolchain expects.`,
       )
     }
 
-    const listed = versions.map(({ refName, prefix, label, state, index, sha, sourceUrl }, at) => ({
-      ref: refName,
+    const listed = versions.map(({ ref, prefix, label, state, index, sha, sourceUrl }, at) => ({
+      ref,
       prefix,
       label,
       state,

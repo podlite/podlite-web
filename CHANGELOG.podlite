@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a version of a mounted document names the source it is built from instead of a directory named by convention; a version whose optional source is missing is left out of the picker rather than offered as a dead link
+
 =item a site may name the repositories its content comes from, and the build fetches them itself: the checkouts live beside the build, the content directory is left to the author, and a source declared as not required is skipped with a word instead of stopping the build
 
 =head1 0.10.14
