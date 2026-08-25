@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.14
+
 =item the check that stopped the build when a source declared a date the parse came back without is withdrawn: it asked the record before the plugins had made the page, so a paragraph carrying C<:pubdate> - a published note by design - stopped a site that builds
 
 =head1 0.10.13
