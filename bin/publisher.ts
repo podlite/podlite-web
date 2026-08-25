@@ -35,6 +35,7 @@ import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
 import specVersionsPlugin, { readVersions } from './spec-versions-plugin'
 import indexingPolicyPlugin, { INDEX_FIELD } from './indexing-policy-plugin'
 import { Prepared, prepareMounts } from './mounts'
+import mountPrefixPlugin from './mount-prefix-plugin'
 import { runLint } from 'podlite/lib/lint/index'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
@@ -199,7 +200,15 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
     includePatterns: '.*',
   }
 
+  // The address is settled by the pubdate plugin, which reads it from the
+  // document again; a section given to a mounted source is applied after that.
+  const configMountPrefixPlugin: PluginConfig = {
+    plugin: mountPrefixPlugin(mountsPrepared),
+    includePatterns: '.*',
+  }
+
   const plugins = [
+    configMountPrefixPlugin,
     configSpecVersionsPlugin,
     configIndexingPolicyPlugin,
     makedocInjectorPlugin,
@@ -273,6 +282,17 @@ const indexFieldsSupported = () => {
     if (code !== 0 && options.lintStrict) {
       program.error('lint reported problems, and --lint-strict is on', { exitCode: 1, code: '--lint-strict' })
     }
+  }
+
+  // A source that gave the walk nothing was mounted for nothing; one that gave
+  // files but no pages is a source whose documents chose not to publish, which is
+  // their own business.
+  for (const m of mounts.filter(m => m.dir)) {
+    const taken = sources.filter((f: string) => f.startsWith(`${m.dir}/`)).length
+    if (taken) continue
+    const message = `mount "${m.name}" (${m.ref}) gave the walk no files`
+    if (m.required !== false) program.error(message, { exitCode: 1, code: 'empty-mount' })
+    console.warn(`${message}; it is declared optional, so the build goes on`)
   }
 
   const items = sources.map((file: string) => parseSources(file)).flat()

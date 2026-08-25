@@ -10,6 +10,7 @@ export type Mount = {
   repo: string
   ref: string
   required?: boolean
+  prefix?: string
 }
 
 export type Prepared = Mount & {
@@ -73,8 +74,19 @@ const report = (prepared: Prepared[]) => {
 }
 
 export const prepareMounts = (contentDir: string, offline = false): Prepared[] => {
-  const { mounts = [] } = readSiteConfig(contentDir)
+  const { mounts = [], versions } = readSiteConfig(contentDir)
   if (!mounts.length) return []
+
+  // A version already builds an address of its own. Two rules over one address
+  // disagree quietly, so the pair is refused outright.
+  const named = new Set((versions?.entries || []).map((e: { mount: string }) => e.mount))
+  const both = mounts.filter(m => m.prefix && named.has(m.name))
+  if (both.length) {
+    throw new Error(
+      `podlite-web.config.js: ${both.map(m => `"${m.name}"`).join(', ')} carries a prefix and is used as a version; ` +
+        `the address is built by one rule or the other, not both`,
+    )
+  }
 
   const prepared = mounts.map(m => {
     const dir = path.join(CACHE_DIR, m.name)
