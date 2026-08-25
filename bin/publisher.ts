@@ -236,7 +236,10 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
 // everything.
 const indexFieldsSupported = () => {
   try {
-    return typeof require('@podlite/publisher/lib/dump-pages-plugin').buildPagesIndex === 'function'
+    return (
+      typeof require('@podlite/publisher/lib/dump-pages-plugin').buildPagesIndex === 'function' &&
+      typeof require('@podlite/publisher').isEntry === 'function'
+    )
   } catch {
     return false
   }
@@ -298,7 +301,7 @@ const indexFieldsSupported = () => {
   const items = sources.map((file: string) => parseSources(file)).flat()
 
   if (!indexFieldsSupported()) {
-    program.error('the installed @podlite/publisher does not carry named index fields; update it to 0.0.48 or newer', {
+    program.error('the installed @podlite/publisher is older than this site needs; update it', {
       exitCode: 1,
       code: 'index-fields',
     })

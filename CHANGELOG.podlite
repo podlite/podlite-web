@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item stop the build when the installed publisher cannot say whether a document is a page, instead of failing part way through
+
 =item last entries, archive, feed and search markup now ask one predicate instead of four copies of a test that answered a different question
 =item a page that carries a date no longer shows up in the feed as an entry
 
