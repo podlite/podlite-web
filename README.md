@@ -88,6 +88,59 @@ docker run --rm -v ${PWD}:/app/pub \
   podlite/podlite-web export-zip ./pub --preset everything > site.zip
 ```
 
+## Mounted sources
+
+A site can list the repositories its content comes from. The build clones them before it reads the files. The list goes into `podlite-web.config.js` in the content directory:
+
+```js
+module.exports = {
+  mounts: [
+    { name: 'spec', repo: 'https://github.com/podlite/podlite-specs', ref: 'main' },
+    { name: 'spec-v1.0', repo: 'https://github.com/podlite/podlite-specs', ref: 'v1.0' },
+    { name: 'spec-v3.0', repo: 'https://github.com/podlite/podlite-specs', ref: 'release/v3.0', required: false },
+    { name: 'skills', repo: 'https://github.com/podlite/podlite-skills', ref: 'main', prefix: '/skills' },
+  ],
+}
+```
+
+| field | meaning |
+|---|---|
+| `name` | the name used elsewhere in the config, and the directory the checkout goes into |
+| `repo` | the repository to clone |
+| `ref` | the branch or tag to build from. For a repository you do not own, use a tag: a branch can change at any time |
+| `required` | true by default. If a required source cannot be prepared, the build stops. With `required: false` the source is skipped and the build prints a warning |
+| `prefix` | the part of the site this source answers at. Without it, addresses come from the documents |
+
+Checkouts go into `.mounts/` next to the build, not into the content directory. You build the same site on your own machine, and files from another repository should not end up among your own. If a checkout is already there, the build asks `git ls-remote` for the commit and clones again only if it differs, so a second local build costs almost nothing. `git` has to be on the PATH.
+
+If a required source gives the build no files at all, the build stops. If an optional one does, the build prints a warning and goes on. The first lines of output list what was mounted: name, ref, commit, and whether it came from the network or from the cache.
+
+Two flags belong to this step:
+
+- `--offline` builds from the checkouts already on disk and does not use the network.
+- `--mounts-only` prepares the sources and stops. A build server can use it to see which commits the refs point to before it decides to build.
+
+### Versions of a mounted document
+
+Several mounts of the same document can be published as versions of it:
+
+```js
+  versions: {
+    default: 'v2.0',
+    entries: [
+      { prefix: 'v1.0', mount: 'spec-v1.0', label: 'v1.0' },
+      { prefix: 'v2.0', mount: 'spec', label: 'v2.0' },
+      { prefix: 'v3.0', mount: 'spec-v3.0', label: 'v3.0' },
+    ],
+  },
+```
+
+List the entries oldest first. Everything after `default` is not released yet. Everything before it is superseded.
+
+The current version answers at the address written in its own documents, and once more under its prefix. The copy under the prefix has a canonical link to the first address and is not indexed. A version that is not released yet gets `noindex` and stays out of the sitemap. A superseded version keeps its address in both, but stays out of the search on the site. The list of versions is passed to the site as data, so the site draws the version picker itself.
+
+A mount used as a version cannot also have a `prefix`. Two rules for one address would disagree, so the build stops if you set both.
+
 ## Site template and components
 
 A site can draw its own page, and keep its React components next to the content without a package of its own.
