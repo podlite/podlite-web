@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.16
+
 =item built against Podlite 0.0.81 and the packages released with it
 
 =item stop the build when the installed publisher does not carry the entry-or-page test, instead of failing part way through
