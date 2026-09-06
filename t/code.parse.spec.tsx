@@ -1,16 +1,9 @@
 import { makeInterator } from '@podlite/schema'
 // import { convertFileLinksToUrl, parseFiles } from '../src/node-utils'
 import { getTextContentFromNode, PodNode } from '@podlite/schema'
-import {
-  parseFiles,
-  PluginConfig,
-  PodliteWebPlugin,
-  PodliteWebPluginContext,
-  processFile,
-  processPlugin,
-  publishRecord,
-} from '@podlite/publisher'
-import { convertFileLinksToUrl } from '@podlite/publisher'
+import { PluginConfig, PodliteWebPlugin, PodliteWebPluginContext, processPlugin, publishRecord } from '@podlite/publisher'
+import { parseFiles, processFile } from '@podlite/publisher/node'
+import { convertFileLinksToUrl } from '@podlite/publisher/node'
 
 const makeAbstactDocument = (title: string, content: string) => {
   return `

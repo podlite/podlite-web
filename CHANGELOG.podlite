@@ -2,6 +2,11 @@
 
 =head1 Upcoming
 
+=item the shared predicate comes from C<@podlite/publisher/record> and the node helpers from C<@podlite/publisher/node>, the entry points the publisher now declares for them
+
+=item module resolution is C<bundler>, so TypeScript reads a package export map the same way the build does. Under C<node> it could not see a subpath at all
+
+
 =item the shared entry-or-page predicate is taken from a subpath instead of the package root, which was dragging node modules into the browser bundle and breaking every site build
 
 =item shiki is a direct dependency again: it became an optional peer upstream, and nothing installed it

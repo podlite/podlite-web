@@ -1,6 +1,6 @@
 import { DataFeedContent } from '../../bin/makeDataSource'
 import { PUBLIC_PATH } from '../constants'
-import { isEntry } from '@podlite/publisher/lib/plugins'
+import { isEntry } from '@podlite/publisher/record'
 import { getSiteInfo } from '../utils'
 import * as fs from 'fs'
 import { convertPodNodeToHtml as convertPodNodeToHtml } from '../utils'

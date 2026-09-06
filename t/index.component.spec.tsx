@@ -1,8 +1,9 @@
 import { makeInterator } from '@podlite/schema'
 // import { convertFileLinksToUrl, parseFiles } from '../src/node-utils'
 import { getTextContentFromNode } from '@podlite/schema'
-import { parseFiles, publishRecord } from '@podlite/publisher'
-import { convertFileLinksToUrl } from '@podlite/publisher'
+import { publishRecord } from '@podlite/publisher'
+import { parseFiles } from '@podlite/publisher/node'
+import { convertFileLinksToUrl } from '@podlite/publisher/node'
 import { addUrl } from 'src/shared'
 export {}
 

@@ -1,4 +1,5 @@
-import { PodliteWebPlugin, PodliteWebPluginContext, processFile, publishRecord } from '@podlite/publisher'
+import { PodliteWebPlugin, PodliteWebPluginContext, publishRecord } from '@podlite/publisher'
+import { processFile } from '@podlite/publisher/node'
 import * as fs from 'fs'
 import * as path from 'path'
 import { Prepared, readSiteConfig } from './mounts'

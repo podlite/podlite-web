@@ -2,7 +2,7 @@ import styles from '../components/service.module.css'
 import Link from 'next/link'
 import { getTextContentFromNode } from '@podlite/schema'
 import moment from 'moment'
-import { isEntry } from '@podlite/publisher/lib/plugins'
+import { isEntry } from '@podlite/publisher/record'
 import { getSiteInfo } from 'src/utils'
 
 export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, getOpt }) => {

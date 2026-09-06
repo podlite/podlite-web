@@ -12,7 +12,7 @@ import { assetUrl, isExternalImageSrc, isExternalUrl } from './image-src'
 import * as components from '../built/components'
 import Link from 'next/link'
 import type { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
-import { isEntry } from '@podlite/publisher/lib/plugins'
+import { isEntry } from '@podlite/publisher/record'
 import type { pubRecord } from '@podlite/publisher'
 
 // The editor draws nothing without a window, so a server-rendered page and the

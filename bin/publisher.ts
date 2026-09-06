@@ -8,15 +8,8 @@
 
  */
 
-import {
-  PluginConfig,
-  composePlugins,
-  processPlugin,
-  parseSources,
-  PodliteWebPlugin,
-  publishRecord,
-  processFile,
-} from '@podlite/publisher'
+import { PluginConfig, PodliteWebPlugin, composePlugins, processPlugin, publishRecord } from '@podlite/publisher'
+import { parseSources, processFile } from '@podlite/publisher/node'
 import * as fs from 'fs'
 import path from 'path'
 import { BUILT_PATH, INDEX_NAMES, PAGES_FILE_PATH, POSTS_PATH, PUBLIC_PATH } from '../src/constants'
