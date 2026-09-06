@@ -1,4 +1,4 @@
-import { publishRecord } from '@podlite/publisher'
+import type { publishRecord } from '@podlite/publisher'
 import * as fs from 'fs'
 import { DATA_PATH, PAGES_INDEX_PATH, PAGES_PATH } from './constants'
 import { DataFeedContent } from './utils'

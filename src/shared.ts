@@ -1,5 +1,5 @@
 import { getFromTree, makeAttrs, makeInterator, PodliteDocument, PodNode } from '@podlite/schema'
-import { publishRecord, pubRecord } from '@podlite/publisher'
+import type { publishRecord, pubRecord } from '@podlite/publisher'
 
 import { podlite as podlite_core } from 'podlite'
 // now we add base60 letters

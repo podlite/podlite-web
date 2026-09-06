@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { DataFeedContent } from 'bin/makeDataSource'
 import { getFromTree, getTextContentFromNode } from '@podlite/schema'
 import { useEffect, useState } from 'react'
-import { publishRecord } from '@podlite/publisher'
+import type { publishRecord } from '@podlite/publisher'
 export const TestComponent = ({ id, children }) => {
   var style = { '--count-columns ': children.length } as React.CSSProperties
   return (

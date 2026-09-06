@@ -11,8 +11,9 @@ import { assetUrl, isExternalImageSrc, isExternalUrl } from './image-src'
 //@ts-ignore
 import * as components from '../built/components'
 import Link from 'next/link'
-import { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
-import { isEntry, pubRecord } from '@podlite/publisher'
+import type { SiteInfo } from '@podlite/publisher/lib/site-data-plugin'
+import { isEntry } from '@podlite/publisher/lib/plugins'
+import type { pubRecord } from '@podlite/publisher'
 
 // The editor draws nothing without a window, so a server-rendered page and the
 // first client render disagree, and react rebuilds the whole page to recover.

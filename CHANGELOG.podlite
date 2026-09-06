@@ -2,6 +2,10 @@
 
 =head1 Upcoming
 
+=item the shared entry-or-page predicate is taken from a subpath instead of the package root, which was dragging node modules into the browser bundle and breaking every site build
+
+=item shiki is a direct dependency again: it became an optional peer upstream, and nothing installed it
+
 =head1 0.10.16
 
 =item built against Podlite 0.0.81 and the packages released with it

@@ -1,5 +1,5 @@
 import { ProcessWithTemplate } from '@Components/service'
-import { publishRecord } from '@podlite/publisher'
+import type { publishRecord } from '@podlite/publisher'
 import { getTextContentFromNode } from '@podlite/schema'
 import Head from 'next/head'
 import { contentData, getPage, readRecord } from 'src/serverside'

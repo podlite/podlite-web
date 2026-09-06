@@ -1,4 +1,4 @@
-import { isEntry } from '@podlite/publisher'
+import { isEntry } from '@podlite/publisher/lib/plugins'
 
 type Source = {
   title?: string | null
