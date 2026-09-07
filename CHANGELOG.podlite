@@ -2,6 +2,9 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.90 release of the monorepo. The editor no longer carries a third-party layer between React and CodeMirror, every package can now be loaded as a module, and switching files while typing keeps the cursor where it was left
+
+
 =head1 0.10.17
 
 =item the shared predicate comes from C<@podlite/publisher/record> and the node helpers from C<@podlite/publisher/node>, the entry points the publisher now declares for them
