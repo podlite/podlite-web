@@ -41,7 +41,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const version = item?.pluginsData?.version
   const canonicalUrl = version?.canonical ? absoluteUrl(siteUrl, version.canonical) : pageUrl
   const askedOutOfIndex = item?.indexing?.robots === false
-  const resultUrl = siteUrl
   const imageUrl = metaImage && img[metaImage] ? absoluteUrl(siteUrl, assetUrl(img[metaImage])) : undefined
   const jsonLd = structuredData({
     item,

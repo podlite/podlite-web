@@ -37,7 +37,15 @@ export function encodePath(path: string): string {
 export function absoluteUrl(siteUrl: string, route: string | null | undefined): string {
   const base = (siteUrl || '').replace(/\/+$/, '')
   const path = route === '/index' ? '' : route || ''
-  return base + encodePath(path)
+  if (!path) return base
+  // An asset may already be an address of its own: badges and remote images do
+  // not live on this site. Pasting a site in front of one gave
+  // `https://site.comhttps://badge.example/x.svg` long before this function
+  // existed; it is caught here because this is where addresses are now made.
+  if (/^(https?:)?\/\//i.test(path) || /^data:/i.test(path)) return path
+  // A route is expected to start at the root. One that does not would glue
+  // itself to the host name, so the separator is added rather than assumed.
+  return base + (path.startsWith('/') ? '' : '/') + encodePath(path)
 }
 
 const XML_ESCAPES: Record<string, string> = {

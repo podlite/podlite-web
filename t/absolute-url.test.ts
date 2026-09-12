@@ -80,6 +80,27 @@ describe('joining a site and a route', () => {
   })
 })
 
+describe('a route that is already an address', () => {
+  // Pre-existing defect, older than this function: an external badge or remote
+  // image is not a route, and pasting the site in front of one made
+  // `https://site.comhttps://badge.example/x.svg`. Found by the code review round.
+  it('an http address is returned untouched', () => {
+    expect(absoluteUrl(SITE, 'https://badge.example/x.svg')).toBe('https://badge.example/x.svg')
+  })
+
+  it('a protocol-relative address is returned untouched', () => {
+    expect(absoluteUrl(SITE, '//badge.example/x.svg')).toBe('//badge.example/x.svg')
+  })
+
+  it('a data uri is returned untouched', () => {
+    expect(absoluteUrl(SITE, 'data:image/png;base64,AAAA')).toBe('data:image/png;base64,AAAA')
+  })
+
+  it('a route with no leading slash gets a separator instead of gluing to the host', () => {
+    expect(absoluteUrl(SITE, 'post/1')).toBe(SITE + '/post/1')
+  })
+})
+
 describe('escaping for xml', () => {
   it('escapes the five characters xml cares about', () => {
     expect(escapeXml(`&<>"'`)).toBe('&amp;&lt;&gt;&quot;&apos;')
