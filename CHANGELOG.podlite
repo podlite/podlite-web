@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.18
+
 =item the Podlite toolchain moves to the 0.0.90 release of the monorepo. The editor no longer carries a third-party layer between React and CodeMirror, every package can now be loaded as a module, and switching files while typing keeps the cursor where it was left
 
 
