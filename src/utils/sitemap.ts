@@ -1,16 +1,18 @@
 import { PUBLIC_PATH } from '../constants'
 import * as fs from 'fs'
 import {  ContentRecord, getSiteInfo } from '../utils'
+import { absoluteUrlForXml } from '../absolute-url'
 import { contentData } from 'src/serverside'
 
 export function generateSitemap() {
   const siteUrl = getSiteInfo().url
   function addPage(page: ContentRecord) {
-    const path = page.publishUrl
-    const route = path === '/index' ? '' : path
+    // The route is a raw path and may hold anything a module author called a
+    // directory: spaces, asterisks, angle brackets. Encoded first so the address
+    // is legal, escaped second so the document stays well-formed.
     return `
         <url>
-          <loc>${`${siteUrl}${route}`}</loc>
+          <loc>${absoluteUrlForXml(siteUrl, page.publishUrl)}</loc>
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>monthly</changefreq>
           <priority>1.0</priority>

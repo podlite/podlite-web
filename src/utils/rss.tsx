@@ -2,6 +2,7 @@ import { DataFeedContent } from '../../bin/makeDataSource'
 import { PUBLIC_PATH } from '../constants'
 import { isEntry } from '@podlite/publisher/record'
 import { getSiteInfo } from '../utils'
+import { absoluteUrlForXml } from '../absolute-url'
 import * as fs from 'fs'
 import { convertPodNodeToHtml as convertPodNodeToHtml } from '../utils'
 import { getAllPages, getPage } from 'src/serverside'
@@ -13,16 +14,16 @@ export function getRssForData(data: DataFeedContent) {
   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
       <title>${conf.title}</title>
-      <atom:link href="${conf.url}/rss.xml" rel="self" type="application/rss+xml"/>
-      <link>${conf.url}</link>
+      <atom:link href="${absoluteUrlForXml(conf.url, '/rss.xml')}" rel="self" type="application/rss+xml"/>
+      <link>${absoluteUrlForXml(conf.url, '')}</link>
       <description>${conf.title}</description>
       <language>${conf.language ?? 'en'}</language>
 ${pages
   .map(
     post => `      <item>
         <title>${post.title || ''}</title>
-        <link>${conf.url}${post.publishUrl}</link>
-        <guid>${conf.url}${post.publishUrl}</guid>
+        <link>${absoluteUrlForXml(conf.url, post.publishUrl)}</link>
+        <guid>${absoluteUrlForXml(conf.url, post.publishUrl)}</guid>
         <pubDate>${new Date(post.pubdate).toUTCString()}</pubDate>
         <description><![CDATA[
           <p>${convertPodNodeToHtml(post.description || '')}</p>

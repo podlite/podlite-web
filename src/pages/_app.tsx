@@ -12,6 +12,7 @@ import { getSiteInfo } from '../utils'
 import { getFromTree, getTextContentFromNode, Image } from '@podlite/schema'
 import { useEffect } from 'react'
 import { useRouter } from 'next/dist/client/router'
+import { absoluteUrl } from '../absolute-url'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { slug = [], item } = pageProps
@@ -30,16 +31,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   // from publishUrl gave a path where an address was needed, so a shared link
   // carried an image nobody could fetch.
   const siteUrl = (url || '').replace(/\/$/, '')
-  const pageUrl = siteUrl + (item?.publishUrl || '')
+  // Routes are raw paths and may hold spaces or angle brackets; encoding happens
+  // here so every consumer below gets the same legal address.
+  const pageUrl = absoluteUrl(siteUrl, item?.publishUrl)
   // The same document may answer at more than one address: a version of it at
   // its own permanent one, the current version at the short one. Whoever put it
   // there says which address is the one to keep and whether this copy asks to be
   // indexed; a page nobody versioned keeps answering for itself.
   const version = item?.pluginsData?.version
-  const canonicalUrl = version?.canonical ? siteUrl + version.canonical : pageUrl
+  const canonicalUrl = version?.canonical ? absoluteUrl(siteUrl, version.canonical) : pageUrl
   const askedOutOfIndex = item?.indexing?.robots === false
   const resultUrl = siteUrl
-  const imageUrl = metaImage && img[metaImage] ? siteUrl + assetUrl(img[metaImage]) : undefined
+  const imageUrl = metaImage && img[metaImage] ? absoluteUrl(siteUrl, assetUrl(img[metaImage])) : undefined
   const jsonLd = structuredData({
     item,
     title,
@@ -85,8 +88,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
         {metaImage && img[metaImage] && (
           <>
-            <meta property="og:image" content={resultUrl + assetUrl(img[metaImage])} />
-            <meta name="twitter:image" content={resultUrl + assetUrl(img[metaImage])} />
+            <meta property="og:image" content={imageUrl} />
+            <meta name="twitter:image" content={imageUrl} />
           </>
         )}
         <meta name="twitter:description" content={description} />
