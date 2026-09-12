@@ -1,1 +1,22 @@
+# The image is built from a clean checkout in CI, but a local `docker build .`
+# hands Docker whatever the working tree holds. Two kinds of leftovers matter.
+#
+# A symlink breaks the build outright: `pub` points at a checkout elsewhere on
+# the developer's disk, and once it is inside the image, Node resolves modules
+# along a path that does not exist in the container. The publisher then cannot
+# find its own dependencies, while `/app/node_modules` sits there untouched.
+# Measured 2026-09-25: the same export succeeded on the published image and
+# failed on a locally built one for this reason alone.
+#
+# The rest only make the image fat — 2.82 GB against the published 2.38 GB.
 node_modules
+pub
+pub.demo
+.mounts
+.next
+out
+built
+public/*
+.yarn/cache
+.yarn/install-state.gz
+*.tsbuildinfo
