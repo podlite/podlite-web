@@ -21,7 +21,7 @@ import siteDataPlugin from '@podlite/publisher/lib/site-data-plugin'
 import stateVersionPlugin from '@podlite/publisher/lib/state-version-plugin'
 import breadcrumbPlugin from '@podlite/publisher/lib/breadcrumb-plugin'
 import termsIndexPlugin from '@podlite/publisher/lib/terms-index-plugin'
-import includeResolvePlugin from '@podlite/publisher/lib/include-resolve-plugin'
+import { includePasses } from '@podlite/publisher/lib/include-resolve-plugin'
 import dumpPagesPlugin from '@podlite/publisher/lib/dump-pages-plugin'
 import navigatePlugin from '@podlite/publisher/lib/prev-next-plugin'
 import docsInjectorPlugin from '@podlite/publisher/lib/docs-injector-plugin'
@@ -104,7 +104,12 @@ const declaredTemplateFile = (): string | undefined => {
 }
 
 const tctx = { testing: false }
-const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
+const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]) => {
+  const mountDirs = mountsPrepared.map(m => m.dir).filter((dir): dir is string => Boolean(dir))
+  // Includes are placed twice over the files the site read, mounted ones among them:
+  // before React, images and links, which then treat an included block as written
+  // in its own file, and after the site data, which makes what contents pages include.
+  const includes = includePasses({ catalogue: items, bounds: mountDirs })
   const configSiteDataPlugin: PluginConfig = {
     plugin: siteDataPlugin({
       public_path,
@@ -139,7 +144,7 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
     includePatterns: '.*',
   }
   const configLinksPlugin: PluginConfig = {
-    plugin: linksPlugin(),
+    plugin: linksPlugin({ documents: includes.documents, home: indexFilePath }),
     includePatterns: '.*',
   }
   const configReactPlugin: PluginConfig = {
@@ -160,8 +165,12 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
     includePatterns: '.*',
   }
 
-  const configIncludeResolvePluginPlugin: PluginConfig = {
-    plugin: includeResolvePlugin(),
+  const configIncludeFirstPlugin: PluginConfig = {
+    plugin: includes.first,
+    includePatterns: '.*',
+  }
+  const configIncludeLastPlugin: PluginConfig = {
+    plugin: includes.last,
     includePatterns: '.*',
   }
 
@@ -205,6 +214,7 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
     configSpecVersionsPlugin,
     configIndexingPolicyPlugin,
     makedocInjectorPlugin,
+    configIncludeFirstPlugin,
     configReactPlugin,
     configImagesPlugin,
     configLinksPlugin,
@@ -213,7 +223,7 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[]) => {
     configNavigatePlugin,
     configTermsIndexPlugin,
     configSiteDataPlugin,
-    configIncludeResolvePluginPlugin,
+    configIncludeLastPlugin,
     configDumpPagesPlugin
   ]
 
@@ -274,7 +284,7 @@ const indexFieldsSupported = () => {
     .filter((f:string)=> !f.split(path.sep).includes('node_modules'))
 
   if (options.lint) {
-    const code = runLint(sources, { strict: false, format: 'text' })
+    const code = runLint(sources, { strict: Boolean(options.lintStrict), format: 'text' })
     if (code !== 0 && options.lintStrict) {
       program.error('lint reported problems, and --lint-strict is on', { exitCode: 1, code: '--lint-strict' })
     }
@@ -300,9 +310,13 @@ const indexFieldsSupported = () => {
     })
   }
 
-  const [res, ctx] = processPlugin(
-    composePlugins([makeCustomPlugin, makeConfigMainPlugin(mounts)], tctx),
-    items,
-    tctx,
-  )
+  // an include or a link that does not resolve stops the build with its file and line
+  try {
+    processPlugin(composePlugins([makeCustomPlugin, makeConfigMainPlugin(mounts, items)], tctx), items, tctx)
+  } catch (e) {
+    if (e instanceof Error && (e.name === 'IncludeError' || e.name === 'LinkError')) {
+      program.error(e.message, { exitCode: 1, code: e.name })
+    }
+    throw e
+  }
 })()
