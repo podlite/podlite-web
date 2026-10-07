@@ -2,6 +2,10 @@
 
 =head1 Upcoming
 
+=item a link to an anchor in the page goes to the id the page gave the heading or block, by the same rule, so a heading with a dot, a colon, a slash or an equals sign in its text is reached. Such a link is a plain link, and a click on a link to a test at the address the page already shows opens that test
+
+=item the tests of the specification have a look of their own: where there is room, the line of a test stands in the right margin beside the rule it checks, otherwise under it; a test opens under the rule, and print shows every test whole
+
 =item the files in the C<t/> directory of a mounted specification are not published under the C<everything> preset either: they come onto a page only through an include
 
 =item includes are placed by the shared assembler of Podlite in two passes. The first goes before React, images and links, so an included block finds its pictures, links and components from the file it was written in; the last goes after the site data, which makes what the contents pages include. An include finds its source among every file the site read, mounted sources among them, and a path written in a mounted file does not lead out of its mount

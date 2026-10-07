@@ -2,5 +2,6 @@
 @import 'node_modules/@podlite/editor-react/lib/podlite-vars.css';
 @import './screen.css';
 @import './global.css';
+@import './tests.css';
 @import 'node_modules/@podlite/editor-react/lib/Editor.css';
 @import 'node_modules/@podlite/formula/lib/default.css';

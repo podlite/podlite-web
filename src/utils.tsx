@@ -1,10 +1,10 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
-import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
+import { PodNode, Rules, getTextContentFromNode, makeAttrs, sameDocTarget, setFn, PodliteDocument } from '@podlite/schema'
 import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
 import dynamic from 'next/dynamic'
 import ReactDOMServer from 'react-dom/server'
-import Podlite from '@podlite/to-jsx'
+import Podlite, { revealTest } from '@podlite/to-jsx'
 import { Indexing } from '../bin/indexing-policy-plugin'
 import * as img from '../built/images'
 import { assetUrl, isExternalImageSrc, isExternalUrl } from './image-src'
@@ -142,10 +142,21 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
           meta = getTextContentFromNode(node)
         }
         const text_content = getTextContentFromNode(node)
-        //TODO: fix links to anchors
-        const href = meta?.trim().replace(/\s/g, '-') || '#'
+        const target = meta?.trim()
+        // an anchor in the page is the id the page gave its heading or block, by the same rule
+        const written = target?.replace(/\s/g, '-')
+        const href = (target?.startsWith('#') ? sameDocTarget(target.replace(/\s+/g, ' '), ctx) ?? written : written) || '#'
+        // A link within the page changes the address itself, so the page hears it; a
+        // click at the address already shown changes nothing, and opens the test there.
+        const reveal = () => {
+          if (decodeURIComponent(window.location.hash) === decodeURIComponent(href)) revealTest(decodeURIComponent(href.slice(1)))
+        }
         return mkComponent(({ children, key }) =>
-          isExternalUrl(href) ? (
+          href.startsWith('#') ? (
+            <a href={href} key={key} onClick={reveal}>
+              {text_content}
+            </a>
+          ) : isExternalUrl(href) ? (
             <a href={href} key={key}>
               {text_content}
             </a>
