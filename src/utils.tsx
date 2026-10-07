@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
-import { PodNode, Rules, getTextContentFromNode, makeAttrs, sameDocTarget, setFn, PodliteDocument } from '@podlite/schema'
+import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
+import { anchorHref } from './anchor-href'
 import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
 import dynamic from 'next/dynamic'
 import ReactDOMServer from 'react-dom/server'
@@ -142,10 +143,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
           meta = getTextContentFromNode(node)
         }
         const text_content = getTextContentFromNode(node)
-        const target = meta?.trim()
-        // an anchor in the page is the id the page gave its heading or block, by the same rule
-        const written = target?.replace(/\s/g, '-')
-        const href = (target?.startsWith('#') ? sameDocTarget(target.replace(/\s+/g, ' '), ctx) ?? written : written) || '#'
+        const href = anchorHref(meta, ctx)
         // A link within the page changes the address itself, so the page hears it; a
         // click at the address already shown changes nothing, and opens the test there.
         const reveal = () => {
