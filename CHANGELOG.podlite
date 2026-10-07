@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the files in the C<t/> directory of a mounted specification are not published under the C<everything> preset either: they come onto a page only through an include
+
 =item includes are placed by the shared assembler of Podlite in two passes. The first goes before React, images and links, so an included block finds its pictures, links and components from the file it was written in; the last goes after the site data, which makes what the contents pages include. An include finds its source among every file the site read, mounted sources among them, and a path written in a mounted file does not lead out of its mount
 
 =item a C<doc:> link finds a document by the names an include finds it by, and the home page answers at C</> before the site data gives it its address
