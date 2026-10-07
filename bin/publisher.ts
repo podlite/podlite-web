@@ -29,6 +29,7 @@ import specVersionsPlugin, { readVersions } from './spec-versions-plugin'
 import indexingPolicyPlugin, { INDEX_FIELD } from './indexing-policy-plugin'
 import { Prepared, prepareMounts } from './mounts'
 import mountPrefixPlugin from './mount-prefix-plugin'
+import mountTestsPlugin from './mount-tests-plugin'
 import { runLint } from 'podlite/lib/lint/index'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
@@ -173,11 +174,8 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]
     plugin: includes.last,
     includePatterns: '.*',
   }
-  // The tests of a specification live in its t/ and come onto a page only by an
-  // include; the pubdate preset drops them already, the everything preset would not.
-  const testDirs = mountDirs.map(dir => `${dir}/t/`)
-  const configDropMountTestsPlugin: PluginConfig = {
-    plugin: [(recs: publishRecord[]) => recs.filter(r => !testDirs.some(dir => r.file.startsWith(dir))), ctx => ctx],
+  const configMountTestsPlugin: PluginConfig = {
+    plugin: mountTestsPlugin(mountsPrepared),
     includePatterns: '.*',
   }
 
@@ -217,6 +215,7 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]
   }
 
   const plugins = [
+    configMountTestsPlugin,
     configMountPrefixPlugin,
     configSpecVersionsPlugin,
     configIndexingPolicyPlugin,
@@ -231,7 +230,6 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]
     configTermsIndexPlugin,
     configSiteDataPlugin,
     configIncludeLastPlugin,
-    configDropMountTestsPlugin,
     configDumpPagesPlugin
   ]
 
