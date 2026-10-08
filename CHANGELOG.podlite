@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.92 release of the monorepo, which the items below are built on
+
 =item a link to an anchor in the page goes to the id the page gave the heading or block, by the same rule, so a heading with a dot, a colon, a slash or an equals sign in its text is reached. Such a link is a plain link, and a click on a link to a test at the address the page already shows opens that test
 
 =item the tests of the specification have a look of their own: where there is room, the line of a test stands in the right margin beside the rule it checks, otherwise under it; a test opens under the rule, and print shows every test whole
