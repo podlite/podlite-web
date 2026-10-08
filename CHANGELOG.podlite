@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.19
+
 =item the Podlite toolchain moves to the 0.0.92 release of the monorepo, which the items below are built on
 
 =item a release builds the example site from the commit it carries before it changes anything, and stops if the site does not build; the dry run lists the steps the release runs
