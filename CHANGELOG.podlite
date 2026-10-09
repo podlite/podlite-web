@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.93 release of the monorepo: indented text at the top level of a document is a code block, a block's margin ends with the block, and the ambient selector finds text outside blocks
+
 =head1 0.10.19
 
 =item the Podlite toolchain moves to the 0.0.92 release of the monorepo, which the items below are built on
