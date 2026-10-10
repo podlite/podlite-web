@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.22
+
 =item C<--links-warn> lets the build go on past a C<doc:> link that does not resolve: one warning names every such link by file and line, and the link is written as its text. Without the flag such a link stops the build, as before
 
 =item the Podlite toolchain moves to the 0.0.95 release of the monorepo: a C<doc:> or C<file:> link is read as such only when its address starts with the scheme, and a table of contents entry for a heading that holds a C<doc:> link, or whose text changed after parsing, links to the heading
