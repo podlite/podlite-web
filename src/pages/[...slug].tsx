@@ -64,7 +64,7 @@ export async function getStaticProps({ params }) {
     process.exit(1)
   }
 
-  const { title: siteTitle, favicon, templateFile }: IndexProps = getSiteInfo()
+  const { favicon, templateFile }: IndexProps = getSiteInfo()
   let template: publishRecord | null = null
   const template_file = item.template_file || templateFile || 'defaultTemplate/defaultSiteTemplate.podlite'
   if (template_file) {
@@ -78,5 +78,5 @@ export async function getStaticProps({ params }) {
     }
   }
   const footer = getSiteInfo().footer
-  return { props: { footer, item, template, siteTitle, favicon } }
+  return { props: { footer, item, template, favicon } }
 }

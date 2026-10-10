@@ -10,7 +10,9 @@ import { getPostComponent, getSiteInfo } from '../utils'
 import { writeRss } from '../utils/rss'
 import { generateSitemap } from '../utils/sitemap'
 
-const Home = ({ footer, favicon, template, item }: IndexProps) => {
+type HomeProps = Omit<IndexProps, 'title' | 'node'>
+
+const Home = ({ footer, favicon, template, item }: HomeProps) => {
   if (template) {
     item.template = template
   }
@@ -35,11 +37,11 @@ export interface IndexProps {
   templateFile?: string | null
 }
 
-export async function getStaticProps(): Promise<{ props: IndexProps }> {
+export async function getStaticProps(): Promise<{ props: HomeProps }> {
   writeRss()
   generateSitemap()
   generateRedirects()
-  const { title, node, footer, favicon, templateFile }: IndexProps = getSiteInfo()
+  const { footer, favicon, templateFile }: IndexProps = getSiteInfo()
   const item: any = getPage('/')
   let template: publishRecord | null = null
 
@@ -54,6 +56,6 @@ export async function getStaticProps(): Promise<{ props: IndexProps }> {
       process.exit(1)
     }
   }
-  return { props: { title, node, footer, favicon, item, template } }
+  return { props: { footer, favicon, item, template } }
 }
 export default Home

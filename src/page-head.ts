@@ -16,8 +16,7 @@ export type PageHead = {
   description: string
 }
 
-// Titles and descriptions keep the line breaks they were written with, and a break inside
-// a tag is shown as it is by whoever reads it.
+// A line break kept from the source is shown as it is inside a meta tag.
 const clean = (text?: string | null): string => (text || '').replace(/\s+/g, ' ').trim()
 
 const textOf = (nodes?: PodNode | AstTree): string =>

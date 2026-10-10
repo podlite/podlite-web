@@ -78,7 +78,7 @@ The text of the page.
 ```
 
 - **Title** (`og:title`, `twitter:title`): the page title alone; the site title goes in `og:site_name`. A page without a title of its own is named by the site.
-- **Tab** (`<title>`): the page title, a dash, the site title: `Axona: six years from idea to release — My site`. The home page and a page without a title show the site title alone.
+- **Tab** (`<title>`): the page title, a dash, the site title: `Axona: six years from idea to release — My site`. A page without a title of its own, or titled like the site, shows the site title alone.
 - **Description** (`og:description`, `twitter:description`, `description`): the text of `DESCRIPTION`. Without it, or when it is empty, the first paragraph of 40 characters or more, cut to 160 characters; without that, the page title, and without a page title, the site title.
 - **Image** (`og:image`, `twitter:image`): the first picture in the document. Put the card picture inside `DESCRIPTION` so it comes first; otherwise the first picture of the text is used.
 - **Card size** (`twitter:card`): `summary_large_image` when the page has that picture, `summary` without one.
