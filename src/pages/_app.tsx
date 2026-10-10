@@ -4,12 +4,12 @@ import '@podlite/editor-react/podlite-vars.css'
 import '../../built/styles.css'
 import * as img from '../../built/images'
 import { assetUrl } from '../image-src'
-import { pageDescription } from '../page-description'
+import { pageHead } from '../page-head'
 import { structuredData } from '../structured-data'
 import Head from 'next/head'
 import type { AppProps } from 'next/app'
 import { getSiteInfo } from '../utils'
-import { getFromTree, getTextContentFromNode, Image } from '@podlite/schema'
+import { getFromTree, Image } from '@podlite/schema'
 import { useEffect } from 'react'
 import { useRouter } from 'next/dist/client/router'
 import { absoluteUrl } from '../absolute-url'
@@ -21,12 +21,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   // Titles come out of the source with the line break they were written with,
   // and a break inside a meta tag is shown as it is by whoever reads it.
   const pageTitle = (item?.title || '').replace(/\s+/g, ' ').trim()
-  const title = pageTitle && pageTitle !== siteTitle ? `${pageTitle} ${siteTitle}` : siteTitle
   const [image] = getFromTree(item?.node, { type: 'image' }) as Array<Image>
   const metaImage = image?.src || null
-  const description = (getTextContentFromNode(item?.description || []) || pageDescription(item?.node, title))
-    .replace(/\s+/g, ' ')
-    .trim()
+  const hasImage = Boolean(metaImage && img[metaImage])
+  const { tab, share, card, description } = pageHead({
+    pageTitle,
+    siteTitle,
+    hasImage,
+    description: item?.description,
+    node: item?.node,
+  })
   // The base for anything that leaves the page is the site address. Taking it
   // from publishUrl gave a path where an address was needed, so a shared link
   // carried an image nobody could fetch.
@@ -41,10 +45,10 @@ function MyApp({ Component, pageProps }: AppProps) {
   const version = item?.pluginsData?.version
   const canonicalUrl = version?.canonical ? absoluteUrl(siteUrl, version.canonical) : pageUrl
   const askedOutOfIndex = item?.indexing?.robots === false
-  const imageUrl = metaImage && img[metaImage] ? absoluteUrl(siteUrl, assetUrl(img[metaImage])) : undefined
+  const imageUrl = hasImage && metaImage ? absoluteUrl(siteUrl, assetUrl(img[metaImage])) : undefined
   const jsonLd = structuredData({
     item,
-    title,
+    title: share,
     pageTitle,
     description,
     pageUrl: canonicalUrl,
@@ -72,20 +76,21 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
+        {tab && <title>{tab}</title>}
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml" />
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
         {askedOutOfIndex && <meta name="robots" content="noindex, follow" />}
         <meta property="og:site_name" content={siteTitle} />
-        <meta property="og:title" content={title.trim()} />
+        <meta property="og:title" content={share} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />
         <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content={title} />
+        <meta name="twitter:card" content={card} />
+        <meta name="twitter:title" content={share} />
         <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-        {metaImage && img[metaImage] && (
+        {hasImage && (
           <>
             <meta property="og:image" content={imageUrl} />
             <meta name="twitter:image" content={imageUrl} />

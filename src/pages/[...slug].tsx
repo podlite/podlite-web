@@ -1,14 +1,12 @@
 import { ProcessWithTemplate } from '@Components/service'
 import type { publishRecord } from '@podlite/publisher'
-import { getTextContentFromNode } from '@podlite/schema'
 import Head from 'next/head'
 import { contentData, getPage, readRecord } from 'src/serverside'
 import { IndexProps } from '.'
 import { getSiteInfo } from '../utils'
-import { pageDescription } from '../page-description'
 
 export default function AnyPage(params) {
-  const { siteTitle, favicon, footer, item, template } = params
+  const { favicon, footer, item, template } = params
   if (template) {
     item.template = template
   }
@@ -17,17 +15,6 @@ export default function AnyPage(params) {
   return (
     <>
       <Head>
-        {/* One child, not three: React separates adjacent text nodes with
-            comment markers, and inside a title those are shown as text. */}
-        <title>{`${(item as publishRecord).title} - ${siteTitle}`}</title>
-        <meta
-          name="description"
-          content={
-            item.description
-              ? getTextContentFromNode(item.description)
-              : pageDescription(item.node, siteTitle + ' ' + (item as publishRecord).title)
-          }
-        />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
       <main data-pagefind-ignore={item?.indexing?.search === false ? true : undefined}>

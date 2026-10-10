@@ -1,7 +1,6 @@
 import { ProcessWithTemplate } from '@Components/service'
-import { pageDescription } from '../page-description'
 import type { publishRecord } from '@podlite/publisher'
-import { getTextContentFromNode, PodNode } from '@podlite/schema'
+import { PodNode } from '@podlite/schema'
 import Head from 'next/head'
 import { contentData, getPage, readRecord } from 'src/serverside'
 import { generateRedirects } from 'src/utils/redirects'
@@ -11,15 +10,13 @@ import { getPostComponent, getSiteInfo } from '../utils'
 import { writeRss } from '../utils/rss'
 import { generateSitemap } from '../utils/sitemap'
 
-const Home = ({ title, node, footer, favicon, template, item }: IndexProps) => {
+const Home = ({ footer, favicon, template, item }: IndexProps) => {
   if (template) {
     item.template = template
   }
   return (
     <div>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={item.description ? getTextContentFromNode(item.description) : pageDescription(item.node, title)} />
         <link rel="shortcut icon" href={`/${favicon}`} />
       </Head>
       <main id="body" data-pagefind-ignore={item?.indexing?.search === false ? true : undefined}>{ProcessWithTemplate(item, footer)}</main>
