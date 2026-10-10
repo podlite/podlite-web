@@ -60,6 +60,30 @@ A preset decides which documents become pages.
 
 There is no default: a run without `--preset` stops with `--preset undefined not valide`.
 
+## Link previews and the feed
+
+When a page is shared, the preview card is built from the page's own blocks:
+
+```podlite
+=begin pod :type('journal-note') :pubdate('2026-10-14T08:00:00')
+=TITLE Axona: six years from idea to release
+
+=begin DESCRIPTION
+One or two sentences about the page.
+=picture card.png
+=end DESCRIPTION
+
+The text of the page.
+=end pod
+```
+
+- **Title** (`og:title`, `twitter:title`): the page `=TITLE` followed by the site title, with a space between them.
+- **Description** (`og:description`, `twitter:description`, `description`): the text of `DESCRIPTION`. Without it, the first paragraph of 40 characters or more, cut to 160 characters; without that, the title.
+- **Image** (`og:image`, `twitter:image`): the first picture in the document. Put the card picture inside `DESCRIPTION` so it comes first; otherwise the first picture of the text is used.
+- **Card size**: `twitter:card` is always `summary`, a small image beside the text.
+
+`rss.xml` lists the last ten pages that have a description, newest first. A page with `DESCRIPTION` goes into the feed as that block, with its picture, not as the whole text; a dated paragraph in a journal goes in as the paragraph itself. Anything that reposts from the feed gets exactly this and a link to the page.
+
 ## Examples
 
 ```sh
