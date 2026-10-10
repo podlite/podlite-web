@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.95 release of the monorepo: a C<doc:> or C<file:> link is read as such only when its address starts with the scheme, and a table of contents entry for a heading that holds a C<doc:> link, or whose text changed after parsing, links to the heading
+
 =head1 0.10.21
 
 =item the Podlite toolchain moves to the 0.0.94 release of the monorepo: a notification is written with C<:notice>, on a block, from C<=set> or from C<=config nested>; a C<=nested> block that has C<:notify> and no C<:notice> is now a plain nested block, without a title or folding. The classes of the output stay C<notify> and C<notify-title>
