@@ -53,6 +53,7 @@ program
   .option('--mounts-only', 'prepare the sources the site declares and stop')
   .option('--no-lint', 'skip the lint report over the sources')
   .option('--lint-strict', 'stop the build when lint reports a problem')
+  .option('--links-warn', 'warn about a doc: link that does not resolve instead of stopping the build')
   .option('-preset, --preset [preset]', 'preset plugins (pubdate, everything)')
   .argument('[path to dir...]', 'path to posts')
 
@@ -145,7 +146,11 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]
     includePatterns: '.*',
   }
   const configLinksPlugin: PluginConfig = {
-    plugin: linksPlugin({ documents: includes.documents, home: indexFilePath }),
+    plugin: linksPlugin({
+      documents: includes.documents,
+      home: indexFilePath,
+      unresolved: options.linksWarn ? 'warning' : 'error',
+    }),
     includePatterns: '.*',
   }
   const configReactPlugin: PluginConfig = {
