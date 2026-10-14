@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
 import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
-import { anchorHref } from './anchor-href'
+import { linkAddress } from './anchor-href'
 import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
 import dynamic from 'next/dynamic'
 import ReactDOMServer from 'react-dom/server'
@@ -138,16 +138,15 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       //@ts-ignore
       DESCRIPTION: () => () => null,
       'L<>': setFn((node, ctx) => {
-        let { meta } = node
-        if (meta === null) {
-          meta = getTextContentFromNode(node)
-        }
         const text_content = getTextContentFromNode(node)
-        const href = anchorHref(meta, ctx)
+        const href = linkAddress(node, ctx)
+        // A link the page cannot give an address keeps its text and goes nowhere
+        if (href === undefined) return mkComponent(({ key }) => <a key={key}>{text_content}</a>)
         // A link within the page changes the address itself, so the page hears it; a
         // click at the address already shown changes nothing, and opens the test there.
         const reveal = () => {
-          if (decodeURIComponent(window.location.hash) === decodeURIComponent(href)) revealTest(decodeURIComponent(href.slice(1)))
+          if (decodeURIComponent(window.location.hash) === decodeURIComponent(href))
+            revealTest(decodeURIComponent(href.slice(1)))
         }
         return mkComponent(({ children, key }) =>
           href.startsWith('#') ? (

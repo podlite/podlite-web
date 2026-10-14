@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a link the tree generated, such as a table of contents entry, reaches the heading its key names: with the release of the Podlite toolchain that gives headings keys, two headings of one name get entries to C<#Intro> and C<#Intro-2>, and an entry for a heading with hidden text to its masked anchor; a generated link whose heading the page does not hold is written without an address. Links an author wrote are read as before
+
 =item a shared link carries the page title alone, the browser tab reads C<page — site>, and a page with a picture gets the large card; the title and the description are written once, on one line, so a page without a title no longer shows C<null> in its tab
 
 =head1 0.10.22
