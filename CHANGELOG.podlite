@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.23
+
 =item the Podlite toolchain moves to the 0.0.96 release of the monorepo: markup codes are read as the specification sets them out, a code ending at its own matching bracket and a code left open running to the end of its block; the codes inside C<S<>> are formatted as anywhere else; an implicit code block keeps its lines aligned as written; headings get keys, which the item below is built on
 
 =item a link the tree generated, such as a table of contents entry, reaches the heading its key names: with the release of the Podlite toolchain that gives headings keys, two headings of one name get entries to C<#Intro> and C<#Intro-2>, and an entry for a heading with hidden text to its masked anchor; a generated link whose heading the page does not hold is written without an address. Links an author wrote are read as before
