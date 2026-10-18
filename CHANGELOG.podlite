@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.98 release of the monorepo: a table of contents takes its caption from C<:caption> only; an entity C<E> inside C<C<>> is read as text unless C«=config C<> :allow<E>» is written; markup codes in a C<:caption> are read only when C<=set> gives it, and a caption written on a block is text
+
 =head1 0.10.23
 
 =item the Podlite toolchain moves to the 0.0.96 release of the monorepo: markup codes are read as the specification sets them out, a code ending at its own matching bracket and a code left open running to the end of its block; the codes inside C<S<>> are formatted as anywhere else; an implicit code block keeps its lines aligned as written; headings get keys, which the item below is built on
