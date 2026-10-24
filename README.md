@@ -58,7 +58,7 @@ A preset decides which documents become pages.
 - **`everything`** — every document is published. Use it while writing, and for sites that are not a blog.
 - **`pubdate`** — only documents carrying a publication date, and only once that date has passed. This is what a blog wants.
 
-There is no default: a run without `--preset` stops with `--preset undefined not valide`.
+There is no default preset: a run without `--preset` stops with an error that names the two presets, `pubdate` and `everything`.
 
 ## Link previews and the feed
 

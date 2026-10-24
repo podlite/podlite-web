@@ -68,7 +68,7 @@ console.log(JSON.stringify({...options,files}, null, 2))
 const preset = options.preset
 
 if (!['pubdate', 'everything'].includes(preset)) {
-  program.error(`--preset ${preset} not valide`, { exitCode: 2, code: '--preset' })
+  program.error(`Missing or invalid --preset (got: ${preset}). Choose pubdate or everything.`, { exitCode: 2, code: '--preset' })
 }
 // Sites written before the .podlite extension still name their index index.pod6.
 // The path is matched against the parsed records as a string, so the directory
