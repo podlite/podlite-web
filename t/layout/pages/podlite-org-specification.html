@@ -1,0 +1,2370 @@
+<!DOCTYPE html><html lang="en" class="bg-default"><head><base href="https://podlite.org/"><meta charset="utf-8"><title>Podlite - a lightweight markup language — Podlite</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"><meta name="description" content="Module-defined handler for extends markup features"><link rel="canonical" href="https://podlite.org/specification"><meta property="og:site_name" content="Podlite"><meta property="og:title" content="Podlite - a lightweight markup language"><meta property="og:description" content="Module-defined handler for extends markup features"><meta property="og:url" content="https://podlite.org/specification"><meta property="og:type" content="website"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Podlite - a lightweight markup language"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="twitter:description" content="Module-defined handler for extends markup features"><link rel="shortcut icon" href="/favicon.png"><meta charset="utf-8"><meta name="next-head-count" content="17"><noscript data-n-css=""></noscript><!--layout-styles--></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSW6H8XQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="__next"><main><nav id="sitenav" class="sitenav--bar" aria-label="site"><div class="sitenav__bar"><a href="/" class="sitenav__link sitenav__link--anchor">Podlite</a><button type="button" class="sitenav__toggle" aria-expanded="false" aria-controls="sitenav-links">Menu</button></div><div class="sitenav__links" id="sitenav-links"><span class="sitenav__sep" aria-hidden="true">·</span><a href="/quick-tour" class="sitenav__link">quick-tour</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/for-agents" class="sitenav__link">ai</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/specification" class="sitenav__link sitenav__link--here" aria-current="page">specification</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/roadmap" class="sitenav__link">roadmap</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/contents" class="sitenav__link">news</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="https://pod6.in" class="sitenav__link sitenav__link--external" target="_blank" rel="noopener noreferrer">playground<span class="sitenav__out" aria-hidden="true">↗</span></a><span class="sitenav__sep" aria-hidden="true">·</span><a href="https://github.com/podlite" class="sitenav__link sitenav__link--external" target="_blank" rel="noopener noreferrer">github<span class="sitenav__out" aria-hidden="true">↗</span></a></div></nav><div style="max-width:40rem;margin:0 auto 1.6rem"><div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;padding-bottom:6px;border-bottom:1px solid rgba(31, 41, 55, 0.12)"><nav style="display:flex;gap:4px;align-items:center" aria-label="Specification versions"><a href="/v1.0/specification" style="font:0.85rem/1.5 inherit;padding:3px 10px;border-radius:6px;text-decoration:none;color:#6b7280;background:transparent;font-weight:400">v1.0</a><a href="/specification" aria-current="page" style="font:0.85rem/1.5 inherit;padding:3px 10px;border-radius:6px;text-decoration:none;color:#1f2937;background:rgba(31, 41, 55, 0.06);font-weight:600">v2.0</a><a href="/v3.0/specification" style="font:0.85rem/1.5 inherit;padding:3px 10px;border-radius:6px;text-decoration:none;color:#bd2a20;background:transparent;font-weight:400">v3.0 draft</a></nav></div></div><article><header><h1>Podlite - a lightweight markup language
+</h1></header><div class="toc"><ul class="toc-list listlevel1"><li class="toc-item"><a href="#v20">v2.0
+</a></li><ul class="toc-list listlevel3"><li class="toc-item"><a href="#Added">Added:
+</a></li><li class="toc-item"><a href="#Changed">Changed:
+</a></li><li class="toc-item"><a href="#Removed">Removed:
+</a></li></ul><li class="toc-item"><a href="#v10">v1.0
+</a></li><ul class="toc-list listlevel3"><li class="toc-item"><a href="#Added-2">Added:
+</a></li><li class="toc-item"><a href="#Changed-2">Changed:
+</a></li><li class="toc-item"><a href="#Removed-2">Removed:
+</a></li></ul><li class="toc-item"><a href="#Podlite">Podlite
+</a></li><ul class="toc-list listlevel2"><li class="toc-item"><a href="#General-syntactic-structure">General syntactic structure
+</a></li><li class="toc-item"><a href="#Podlite-blocks">Podlite blocks
+</a></li><ul class="toc-list listlevel3"><li class="toc-item"><a href="#Delimited-blocks">Delimited blocks
+</a></li><li class="toc-item"><a href="#Paragraph-blocks">Paragraph blocks
+</a></li><li class="toc-item"><a href="#Abbreviated-blocks">Abbreviated blocks
+</a></li><li class="toc-item"><a href="#Block-equivalence">Block equivalence
+</a></li><li class="toc-item"><a href="#Standard-configuration-options">Standard configuration options
+</a></li></ul><li class="toc-item"><a href="#Selectors">Selectors
+</a></li><li class="toc-item"><a href="#Block-types">Block types
+</a></li><ul class="toc-list listlevel3"><li class="toc-item"><a href="#Headings">Headings
+</a></li><li class="toc-item"><a href="#Ordinary-paragraph-blocks">Ordinary paragraph blocks
+</a></li><li class="toc-item"><a href="#Code-blocks">Code blocks
+</a></li><li class="toc-item"><a href="#IO-blocks">I/O blocks
+</a></li><li class="toc-item"><a href="#Lists">Lists
+</a></li><li class="toc-item"><a href="#Nesting-blocks">Nesting blocks
+</a></li><li class="toc-item"><a href="#Tables">Tables
+</a></li><li class="toc-item"><a href="#Custom-blocks">Named or modular custom blocks
+</a></li><li class="toc-item"><a href="#Data-table-blocks">Data-table blocks
+</a></li><li class="toc-item"><a href="#Podlite-comments">Podlite comments
+</a></li><li class="toc-item"><a href="#Data-blocks">Data blocks
+</a></li><li class="toc-item"><a href="#Semantic-blocks">Semantic blocks
+</a></li><li class="toc-item"><a href="#Table-of-contents">Table of contents
+</a></li><li class="toc-item"><a href="#Include-directive">Include directive
+</a></li><li class="toc-item"><a href="#Section-boundaries">Section boundaries
+</a></li><li class="toc-item"><a href="#Inserting-pictures">Inserting pictures
+</a></li><li class="toc-item"><a href="#Mathematical-formulas">Mathematical formulas
+</a></li><li class="toc-item"><a href="#Markdown-support">Markdown support
+</a></li></ul><li class="toc-item"><a href="#Markup-codes">Markup codes
+</a></li><ul class="toc-list listlevel3"><li class="toc-item"><a href="#Significance-indicators">Significance indicators
+</a></li><li class="toc-item"><a href="#Mistake-marking">Mistake marking
+</a></li><li class="toc-item"><a href="#Text-positioning">Text positioning
+</a></li><li class="toc-item"><a href="#Definitions">Definitions
+</a></li><li class="toc-item"><a href="#Example-specifiers">Example specifiers
+</a></li><li class="toc-item"><a href="#Verbatim-text">Verbatim text
+</a></li><li class="toc-item"><a href="#Inline-comments">Inline comments
+</a></li><li class="toc-item"><a href="#Content-masking">Content masking
+</a></li><li class="toc-item"><a href="#Links">Links
+</a></li><li class="toc-item"><a href="#Contextual-backlinks">Contextual backlinks
+</a></li><li class="toc-item"><a href="#Link-configuration-attributes">Link configuration attributes
+</a></li><li class="toc-item"><a href="#Alias-placements">Alias placements
+</a></li><li class="toc-item"><a href="#Space-preserving-text">Space-preserving text
+</a></li><li class="toc-item"><a href="#Entities">Entities
+</a></li><li class="toc-item"><a href="#Indexing-terms">Indexing terms
+</a></li><li class="toc-item"><a href="#Annotations">Annotations
+</a></li><li class="toc-item"><a href="#Custom-markup-codes">Module-defined handler for extends markup features
+</a></li></ul><li class="toc-item"><a href="#Block-pre-configuration">Block pre-configuration
+</a></li><ul class="toc-list listlevel3"><li class="toc-item"><a href="#Pre-configuring-markup-codes">Pre-configuring markup codes
+</a></li></ul><li class="toc-item"><a href="#Block-attribute-assignment-with-set">Block attribute assignment with =set
+</a></li><li class="toc-item"><a href="#Aliases">Aliases
+</a></li><li class="toc-item"><a href="#Notification-blocks">Notification blocks
+</a></li><li class="toc-item"><a href="#Directives">Directives
+</a></li><li class="toc-item"><a href="#Blocks">Blocks
+</a></li><li class="toc-item"><a href="#Inline-markup-codes">Inline markup codes
+</a></li></ul></ul></div><div><h1 class="AUTHORS">AUTHORS</h1><ul><li id="hwJUgw21E2guL0Xx0CmRx"><p>Damian Conway &lt;<a href="mailto:damian@conway.org">damian@conway.org</a>&gt;
+</p></li><li id="5wxp8oeUKYtPQr7gVmIhT"><p>Aliaksandr Zahatski &lt;<a href="mailto:zag@cpan.org">zag@cpan.org</a>&gt;
+</p></li></ul></div><div><h1 class="VERSION">VERSION</h1><p>2.0
+</p></div><div><h1 class="CHANGES">CHANGES</h1><h2 id="v20">v2.0
+</h2><h3 id="Added">Added:
+</h3><ul><li id="1-dTRK6BKBsqdk5TIEhC8"><p>Attributes on Markdown fenced code blocks,
+</p></li><li id="huSAnM43sZ5pcCaF-amsZ"><p>Per-link configuration attributes for <code>L&lt;&gt;</code> markup code,
+</p></li><li id="J_HyvyeY2p9713vCD_6Uz"><p>Error recovery rules for <code>=table</code> block,
+</p></li><li id="ZZlu0QzctR8n2B16R_ois"><p><code>=boundary</code> directive for marking structural section boundaries,
+</p></li><li id="IiUV7oSEKL495pSJ_7uhY"><p><code>G&lt;&gt;</code> markup code (Guarded) and <code>:masked</code> block attribute for content masking,
+</p></li><li id="H40yriq91aeOPhxax7iel"><p><code>=set</code> directive for per-block attribute assignment with multiline values and inline markup support,
+</p></li><li id="Oe4jVC_e_5IOePQgvYwRG"><p>Extended <code>:mime-type</code> attribute syntax to accept MIME parameters per RFC 6838, with <code>header=present|absent</code> recognised for CSV/TSV header indication per RFC 4180 §3,
+</p></li><li id="fRwbhzsgf0hsyhJK2dDl2"><p><code>=data-table</code> block for rendering CSV and TSV data, with <code>:src</code>, <code>:columns</code>, <code>:rename</code> attributes.
+</p></li></ul><h3 id="Changed">Changed:
+</h3><ul><li id="_-J7BheXHAUCbOX4v_M1B"><p>Reclassified <code>=include</code> as directive,
+</p></li><li id="Olpb16B4tmbo_Zwk2MCk0"><p>Refined <code>:folded</code> definition,
+</p></li><li id="FZyyKZW3rYSXk28fKidsn"><p>Fixed attribute name inconsistencies in examples.
+</p></li></ul><h3 id="Removed">Removed:
+</h3><ul><li id="8t4_yyKUTST8Fd_U5CCTa"><p>Outdated string attribute syntax formats.
+</p></li></ul><details class="folded-section"><summary class="folded-section-summary"><h2 id="v10">v1.0
+</h2></summary><div class="folded-section-content"><h3 id="Added-2">Added:
+</h3><ul><li id="mxfhmq2sp6hNm-l9YjuuH"><p>Notification blocks, <code>:notice</code> attribute for <code>=nested</code> blocks,
+</p></li><li id="cvFJqQBDbwCU2bQ_PGx0O"><p><code>:folded</code> attribute,
+</p></li><li id="IEIzdWQHg76j_oqlgZf65"><p><code>:folded-levels</code> for <code>=toc</code> block,
+</p></li><li id="KhO_Lltr6SH7RdiuVUoPf"><p>embedding binary data into documents, <code>=data</code>, <code>:filename</code>, <code>:encoding</code>,
+</p></li><li id="Fja8dLDJ_qySFKnt1uD_u"><p><code>:mime-type</code> attribute for <code>=include</code> and <code>=data</code> blocks,
+</p></li><li id="ph5OkVxowpYLTjthzx-sM"><p>introduce <code>data:</code> schema for use in <code>=picture</code> and <code>=table</code>,
+</p></li><li id="TmEKcfGCGI4SibtzyIVMP"><p>render tables from CSV files, <code>=table</code>,
+</p></li><li id="O6W58Nbi7oY1um_zGLasL"><p>new markdown mode for parser,
+</p></li><li id="E-J4Q3UuFhMRvPmg4MNv"><p><code>M&lt;&gt;</code> - extends inline markup features,
+</p></li><li id="Y65XIo3STki3zSJhfNxrZ"><p>add <code>:id</code>, <code>:caption</code>, <code>:lang</code> attributes,
+</p></li><li id="UYk9wlMKtopWZhEAC_xJF"><p>task lists, <code>=item</code> and <code>:checked</code> attribute,
+</p></li><li id="em1_rcLpIgnIVDrvVQrLM"><p>intro Selectors,
+</p></li><li id="khB2mNhKd0Db0ZK_e8IBa"><p>table of contents, <code>=toc</code>,
+</p></li><li id="wWySagZRrsBlTbv7wWuxY"><p>include block, <code>=include</code>,
+</p></li><li id="qS_ERe0NWbSL3urNNqToT"><p>inserting pictures, <code>=picture</code>, <code>P&lt;&gt;</code>,
+</p></li><li id="deBcSQ7MHSqwus-ESmUXu"><p>mathematical formulas, <code>=formula</code>, <code>F&lt;&gt;</code>,
+</p></li><li id="Aju8gPqOIhhx-0AuqMffd"><p>Markdown support, <code>=markdown</code>,
+</p></li><li id="JzPO7zMXwJI3ii1yS_a7V"><p>mistake marking, <code>O&lt;&gt;</code>,
+</p></li><li id="m1ZuWxT7LTngbBuM4M23m"><p>text positioning, <code>J&lt;&gt;</code>, <code>H&lt;&gt;</code>,
+</p></li><li id="PAKIIXrIbyy7bwIMKFTSN"><p>Emoji, <code>E&lt;&gt;</code>,
+</p></li><li id="PQQJDOA0oFnRJtOmLgVok"><p>contextual backlinks, <code>W&lt;&gt;</code>,
+</p></li><li id="4ysN-wkl-j17HSaR_oJxC"><p>advanced table format, <code>=row</code>, <code>=cell</code> blocks,
+    <code>:header</code>, <code>:rowspan</code>, <code>:colspan</code> attributes.
+</p></li></ul><h3 id="Changed-2">Changed:
+</h3><ul><li id="FWP1jQg2sNZeo2eMeLIjF"><p>refactor Named custom blocks and markup custom codes, <code>M&lt;&gt;</code>.
+</p></li></ul><h3 id="Removed-2">Removed:
+</h3><ul><li id="pWxs4dbF0lOAEO-zHPku7"><p>Contextual aliases,
+</p></li><li id="xTLMDpm6jy3MM0NIoqoL2"><p><code>=finish</code>,
+</p></li><li id="raB_7jTcuWFerB8u2xV_F"><p>markers in comments,
+</p></li><li id="NitWT8eyStGEYGvU49gGO"><p><code>:margin</code> attribute,
+</p></li><li id="VzBgFMnJE39qPNY5uvAjY"><p><code>=encoding</code> directive,
+</p></li><li id="sSfhWEYvtiktRRMdEL_LA"><p><code>P&lt;toc:&gt;</code> due to <code>=toc</code> block,
+</p></li><li id="UvHzQd1_8uFgR2sx2gHXP"><p><code>P&lt;man:&gt;</code>, <code>P&lt;doc:&gt;</code> due to <code>=include</code> directive,
+</p></li><li id="P4xwfoqt_sWXpuZHISCE9"><p><code>P&lt;&gt;</code> - placement links,
+</p></li><li id="Q5Sob4INMq5UgjO2YqbTi"><p>Declarator block,
+</p></li><li id="EQUkSr5F5KP-uEzo4hiXU"><p><code>:formatted</code> attribute,
+</p></li><li id="JwUY3DjteW_qysR8KR29l"><p><code>:like</code> attribute.
+</p></li></ul></div></details></div><h1 id="Podlite">Podlite
+</h1><p><dfn>Podlite</dfn> is an easy-to-use markup language with a simple, consistent
+underlying document object model. Podlite can be used for writing language
+documentation, for documenting programs and modules, as well as for
+other types of document composition.
+</p><p>The Podlite is a purely descriptive mark-up notation, with no presentational
+components.
+</p><h2 id="General-syntactic-structure">General syntactic structure
+</h2><p>Podlite documents are specified using <dfn>directives</dfn>, which are
+used to declare configuration information and to delimit blocks of
+textual content.
+</p><p>Every directive starts either with an equals sign (<code>=</code>) followed
+immediately by an identifier.
+</p><p>An <dfn>identifier</dfn> composed of an alphabetical character followed by 
+any combination of alphanumeric characters. Alphabetic and numeric 
+definitions encompass relevant Unicode characters. The underscore 
+is consistently treated as alphabetic. Additionally, an identifier 
+can include isolated apostrophes or hyphens, given that the subsequent
+character is alphabetic.
+</p><p>Directives that start with <code>=</code> can be indented like the code they
+interleave, but their initial <code>=</code> must still be the first non-whitespace
+character on their line.
+</p><p>An indented Podlite block is considered to have a <i>virtual left margin</i>,
+determined by the indentation of its opening delimiter.
+</p><p>In other words, if a directive is indented from the left margin, the
+column at which the first character of its opening delimiter appears is
+thereafter considered the first column of the entire block's contents.
+</p><p>The virtual margin treats leading tabs as aligning to tabstops spaced 
+every <code>($?TABSTOP // 8)</code> characters.
+</p><h2 id="Podlite-blocks">Podlite blocks
+</h2><p>The content of a document is specified within one or more <dfn>blocks</dfn>.
+Every Podlite block may be declared in any of three forms:
+<i><a href="#Delimited-blocks">delimited style</a></i>, <i><a href="#Paragraph-blocks">paragraph style</a></i>, or <i><a href="#Abbreviated-blocks">abbreviated style</a></i>.
+All of these forms are equivalent.
+</p><p>Anything in a document that is neither a Podlite directive nor contained
+within a Podlite block is treated as "ambient" material. Typically this
+would be the source code of the program that the Podlite is documenting. 
+Podlite parsers still parse this text into the internal representation of the
+file, representing it as a "ambient" block. Renderers
+will <i>usually</i> ignore such blocks.
+This is the <dfn>default mode</dfn> of the parser.
+</p><p>All directives have a defined terminator and the Podlite parser always reverts to
+<dfn>"ambient"</dfn> at the end of each Podlite directive or 
+block.
+</p><p>The <code>=pod</code> block puts the parser in <dfn>"pod" mode</dfn>, 
+treating all text between blocks as implicit paragraph Podlite, even if 
+it's not inside an explicit block.
+</p><p>To keep the parser in "pod" mode, enclose the desired Podlite region 
+in a <code>=pod</code> block:
+</p><div class="code-block"><pre><code>  <strong>=begin pod</strong>
+
+  =head1 A heading
+
+  This is Podlite too. Specifically, this is a simple C&lt;para&gt; block
+
+      $this = pod('also');  # Specifically, a code block
+
+  <strong>=end pod</strong>
+</code></pre></div><p>The contents of files with the extensions <code>.podlite</code> and <code>.pod6</code> are 
+implicitly wrapped in a <code>=pod</code> directive.
+</p><p>For <code>.md</code> and <code>.markdown</code> files, the parser operates in <dfn>"Markdown" 
+mode</dfn> for the entire file, treating all 
+text as markdown even if it is not inside an <code>=markdown</code> block.
+</p><p>Any other file extension puts the parser in default mode. The <a href="#Include-directive">=include
+directive</a> provides a mechanism to override this behavior
+by using the <code>:mime-type</code> attribute for the included files.
+</p><h3 id="Delimited-blocks">Delimited blocks
+</h3><p>Delimited blocks are bounded by <code>=begin</code> and <code>=end</code> markers, both of
+which are followed by a valid Podlite identifier, which is the
+<dfn>typename</dfn> of the block. Typenames that are entirely lowercase (for
+example: <code>=begin head1</code>) or entirely uppercase (for example: <code>=begin
+SYNOPSIS</code>) are reserved.
+</p><p>After the typename, the rest of the <code>=begin</code> marker line is treated as
+configuration information for the block. This information is used in
+different ways by different types of blocks, but is always specified using
+any of:
+</p><table id="configuration_syntax"><caption class="caption">Block configuration syntax</caption><thead><tr><th>Value is...</th><th>Specify with...</th><th>Or with...</th><th>Also valid</th></tr></thead><tbody><tr><td>Boolean (true)</td><td><code>:key</code></td><td><code>:key(1)</code></td><td></td></tr><tr><td>Boolean (false)</td><td><code>:!key</code></td><td><code>:key(0)</code></td><td></td></tr><tr><td>Integer</td><td><code>:key(N)</code></td><td></td><td></td></tr><tr><td>String (single word)</td><td><code>:key&lt;str&gt;</code></td><td><code>:key('str')</code></td><td><code>:key'str'</code> <code>:key｢str｣</code> <code>:key"str"</code></td></tr><tr><td>String (with spaces)</td><td><code>:key('str with spaces')</code></td><td><code>:key("str with spaces")</code></td><td><code>:key'str with spaces'</code> <code>:key｢str with spaces｣</code> <code>:key"str with spaces"</code></td></tr><tr><td>List</td><td><code>:key&lt;val1 val2&gt;</code></td><td><code>:key[val1,val2]</code></td><td></td></tr><tr><td>Hash</td><td><code>:key{a=&gt;1, b=&gt;2}</code></td><td></td><td></td></tr></tbody></table><p>All option keys and values must, of course, be constants since Podlite is a
+specification language, not a programming language. Specifically, option
+values cannot be closures.
+</p><p>The configuration section may be extended over subsequent lines by
+starting those lines with an <code>=</code> in the first (virtual) column followed
+by a whitespace character.
+</p><p>The lines following the opening delimiter and configuration are the
+data or contents of the block, which continue until the block's matching
+<code>=end</code> marker line. For most block types, these contents may be
+indented if you wish, without them being treated as <a href="#Code-blocks">code blocks</a>. Indented text is only treated as code within
+<code>=pod</code>, <a href="#Nesting-blocks">=nested</a>, <a href="#Lists">=item</a>, <code>=code</code>,
+and <a href="#Semantic-blocks">semantic</a> blocks.
+</p><p>The general syntax is:
+</p><div class="code-block"><pre><code>     =begin <var>BLOCK_TYPE</var>  <var>OPTIONAL CONFIG INFO</var>
+     =                  <var>OPTIONAL EXTRA CONFIG INFO</var>
+     <var>BLOCK CONTENTS</var>
+     =end <var>BLOCK_TYPE</var>
+</code></pre></div><p>For example:
+</p><div class="code-block"><pre><code>     =begin table  :caption('Table of Contents')
+         Constants           1
+
+         Variables           10
+
+         Subroutines         33
+
+         Everything else     57
+     =end table
+
+        =begin Name  :required
+        =            :width(50)
+        The applicant's full name
+        =end Name
+
+        =begin Contact  :optional
+            The applicant's contact details
+        =end Contact
+</code></pre></div><p>Note that no blank lines are required around the directives; blank
+lines within the contents are always treated as part of the contents.
+This is a universal feature of Podlite.
+</p><p>Note also that in the following specifications, a "blank line" is a line
+that is either empty or that contains only whitespace characters. That
+is, a blank line matches the following pattern: <code>/^^ \h* $$/</code>. Podlite uses
+blank lines as delimiters, rather than empty lines, to minimize unpleasant
+surprises when stray spaces or tabs mysteriously turn up in hitherto
+empty lines.
+</p><h3 id="Paragraph-blocks">Paragraph blocks
+</h3><p>Paragraph blocks are introduced by a <code>=for</code> marker and terminated by
+the next Podlite directive or the first blank line (which is <i>not</i>
+considered to be part of the block's contents). The <code>=for</code> marker is
+followed by the name of the block and optional configuration
+information. The general syntax is:
+</p><div class="code-block"><pre><code>     =for <var>BLOCK_TYPE</var>  <var>OPTIONAL CONFIG INFO</var>
+     =                <var>OPTIONAL EXTRA CONFIG INFO</var>
+     <var>BLOCK DATA</var>
+</code></pre></div><p>For example:
+</p><div class="code-block"><pre><code>     =for table  :caption('Table of Contents')
+         Constants           1
+         Variables           10
+         Subroutines         33
+         Everything else     57
+
+        =for Name  :required
+        =          :width(50)
+        The applicant's full name
+
+     =for Contact  :optional
+        The applicant's contact details
+
+</code></pre></div><h3 id="Abbreviated-blocks">Abbreviated blocks
+</h3><p>Abbreviated blocks are introduced by an <code>'='</code> sign in the
+first column, which is followed immediately by the typename of the
+block. The rest of the line is treated as block data, rather than as
+configuration. The content terminates at the next Podlite directive or the
+first blank line (which is not part of the block data). The general
+syntax is:
+</p><div class="code-block"><pre><code>     =<var>BLOCK_TYPE</var>  <var>BLOCK DATA</var>
+     <var>MORE BLOCK DATA</var>
+
+</code></pre></div><p>For example:
+</p><div class="code-block"><pre><code>     =table
+         Constants           1
+         Variables           10
+         Subroutines         33
+         Everything else     57
+
+        =Name  The applicant's full name
+     =Contact  The applicant's contact details
+
+</code></pre></div><p>Note that abbreviated blocks cannot specify configuration information. If
+configuration is required, use a <code>=for</code> or <code>=begin</code>/<code>=end</code> instead.
+</p><h3 id="Block-equivalence">Block equivalence
+</h3><p>The underlying documentation model treats all block
+specifications (delimited, paragraph, and abbreviated) the same way.
+It is possible to choose the form is most convenient for a particular
+documentation task. In the descriptions that follow, the abbreviated
+form will generally be used, but should be read as standing for all
+three forms equally.
+</p><p>For example, although <a href="#Headings">#Headings</a> shows only:
+</p><div class="code-block"><pre><code>  =head1 Top Level Heading
+</code></pre></div><p>this automatically implies that you could also write that block as:
+</p><div class="code-block"><pre><code>  =for head1
+  Top Level Heading
+</code></pre></div><p>or:
+</p><div class="code-block"><pre><code>  =begin head1
+  Top Level Heading
+  =end head1
+</code></pre></div><h3 id="Standard-configuration-options">Standard configuration options
+</h3><p>Podlite predefines a small number of standard configuration options that can be
+applied uniformly to any built-in block type. These include:
+</p><dl><dt><code>:caption</code></dt><dd>This option assigns a title to the given block, which is typically used to create
+a <a href="#Table-of-contents">table of contents</a>.
+</dd></dl><dl><dt><code>:id</code></dt><dd>This option enables the explicit definition of identifiers for blocks and use those 
+IDs for linking purposes (see <a href="#Links">#Links</a>).
+</dd></dl><dl><dt><code>:nested</code></dt><dd>This option specifies that the block is to be nested within its current
+context. For example, nesting might be applied to block quotes, to textual
+examples, or to commentaries. In addition the <a href="#Code-blocks">=code</a>,
+<a href="#Lists">=item</a>, <a href="#IO-blocks">=input</a>, and <a href="#IO-blocks">=output</a>
+blocks all have implicit nesting.
+</dd><dd>Nesting of blocks is usually rendered by adding extra indentation to the
+block contents, but may also be indicated in other ways:
+by boxing the contents, by changing the font or size of the nested text,
+or even by folding the text (so long as a visible placeholder is provided).
+</dd><dd>Occasionally it is desirable to nest content by more than one level:
+</dd><div class="code-block"><pre><code>    =begin para :nested
+    =begin para :nested
+    =begin para :nested
+    "We're going deep, deep, deep undercover!"
+    =end para
+    =end para
+    =end para
+</code></pre></div><dd>This can be simplified by giving the <code>:nested</code> option a positive integer
+value:
+</dd><div class="code-block"><pre><code>    =begin para <strong>:nested(3)</strong>
+    "We're going deep, deep, deep undercover!"
+    =end para
+</code></pre></div><dd>You can also give the option a value of zero, to defeat any implicit
+nesting that might normally be applied to a paragraph. For example, to
+specify a block of code that should appear <i>without</i> its usual
+nesting:
+</dd><div class="code-block"><pre><code>    =comment Don't nest this code block in the usual way...
+    <strong>=begin code :nested(0)</strong>
+
+                 1         2         3         4         5         6
+        123456789012345678901234567890123456789012345678901234567890
+        |------|-----------------------|---------------------------|
+          line        instruction                comments
+         number           code
+
+    =end code
+</code></pre></div><dd>Note that <code>:!nested</code> could also be used for this purpose:
+</dd><div class="code-block"><pre><code>    =Z&lt;&gt;begin code :!nested
+</code></pre></div></dl><dl><dt><code>:numbered</code></dt><dd>This option specifies that the block is to be numbered. The most common
+use of this option is to create <a href="#Numbered-headings">numbered headings</a> and
+<a href="#Ordered-lists">ordered lists</a>, but it can be applied to any block.
+</dd><dd>The numbering conventions for headings and lists are specified in those
+sections, but it is up to individual renderers to decide how to display
+any numbering associated with other types of blocks.
+</dd><dd>Note that numbering is never explicit; it is always implied by context.
+</dd></dl><dl><dt><code>:checked</code></dt><dd>This attribute indicates that a checkbox should be added to that block. 
+It is possible to apply a <code>:checked</code> attributes to any block.
+The most common use of this option is to create <a href="#Task-lists">task lists</a>.
+</dd><dd>For an unchecked checkbox the <code>:!checked</code> is used.
+</dd><dd>The task list item marker (checkbox) is added to the output. 
+In HTML output, this would be represented as an 
+ <code>input type="checkbox"</code> element.
+</dd><dd>The specification does not define how these checkboxes are interacted with.
+Implementors are free to choose whether they render them as disabled,
+unchangeable elements, or handle dynamic interactions like checking and unchecking
+in the final rendered document.
+</dd></dl><dl><dt><code>:folded</code></dt><dd>This option specifies that the block content is not presented
+immediately but is available on demand. The attribute controls the
+initial state: <code>:folded</code> or <code>:folded(1)</code> indicates the content is
+concealed by default; <code>:!folded</code> or <code>:folded(0)</code> indicates it is
+revealed by default.
+</dd><div class="code-block"><pre><code>  =for table <strong>:folded</strong> :caption('Culinary Techniques for Sustainability')
+    Sous-vide   Low energy consumption
+    ----------  -------------------------
+    Steaming    Preserves nutrients
+    Baking      Efficient for batch cooking
+</code></pre></div><dd>When applied to a heading block, the attribute governs the heading
+and all associated lower-level content, forming a hierarchical
+structure.
+</dd><div class="code-block"><pre><code>  =for <strong>head2 :folded</strong>
+  Green Energy Overview
+</code></pre></div><dd>In non-interactive contexts, the distinction may be expressed through
+visual means such as sidebar placement or reduced emphasis.
+</dd></dl><dl><dt><code>:lang</code></dt><dd>This option is used to <a href="#Assign-programming-language-to-code-blocks">provide information</a> about the programming language used in a specific code block.
+This helps ensure that the code is displayed and interpreted correctly
+by rendering engines or syntax highlighters.
+</dd><dd>Here's a table that lists a few programming languages along with their possible 
+values for the <code>:lang</code> attribute:
+</dd><table id="Fk_JvhjPQ7bi2tP4zkR4t"><caption class="caption">Matching languages and lang attribute values</caption><thead><tr><th>Programming language</th><th>Possible <code>:lang</code> values</th></tr></thead><tbody><tr><td>C++</td><td>cpp</td></tr><tr><td>CSS</td><td>css</td></tr><tr><td>HTML</td><td>html</td></tr><tr><td>Java</td><td>java</td></tr><tr><td>JavaScript</td><td>javascript</td></tr><tr><td>Python</td><td>python</td></tr><tr><td>Raku</td><td>raku</td></tr></tbody></table><dd>If the language is not specified, the default language is used based 
+on the file extension or mime type of the current document.
+</dd></dl><dl><dt><code>:allow</code></dt><dd>This option expects a list of markup codes that are to be recognized
+within any <code>V&lt;&gt;</code> codes that appear in (or are implicitly applied to)
+the current block. The option is most often used on <code>=code</code> blocks to
+allow mark-up within those otherwise verbatim blocks, though it can be
+used in <i>any</i> block that contains verbatim text. See <a href="#Formatting-within-code-blocks">#Formatting
+within code blocks</a>.
+</dd></dl><h2 id="Selectors">Selectors
+</h2><p>Selectors consist of patterns that help identify and filter specific blocks
+within documents. Each pattern contains optional source of blocks and block names.
+</p><p>The general syntax is:
+</p><div class="code-block"><pre><code><var>EXTERNAL_SOURCE</var>
+or
+[ <var>EXTERNAL_SOURCE</var> | ] <var>BLOCKS_SELECTOR</var>
+</code></pre></div><p>...where
+</p><ul><li id="W2mPegU2W1YLgOWMd3gh2"><p>EXTERNAL_SOURCE - optional source of blocks for filtering, default current document,
+</p></li><li id="xT7mi5-LNLaPBKCKaqYm_"><p>BLOCK_SELECTOR - list of block names, filter for
+</p></li></ul><p>For example:
+</p><table id="sdgw_UkZ12HXW7e7OLrJ8"><thead><tr><th>Selector</th><th>Description</th></tr></thead><tbody><tr><td>head1, head2, item1</td><td>all head1, head2 and item1 blocks from document</td></tr><tr><td>file:article.pod6</td><td>head1, head2                all head1 and head2 blocks from article.pod6 file</td></tr><tr><td> file:./includes/*.pod6 | head1, head2                                      </td><td> all head1 and head2 blocks from pod6 files placed  in includes directory</td></tr><tr><td>doc:Data::Dumper</td><td>code                         all code blocks from a module documentation</td></tr><tr><td> file:/docs/**/*.md | head1                                                 </td><td> search headers with first level for all ".md" files  within the "docs" directory and its subdirectories.</td></tr></tbody></table><p>Please note that while the Selector blocks provide a way to query and filter specific elements 
+within Markdown files, Markdown itself doesn't have formal named blocks like the Podlite syntax. 
+Instead, Markdown uses a lightweight markup to structure content. The above table provides a mapping
+between Podlite block names and their corresponding Markdown elements.
+</p><table id="oR8tA8n-3TDBGQpSFilCA"><caption class="caption">A table of correspondences for some Podlite blocks and markdown blocks</caption><thead><tr><th>Podlite</th><th>Markdown</th><th>Describtion</th></tr></thead><tbody><tr><td><code>=head1</code>, <code>=head2</code>, ...</td><td>#, ##, ...</td><td>Heading level 1,2...</td></tr><tr><td><code>=nested</code></td><td>"&gt;"</td><td>blockquote</td></tr><tr><td><code>=para</code></td><td>block of text</td><td>paragraph</td></tr><tr><td><code>N&lt;&gt;</code></td><td>[^1]: footnote.</td><td>footnote</td></tr><tr><td><code>=Html</code></td><td>&lt;span&gt;text&lt;span&gt;</td><td>HTML block</td></tr><tr><td><code>O&lt;text&gt;</code></td><td>~~text~~</td><td>Strikethrough, "O for Overstrike"</td></tr><tr><td><code>H&lt;text&gt;</code></td><td>^text^</td><td>Superscript, "H for High text"</td></tr><tr><td><code>J&lt;text&gt;</code></td><td>~text~</td><td>Subscript, "J for Junior text"</td></tr><tr><td><code>F&lt;&gt;</code>, <code>=formula</code></td><td>$,$$, ```math</td><td>Mathematical formulas</td></tr></tbody></table><p>The most common use of Selectors is to create <a href="#Table-of-contents">table of contents</a> and
+in the <a href="#Include-directive">include directive</a>.
+</p><h2 id="Block-types">Block types
+</h2><p>Podlite offers notations for specifying a wide range of standard block types...
+</p><h3 id="Headings">Headings
+</h3><p>Podlite provides an unlimited number of levels of heading, specified by the
+<code>=head</code><var>N</var> block marker. For example:
+</p><div class="code-block"><pre><code>  =head1 A Top Level Heading
+
+    =head2 A Second Level Heading
+
+      =head3 A third level heading
+
+            =head86 A "Missed it by I&lt;that&gt; much!" heading
+</code></pre></div><p>While Podlite parsers are required to recognize and distinguish all levels
+of heading, Podlite renderers are only required to provide distinct
+<i>renderings</i> of the first four levels of heading (though they may, of
+course, provide more than that). Headings at levels without distinct
+renderings would typically be rendered like the lowest distinctly
+rendered level.
+</p><h4 id="Numbered-headings">Numbered headings
+</h4><p>You can specify that a heading is numbered using the <code>:numbered</code> option. For
+example:
+</p><div class="code-block"><pre><code>  =for head1 :numbered
+  The Problem
+  
+  =for head1 :numbered
+  The Solution
+  
+      =for head2 :numbered
+      Analysis
+  
+          =for head3
+          Overview
+  
+          =for head3
+          Details
+  
+      =for head2 :numbered
+      Design
+  
+  =for head1 :numbered
+  The Implementation
+</code></pre></div><p>which would produce:
+</p><blockquote><p>1. The Problem
+</p><p>2. The Solution
+</p><blockquote><p>2.1. Analysis
+</p><blockquote><p>Overview
+</p><p>Details
+</p></blockquote><p>2.2: Design
+</p></blockquote><p>3. The Implementation
+</p></blockquote><p>It is usually better to preset a numbering scheme for each heading
+level, in a series of <a href="#Block-pre-configuration">configuration blocks</a>:
+</p><div class="code-block"><pre><code>  <strong>=config head1 :numbered
+  =config head2 :numbered
+  =config head3 :!numbered</strong>
+  
+  =head1 The Problem
+  =head1 The Solution
+  =head2   Analysis
+  =head3     Overview
+  =head3     Details
+  =head2   Design
+  =head1 The Implementation
+</code></pre></div><p>Alternatively, as a short-hand, if the first whitespace-delimited word
+in a heading consists of a single literal <code>#</code> character, the <code>#</code> is
+removed and the heading is treated as if it had a <code>:numbered</code> option:
+</p><div class="code-block"><pre><code>  =head1 # The Problem
+  =head1 # The Solution
+  =head2   # Analysis
+  =head3       Overview
+  =head3       Details
+  =head2   # Design
+  =head1 # The Implementation
+</code></pre></div><p>Note that, even though renderers are not required to distinctly render
+more than the first four levels of heading, they <i>are</i> required to
+correctly honour arbitrarily nested numberings. That is:
+</p><div class="code-block"><pre><code>    =head6 # The Rescue of the Kobayashi Maru
+</code></pre></div><p>should produce something like:
+</p><blockquote><p><strong>2.3.8.6.1.9. The Rescue of the Kobayashi Maru</strong>
+</p></blockquote><h3 id="Ordinary-paragraph-blocks">Ordinary paragraph blocks
+</h3><p>Ordinary paragraph blocks consist of text that is to be formatted into
+a document at the current level of nesting, with whitespace
+squeezed, lines filled, and any special <a href="#Markup-codes">inline mark-up</a>
+applied.
+</p><p>Ordinary paragraphs consist of one or more consecutive lines of text,
+each of which starts with a non-whitespace character at (virtual) column
+1. The paragraph is terminated by the first blank line or block
+directive. For example:
+</p><div class="code-block"><pre><code>  =head1 This is a heading block
+  
+  This is an ordinary paragraph.
+  Its text  will   be     squeezed     and
+  short lines filled. It is terminated by
+  the first blank line.
+  
+  This is another ordinary paragraph.
+  Its     text    will  also be squeezed and
+  short lines filled. It is terminated by
+  the trailing directive on the next line.
+    =head2 This is another heading block
+  
+    This is yet another ordinary paragraph,
+    at the first virtual column set by the
+    previous directive
+</code></pre></div><p>Within a <code>=pod</code>, <code>=item</code>, <code>=defn</code>, <code>=nested</code>, or
+<a href="#Semantic-blocks">semantic</a> block, ordinary paragraphs do not require
+an explicit marker or delimiters, but there is also an explicit <code>para</code>
+marker (which may be used anywhere):
+</p><div class="code-block"><pre><code>  <strong>=para</strong>
+  This is an ordinary paragraph.
+  Its text  will   be     squeezed     and
+  short lines filled.
+</code></pre></div><p>and likewise the longer <code>=for</code> and <code>=begin</code>/<code>=end</code> forms. For example:
+</p><div class="code-block"><pre><code>  <strong>=begin para</strong>
+    This is an ordinary paragraph.
+    Its text  will   be     squeezed     and
+    short lines filled.
+    
+    This is I&lt;still&gt; part of the same paragraph,
+    which continues until an...
+  <strong>=end para</strong>
+</code></pre></div><p>As the previous example implies, when any form of explicit <code>=para</code> block
+is used, any whitespace at the start of each line is removed during rendering.
+In addition, within a delimited <code>=begin para</code>/<code>=end para</code> block, any
+blank lines are preserved.
+</p><h3 id="Code-blocks">Code blocks
+</h3><p>Code blocks are used to specify pre-formatted text (typically source
+code), which should be rendered without rejustification, without
+whitespace-squeezing, and without recognizing any inline markup
+codes. Code blocks also have an implicit <a href="#Nesting-blocks">nesting</a>
+associated with them. Typically these blocks are used to show examples
+of code, mark-up, or other textual specifications, and are rendered
+using a fixed-width font.
+</p><p>A code block may be implicitly specified as one or more lines of text,
+each of which starts with a whitespace character at the block's virtual
+left margin. The implicit code block is then terminated by a blank line.
+For example:
+</p><div class="code-block"><pre><code>  This ordinary paragraph introduces a code block:
+
+    $this = 1 * code('block');
+    $which.is_specified(:by&lt;indenting&gt;);
+</code></pre></div><p>Implicit code blocks may only be used within <code>=pod</code>, <code>=item</code>, <code>=defn</code>,
+<code>=nested</code>, or <a href="#Semantic-blocks">semantic</a> blocks.
+</p><p>There is also an explicit <code>=code</code> block (which can be specified within
+<i>any</i> other block type, not just <code>=pod</code>, <code>=item</code>, etc.):
+</p><div class="code-block"><pre><code>  The C&lt;loud_update()&gt; subroutine adds feedback:
+
+    <strong>=begin code</strong>
+
+    sub loud_update ($who, $status) {
+        say "$who -&gt; $status";
+
+        silent_update($who, $status);
+    }
+
+    <strong>=end code</strong>
+</code></pre></div><p>As the previous example demonstrates, within an explicit <code>=code</code> block
+the code can start at the (virtual) left margin. Furthermore, lines that
+start with whitespace characters after that margin have subsequent
+whitespace preserved exactly (in addition to the implicit nesting of the
+code). Explicit <code>=code</code> blocks may also contain empty lines.
+</p><h4 id="Formatting-within-code-blocks">Formatting within code blocks
+</h4><p>Although <code>=code</code> blocks automatically disregard all <a href="#Markup-codes">markup
+codes</a>, occasionally you may still need to specify
+some formatting within a code block. For example, you may wish
+to emphasize a particular keyword in an example (using a <code>B&lt;&gt;</code> code). Or
+you may want to indicate that part of the example is metasyntactic
+(using the <code>R&lt;&gt;</code> code). Or you might need to insert a non-ASCII
+character (using the <code>E&lt;&gt;</code> code).
+</p><p>You can specify a list of markup codes that should still be
+recognized within a code block using the <code>:allow</code> option. The value of
+the <code>:allow</code> option must be a list of the (single-letter) names of one
+or more markup codes. Those codes will then remain active inside the
+code block. For example:
+</p><div class="code-block"><pre><code>  =begin code :allow&lt;B R&gt;
+  sub demo {
+      B&lt;say&gt; 'Hello R&lt;name&gt;';
+  }
+  =end code
+</code></pre></div><p>would be rendered:
+</p><div class="code-block"><pre><code>  sub demo {
+      <strong>say</strong> 'Hello <var>name</var>';
+  }
+</code></pre></div><p>Note that the use of the <code>:allow</code> option also makes it possible
+for verbatim <a href="#Markup-codes">markup codes</a> (such as <code>C&lt;&gt;</code>
+and <code>V&lt;&gt;</code>) to <a href="#Pre-configuring-markup-codes">contain other codes as well</a>.
+</p><h4 id="Assign-programming-language-to-code-blocks">Assign programming language to code blocks
+</h4><p>The <code>:lang</code> attribute will be used to provide information about the 
+programming language used in a particular block of code. This helps
+in ensuring that the code is correctly rendered and interpreted by the
+renderers or syntax highlighting tools.
+</p><p>For example:
+</p><div class="code-block"><pre><code>  =begin code <strong>:lang&lt;raku&gt;</strong>
+  sub demo {
+     say 'Hello R&lt;name&gt;';
+  }
+  =end code
+</code></pre></div><h3 id="IO-blocks">I/O blocks
+</h3><p>Podlite also provides blocks for specifying the input and output of programs.
+</p><p>The <code>=input</code> block is used to specify pre-formatted keyboard input,
+which should be rendered without rejustification or squeezing of whitespace.
+</p><p>The <code>=output</code> block is used to specify pre-formatted terminal or file
+output which should also be rendered without rejustification or
+whitespace-squeezing.
+</p><p>Note that, like <code>=code</code> blocks, both <code>=input</code> and <code>=output</code> blocks have an
+implicit level of nesting. They are also like <code>=code</code> blocks in that they
+are typically rendered in a fixed-width font, though ideally all three blocks
+would be rendered in distinct font/weight combinations (for example: regular
+serifed for code, bold sans-serif for input, and regular sans-serif for
+output).
+</p><p>Unlike <code>=code</code> blocks, both <code>=input</code> and <code>=output</code> blocks honour any
+nested markup codes. This is particularly useful since a sample of
+input will often include prompts (which are, of course, output).
+Likewise a sample of output may contain the occasional interactive
+component. Podlite provides <a href="#Example-specifiers">special markup codes</a>
+(<code>K&lt;&gt;</code> and <code>T&lt;&gt;</code>) to indicate embedded input or output, so you can use
+the block type that indicates the overall purpose of the sample (i.e. is
+it demonstrating an input operation or an output sequence?) and then use
+the "contrasting" markup code within the block.
+</p><p>For example, to include a small amount of input in a sample of output
+you could use the <code>K&lt;&gt;</code> markup code:
+</p><div class="code-block"><pre><code>  =begin output
+      Name:    Baracus, B.A.
+      Rank:    Sgt
+      Serial:  1PTDF007
+  
+      Do you want additional personnel details? <strong>K&lt;y&gt;</strong>
+  
+      Height:  180cm/5'11"
+      Weight:  104kg/230lb
+      Age:     49
+  
+      Print? <strong>K&lt;n&gt;</strong>
+  =end output
+</code></pre></div><h3 id="Lists">Lists
+</h3><p>Lists in Podlite are specified as a series of contiguous <code>=item</code> blocks. No
+special "container" directives or other delimiters are required to
+enclose the entire list. For example:
+</p><div class="code-block"><pre><code>  The seven suspects are:
+  
+  =item  Happy
+  =item  Dopey
+  =item  Sleepy
+  =item  Bashful
+  =item  Sneezy
+  =item  Grumpy
+  =item  Keyser Soze
+</code></pre></div><p>List items have one implicit level of nesting:
+</p><blockquote><p>The seven suspects are:
+</p><ul><li id="EGQQrJ5cMubJVWacimoOa"><p>Happy
+</p></li><li id="bgWsnvvpZT92xb1Shc-bh"><p>Dopey
+</p></li><li id="xUqimTXFMTqxxsctqsEi7"><p>Sleepy
+</p></li><li id="Docd2YlRfJgOojeM_uSdB"><p>Bashful
+</p></li><li id="dVycllCp-Qg5oOC_QkWOJ"><p>Sneezy
+</p></li><li id="3axx_SD7xA_7PNbm2eMb3"><p>Grumpy
+</p></li><li id="rkCS0BIixR4O2HSLozRax"><p>Keyser Soze
+</p></li></ul></blockquote><p>Lists may be multi-level, with items at each level specified using the
+<code>=item1</code>, <code>=item2</code>, <code>=item3</code>, etc. blocks. Note that <code>=item</code> is just
+an abbreviation for <code>=item1</code>. For example:
+</p><div class="code-block"><pre><code>  =item1  Animal
+  =item2     Vertebrate
+  =item2     Invertebrate
+  
+  =item1  Phase
+  =item2     Solid
+  =item2     Liquid
+  =item2     Gas
+  =item2     Chocolate
+</code></pre></div><p>which would be rendered something like:
+</p><blockquote><div id="TcWxnddcFbPn2O2Veb8rg"><p>• Animal
+</p></div></blockquote><blockquote><blockquote><div id="WRaE_SCNBdFu2CzrC-v-r"><p>– Vertebrate
+</p></div></blockquote></blockquote><blockquote><blockquote><div id="IqFvvsPnti12l_GDSlb5y"><p>– Invertebrate
+</p></div></blockquote></blockquote><blockquote><div id="Gfn-SwrR8gq4vpxL-aRjb"><p>• Phase
+</p></div></blockquote><blockquote><blockquote><div id="jsVffAGayk80noN3wqDQl"><p>– Solid
+</p></div></blockquote></blockquote><blockquote><blockquote><div id="J2z0DDgVszTj-SmzCXtlv"><p>– Liquid
+</p></div></blockquote></blockquote><blockquote><blockquote><div id="lWaHZr8rzeTDGSAf_XXkL"><p>– Gas
+</p></div></blockquote></blockquote><blockquote><blockquote><div id="wqBgolx0wtRVpInxuYZd3"><p>– Chocolate
+</p></div></blockquote></blockquote><p>Podlite parsers must issue a warning if a "level-<var>N+1</var>" <code>=item</code> block
+(e.g. an <code>=item2</code>, <code>=item3</code>, etc.) appears anywhere except where there
+is a preceding "level-<var>N</var>" <code>=item</code> in the same surrounding block. That
+is, an <code>=item3</code> should only be specified if an <code>=item2</code> appears
+somewhere before it, and that <code>=item2</code> should itself only appear if
+there is a preceding <code>=item1</code>.
+</p><p>Note that item blocks within the same list are not physically nested.
+That is, lower-level items should <i>not</i> be specified inside
+higher-level items:
+</p><div class="code-block"><pre><code>    =comment WRONG...
+    =begin item1          --------------
+    The choices are:                    |
+    =item2 Liberty        ==&lt; Level 2   |==&lt;  Level 1
+    =item2 Death          ==&lt; Level 2   |
+    =item2 Beer           ==&lt; Level 2   |
+    =end item1            --------------
+</code></pre></div><div class="code-block"><pre><code>    =comment CORRECT...
+    =begin item1          ---------------
+    The choices are:                     |==&lt; Level 1
+    =end item1            ---------------
+    =item2 Liberty        ==================&lt; Level 2
+    =item2 Death          ==================&lt; Level 2
+    =item2 Beer           ==================&lt; Level 2
+</code></pre></div><h4 id="Ordered-lists">Ordered lists
+</h4><p>An item is part of an ordered list if the item has a <code>:numbered</code>
+configuration option:
+</p><div class="code-block"><pre><code>     =for item1 :numbered
+     Visito
+
+     =for item2 :numbered
+     Veni
+
+     =for item2 :numbered
+     Vidi
+
+     =for item2 :numbered
+     Vici
+</code></pre></div><p>This would produce something like:
+</p><blockquote><p>1. Visito
+</p><blockquote><p>1.1. Veni
+</p><p>1.2. Vidi
+</p><p>1.3. Vici
+</p></blockquote></blockquote><p>although the numbering scheme is entirely at the discretion of the
+renderer, so it might equally well be rendered:
+</p><blockquote><p>1. Visito
+</p><blockquote><p>1a. Veni
+</p><p>1b. Vidi
+</p><p>1c. Vici
+</p></blockquote></blockquote><p>or even:
+</p><blockquote><p>A: Visito
+</p><blockquote><p>&nbsp;&nbsp;(i) Veni
+</p><p>&nbsp;(ii) Vidi
+</p><p>(iii) Vici
+</p></blockquote></blockquote><p>Alternatively, if the first word of the item consists of a single <code>#</code>
+character, the item is treated as having a <code>:numbered</code> option:
+</p><div class="code-block"><pre><code>     =item1  # Visito
+     =item2     # Veni
+     =item2     # Vidi
+     =item2     # Vici
+</code></pre></div><p>To specify an <i>unnumbered</i> list item that starts with a literal <code>#</code>, either
+make the octothorpe verbatim:
+</p><div class="code-block"><pre><code>    =item <strong>V&lt;#&gt;</strong> introduces a comment
+</code></pre></div><p>or explicitly mark the item itself as being unnumbered:
+</p><div class="code-block"><pre><code>    =for item <strong>:!numbered</strong>
+    # introduces a comment
+</code></pre></div><p>The numbering of successive <code>=item1</code> list items increments
+automatically, but is reset to 1 whenever any other kind of non-ambient
+Podlite block appears between two <code>=item1</code> blocks. For example:
+</p><div class="code-block"><pre><code>    The options are:
+
+    =item1 # Liberty
+    =item1 # Death
+    =item1 # Beer
+
+    The tools are:
+
+    =item1 # Revolution
+    =item1 # Deep-fried peanut butter sandwich
+    =item1 # Keg
+</code></pre></div><p>would produce:
+</p><blockquote><p>The options are:
+</p><blockquote><div id="6dazV_nqHYvf8KCgVj6yL"><p>1. Liberty
+</p></div><div id="PJiSJg9jGAV0KS8RBHvak"><p>2. Death
+</p></div><div id="pnWuYN24nMmzwNAveyGgl"><p>3. Beer
+</p></div></blockquote><p>The tools are:
+</p><blockquote><div id="QpT53vPbck_-h2aTwV1dm"><p>1. Revolution
+</p></div><div id="hyWLc4eeGKsHM4bR-pBsB"><p>2. Deep-fried peanut butter sandwich
+</p></div><div id="jLe5aOe18d63ccPUd3sJA"><p>3. Keg
+</p></div></blockquote></blockquote><p>The numbering of nested items (<code>=item2</code>, <code>=item3</code>, etc.) only resets
+(to 1) when the higher-level item's numbering either resets or increments.
+</p><p>To prevent a numbered <code>=item1</code> from resetting after a non-item block,
+you can specify the <code>:continued</code> option:
+</p><div class="code-block"><pre><code>     =for item1
+     # Retreat to remote Himalayan monastery
+
+     =for item1
+     # Learn the hidden mysteries of space and time
+
+     I&lt;????&gt;
+
+     =for item1 <strong>:continued</strong>
+     # Prophet!
+</code></pre></div><p>which produces:
+</p><blockquote><div id="TX1316prIgEhmHuPoMff2"><p>1. Retreat to remote Himalayan monastery
+</p></div><div id="3vi9-0FY0f5_2uK_q461w"><p>2. Learn the hidden mysteries of space and time
+</p></div><div id="w1nLprZjmDS-ABdDO_TxZ"><p><i>????</i>
+</p></div><div id="dF78vpEqe1RMfXLj7pkTg"><p>3. Prophet!
+</p></div></blockquote><h4 id="Task-lists">Task lists
+</h4><p>In addition to the ordered list Podlite also supports 
+task lists, which are commonly known as checklists or to-do lists.
+</p><p>To create a task list item just apply a <code>:checked</code>
+attribute to <code>=item</code> block.
+</p><div class="code-block"><pre><code> =for item <strong>:checked</strong>
+ Buy groceries
+ =for item <strong>:!checked</strong>
+ Clean the garage
+</code></pre></div><p>The rendered output looks like this:
+</p><div class="code-block"><pre><code>[X] Buy groceries
+[ ] Clean the garage
+</code></pre></div><p>Alternatively, if item content starts with brackets with space (<code>[ ]</code>)
+the item is treated as having a <code>:!checked</code> attribute.
+To select a checkbox, add an <code>x</code> in between the brackets (<code>[x]</code>). it eqvivalent
+of <code>:checked</code> attribute.
+</p><p>For example:
+</p><div class="code-block"><pre><code> =item <strong>[x]</strong> Buy groceries
+ =itme <strong>[ ]</strong> Clean the garage 
+</code></pre></div><p>It possiible to create multilevel to-do lists, which permits the 
+inclusion of various task levels or sub-tasks.
+Here's an example:
+</p><div class="code-block"><pre><code> <strong>=item1</strong> [ ] Work
+   <strong>=item2</strong> [ ] Prepare the presentation
+   =item2 [x] Send emails
+ =item1 [ ] Home
+   =item2 [ ] Vacuum the living room
+   =item2 [ ] Water the plants
+</code></pre></div><h4 id="Unordered-lists">Unordered lists
+</h4><p>List items that are not <code>:numbered</code> or <code>:checked</code> are treated as defining unordered
+lists. Typically, such lists are rendered with bullets. For example:
+</p><div class="code-block"><pre><code>    =item1 Reading
+    =item2 Writing
+    =item3 'Rithmetic
+</code></pre></div><p>might be rendered:
+</p><blockquote><div id="okIQBnaYxt_z3ee8uy1zt"><p>•&nbsp;&nbsp;Reading
+</p></div></blockquote><blockquote><blockquote><div id="if4ADP9rSqDVi9L4LCYDx"><p>—&nbsp;&nbsp;Writing
+</p></div></blockquote></blockquote><blockquote><blockquote><blockquote><div id="XMQwyD6kCY6K_SIvbt5NY"><p>¤&nbsp;&nbsp;'Rithmetic
+</p></div></blockquote></blockquote></blockquote><p>As with numbering styles, the bulletting strategy used for different levels
+within a nested list is entirely up to the renderer.
+</p><h4 id="Multi-paragraph-list-items">Multi-paragraph list items
+</h4><p>Use the delimited form of the <code>=item</code> block to specify items that
+contain multiple paragraphs. For example:
+</p><div class="code-block"><pre><code>     Let's consider two common proverbs:
+
+     =begin item :numbered
+     I&lt;The rain in Spain falls mainly on the plain.&gt;
+
+     This is a common myth and an unconscionable slur on the Spanish
+     people, the majority of whom are extremely attractive.
+     =end item
+
+     =begin item :numbered
+     I&lt;The early bird gets the worm.&gt;
+
+     In deciding whether to become an early riser, it is worth
+     considering whether you would actually enjoy annelids
+     for breakfast.
+     =end item
+
+     As you can see, folk wisdom is often of dubious value.
+</code></pre></div><p>which produces:
+</p><blockquote><p>Let's consider two common proverbs:
+</p><ol><li id="OmTypttbOPjAZPhOhS29m"><p><i>The rain in Spain falls mainly on the plain.</i>
+</p><p>This is a common myth and an unconscionable slur on the Spanish
+people, the majority of whom are extremely attractive.
+</p></li><li id="kPjtmclwakRzRw1c_vu9y"><p><i>The early bird gets the worm.</i>
+</p><p>In deciding whether to become an early riser, it is worth
+considering whether you would actually enjoy annelids
+for breakfast.
+</p></li></ol><p>As you can see, folk wisdom is often of dubious value.
+</p></blockquote><h4 id="Definition-lists">Definition lists
+</h4><p>To create term/definition lists, use a <code>=defn</code> block. This is
+similar in effect to an <code>=item</code> block, in that a series of <code>=defn</code>
+blocks implicitly defines a list (but which might then be rendered into
+HTML using <code>&lt;DL&gt;...&lt;/DL&gt;</code> tags, rather than <code>&lt;UL&gt;...&lt;/UL&gt;</code> tags)
+</p><p>The first non-blank line of content is treated as a term being defined,
+and the remaining content is treated as the definition for the term.
+For example:
+</p><div class="code-block"><pre><code>    =defn  MAD
+    Affected with a high degree of intellectual independence.
+
+    =defn  MEEKNESS
+    Uncommon patience in planning a revenge that is worth while.
+
+    =defn
+    MORAL
+    Conforming to a local and mutable standard of right.
+    Having the quality of general expediency.
+</code></pre></div><p>Like other kinds of list items, definitions can be numbered, using either an
+option or a leading <code>#</code>:
+</p><div class="code-block"><pre><code>    =for defn <strong>:numbered</strong>
+    SELFISH
+    Devoid of consideration for the selfishness of others.
+
+    =defn <strong>#</strong> SUCCESS
+    The one unpardonable sin against one's fellows.
+</code></pre></div><h3 id="Nesting-blocks">Nesting blocks
+</h3><p>Any block can be nested by specifying a <code>:nested</code> option on it:
+</p><div class="code-block"><pre><code>    =begin para <strong>:nested</strong>
+        We are all of us in the gutter,E&lt;NL&gt;
+        but some of us are looking at the stars!
+    =end para
+</code></pre></div><p>However, qualifying each nested paragraph individually quickly becomes
+tedious if there are many in a sequence, or if multiple levels of
+nesting are required:
+</p><div class="code-block"><pre><code>    =begin para <strong>:nested</strong>
+        We are all of us in the gutter,E&lt;NL&gt;
+        but some of us are looking at the stars!
+    =end para
+    =begin para <strong>:nested(2)</strong>
+            -- Oscar Wilde
+    =end para
+</code></pre></div><p>So Podlite provides a <code>=nested</code> block that marks all its contents as being
+nested:
+</p><div class="code-block"><pre><code>    <strong>=begin nested</strong>
+    We are all of us in the gutter,E&lt;NL&gt;
+    but some of us are looking at the stars!
+        <strong>=begin nested</strong>
+        -- Oscar Wilde
+        <strong>=end nested</strong>
+    <strong>=end nested</strong>
+</code></pre></div><p>Nesting blocks can contain any other kind of block, including implicit
+paragraph and code blocks. Note that the relative physical indentation
+of the blocks plays no role in determining their ultimate nesting.
+The preceding example could equally have been specified:
+</p><div class="code-block"><pre><code>    <strong>=begin nested</strong>
+    We are all of us in the gutter,E&lt;NL&gt;
+    but some of us are looking at the stars!
+    <strong>=begin nested</strong>
+    -- Oscar Wilde
+    <strong>=end nested</strong>
+    <strong>=end nested</strong>
+</code></pre></div><h3 id="Tables">Tables
+</h3><p>Simple tables can be specified in Podlite using a <code>=table</code> block.
+The table may be given an associated description or title using the
+<code>:caption</code> option.
+</p><p>Columns are separated by two or more consecutive whitespace characters
+(double-space),
+or by a vertical line (<code>|</code>) or a border intersection (<code>+</code>), either of
+which must be separated from any content by at least one whitespace
+character.  Note that only one column separator type is allowed in a single line,
+but different lines are allowed to use different visible column separator types
+(that style is not recommended).  Using a mixture of visible and non-visible
+column separator types in a table is an error.
+</p><p>Rows can be specified in one of two ways: either one row per line, with
+no separators; or multiple lines per row with explicit horizontal
+separators (whitespace, intersections (<code>+</code>), or horizontal lines: <code>-</code>,
+<code>=</code>, <code>_</code>) between <i>every</i> row. Either style can also have an
+explicitly separated header row at the top. If rows are using the
+two-whitespace-character separator, the row cells should be carefully
+aligned to ensure the table is interpreted as the user intended.
+</p><p>Each individual table cell is separately formatted, as if it were a
+nested <code>=para</code>. Note that table rows are expected to have the same number
+of cells.
+</p><p>This means you can create tables compactly, line-by-line:
+</p><div class="code-block"><pre><code>    =table
+        The Shoveller   Eddie Stevens     King Arthur's singing shovel
+        Blue Raja       Geoffrey Smith    Master of cutlery
+        Mr Furious      Roy Orson         Ticking time bomb of fury
+        The Bowler      Carol Pinnsler    Haunted bowling ball
+</code></pre></div><p>With header:
+</p><div class="code-block"><pre><code> =begin table
+
+    Directive           Specifies
+    _________           ____________________________________________________
+    C&lt;=begin&gt;           Start of an explicitly terminated block
+    C&lt;=config&gt;          Lexical modifications to a block or markup code
+    
+ =end table
+</code></pre></div><p>Or:
+</p><div class="code-block"><pre><code> =begin table
+
+    Energy Source                Benefit
+
+    Solar power                  Reduces electricity bills
+    Wind energy                  Clean power source
+    Hydroelectric power          Highly efficient
+    Geothermal energy            Low emissions
+    Biomass                      Reduces waste
+
+=end table
+</code></pre></div><p>or line-by-line with multi-line headers:
+</p><div class="code-block"><pre><code>    =table
+        Superhero     | Secret          |
+                      | Identity        | Superpower
+        ==============|=================|================================
+        The Shoveller | Eddie Stevens   | King Arthur's singing shovel
+        Blue Raja     | Geoffrey Smith  | Master of cutlery
+        Mr Furious    | Roy Orson       | Ticking time bomb of fury
+        The Bowler    | Carol Pinnsler  | Haunted bowling ball
+</code></pre></div><p>or with multi-line headers <i>and</i> multi-line data:
+</p><div class="code-block"><pre><code>    =begin table :caption('The Other Guys')
+
+                        Secret
+        Superhero       Identity          Superpower
+        =============   ===============   ===================
+        The Shoveller   Eddie Stevens     King Arthur's
+                                          singing shovel
+
+        Blue Raja       Geoffrey Smith    Master of cutlery
+
+        Mr Furious      Roy Orson         Ticking time bomb
+                                          of fury
+
+        The Bowler      Carol Pinnsler    Haunted bowling ball
+
+    =end table
+</code></pre></div><h4 id="Advanced-Table-Format">Advanced Table Format
+</h4><p>Tables may be constructed using <code>=row</code> and <code>=cell</code> blocks.
+The <code>=row</code> blocks represent individual rows within the table.
+</p><p>The <code>=cell</code> blocks exist within rows and contain the actual content of the table.
+These cells can contain text, data, or other blocks.
+</p><div class="code-block"><pre><code>  =begin table
+
+  =begin row
+    =cell Fruits
+    =cell Bananas
+    =cell Yellow and ripe
+  =end row
+
+  =begin row
+    =cell Vegetables
+    =cell Carrots
+    =begin cell
+     =para Crunchy and orange
+    =end cell
+  =end row
+
+  =end table
+</code></pre></div><p>Each <code>=row</code> block may have an optional <code>:header</code> attribute, designating
+it as a header row. Header rows typically contain labels or titles
+for columns and are visually distinct.
+</p><div class="code-block"><pre><code>  =begin table
+
+  =begin row <strong>:header</strong>
+    =cell Category
+    =cell Product
+    =cell Description
+  =end row
+
+  =begin row
+    =cell Fruits
+    =cell Bananas
+    =cell Yellow and ripe
+  =end row
+
+  =begin row
+    =cell Vegetables
+    =cell Carrots
+    =cell Crunchy and orange
+  =end row
+  
+  =end table
+</code></pre></div><p>The <code>=cell</code> blocks can also have two important attributes:
+</p><dl><dt><code>:colspan</code></dt><dd>This attribute specifies the number of columns a cell should span horizontally.
+It allows cells to merge and occupy multiple adjacent columns, creating a visually
+unified cell.
+</dd></dl><dl><dt><code>:rowspan</code></dt><dd>This attribute determines how many rows a cell should span vertically.
+Cells with <code>:rowspan</code> can cover multiple rows in a table, creating a vertical merge effect.
+</dd></dl><p>The following examples demonstrate how <code>:colspan</code> and <code>:rowspan</code> attributes
+are used to create tables with merged cells, which is particularly useful
+for complex data structures.
+</p><div class="code-block"><pre><code>    =begin table
+
+    =begin row :header
+      =for cell :colspan(2)
+      Item and Quantity 
+      =cell Description
+    =end row
+
+    =begin row
+      =cell Apples
+      =cell 5
+      =for cell :rowspan(2)
+      Fruit for snacking
+    =end row
+
+    =begin row
+      =cell Bananas
+      =cell 3
+    =end row
+
+    =end table
+</code></pre></div><p>The resulting table is rendered as follows:
+</p><div class="code-block"><pre><code>---------------------------------------------------------------
+|         Item and Quantity        |     Description          |
+|----------------------------------|--------------------------|
+|   Apples     |      5            |                          |
+|--------------|-------------------|    Fruit for snacking    |
+|   Bananas    |      3            |                          |
+---------------------------------------------------------------
+</code></pre></div><p>Each <code>=row</code> block may only contain <code>=cell</code> blocks or blank lines as delimiters.
+All other types of blocks within the <code>=row</code> are implicitly wrapped
+by <code>=cell</code> blocks.
+</p><p>For example: 
+</p><div class="code-block"><pre><code>
+ =begin table
+
+  =begin row :header
+    =cell Diagram or Picture
+    =cell Description
+  =end row
+
+  =begin row
+    =picture spacecraft_in_orbit.jpg
+    =para
+    A vehicle designed for space travel
+  =end row
+
+  =begin row
+   =Mermaid
+       graph TD;
+       A[Space Station] --&gt; B[Mars Base]
+   
+   A space station connected to a Mars base
+  =end row
+ 
+ =end table
+
+</code></pre></div><p>Cell spanning attributes and nested block content within cells are
+semantic properties of the table document model and are preserved
+in the document tree.
+</p><p>For loading external CSV or TSV data into tables, use <code>=data-table</code>
+(<a href="#Data-table-blocks">#Data-table blocks</a>).
+</p><h4 id="Error-Recovery">Error Recovery
+</h4><p>The column separator type is determined per line. If visible separators
+(<code>|</code> or <code>+</code>) are present, they are used; otherwise, sequences of two
+or more consecutive whitespace characters serve as separators. Mixed
+separator types across lines produce a warning; the table is not
+rejected.
+</p><p>The expected cell count is established from the header row or, in its
+absence, the row with the most cells. Rows with fewer cells are padded
+with empty cells; rows with excess cells are truncated. In both cases,
+a warning is issued.
+</p><p>For <code>=row</code>/<code>=cell</code> tables, separator recovery does not apply, but
+mismatched cell counts produce a warning.
+</p><p>For tables sourced from <code>file:</code> or <code>data:</code> references, three levels
+of error are defined. If the source cannot be resolved, an error is
+issued and the table is rendered as an empty block. If the source
+cannot be interpreted as CSV, the content is rendered as a <code>=code</code>
+block. If the CSV contains rows with unequal field counts, parsing
+proceeds with padding for missing fields, and a warning is issued.
+</p><h3 id="Custom-blocks">Named or modular custom blocks
+</h3><p><dfn>Blocks</dfn> whose names contain at least one uppercase and one lowercase
+letter are assumed to be destined for specialized renderers or parser
+plug-ins. For example:
+</p><div class="code-block"><pre><code>    =begin Xhtml
+    &lt;object type="video/quicktime" data="onion.mov"&gt;
+    =end Xhtml
+</code></pre></div><p>or:
+</p><div class="code-block"><pre><code>  =Image http://www.perlfoundation.org/images/perl_logo_32x104.png
+</code></pre></div><aside class="notify note"><p class="notify-title">Note</p><blockquote><p>Named or modular blocks are defined within separate modules 
+and integrated into the core system through a defined interface or API.
+</p><p>The interface or API for external modules depends on the implementation. 
+</p></blockquote></aside><p>Ideally, each named block should have a corresponding handler responsible
+for its rendering and processing.
+</p><p>In the absence of a handler for named block, the implementation should 
+allow the content to degrade gracefully, ensuring that the core message
+or functionality remains accessible even if some advanced features cannot
+be rendered. As result, that blocks my be displayed as verbatim or
+placeholder content or even not rendered at all.
+</p><p>Alongside the verbatim or placeholder content, the renderer could provide
+an unobtrusive yet informative error message, explaining that the named block
+could not be processed.
+</p><p>Note that all block names consisting entirely of lowercase or entirely of
+uppercase letters are reserved. See <a href="#Semantic-blocks">#Semantic blocks</a>.
+</p><p>To check custom markup codes, refer to <a href="#Custom-markup-codes">#Custom markup codes</a>.
+</p><h3 id="Data-table-blocks">Data-table blocks
+</h3><p>The <code>=data-table</code> block renders CSV and TSV tables. It accepts
+data in three forms: inline body, an external file via <code>:src</code>, or
+a referenced <code>=data</code> block. <code>:columns</code> declares column projection;
+<code>:rename</code> declares display name overrides.
+</p><p>The inline body form embeds the source data:
+</p><div class="code-block"><pre><code>  =begin data-table :mime-type('text/csv; header=present')
+    name,age,city
+    Alice,30,London
+    Bob,25,Paris
+  =end data-table
+</code></pre></div><p>The external file form references a CSV or TSV file via the <code>:src</code>
+option, as in:
+</p><div class="code-block"><pre><code>  =for data-table :src&lt;file:./planets.csv&gt;
+  =    :columns&lt;name,radius_km&gt;
+  =    :caption('Inner planets')
+</code></pre></div><p>The reference form refers to a named <code>=data</code> block:
+</p><div class="code-block"><pre><code>  =begin data :key&lt;sales&gt; :mime-type('text/csv; header=present')
+    quarter,region,revenue
+    Q1,EU,120
+  =end data
+
+  =for data-table :src&lt;data:sales&gt; :columns&lt;quarter,revenue&gt;
+</code></pre></div><p>The body is verbatim and is parsed per <code>:mime-type</code> using RFC 4180
+for <code>text/csv</code> or RFC 4180 §3 for <code>text/tab-separated-values</code>.
+</p><aside class="notify warning"><p class="notify-title">Warning</p><blockquote><p>A CSV field with a literal newline followed by <code>=end data-table</code> at
+virtual margin terminates the block prematurely. Such content
+requires the external file form.
+</p></blockquote></aside><p>The standard <code>:allow</code> option enables markup codes within each cell;
+listed codes are interpreted after the cell is parsed from CSV or
+TSV. Without <code>:allow</code>, cell content is plain text.
+</p><p>The <code>:mime-type</code> option declares the format. With <code>:src&lt;data:X&gt;</code>,
+<code>:mime-type</code> is inherited from the referenced block; declaring it
+on <code>=data-table</code> in this case produces an error. With
+<code>:src&lt;file:X.ext&gt;</code>, <code>:mime-type</code> may be omitted and is inferred
+from the file extension. With <code>:src&lt;http:&gt;</code> or <code>:src&lt;https:&gt;</code>,
+<code>:mime-type</code> may be omitted and is inferred from the HTTP
+<code>Content-Type</code> response header. For inline body, <code>:mime-type</code> is
+required.
+</p><p>Error recovery follows <code>=table</code> rules (<a href="#Error-Recovery">#Error Recovery</a>).
+</p><p>Each <code>=data-table</code> block can include the following attributes:
+</p><dl><dt><code>:src</code></dt><dd>This option declares the source URI. Accepted schemes are <code>file:</code>
+for local files, <code>data:</code> for references to <code>=data</code> blocks by key,
+<code>http:</code> and <code>https:</code> for remote resources, and <code>doc:</code> for
+cross-document references. When the scheme is omitted, <code>file:</code> is
+the default. For example:
+</dd><div class="code-block"><pre><code>  :src&lt;file:./planets.csv&gt;
+  :src&lt;data:sales&gt;
+  :src&lt;https://example.com/data.csv&gt;
+</code></pre></div><dd>Relative paths in <code>file:</code> URIs resolve against the file declaring
+the directive, not the parent including document.
+</dd><dd>The <code>:src</code> option and inline body content are mutually exclusive;
+declaring both produces an error at parse time.
+</dd></dl><dl><dt><code>:columns</code></dt><dd>This option declares ordered column projection: which source columns
+appear in the output and in what order. Numeric indices refer to
+column position (1-based) in the source, not row position. For
+example:
+</dd><div class="code-block"><pre><code>  :columns&lt;product,revenue&gt;
+  :columns&lt;1,3,5&gt;
+  :columns&lt;revenue,product&gt;
+</code></pre></div><dd>Output order matches list order; columns absent from the list are
+excluded. Omitting the option renders all source columns in their
+source order.
+</dd><dd>An empty value for <code>:columns</code> produces an error; omit the option
+to render all columns. Out-of-range indices produce an error.
+</dd></dl><dl><dt><code>:rename</code></dt><dd>This option declares display name overrides for projected columns.
+The value is a hash mapping source identifiers, either names or
+indices, to display strings. For example:
+</dd><div class="code-block"><pre><code>  :rename{revenue=&gt;USD}
+  :rename{1=&gt;Time, 2=&gt;Action}
+  :rename{product=&gt;'Product name'}
+</code></pre></div><dd>Only columns appearing as hash keys receive overrides; other columns
+retain their source name when <code>header=present</code> or numeric index
+when <code>header=absent</code>.
+</dd><dd>Hash keys referring to columns absent from <code>:columns</code> (or from the
+source when <code>:columns</code> is omitted) produce an error.
+</dd></dl><h3 id="Podlite-comments">Podlite comments
+</h3><p><dfn>Podlite comments</dfn> refers to Podlite blocks that should not
+be displayed by any renderer. However, they are still may be part of the
+internal Podlite representation.
+</p><p>Comments are useful for meta-documentation (documenting the documentation):
+</p><div class="code-block"><pre><code>    =comment Add more here about the algorithm
+</code></pre></div><p>and for temporarily removing parts of a document:
+</p><div class="code-block"><pre><code>  =item # Retreat to remote Himalayan monastery
+
+  =item # Learn the hidden mysteries of space and time
+
+  =item # Achieve enlightenment
+
+  <strong>=begin comment</strong>
+  =item # Prophet!
+  <strong>=end comment</strong>
+</code></pre></div><h3 id="Data-blocks">Data blocks
+</h3><p>The <code>=data</code> block is used to embed various types of data directly into a document.
+</p><p>For example, to include a CSV file in a document, it is possible to 
+use the following syntax:
+</p><div class="code-block"><pre><code>
+  =begin data :key&lt;sales_data&gt; :mime-type&lt;text/csv&gt;
+    name,month,amount
+    John Doe,January,1000
+    Jane Doe,February,1500
+  =end data
+
+</code></pre></div><p>Each <code>=data</code> block can be given a <code>:key</code> option, to name it. The contents
+of any <code>=data</code> block with a key are addressable via
+the <code>data:</code> schema. For example:
+</p><div class="code-block"><pre><code>  =begin data <strong>:key&lt;employee_data&gt;</strong> :mime-type&lt;text/csv&gt;
+    id,name,position,department
+    1,John Doe,Manager,Marketing
+    2,Jane Smith,Developer,Engineering
+    3,Bob Brown,Designer,Product
+  =end data
+
+  =table <strong>data:employee_data</strong>
+
+</code></pre></div><p>Each <code>=data</code> block can include several attributes to provide additional information
+about the contained data:
+</p><dl><dt><code>:filename</code></dt><dd>This option specifies the original file name of the embedded data, which 
+can be used to hint at the type of data contained if the <code>:mime-type</code> is not 
+explicitly provided.
+</dd></dl><dl><dt><code>:mime-type</code></dt><dd>This option indicates the MIME type of the data, such as <code>image/png</code> for PNG images,
+which helps determine how the data should be interpreted and processed.
+</dd><dd>The <code>header</code> MIME parameter (per RFC 4180 §3) is recognised on
+<code>:mime-type</code> for CSV and TSV content. It accepts <code>present</code> or
+<code>absent</code>, with default <code>absent</code>. When <code>header=present</code>, the
+renderer treats the first row as column labels in <code>=table data:X</code>:
+</dd><div class="code-block"><pre><code>  =begin data :key&lt;planets&gt; <strong>:mime-type('text/csv; header=present')</strong>
+    name,radius_km,moons
+    Mercury,2440,0
+    Venus,6052,0
+    Earth,6371,1
+    Mars,3390,2
+  =end data
+
+  =for table :caption('Inner planets')
+  data:planets
+</code></pre></div><dd>For <code>=data-table</code> blocks, the <code>:mime-type</code> option may be omitted
+when the format can be inferred from the source. With
+<code>:src&lt;file:X.ext&gt;</code>, the format is inferred from the file extension
+via the MIME extension table below; matching is case-insensitive and
+multi-dot filenames use the last extension component. With
+<code>:src&lt;http:&gt;</code> or <code>:src&lt;https:&gt;</code>, the format is inferred from the
+HTTP <code>Content-Type</code> response header. With <code>:src&lt;data:X&gt;</code>, the MIME
+type is inherited from the referenced <code>=data</code> block.
+</dd><dd>For inline body and for sources where inference fails (unknown file
+extension, missing or generic HTTP <code>Content-Type</code>, absent file
+extension), <code>:mime-type</code> is required and its omission produces an
+error. An explicit <code>:mime-type</code> always overrides inference.
+</dd><dd>Here is a list of common MIME types and their corresponding file extensions:
+</dd><table id="ITyHNO2fQC4ygiWz5Y6RD"><thead><tr><th> MIME Type                </th><th> File Extension</th></tr></thead><tbody><tr><td> text/plain               </td><td> .txt</td></tr><tr><td> text/markdown            </td><td> .md, .markdown</td></tr><tr><td> text/podlite             </td><td> .podlite, .pod6</td></tr><tr><td> application/json         </td><td> .json</td></tr><tr><td> application/xml          </td><td> .xml</td></tr><tr><td> image/jpeg               </td><td> .jpg, .jpeg</td></tr><tr><td> image/png                </td><td> .png</td></tr><tr><td> application/pdf          </td><td> .pdf</td></tr><tr><td> application/zip          </td><td> .zip</td></tr><tr><td> audio/mpeg               </td><td> .mp3</td></tr><tr><td> video/mp4                </td><td> .mp4</td></tr><tr><td> application/msword       </td><td> .doc, .docx</td></tr><tr><td> text/csv                 </td><td> .csv</td></tr><tr><td> text/tab-separated-values</td><td> .tsv, .tab</td></tr></tbody></table></dl><dl><dt><code>:access-time</code> and <code>:modify-time</code></dt><dd>These attributes record the times when the data was last accessed or
+edited.
+</dd></dl><dl><dt><code>:encoding</code></dt><dd>This option specifies the encoding method used to store the data.
+For non-text data, such as images in PNG format, 
+the encoding method <code>base64</code> is used.
+</dd></dl><p>Example of storing images in <code>=data</code> blocks:
+</p><div class="code-block"><pre><code>
+  =begin <strong>data</strong> <strong>:key&lt;Logo&gt;</strong> :filename&lt;Logo.png&gt; :mime-type&lt;image/png&gt;
+  = :access-time&lt;2022-01-01T00:00:00Z&gt;  :modify-time&lt;2022-01-02T10:00:00Z&gt;
+  = :encoding&lt;base64&gt;
+  iVBORw0KGgoAAAANSUhEUgAAAAMAAAAFCAYAAACAcVaiAAAAS0lEQVR4AWPOPfjpvWZSW4db
+  ZLk+kwTHP24HUQYGfi4WTiZVAcYfDtIMDCJc/38xK6TWth37wcrw7cufF8yeeWUGrL8Z33Ey
+  /t0HAMBnF2nt5sNRAAAAAElFTkSuQmCC
+  =end data
+
+  =picture <strong>data:Logo</strong>
+
+</code></pre></div><p>In the example above, we have a <code>=data</code> block with <code>:key</code> <code>Logo</code> that stores
+the base64-encoded image data. We also specify the filename, mime type,
+access time, and edit time as attributes of the <code>=data</code> block.
+</p><p>The image can then be referenced using the <code>=picture</code> block with the scheme
+<code>data:</code> and the block name <code>Logo</code>.
+</p><p>The <code>=data</code> blocks are just regular Podlite blocks and may appear anywhere
+within a source file, and as many times as required.
+</p><p>Note that in Podlite, it is possible to specify <code>=data</code> blocks
+<i>after</i> the point in the source where their contents will be used.
+</p><p><code>=data</code> blocks are never rendered by the standard Podlite renderers.
+</p><h3 id="Semantic-blocks">Semantic blocks
+</h3><p>All uppercase block typenames are reserved for specifying standard
+documentation, publishing, or source components.
+</p><p>Standard semantic blocks include:
+</p><div class="code-block"><pre><code>    =NAME
+    =AUTHOR
+    =VERSION
+    =SYNOPSIS
+    =DESCRIPTION
+    =USAGE
+    =INTERFACE
+    =METHOD
+    =SUBROUTINE
+    =OPTION
+    =DIAGNOSTIC
+    =ERROR
+    =WARNING
+    =DEPENDENCY
+    =BUG
+    =SEE-ALSO
+    =ACKNOWLEDGEMENT
+    =COPYRIGHT
+    =DISCLAIMER
+    =LICENCE
+    =LICENSE
+    =TITLE
+    =SECTION
+    =CHAPTER
+    =APPENDIX
+    =TOC
+    =INDEX
+    =FOREWORD
+    =SUMMARY
+</code></pre></div><p>The plural forms of each of these keywords are also reserved, and are
+aliases for the singular forms.
+</p><p>Most of these blocks are typically used in their full delimited forms:
+</p><div class="code-block"><pre><code>    =begin SYNOPSIS
+        use Magic::Parser;
+
+        my Magic::Parser $parser .= new();
+
+        my $tree = $parser.parse($fh);
+    =end SYNOPSIS
+</code></pre></div><p>Semantic blocks can be considered to be variants of the <code>=head1</code> block
+in most respects (and most renderers will treat them as such). The main
+difference is that, in a <code>=head1</code> block, the heading is the contents of
+the block; whereas, in a semantic block, the heading is derived from the
+typename of the block itself and the block contents are instead treated as
+the <code>=para</code> or <code>=code</code> block(s) belonging to the heading.
+</p><p>The use of these special blocks is not required; you can still just write:
+</p><div class="code-block"><pre><code>    =head1 SYNOPSIS
+    =begin code :lang&lt;raku&gt;
+        use Magic::Parser
+
+        my Magic::Parser $parser .= new();
+
+        my $tree = $parser.parse($fh);
+    =end code
+</code></pre></div><p>However, using the keywords adds semantic information to the
+documentation, which may assist various renderers, summarizers, coverage
+tools, document refactorers, and other utilities. This is because a
+semantic block <i>encloses</i> the text it controls (unlike a <code>=head1</code>,
+which merely precedes its corresponding text), so using semantic blocks
+produces a more explicitly structured document.
+</p><p>Note that there is no requirement that semantic blocks be rendered in
+a particular way (or at all). Specifically, it is not necessary to
+preserve the capitalization of the keyword. For example, the
+<code>=SYNOPSIS</code> block of the preceding example might be rendered like so:
+</p><blockquote><p><strong>3.&nbsp;&nbsp;<i>Synopsis</i></strong>
+</p><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#A626A4">    use</span><span style="color:#383A42"> Raku::Magic::Parser;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A626A4">    my</span><span style="color:#E45649"> $rep</span><span style="color:#383A42"> = Raku::Magic::Parser.parse(</span><span style="color:#E45649">$fh</span><span style="color:#383A42">, :all_pod);</span></span>
+<span class="line"></span></code></pre></code></div></blockquote><h3 id="Table-of-contents">Table of contents
+</h3><p>The <code>=toc</code> block creates an autogenerated table of contents (TOC)
+in a document. The TOC is an index of section titles within the document, 
+and its structure is determined by the document's organization. 
+</p><p>The first non-blank line of <code>=toc</code> content is treated as a <a href="#Selectors">selector</a>.
+</p><p>For example:
+</p><div class="code-block"><pre><code> =toc head1, head2, head3, item1, item2, table
+</code></pre></div><p>or:
+</p><div class="code-block"><pre><code>  =toc  head1, head2, head3 
+</code></pre></div><p>The TOC displays without a caption by default.
+However, a caption can be specified using the <code>:caption</code> 
+attribute of the <code>=toc</code> block.
+</p><p>For example:
+</p><div class="code-block"><pre><code>  =for toc <strong>:caption('Table of contents')</strong>
+  head1, head2, head3 
+</code></pre></div><p>The TOC entries are built using the <code>:caption</code> attribute content
+within the block. If this attribute is not present, the text
+presentation of the block's content serves as the TOC entry.
+</p><p>The depth of the generated TOC is determined by the <a href="#Selectors">"Selector"</a> argument.
+The selector is processed, and headers or filtered blocks that 
+allow levels are used to build the TOC levels. If a block lacks an 
+associated level, it is rendered at a level one higher than the previous 
+block with a level in the TOC.
+</p><p>Note that all <a href="#Semantic-blocks">semantic blocks</a> are treated as equivalent 
+to <code>head1</code> headings, and the <code>=item1</code>/<code>=item</code> equivalence is preserved.
+</p><p>The <code>:folded-levels</code> attribute indicates which levels of the TOC should
+be folded. 
+</p><div class="code-block"><pre><code> =for toc <strong>:folded-levels[2,3]</strong> :caption('Table of contents')
+    head1, head2, item1
+</code></pre></div><p>If the <code>:folded-levels</code> attribute is provided with a set 
+of key-value pairs, it indicates the folding state of each 
+specified level. 
+</p><p>For example: 
+</p><div class="code-block"><pre><code>  =for toc <strong> :folded-levels{ 2=&gt;1, 4 =&gt; 1, 3=&gt;0 } </strong>
+    head1, head2, head3, item1, item2
+</code></pre></div><p>The value <code>0</code> for level <code>3</code> indicates that this level should 
+remain unfolded. Levels <code>2</code> and <code>4</code> are folded.
+</p><p>This configuration enables customized folding within the TOC.
+</p><p>The TOC is inserted at the location of the <code>=toc</code> block.
+</p><p>To enable the autogenerated TOC controlled by the renderer, set the <code>:toc</code>
+document attribute for the <code>=pod</code> block. In this case, the specific configuration 
+and outcome of the TOC are determined by the renderer implementation.
+</p><h3 id="Include-directive">Include directive
+</h3><p>The <code>=include</code> directive enables reuse of specific parts of documents within
+project sources. It is useful for complex documents that combine sections
+from different files while maintaining overall context and structure.
+</p><p>The <code>=include</code> construct is classified as a directive, consistent with
+<code>=config</code> and <code>=alias</code>. As a directive, <code>=include</code> references external
+content rather than containing it directly.
+</p><p>The <code>=include</code> directive is followed by a <a href="#Selectors">"Selector"</a> that specifies the
+content to be included.
+</p><p>In this example, the content of the file <code>chapter01.pod6</code> located in the 
+<code>./includes</code> directory is included:
+</p><div class="code-block"><pre><code>=include file:./includes/chapter01.pod6
+</code></pre></div><p>A wildcard <a href="#Selectors">"Selector"</a> enables inclusion 
+of content from all the Markdown files:
+</p><div class="code-block"><pre><code>  =include file:./includes/*.md
+</code></pre></div><p>It is possible to include blocks from the same document.
+This feature proves valuable when reusing parts of existing content.
+</p><p>For instance, a semantic block <code>=VERSION</code> can be included as demonstrated:
+</p><div class="code-block"><pre><code><strong>=include VERSION</strong>
+=VERSION 1.0.0
+</code></pre></div><p>or, equivalently:
+</p><div class="code-block"><pre><code>=VERSION 1.0.0
+=VERSION 1.0.0
+</code></pre></div><p>Podlite detects the type of the included file by its extension.
+For example, if the included file has a <code>.md</code> extension, 
+it is treated as a Markdown file.
+</p><p>To override the type of the included file, the <code>:mime-type</code> attribute
+is placed on the directive line after the source URI. For example:
+</p><div class="code-block"><pre><code>=include file:./includes/text.txt <strong>:mime-type('text/podlite')</strong>
+</code></pre></div><p>The <code>:mime-type</code> attribute lets the parser handle files whose extension
+does not match their actual type.
+</p><p>External content can introduce vulnerabilities such as code injection.
+Tools displaying included content should provide warnings.
+</p><p><code>=set</code> directives accumulated before <code>=include</code> apply to the first
+block of the resolved included content (resolution-time targeting).
+The <code>=include</code> directive itself does not receive <code>=set</code> attributes.
+Full discipline: <a href="#Block-attribute-assignment-with-set">Block attribute assignment with =set</a>.
+</p><h3 id="Section-boundaries">Section boundaries
+</h3><p>The <code>=boundary</code> directive marks a structural transition between major
+document sections such as chapters, parts, or topics. The transition
+is semantic, not presentational.
+</p><p>A <code>=boundary</code> is a directive, not a block. Hence, there is no
+paragraph or delimited form of the <code>=boundary</code> directive. It accepts
+an optional <code>:caption</code> attribute that describes the transition:
+</p><div class="code-block"><pre><code><strong>=boundary</strong>
+
+<strong>=boundary</strong> :caption&lt;<var>BOUNDARY_DESCRIPTION</var>&gt;
+</code></pre></div><p>Boundaries are placed between blocks, not within them, at the same
+structural level as the blocks they separate:
+</p><div class="code-block"><pre><code>=head1 Chapter One
+Content of chapter one.
+
+<strong>=boundary</strong>
+
+=head1 Chapter Two
+Content of chapter two.
+</code></pre></div><p>Rendering is format-specific. Renderers may use page breaks
+(paginated output), thematic breaks (web), or separator lines (plain
+text), and may ignore the directive when boundaries are not supported.
+The <code>:caption</code> attribute is descriptive metadata; renderers may
+surface it as a header, navigation entry, or omit it.
+</p><h3 id="Inserting-pictures">Inserting pictures
+</h3><p>Podlite allows to include images using a <code>=picture</code> block with an inline version
+represented as <code>P&lt;alternative text|source of the image&gt;</code>:
+</p><div class="code-block"><pre><code> <strong>=picture astronaut.png</strong>
+ =para In the vast expanse of the cosmos, an intrepid <strong>P&lt;astronaut|astronaut.png&gt;</strong>
+ floats weightlessly above the Earth.
+</code></pre></div><p>The first non-blank line of content within the <code>=picture</code> block specifies the
+source of the image, and the remaining content is treated as caption.
+</p><p>This source can be either local or remote, and it can be
+specified using different schemas: <code>https:</code> for remote images, <code>file:</code> for
+local ones, or <code>data:</code> for <a href="#Data-blocks">embedded images</a> in the document.
+If no schema is provided, <code>file:</code> is used as default.
+</p><div class="code-block"><pre><code> =picture https://example.com/image.jpg
+ =picture file:/local/image.png
+ =picture /local/image.png
+ =picture ../image.png
+ =picture data:Logo
+</code></pre></div><p>Following the source line, it possible to include an image caption.
+</p><div class="code-block"><pre><code> =picture astronaut.png
+ In the vast expanse of the cosmos, an intrepid B&lt;astronaut&gt;
+ floats weightlessly above the Earth.
+</code></pre></div><p>In the delimited form of <code>=picture</code>, multiple text blocks can be included:
+</p><div class="code-block"><pre><code> =begin picture
+ astronaut.png
+ 
+ In the vast expanse of the cosmos, an intrepid B&lt;astronaut&gt;
+ floats weightlessly above the Earth.
+
+ This astronaut explores the vastness of space.
+ 
+ =end picture
+</code></pre></div><p>All inline markup codes supported by <a href="#Ordinary-paragraph-blocks">ordinary paragraph blocks</a>
+can be used within picture captions.
+</p><p>A caption can also be defined using the <code>:caption</code> attribute:
+</p><div class="code-block"><pre><code> =for picture <strong>:caption&lt;diagram&gt;</strong>
+ diag01.png
+</code></pre></div><h3 id="Mathematical-formulas">Mathematical formulas
+</h3><p>To include mathematical formulas, use a <code>=formula</code> block with an inline version
+represented as <code>F&lt;&gt;</code>.
+</p><p>To insert mathematical expressions, use LaTeX-style syntax, which is
+a commonly used format for writing mathematical equations.
+</p><div class="code-block"><pre><code>  <strong>=formula</strong>
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+
+  In a right triangle, the length of the hypotenuse can be calculated 
+  using the Pythagorean theorem: <strong>F&lt;a^2 + b^2 = c^2&gt;</strong>.
+
+  Euler's identity, <strong>F&lt;e^{i\pi} + 1 = 0&gt;</strong>, is a fundamental equation in
+  complex analysis.
+
+</code></pre></div><p>The formula caption can be defined using the <code>:caption</code> attribute:
+</p><div class="code-block"><pre><code>  =for formula <strong> :caption('Quadratic Formula') </strong>
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+</code></pre></div><h3 id="Markdown-support">Markdown support
+</h3><p>Podlite includes built-in support for Markdown, making it easy to include Markdown
+content within Podlite documents. This is achieved using the <code>=markdown</code> block.
+</p><div class="code-block"><pre><code>  <strong>=begin markdown</strong>
+
+  ## Markdown Example
+
+  You can use all the standard Markdown syntax within this block. For example:
+
+  - *Italic text* using asterisks or underscores: *italic* or _italic_.
+  - **Bold text** using double asterisks or underscores: **bold** or __bold__.
+  - [Links](https://example.com) with the `[text](url)` syntax.
+  - Unordered lists using `-`, `*`, or `+`:
+
+  - Item 1
+  - Item 2
+
+  - Ordered lists using numbers:
+
+  1. First item
+  2. Second item
+
+  - Code blocks with backticks:
+
+  ```python
+  def hello_world():
+      print("Hello, World!")
+  ```
+
+  - Blockquotes with the `&gt;` symbol:
+  
+    &gt; This is a blockquote.
+
+  <strong>=end markdown</strong>
+</code></pre></div><p>This block allows to seamlessly combine Podlite's structured blocks with
+the flexibility of Markdown.
+</p><h4 id="Fenced-code-block-attributes">Fenced code block attributes
+</h4><p>Within markdown content, fenced code blocks may include Podlite configuration
+attributes following the language identifier. The language identifier on the
+opening fence line maps directly to the <code>:lang</code> attribute of the native
+<code>=code</code> block.
+</p><div class="code-block"><pre><code>  <strong>```python</strong>
+  def hello():
+      print("Hello")
+  <strong>```</strong>
+</code></pre></div><p>This fenced code block is semantically equivalent to:
+</p><div class="code-block"><pre><code>  <strong>=begin code :lang&lt;python&gt;</strong>
+  def hello():
+      print("Hello")
+  <strong>=end code</strong>
+</code></pre></div><p>Both backtick (<code>```</code>) and tilde (<code>~~~</code>) fence delimiters are supported.
+The two forms are semantically identical.
+</p><p>Extended attributes may be specified after the language identifier using
+standard Podlite configuration syntax:
+</p><div class="code-block"><pre><code>  <strong>```python :line-numbers :highlight&lt;2,5-7&gt; :caption&lt;Example&gt;</strong>
+  def fibonacci(n):
+      if n &lt;= 1:
+          return n
+      return fibonacci(n-1) + fibonacci(n-2)
+  <strong>```</strong>
+</code></pre></div><p>This is equivalent to:
+</p><div class="code-block"><pre><code>  <strong>=begin code :lang&lt;python&gt; :line-numbers :highlight&lt;2,5-7&gt; :caption&lt;Example&gt;</strong>
+  def fibonacci(n):
+      if n &lt;= 1:
+          return n
+      return fibonacci(n-1) + fibonacci(n-2)
+  <strong>=end code</strong>
+</code></pre></div><p>All attributes defined for <code>=code</code> blocks in this specification are available
+on fenced code blocks. The complete attribute syntax is described in the
+<a href="#Block-Configuration">Block Configuration</a> section.
+</p><p>Implementation of extended attributes beyond the language identifier is optional.
+Parsers not supporting extended attributes parse the language identifier and
+either ignore trailing content or emit a warning, continuing processing in
+accordance with the graceful degradation principle.
+</p><table id="Z-J-sezPtUVd0CEldFKum"><caption class="caption">Fence to code block attribute equivalence</caption><thead><tr><th>Markdown fence</th><th>Podlite equivalent</th></tr></thead><tbody><tr><td><code>```python</code></td><td><code>=code :lang&lt;python&gt;</code></td></tr><tr><td><code>```javascript</code></td><td><code>=code :lang&lt;javascript&gt;</code></td></tr><tr><td><code>```</code></td><td><code>=code</code></td></tr><tr><td><code>~~~rust</code></td><td><code>=code :lang&lt;rust&gt;</code></td></tr></tbody></table><p>Common attribute patterns found in various markdown implementations may be
+mapped to Podlite notation as follows:
+</p><table id="UPWylNWp0FPfgONv0zC-_"><caption class="caption">Common markdown attributes to Podlite notation</caption><thead><tr><th>Function</th><th>Common pattern</th><th>Podlite equivalent</th></tr></thead><tbody><tr><td>Line numbers</td><td><code>showLineNumbers</code></td><td><code>:line-numbers</code></td></tr><tr><td>Line numbers</td><td><code>.numberLines</code></td><td><code>:line-numbers</code></td></tr><tr><td>Start line</td><td><code>startFrom="N"</code></td><td><code>:start-line&lt;N&gt;</code></td></tr><tr><td>Highlight</td><td><code>{1,3-5}</code></td><td><code>:highlight&lt;1,3-5&gt;</code></td></tr><tr><td>Title</td><td><code>title="text"</code></td><td><code>:caption&lt;text&gt;</code></td></tr><tr><td>Element ID</td><td><code>#identifier</code></td><td><code>:id&lt;identifier&gt;</code></td></tr><tr><td>CSS class</td><td><code>.classname</code></td><td><code>:class&lt;classname&gt;</code></td></tr></tbody></table><h2 id="Markup-codes">Markup codes
+</h2><p>Markup codes enable inline markup within the text of (most) Podlite block types.
+They are a form of block that can contain only other markup codes. Specifically,
+markup codes can nest:
+</p><div class="code-block"><pre><code>    B&lt;I shall say this loudly
+    <strong>Z&lt;and repeatedly&gt;</strong>
+    and with emphasis.&gt;
+</code></pre></div><p>All Podlite markup codes consist of a single capital letter followed
+immediately by a set of angle brackets. The brackets contain the text or
+data to which the markup code applies. A set of single
+angles (<code>&lt;...&gt;</code>), a set of double angles (<code>«...»</code>), or multiple
+single-angles (<code>&lt;&lt;&lt;...&gt;&gt;&gt;</code>) can be used.
+</p><p>Within angle delimiters, you cannot use sequences of the same angle
+characters that are longer than the delimiters:
+</p><div class="code-block"><pre><code>    =comment
+        These are errors...
+
+    C&lt; $foo<strong>&lt;&lt;</strong>bar<strong>&gt;&gt;</strong> &gt;
+    The Perl 5 heredoc syntax was: C&lt; <strong>&lt;&lt;</strong>END_MARKER &gt;
+</code></pre></div><p>Sequences of angles that are the same length as
+the delimiters <i>can</i> be used, but they must be balanced. For example:
+</p><div class="code-block"><pre><code>C&lt;  $foo&lt;bar&gt;   &gt;
+C&lt;&lt; $foo&lt;&lt;bar&gt;&gt; &gt;&gt;
+</code></pre></div><p>If an unbalanced angle is needed, either use different delimiters:
+</p><div class="code-block"><pre><code>    C<strong>«</strong>$foo &lt; $bar<strong>»</strong>
+    The Perl 5 heredoc syntax was: C<strong>«</strong> &lt;&lt;END_MARKER <strong>»</strong>
+</code></pre></div><p>or delimiters with more consecutive angles than the text contains:
+</p><div class="code-block"><pre><code>    C<strong>&lt;&lt;</strong>$foo &lt; $bar<strong>&gt;&gt;</strong>
+    The Perl 5 heredoc syntax was: C<strong>&lt;&lt;&lt;</strong> &lt;&lt;END_MARKER <strong>&gt;&gt;&gt;</strong>
+</code></pre></div><p>A markup code ends at the matching closing angle bracket(s), or at
+the end of the enclosing block or markup code in which the opening
+angle bracket was specified, whichever comes first (this includes paragraph
+and abbreviated blocks, ending with blank a line). Podlite parsers are
+required to issue a warning whenever a markup code is terminated by
+the end of an outer block rather than by its own delimiter (unless the
+user explicitly disables the warning).
+</p><h3 id="Significance-indicators">Significance indicators
+</h3><p>Podlite provides three markup codes that flag their contents with
+increasing levels of significance:
+</p><ul><li id="z_eUBGSiZAbAYsPVuJGqf"><p>The <code>U&lt;&gt;</code> markup code specifies that the contained text is
+<strong>unusual</strong> or distinctive; that it is of <i>minor significance</i>. Typically
+such content would be rendered in an underlined style.
+</p></li><li id="m_EDsr3Bn1QsKCUqE3raG"><p>The <code>I&lt;&gt;</code> markup code specifies that the contained text is
+<strong>important</strong>; that it is of <i>major significance</i>. Such content would
+typically be rendered in italics or in <code> &lt;em&gt;...&lt;/em&gt; </code> tags
+</p></li><li id="IRY0LLxwdapOa-sar4Q1Q"><p>The <code>B&lt;&gt;</code> markup code specifies that the contained text is the
+<strong>basis</strong> or focus of the surrounding text; that it is of <i>fundamental
+significance</i>. Such content would typically be rendered in a bold style or
+in <code> &lt;strong&gt;...&lt;/strong&gt; </code> tags.
+</p></li></ul><h3 id="Mistake-marking">Mistake marking
+</h3><p>The code <code>O&lt;&gt;</code> can be used for strikethrough text, where 'O' stands
+for "Overstrike." This indicates that certain words are a
+mistake and should not be included in the document.
+</p><div class="code-block"><pre><code>O&lt;The sky is green.&gt; Our planet's sky is usually blue.
+</code></pre></div><h3 id="Text-positioning">Text positioning
+</h3><p>Podlite provides two markup codes for positioning characters or words.
+</p><ul><li id="913xccFijhtlUDsiWUpsq"><p>To create subscript text, use the <code>J&lt;&gt;</code> markup code, where 'J' represents 
+"Junior text." Subscript positions one or more characters slightly below the normal
+line of type.
+</p><div class="code-block"><pre><code>HJ&lt;2&gt;O
+</code></pre></div><p>This code renders as <code>H&lt;sub&gt;2&lt;/sub&gt;O</code>, which signifies that the '2' is positioned 
+slightly below the baseline, as is often seen in chemical formulas like <code>H₂O</code> (water).
+</p></li><li id="Gdg0V-NgwidIkGzCPFveh"><p>To create superscript text, it possible to use the <code>H&lt;&gt;</code> markup code, where 'H'
+stands for "High text." Superscript positions one or more characters slightly
+above the normal line of type
+</p><div class="code-block"><pre><code>XH&lt;2&gt;
+</code></pre></div><p>This code renders as <code>X&lt;sup&gt;2&lt;/sup&gt;</code>, indicating that the <code>'2'</code> is positioned 
+slightly above the baseline. This is commonly used for mathematical exponents, as in <code>X²</code>.
+</p></li></ul><h3 id="Definitions">Definitions
+</h3><p>The <code>D&lt;&gt;</code> markup code indicates that the contained text is a
+<strong>definition</strong>, introducing a term that the adjacent text
+elucidates. It is the inline equivalent of a <code>=defn</code> block.
+For example:
+</p><div class="code-block"><pre><code>    There ensued a terrible moment of <strong>D&lt;coyotus interruptus&gt;</strong>: a brief
+    suspension of the effects of gravity, accompanied by a sudden
+    to-the-camera realization of imminent downwards acceleration.
+</code></pre></div><p>A definition may be given synonyms, which are specified after a vertical bar
+and separated by semicolons:
+</p><div class="code-block"><pre><code>    A <strong>D&lt;markup code|markup codes;formatters&gt;</strong> provides a way
+    to add inline mark-up to a piece of text.
+</code></pre></div><p>A definition would typically be rendered in italics or <code> &lt;dfn&gt;...&lt;/dfn&gt; </code>
+tags and will often be used as a link target for subsequent instances of the
+term (or any of its specified synonyms) within a hypertext.
+</p><h3 id="Example-specifiers">Example specifiers
+</h3><p>Podlite provides markup codes for specifying inline examples of input,
+output, code, and metasyntax:
+</p><ul><li id="YTojnr-aerPnebHnVUSRu"><p>The <code>T&lt;&gt;</code> markup code specifies that the contained text is
+<strong>terminal output</strong>; that is: something that a program might print out.
+Such content would typically be rendered in a <samp>fixed-width font</samp> or with
+<code> &lt;samp&gt;...&lt;/samp&gt; </code> tags. The contents of a <code>T&lt;&gt;</code> code are always
+<a href="#Space-preserving-text">space-preserved </a> (as if they had an implicit
+<code>S&lt;...&gt;</code> around them). The <code>T&lt;&gt;</code> code is the inline equivalent of the
+<code>=output</code> block.
+</p></li><li id="mKGwH8aGFBgQyzbJL5tWI"><p>The <code>K&lt;&gt;</code> markup code specifies that the contained text is
+<strong>keyboard input</strong>; that is: something that a user might type in. Such
+content would typically be rendered in a <kbd>fixed-width font</kbd> (preferably a
+different font from that used for the <code>T&lt;&gt;</code> markup code) or with
+<code> &lt;kbd&gt;...&lt;/kbd&gt; </code> tags. The contents of a <code>K&lt;&gt;</code> code are always
+<a href="#Space-preserving-text">space-preserved</a>. The <code>K&lt;&gt;</code> code is the
+inline equivalent of the <code>=input</code> block.
+</p></li><li id="7PcAmZV8ZUwInYC7PjoIn"><p>The <code>C&lt;&gt;</code> markup code specifies that the contained text is <strong>code</strong>;
+that is, something that might appear in a program or specification. Such
+content would typically be rendered in a <code>fixed-width font</code> (preferably
+a different font from that used for the <code>T&lt;&gt;</code> or <code>K&lt;&gt;</code> markup
+codes) or with <code> &lt;code&gt;...&lt;/code&gt; </code> tags. The contents of a <code>C&lt;&gt;</code> code
+are <a href="#Space-preserving-text">space-preserved</a> and <a href="#Verbatim-text">verbatim</a>.
+The <code>C&lt;&gt;</code> code is the inline equivalent of the <code>=code</code> block.
+</p><p>To include other markup codes in a <code>C&lt;&gt;</code> code, the code can be lexically
+<a href="#Block-pre-configuration">reconfigured</a>:
+</p><div class="code-block"><pre><code>  =begin para
+  <strong>=config C&lt;&gt; :allow&lt;E I&gt;</strong>
+  Raku makes extensive use of the C&lt;<strong>E&lt;laquo&gt;</strong>&gt; and C&lt;<strong>E&lt;raquo&gt;</strong>&gt;
+  characters, for example, in a hash look-up:
+  C&lt;%hash<strong>I&lt;E&lt;laquo&gt;&gt;</strong>key<strong>I&lt;E&lt;raquo&gt;&gt;</strong>&gt;
+  =end para
+</code></pre></div><p>To enable entities in <i>every</i> <code>C&lt;...&gt;</code>, place a <code>=config C&lt;&gt; :allow&lt;E&gt;</code>
+at the top of the document.
+</p></li><li id="Fa5F36ODp3THjHt_aYurC"><p>The <code>R&lt;&gt;</code> markup code specifies that the contained text is a
+<strong>replaceable item</strong>, placeholder, or metasyntactic variable. It is
+used to indicate a component of a syntax or specification that should
+eventually be replaced by an actual value. For example:
+</p><div class="code-block"><pre><code>  The basic C&lt;ln&gt; command is: C&lt;ln&gt; <strong>R&lt;source_file&gt; R&lt;target_file&gt;</strong>
+</code></pre></div><p>or:
+</p><div class="code-block"><pre><code>  Then enter your details at the prompt:
+  =for input
+      Name: <strong>R&lt;your surname&gt;</strong>
+        ID: <strong>R&lt;your employee number&gt;</strong>
+      Pass: <strong>R&lt;your 36-letter password&gt;</strong>
+</code></pre></div><p>Typically replaceables would be rendered in <var>fixed-width italics</var> or with
+<code> &lt;var&gt;...&lt;/var&gt; </code> tags. The font used should be the same as that used for
+the <code>C&lt;&gt;</code> code, unless the <code>R&lt;&gt;</code> is inside a <code>K&lt;&gt;</code> or <code>T&lt;&gt;</code> code (or
+the equivalent <code>=input</code> or <code>=output</code> blocks), in which case their
+respective fonts should be used.
+</p></li></ul><h3 id="Verbatim-text">Verbatim text
+</h3><p>The <code>V&lt;&gt;</code> markup code treats its entire contents as being <strong>verbatim</strong>,
+disregarding every apparent markup code within it. For example:
+</p><div class="code-block"><pre><code>The B&lt;V&lt; V&lt;&gt; &gt;&gt; markup code disarms other codes
+such as V&lt; I&lt;&gt;, C&lt;&gt;, B&lt;&gt;, and M&lt;&gt; &gt;.
+</code></pre></div><p>Note that the <code>V&lt;&gt;</code> code only changes the way its
+contents are parsed, <i>not</i> the way they are rendered. That is, the
+contents are still wrapped and formatted like plain text, and the
+effects of any markup codes surrounding the <code>V&lt;&gt;</code> code
+are still applied to its contents. For example, the previous example
+is rendered:
+</p><blockquote><p>The <strong> V&lt;&gt; </strong> markup code disarms other codes
+such as  I&lt;&gt;, C&lt;&gt;, B&lt;&gt;, and M&lt;&gt; .
+</p></blockquote><p>You can prespecify markup codes that remain active within
+a <code>V&lt;&gt;</code> code, using the <a href="#Formatting-within-code-blocks">:allow</a>
+option.
+</p><h3 id="Inline-comments">Inline comments
+</h3><p>The <code>Z&lt;&gt;</code> markup code indicates that its contents constitute a
+<strong>zero-width comment</strong>, which should not be rendered by any renderer.
+For example:
+</p><div class="code-block"><pre><code>  The "exeunt" command <strong>Z&lt;Think about renaming this command?&gt;</strong> is used
+  to quit all applications.
+</code></pre></div><p>In certain scenarios, the <code>Z&lt;&gt;</code> code is used to break up text that 
+would otherwise be considered mark-up:
+</p><div class="code-block"><pre><code>  In certain scenarios, the Z<strong>Z&lt;&gt;</strong>&lt;&gt; code is used to break up text that 
+  would otherwise be considered mark-up.
+</code></pre></div><p>That technique still works, but it's now easier to accomplish the same goal
+using a verbatim markup code:
+</p><div class="code-block"><pre><code>  In certain scenarios, the <strong>V&lt;V&lt;Z&lt;&gt;&gt;&gt;</strong> code is used to break up text that 
+  would otherwise be considered mark-up.
+</code></pre></div><p>Moreover, the <code>C&lt;&gt;</code> code automatically treats its contents as being
+verbatim, which often eliminates the need for the <code>V&lt;&gt;</code> as well:
+</p><div class="code-block"><pre><code>  In certain scenarios, the <strong>V&lt;C&lt;Z&lt;&gt;&gt;&gt;</strong> code was widely used to break up text
+  that would otherwise be considered mark-up.
+</code></pre></div><p>The <code>Z&lt;&gt;</code> markup code is the inline equivalent of a
+<a href="#Comments">=comment block</a>.
+</p><h3 id="Content-masking">Content masking
+</h3><p>The <code>G&lt;&gt;</code> markup code marks an inline text fragment, and the
+<code>:masked</code> attribute marks an entire block, as guarded. The original
+content is preserved in the document model; only the rendered output is
+concealed.
+</p><p>The mechanism provides presentation-layer concealment for sensitive
+content (API tokens, credentials, personally identifiable information,
+age-restricted material). It complements other security layers such as
+source file access controls and authenticated build pipelines.
+</p><div class="code-block"><pre><code>The password is <strong>G&lt;&gt;<var>hunter2</var><strong></strong></strong> and must not be exposed.
+
+=for <var>BLOCKTYPE</var> <strong>:masked</strong>
+</code></pre></div><p>The mask character is determined by the renderer; the recommended default
+is U+2588 (█ FULL BLOCK). Whitespace structure is preserved in the masked
+output.
+</p><p>Two render modes are defined:
+</p><ul><li id="YV5VJXZbOmrxJv-CwptV4"><p>Production mode (default): guarded content is concealed
+</p></li><li id="Dt-aoPWNfTwiW7ujl-KW2"><p>Draft mode: guarded content is rendered visibly for editing and review
+</p></li></ul><p>Selection between modes is implementation-defined (renderer-controlled
+through command-line, environment, or interactive interface).
+</p><p>When <code>G&lt;&gt;</code> appears within a block marked <code>:masked</code>, both the inline and
+surrounding content are concealed; the masking operation is idempotent.
+</p><p>Guard is a property of content, not of location. Content marked
+with <code>G&lt;&gt;</code> or carrying <code>:masked</code> renders concealed wherever it
+appears in rendered output. The rule applies when content is
+reached through <a href="#Links">links</a>, <a href="#Include-directive">inclusion</a>,
+<a href="#Aliases">aliases</a>, or <a href="#Data-blocks">data references</a>.
+</p><p>The <code>G&lt;&gt;</code> code is not processed inside code blocks by default. To enable
+masking in code blocks, the <code>:allow&lt;G&gt;</code> attribute is required on the
+<code>=code</code> block (see <a href="#Formatting-within-code-blocks">:allow</a>).
+</p><div class="code-block"><pre><code>=begin code :lang&lt;python&gt; <strong>:allow&lt;G&gt;</strong>
+api_key = "G&lt;sk-12345&gt;"
+=end code
+</code></pre></div><p>The <code>G&lt;&gt;</code> code marks content for concealment at render time but
+does not protect it. The original text remains in plain form in
+source files, document model, version control, and any consumer
+that does not invoke the renderer. For cryptographic security or
+access control, complementary mechanisms (file permissions,
+encryption, authenticated access) are required.
+</p><h3 id="Links">Links
+</h3><p>The <code>L&lt;&gt;</code> code is used to specify all kinds of links, filenames, citations,
+and cross-references (both internal and external).
+</p><p>A link specification consists of a <i>scheme specifier</i> terminated by a
+colon, followed by an <i>external address</i> (in the scheme's preferred
+syntax), followed by an <i>internal address</i> (again, in the scheme's syntax).
+All three components are optional, though at least one must be present in
+any link specification.
+</p><p>Usually, in schemes where an internal address makes sense, it will be
+separated from the preceding external address by a <code>#</code>, unless the
+particular addressing scheme requires some other syntax. When new
+addressing schemes are created specifically for Podlite, it is strongly
+recommended that <code>#</code> be used to mark the start of internal addresses.
+</p><p>Standard schemes include:
+</p><dl><dt><code>http:</code> and <code>https:</code></dt><dd>A standard web URL. For example:
+</dd><div class="code-block"><pre><code>  This module needs the LAME library
+  (available from L&lt;<strong>http://www.mp3dev.org/mp3/</strong>&gt;)
+</code></pre></div><dd>If the link does not start with <code>//</code> it is treated as being relative to
+the location of the current document:
+</dd><div class="code-block"><pre><code>  See also: L&lt;<strong>http:tutorial/faq.html</strong>&gt; and
+  L&lt;<strong>http:../examples/index.html</strong>&gt;
+</code></pre></div></dl><dl><dt><code>file:</code></dt><dd>A filename on the local system. For example:
+</dd><div class="code-block"><pre><code>  Next, edit the global config file (that is, either
+  L&lt;<strong>file:/usr/local/lib/.configrc</strong>&gt; or L&lt;<strong>file:~/.configrc</strong>&gt;).
+</code></pre></div><dd>Filenames that don't begin with a <code>/</code> or a <code>~</code> are relative
+to the current document's location:
+</dd><div class="code-block"><pre><code>    Then, edit the local config file (that is, either
+    L&lt;<strong>file:.configrc</strong>&gt; or L&lt;<strong>file:CONFIG/.configrc</strong>&gt;.
+</code></pre></div></dl><dl><dt><code>mailto:</code></dt><dd>An email address. Typically, activating this type of link invokes a mailer.
+For example:
+</dd><div class="code-block"><pre><code>  Please forward bug reports to L&lt;<strong>mailto:devnull@rt.cpan.org</strong>&gt;
+</code></pre></div></dl><dl><dt><code>man:</code></dt><dd>A link to the system manpages. For example:
+</dd><div class="code-block"><pre><code>  This module implements the standard
+  Unix L&lt;<strong>man:find(1)</strong>&gt; facilities.
+</code></pre></div></dl><dl><dt><code>doc:</code></dt><dd>A link to other documents by utilizing semantic blocks 
+such as <code>=TITLE</code> or <code>=NAME</code> as anchor points for these links.
+</dd><dd>For example:
+</dd><div class="code-block"><pre><code>  <strong>=NAME Dumper</strong>
+  
+  You may wish to use L&lt;<strong>doc:Dumper</strong>&gt; to
+  view the results.
+</code></pre></div><dd>Moreover, the <code>doc:</code> scheme allows the use of an <code>:id</code> attribute within
+the <code>=TITLE</code> or <code>=NAME</code> blocks to create unique identifiers for document
+linking. This ensures precision in navigation, as each identifier
+corresponds to a specific part of the document set. An example would be:
+</dd><div class="code-block"><pre><code>    =for TITLE :id&lt;Specification&gt;
+    The Specification of Podlite
+    
+    ...
+    
+    Read the L&lt;spec|doc:Specification&gt;.
+    
+    ...
+</code></pre></div><dd>When Podlite processes a link, it can automatically use the document's title
+from the <code>=TITLE</code> or <code>=NAME</code> blocks as the display text for the hyperlink if no
+explicit text is provided. For example:
+</dd><div class="code-block"><pre><code>
+   =for TITLE :id&lt;Specification&gt;
+       The Specification of Podlite
+
+   =para
+   Please read "<strong>L&lt;doc:Specification&gt;</strong>".
+
+</code></pre></div><dd>... will be rendered as:
+</dd><div class="code-block"><pre><code>
+ Please read "<strong>The Specification of Podlite</strong>".
+
+</code></pre></div></dl><dl><dt><code>defn:</code></dt><dd>A link to the <a href="#Definition-lists">block-form</a> or <a href="#Definitions">inline</a>
+definition of the specified term within the current document. For example:
+</dd><div class="code-block"><pre><code>  He was highly prone to <strong>D&lt;lexiphania&gt;</strong>: an unfortunate proclivity
+  for employing grandiloquisms (for example, words such as "proclivity",
+  "grandiloquism", and indeed "lexiphania").
+
+  <strong>=defn glossoligation</strong>
+  Restraint of the tongue (voluntary or otherwise)
+</code></pre></div><dd>and later, to link back to the definition:
+</dd><div class="code-block"><pre><code>To treat his chronic L&lt;<strong>defn:lexiphania</strong>&gt; the doctor prescribed an
+immediate L&lt;<strong>defn:glossoligation</strong>&gt; or, if that proved ineffective,
+a complete cephalectomy.
+</code></pre></div></dl><dl><dt><code>isbn:</code> and <code>issn:</code></dt><dd>The International Standard Book Number or International Standard
+Serial Number for a publication. For example:
+</dd><div class="code-block"><pre><code>  The Perl Journal was a registered
+  serial publication (L&lt;<strong>issn:1087-903X</strong>&gt;)
+</code></pre></div></dl><p>To refer to a specific section within a webpage, manpage, or Podlite
+document, add the name of that section after the main link, separated by
+a <code>#</code>. For example:
+</p><div class="code-block"><pre><code>  Also see: L&lt;man:bash(1)<strong>#Compound Commands</strong>&gt;,
+  L&lt;doc:perlsyn<strong>#For Loops</strong>&gt;, and
+  L&lt;http://dev.perl.org/perl6/syn/S04.html<strong>#The_for_statement</strong>&gt;
+</code></pre></div><p>To refer to a section of the current document, omit the external address:
+</p><div class="code-block"><pre><code>  This mechanism is described under L&lt;doc:<strong>#Special Features</strong>&gt; below.
+</code></pre></div><p>The scheme name may also be omitted in that case:
+</p><div class="code-block"><pre><code>  This mechanism is described under L&lt;<strong>#Special Features</strong>&gt; below.
+</code></pre></div><p>Podlite includes the possibility of assigning a unique identifier to a block.
+These identifiers can be explicitly assigned to any blocks using 
+the <code>:id</code> attribute. Later, these identifiers are utilized for addressing blocks
+and creating links.
+</p><div class="code-block"><pre><code>  =for head1 :id&lt;intro&gt;
+  Introduction
+  =for para <strong>:id&lt;id1&gt;</strong>
+  This is an introductory paragraph.
+  
+  For more information, see L&lt;here|<strong>#intro</strong>&gt; and L&lt;here|<strong>#id1</strong>&gt;
+</code></pre></div><p>In this example, the link reference to the header block identified by "intro"
+rather than the name "Introduction" and to the paragrapth block with identifier "id1".
+</p><p>Normally a link is presented as some rendered version of the link
+specification itself. However, you can specify an alternate
+presentation by prefixing the link with the desired text and a
+vertical bar. Whitespace is not significant on either side of the bar.
+For example:
+</p><div class="code-block"><pre><code>  This module needs the L&lt;<strong>LAME library|</strong>http://www.mp3dev.org/mp3/&gt;.
+
+  You could also write the code
+  L&lt;<strong>in Latin |</strong> doc:Lingua::Romana::Perligata&gt;
+
+  His L&lt;<strong>lexiphanic|</strong>defn:lexiphania&gt;&gt; tendencies were, alas, incurable.
+</code></pre></div><h3 id="Contextual-backlinks">Contextual backlinks
+</h3><p>Podlite introduces the concept of contextual backward links <code>W&lt;&gt;</code> (or contextual backlinks),
+enhancing the traditional <a href="#Links">linking</a> mechanism by allowing to not
+only reference another location but also provide specific
+context around that reference. This context can take the form of opinions,
+additional information, or any relevant commentary that enhances the understanding 
+of the referenced material.
+</p><p>For example:
+</p><div class="code-block"><pre><code>  This text can reveal the meaning of <strong>W&lt;glossoligation|defn:glossoligation&gt;</strong>
+</code></pre></div><p>or:
+</p><div class="code-block"><pre><code>  We discuss here about <strong>W&lt;doc:perldata&gt;</strong>.
+</code></pre></div><p>Contextual backlinks on the destination page can be displayed in various ways.
+They may appear with surrounding text chunks, providing context within
+the flow of the content. Alternatively, they can be placed at the end
+of the text, in the margin of the page, or highlighted in other visually
+distinctive ways.
+</p><p>Like traditional <a href="#Links">links</a>, contextual backlinks allows the use of
+all available link schemes, including <code>https:</code> and <code>doc:</code>, to link to external content.
+</p><p>Contextual backlinks might be visually distinguished from
+standard links through color coding.
+</p><h3 id="Link-configuration-attributes">Link configuration attributes
+</h3><p>The <code>L&lt;&gt;</code> and <code>W&lt;&gt;</code> markup codes may be extended with optional
+configuration attributes following the link specification. These attributes
+are specified using the standard Podlite configuration syntax.
+</p><p>The general form is:
+</p><div class="code-block"><pre><code>  L&lt;[text|]linkspec <strong>[:attr1 :attr2&lt;value&gt; ...]</strong>&gt;
+  W&lt;[text|]linkspec <strong>[:attr1 :attr2&lt;value&gt; ...]</strong>&gt;
+</code></pre></div><p>The configuration portion begins at the first whitespace character that
+is immediately followed by a colon (<code>:</code>). The substring preceding this
+boundary constitutes the link specification. This boundary rule is
+unambiguous because URL schemes begin with a letter character, not a colon,
+and standard URLs do not contain space-colon sequences.
+</p><p>For example:
+</p><div class="code-block"><pre><code>  L&lt;https://example.com <strong>:new</strong>&gt;
+</code></pre></div><p>In this example, the boundary occurs at the space before <code>:new</code>.
+</p><p>The following attributes are defined:
+</p><table id="59kRpasBsr3l4FTLLWye9"><caption class="caption">Link Configuration Attributes</caption><thead><tr><th>Attribute</th><th>Type</th><th>Semantics</th></tr></thead><tbody><tr><td>:new</td><td>Boolean</td><td>Resource is opened in a new navigation context</td></tr><tr><td>:title</td><td>String</td><td>Advisory information about the resource</td></tr><tr><td>:lang</td><td>String</td><td>Primary language of the linked resource</td></tr><tr><td>:download</td><td>Boolean/String</td><td>Resource is downloaded; string suggests filename</td></tr></tbody></table><p>For example:
+</p><div class="code-block"><pre><code>  L&lt;API Reference|https://api.example.com <strong>:new :title('Official documentation')</strong>&gt;
+
+  L&lt;Download SDK|https://example.com/sdk.tar.gz <strong>:download&lt;sdk-v2.tar.gz&gt;</strong>&gt;
+
+  L&lt;French Guide|https://example.fr/guide <strong>:lang&lt;fr&gt;</strong>&gt;
+
+  W&lt;related term|defn:glossary <strong>:title('See definition')</strong>&gt;
+</code></pre></div><p>When the same attribute is specified both in <code>=config L&lt;&gt;</code> and in an
+inline <code>L&lt;&gt;</code> instance, the inline value takes precedence:
+</p><div class="code-block"><pre><code>  =config L&lt;&gt; :new
+
+  =comment inherits :new
+  L&lt;External|https://example.com&gt;
+
+  =comment overrides to false
+  L&lt;Internal|file:local.html <strong>:!new</strong>&gt;
+</code></pre></div><p>Link specifications containing literal spaces are required to be quoted.
+The <code>file:</code> scheme commonly requires this treatment:
+</p><div class="code-block"><pre><code>  =comment correct
+  L&lt;file:<strong>'</strong>my document.txt<strong>'</strong> :download&gt;
+</code></pre></div><p>Colons within URLs (such as port numbers or path parameters) are not
+preceded by whitespace and therefore do not trigger attribute parsing:
+</p><div class="code-block"><pre><code>  =comment  :8080 is port
+  L&lt;http://localhost:8080/api :new&gt;
+  
+  =comment  :id is path
+  L&lt;https://api.example.com/users/:id :title('User profile')&gt;
+</code></pre></div><p>Parsers that do not implement this extension treat the entire content
+of <code>L&lt;&gt;</code> as a link specification. The link remains functional; only
+metadata is lost. Renderers that encounter unknown attributes are
+required to ignore them without error.
+</p><h3 id="Alias-placements">Alias placements
+</h3><p>The <code>A&lt;&gt;</code> code is replaced by the contents of the named alias or object
+specified within its delimiters.
+For example:
+</p><div class="code-block"><pre><code>  =alias PROGNAME    Earl Irradiatem Eventually
+  =alias VENDOR      4D Kingdoms
+  =alias TERMS_URL   L&lt;http://www.4dk.com/eie&gt;
+
+  The use of A&lt;PROGNAME&gt; is subject to the terms and conditions
+  laid out by A&lt;VENDOR&gt;, as specified at A&lt;TERMS_URL&gt;.
+</code></pre></div><p>See <a href="#Aliases">#Aliases</a> for further details of the aliasing macro mechanism.
+</p><h3 id="Space-preserving-text">Space-preserving text
+</h3><p>Any text enclosed in an <code>S&lt;&gt;</code> code is formatted normally, except that
+every whitespace character in it—including any newline—is
+preserved. These characters are also treated as being non-breaking
+(except for the newlines, of course). For example:
+</p><div class="code-block"><pre><code>The emergency signal is: S&lt;
+dot dot dot   dash dash dash   dot dot dot&gt;.
+</code></pre></div><p>would be formatted like so:
+</p><blockquote><p>The emergency signal is:
+dot&nbsp;dot&nbsp;dot&nbsp;&nbsp;&nbsp;dash&nbsp;dash&nbsp;dash&nbsp;&nbsp;&nbsp;&nbsp;dot&nbsp;dot&nbsp;dot.
+</p></blockquote><p>rather than:
+</p><blockquote><p>The emergency signal is: dot dot dot dash dash dash dot dot dot.
+</p></blockquote><h3 id="Entities">Entities
+</h3><p>To include Unicode code points or HTML5 character references in a
+Podlite document, specify the required <dfn>entity</dfn> using the <code>E&lt;&gt;</code> code.
+</p><p>If the <code>E&lt;&gt;</code> contains a number, that number is treated as the decimal
+Unicode value for the desired code point. For example:
+</p><div class="code-block"><pre><code>Podlite makes considerable use of E&lt;171&gt; and E&lt;187&gt;.
+</code></pre></div><p>You can also use explicit binary, octal, decimal, or hexadecimal numbers:
+</p><div class="code-block"><pre><code>Podlite makes considerable use of E&lt;0b10101011&gt; and E&lt;0b10111011&gt;.
+Podlite makes considerable use of E&lt;0o253&gt; and E&lt;0o273&gt;.
+Podlite makes considerable use of E&lt;0d171&gt; and E&lt;0d187&gt;.
+Podlite makes considerable use of E&lt;0xAB&gt; and E&lt;0xBB&gt;.
+</code></pre></div><p>If the <code>E&lt;&gt;</code> contains anything that is not a number, the contents are
+interpreted as a Unicode character name (which is always uppercase), or
+else as an HTML5 named character reference. For example:
+</p><div class="code-block"><pre><code>Podlite makes considerable use of E&lt;LEFT DOUBLE ANGLE BRACKET&gt;
+and E&lt;RIGHT DOUBLE ANGLE BRACKET&gt;.
+</code></pre></div><p>or, equivalently:
+</p><div class="code-block"><pre><code>Podlite makes considerable use of E&lt;laquo&gt; and E&lt;raquo&gt;.
+</code></pre></div><p>To include emoji codes, you can use the <code>E&lt;&gt;</code> code along 
+with the colon-prefixed and postfix emoji shortname:
+</p><div class="code-block"><pre><code>Podlite uses emoji codes to express emotions and actions,
+such as E&lt;:thumbsup:&gt; for approval and E&lt;:smile:&gt; for happiness.
+</code></pre></div><p>In this example, <code>:smile:</code> and <code>:thumbsup:</code> are emoji codes representing
+the respective emojis. You can use any valid emoji code in this format 
+to include emojis in your Podlite document.
+</p><p>Note that the specific emoji codes and the emojis they represent may vary
+depending on the platform or system you are using. 
+</p><p>Multiple consecutive entities (in any format) can be specified in a
+single <code>E&lt;&gt;</code> code, separated by semicolons:
+</p><div class="code-block"><pre><code>Podlite makes considerable use of E&lt;LEFT DOUBLE ANGLE BRACKET;hellip;0xBB;:smile:&gt;.
+</code></pre></div><h3 id="Indexing-terms">Indexing terms
+</h3><p>Anything enclosed in an <code>X&lt;&gt;</code> code is an <strong>index entry</strong>. The contents
+of the code are both formatted into the document and used as the
+(case-insensitive) index entry:
+</p><div class="code-block"><pre><code>    An <strong>X&lt;array&gt;</strong> is an ordered list of scalars indexed by number,
+    starting with 0. A <strong>X&lt;hash&gt;</strong> is an unordered collection of scalar
+    values indexed by their associated string key.
+</code></pre></div><p>An index entry where the indexed text and the index entry differ can be specified
+by separating the two with a vertical bar:
+</p><div class="code-block"><pre><code>  An <strong>X&lt;array|arrays&gt;</strong> is an ordered list of scalars indexed by number,
+  starting with 0. A <strong>X&lt;hash|hashes&gt;</strong> is an unordered collection of
+  scalar values indexed by their associated string key.
+</code></pre></div><p>In the two-part form, the index entry comes after the bar and is
+case-sensitive.
+</p><p>Hierarchical index entries can be specified by separating indexing levels
+with commas:
+</p><div class="code-block"><pre><code>  An X&lt;array|<strong>arrays, definition of</strong>&gt; is an ordered list of scalars
+  indexed by number, starting with 0. A X&lt;hash|<strong>hashes, definition of</strong>&gt;
+  is an unordered collection of scalar values indexed by their
+  associated string key.
+</code></pre></div><p>Multiple entries for a single indexed text can be specified by separating
+the entries with semicolons:
+</p><div class="code-block"><pre><code>  A X&lt;hash|<strong>hashes, definition of; associative arrays</strong>&gt;
+  is an unordered collection of scalar values indexed by their
+  associated string key.
+</code></pre></div><p>The indexed text can be empty, creating a "zero-width" index entry:
+</p><div class="code-block"><pre><code>  <strong>X&lt;|puns, deliberate&gt;</strong>This is called the "Orcish Manoeuvre"
+  because you "OR" the "cache".
+</code></pre></div><h3 id="Annotations">Annotations
+</h3><p>Anything enclosed in an <code>N&lt;&gt;</code> code is an inline <strong>note</strong>.
+For example:
+</p><div class="code-block"><pre><code>  Space stations feature hydroponic gardens <strong>N&lt;Plants grow without soil,
+  using mineral nutrient solutions.&gt;</strong>, a necessity for long-term missions.
+</code></pre></div><p>Renderers may present such annotations in various ways: as
+footnotes, endnotes, sidebars, pop-ups, tooltips, or
+expandable tags. They are never rendered as unmarked
+inline text. The previous example might be rendered as:
+</p><blockquote><p>Space stations feature hydroponic gardens †, a necessity for 
+long-term missions.
+and later:
+</p></blockquote><blockquote><p><strong>Footnotes</strong>
+</p><div id="vmizKvP-souHyAmJlnT5K"><p>† Plants grow without soil, using mineral nutrient solutions.
+</p></div></blockquote><h3 id="Custom-markup-codes">Module-defined handler for extends markup features
+</h3><p>The <code>M&lt;&gt;</code> code in Podlite extends the language's capabilities by allowing users 
+to specify additional processing instructions within their documents. 
+This is achieved by combining content text with a custom plug-in specifier, 
+followed by optional configuration information that is passed to a handler function.
+</p><p>The structure of the <code>M&lt;&gt;</code> markup code as follows: 
+</p><div class="code-block"><pre><code>M&lt; CONTENT-TEXT| R&lt;MODULE_NAME&gt; R&lt;OPTIONAL CONFIG INFO&gt;&gt;
+</code></pre></div><p>This syntax includes <code>CONTENT-TEXT</code> section, followed by a
+name specifier <code>MODULE_NAME</code> and then the <code>OPTIONAL CONFIG INFO</code>
+(see <a href="#configuration_syntax">"Configuration syntax options"</a>).
+The name specifier should follow the same rules as for 
+<a href="#Custom-blocks">named blocks</a>.
+</p><p>The <code>M&lt;&gt;</code> markup code is the inline equivalent of a
+<a href="#Custom-blocks">named block</a>.
+</p><p>An example of how this code might be used is :
+</p><div class="code-block"><pre><code>    <strong>M&lt;</strong> This text is highlighted in yellow <strong>|Marker :color('yellow') &gt;</strong>.
+</code></pre></div><p>In this example, the text <code>"This text is highlighted in yellow"</code> is subject
+to special handling specified by the <code>Marker</code> module and
+<code>:color('yellow')</code>, indicating that the text should be highlighted in yellow.
+</p><p>If the <code>MODULE_NAME</code> is unrecognized, the content text <code>CONTENT-TEXT</code> should be
+rendered as ordinary text. This ensures that documents remain readable even 
+if specific processing instructions cannot be executed. The renderer could provide
+an unobtrusive yet informative error message, explaining that the custom 
+markup block could not be processed.
+</p><h2 id="Block-pre-configuration">Block pre-configuration
+</h2><p>The <code>=config</code> directive allows you to prespecify standard configuration
+information that is applied to every block of a particular type.
+</p><div class="code-block"><pre><code>
+  =config code     :lang&lt;python&gt; :allow&lt;B&gt;
+  =config head1    :numbered
+  =config head2    :folded
+    
+</code></pre></div><p>Here, two configurations are outlined. The first one sets 
+the language for code blocks to <code>python</code> and allows bold markup.
+The second establishes that all level 1 headings will be numbered.
+</p><p>The general syntax for configuration directives is:
+</p><div class="code-block"><pre><code>    =config <var>BLOCK_TYPE</var>  <var>CONFIG OPTIONS</var>
+    =                   <var>OPTIONAL EXTRA CONFIG OPTIONS</var>
+</code></pre></div><p>A <code>=config</code> is a directive, not a block. Hence,
+there is no paragraph or delimited form of the <code>=config</code> directive.
+Each <code>=config</code> specification is lexically scoped to the surrounding
+block or file in which it is specified.
+</p><p>Note that, if a particular block later explicitly specifies a
+configuration option with the same key, that option overrides the
+pre-configured option. For example, given the code blocks configurations in the
+previous example, to specify another language for code block:
+</p><div class="code-block"><pre><code>  =for code :lang&lt;javascript&gt;
+  print(JSON.stringify([1,2]]));
+</code></pre></div><h3 id="Pre-configuring-markup-codes">Pre-configuring markup codes
+</h3><p>You can also lexically preconfigure a <a href="#Markup-codes">markup code</a>,
+by naming it with a pair of angles as a suffix. For example:
+</p><div class="code-block"><pre><code>  =comment  Always allow E&lt;&gt; codes in any (implicit or explicit) V&lt;&gt; code...
+  <strong>=config V&lt;&gt;  :allow&lt;E&gt;</strong>
+  =comment  All inline code allows I&lt;&gt;
+  <strong>=config C&lt;&gt;  :allow&lt;I&gt;</strong>
+</code></pre></div><p>Note that, even though the markup code is named using single-angles,
+the preconfiguration applies regardless of the actual delimiters used on
+subsequent instances of the code.
+</p><p>For per-block attribute assignment that targets a single block instance
+rather than setting type-wide defaults, see <a href="#Block-attribute-assignment-with-set">Block attribute assignment
+with =set</a>.
+</p><h2 id="Block-attribute-assignment-with-set">Block attribute assignment with =set
+</h2><p>The <code>=set</code> directive assigns attribute values to the next block in
+the same lexical scope. Like <code>=config</code>, it sets attributes for a
+block; unlike <code>=config</code>, it targets a single block instance rather
+than all blocks of a type. Attribute values may include multiline
+content with inline markup codes.
+</p><p>The directive has two syntax variants. Configuration syntax uses
+standard delimited attribute values, for example:
+</p><div class="code-block"><pre><code><strong>=set</strong> :caption('Product comparison') :id&lt;table-1&gt;
+<strong>=set</strong> :lang&lt;en&gt; :numbered
+
+=begin table
+...
+=end table
+</code></pre></div><p>Alias syntax permits multiline values with inline markup codes, for
+example:
+</p><div class="code-block"><pre><code><strong>=set</strong> :caption Selected <strong>chemical</strong> elements with their
+<strong>=   </strong>          L&lt;atomic numbers|#elements&gt; and symbols
+
+=begin table
+Element     Symbol    Atomic Number
+=========   ======    =============
+Hydrogen    H         1
+Carbon      C         6
+Oxygen      O         8
+=end table
+</code></pre></div><p>Continuation lines (<code>=</code> followed by whitespace) extend multiline
+alias values until the next non-continuation directive or a blank
+line. Lines join into the final value before markup processing.
+</p><p>Both syntax variants may be mixed across continuation lines, as in
+the following example combining configuration-syntax continuation
+(<code>=    :folded&lt;true&gt;</code>) with alias-syntax continuation:
+</p><div class="code-block"><pre><code><strong>=set</strong> :id&lt;special-table&gt;
+<strong>=   </strong> :folded&lt;true&gt;
+<strong>=set</strong> :caption Product <strong>Performance</strong> Metrics
+<strong>=   </strong>          with detailed analysis
+
+=begin table
+...
+=end table
+</code></pre></div><p>The table receives all three attributes (<code>:id</code>, <code>:folded</code>, <code>:caption</code>).
+</p><p><code>=set</code> assignments override <code>=config</code> defaults but yield to explicit
+attributes on the block declaration. When multiple <code>=set</code> directives
+assign the same attribute key, the last assignment wins, regardless
+of syntax variant.
+</p><p>Directives (<code>=set</code>, <code>=config</code>, <code>=alias</code>, <code>=include</code>, <code>=boundary</code>)
+and <code>=comment</code> blocks are transparent to <code>=set</code> targeting and do not
+consume the assignment. For example:
+</p><div class="code-block"><pre><code><strong>=set</strong> :caption Renewable energy sources
+=config table :width&lt;100%&gt;
+=alias COMPANY Acme Corp
+=comment Approved
+=begin table
+Source      Type
+=========   ==========
+Solar       photovoltaic
+Wind        turbine
+=end table
+</code></pre></div><p>The <code>=table</code> block receives the <code>:caption</code> attribute despite the
+intervening directives and <code>=comment</code>.
+</p><p>For <code>=include</code>, attributes apply to the first block of the resolved
+included content. <code>=set</code> directives inside an included file are
+lexically scoped to that file and do not leak to the parent file.
+</p><p>If no block follows before the end of the containing block or file,
+parsers issue a warning that the <code>=set</code> directive has no target.
+</p><h2 id="Aliases">Aliases
+</h2><p>The <code>=alias</code> directive provides a way to define lexically scoped
+synonyms for longer Podlite sequences, (meta)object declarators from the
+code, or even entire chunks of ambient source. These synonyms can then
+be inserted into subsequent Podlite using the
+<a href="#Alias-placements">A&lt;&gt; markup code</a>.
+</p><p>Note that <code>=alias</code> is a fundamental Podlite directive, like <code>=begin</code> or
+<code>=for</code>; there are no equivalent paragraph or delimited forms.
+</p><p>Macro aliases are lexically scoped to the surrounding Podlite block.
+</p><p>The simplest form of alias takes two arguments. The first is an
+identifier (which is usually specified in uppercase, though this is
+certainly not mandatory). The second argument consists of one or more
+lines of replacement text.
+</p><p>This creates a lexically scoped Podlite macro that can be invoked during
+document generation by placing the identifier (i.e. the first argument
+of the alias) in an <code>A&lt;&gt;</code> markup code. This markup code is then
+replaced by the text returned by new macro.
+</p><p>The replacement text returned by the alias macro begins at the first
+non-whitespace character after the alias's identifier and continues to
+the end of the line. The replacement text can extend over multiple
+lines by starting each following line with an <code>=</code> (at the same level
+of indentation as the <code>=alias</code> directive itself) followed by at least
+one whitespace. Each additional line uses the original
+line's (virtual) left margin, as specified by the indentation of the
+replacement text on the <code>=alias</code> line.
+</p><p>For example:
+</p><div class="code-block"><pre><code>    =alias PROGNAME    Earl Irradiatem Evermore
+    =alias VENDOR      4D Kingdoms
+    =alias TERMS_URLS  =item L&lt;http://www.4dk.com/eie&gt;
+    =                  =item L&lt;http://www.4dk.co.uk/eie.io/&gt;
+    =                  =item L&lt;http://www.fordecay.ch/canttouchthis&gt;
+
+    The use of A&lt;PROGNAME&gt; is subject to the terms and conditions
+    laid out by A&lt;VENDOR&gt;, as specified at:
+
+        A&lt;TERMS_URLS&gt;
+
+</code></pre></div><p>This would produce:
+</p><blockquote><div id="E09Nu46waW_FCnKB_y6O5"><p>The use of Earl Irradiatem Evermore is subject to the terms and
+    conditions laid out by 4D Kingdoms Inc, as specified at:
+</p><ul><li id="xC_DArd5wu0pg6AhsyGtm"><p><a href="http://www.4dk.com/eie">http://www.4dk.com/eie</a>
+</p></li><li id="J2dnnPVVgnWjI5AfXTN59"><p><a href="http://www.4dk.co.uk/eie.io/">http://www.4dk.co.uk/eie.io/</a>
+</p></li><li id="eexBsXDUgduDpoDBVDzTg"><p><a href="http://www.fordecay.ch/canttouchthis">http://www.fordecay.ch/canttouchthis</a>
+</p></li></ul></div></blockquote><p>The advantage of using aliases is that the same alias can be
+reused in multiple places in the documentation. If the replacement
+text needs to be changed, it requires modification in only a single place:
+</p><div class="code-block"><pre><code>    =alias PROGNAME    Count Krunchem Constantly
+    =alias VENDOR      Last Chance Receivers Intl
+    =alias TERMS_URLS  L&lt;http://www.c11.com/generic_conditions&gt;
+</code></pre></div><h2 id="Notification-blocks">Notification blocks
+</h2><p>These blocks, often referred to as admonitions, callouts, or alerts,
+serve to draw attention to different types of content, 
+such as tips, warnings, or important notes. 
+</p><p>To create specially formatted blocks highlighting information in Podlite,
+the <code>=nested</code> block and <code>:notice</code> attribute are used.
+</p><p>For example:
+</p><div class="code-block"><pre><code>    <strong>=begin nested</strong> <strong>:notice&lt;tip&gt;</strong>
+    Remember to always use oven mitts when handling hot bakeware
+    to prevent burns.
+    <strong>=end nested</strong>
+</code></pre></div><p>Below is a table outlining the different types of notification blocks
+along with a brief description of each type.
+</p><table id="urByGvLl64rjSBcvKQn0z"><caption class="caption">Types of Notification blocks</caption><thead><tr><th>Type</th><th>Description</th></tr></thead><tbody><tr><td> note               </td><td> Provides additional information and context without interrupting the flow of the main content</td></tr><tr><td>tip</td><td>Offers advice for doing things better or more easily</td></tr><tr><td> important          </td><td> Signifies that the information is crucial for  understanding or success</td></tr><tr><td> warning            </td><td> Indicates urgent information that requires immediate  attention to avoid potential problems</td></tr><tr><td> caution            </td><td> Advises readers about potential negative outcomes or  risks associated with certain actions</td></tr></tbody></table><p>By default, the title of the notification block is its type identifier in title case.
+The title of the block and visibility of the information can be customized
+using the <code>:caption</code> and <code>:folded</code> options.
+</p><div class="code-block"><pre><code>  =begin nested <strong>:caption("Astronaut's Reminder")</strong> :notice&lt;important&gt; <strong>:folded</strong>
+    Space missions require meticulous planning and adherence to safety protocols.
+    Neglecting these can lead to mission failure or, worse, endanger lives.
+  =end nested
+</code></pre></div><p>Title-only callouts can be created by omitting the body.
+</p><div class="code-block"><pre><code>  =for nested :notice&lt;important&gt; :folded :caption("Title-only callout")
+</code></pre></div><p>Notification blocks are displayed with distinctive colors and 
+icons that indicate the significance of the content.
+</p><div><h1 class="SUMMARY">SUMMARY</h1><h2 id="Directives">Directives
+</h2><table id="74uNxoIsOoS8afyxa3vzf"><thead><tr><th>Directive</th><th>Specifies</th></tr></thead><tbody><tr><td><code>=begin</code></td><td>Start of an explicitly terminated block</td></tr><tr><td><code>=config</code></td><td>Lexical modifications to a block or markup code</td></tr><tr><td><code>=set</code></td><td>Attribute assignment to the next block</td></tr><tr><td><code>=end</code></td><td>Explicit termination of a <code>=begin</code> block</td></tr><tr><td><code>=for</code></td><td>Start of an implicitly (blank-line) terminated block</td></tr><tr><td><code>=alias</code></td><td>Define a Podlite macro</td></tr><tr><td><code>=include</code></td><td>Include content from other sources</td></tr><tr><td><code>=boundary</code></td><td>Marker for a structural section boundary</td></tr></tbody></table><h2 id="Blocks">Blocks
+</h2><table id="saSJxyK_wSkvqNYnrJBE8"><thead><tr><th>Block typename</th><th>Specifies</th></tr></thead><tbody><tr><td><code>=code</code></td><td>Verbatim pre-formatted sample source code</td></tr><tr><td><code>=comment</code></td><td>Content to be ignored by all renderers</td></tr><tr><td><code>=defn</code></td><td>Definition of a term</td></tr><tr><td><code>=head</code><var>N</var></td><td><i>N</i>th-level heading</td></tr><tr><td><code>=input</code></td><td>Pre-formatted sample input</td></tr><tr><td><code>=item</code></td><td>First-level list item</td></tr><tr><td><code>=item</code><var>N</var></td><td><i>N</i>th-level list item</td></tr><tr><td><code>=nested</code></td><td>Nested block contents within the current context</td></tr><tr><td><code>=output</code></td><td>Pre-formatted sample output</td></tr><tr><td><code>=para</code></td><td>Ordinary paragraph</td></tr><tr><td><code>=pod</code></td><td>No "ambient" blocks inside</td></tr><tr><td><code>=table</code></td><td>Simple rectangular table</td></tr><tr><td><code>=row</code></td><td>Row in advanced table format</td></tr><tr><td><code>=cell</code></td><td>Cell within a <code>=row</code> block</td></tr><tr><td><code>=data</code></td><td>Data section</td></tr><tr><td><code>=data-table</code></td><td>Tabular rendering of CSV or TSV data</td></tr><tr><td><code>=toc</code></td><td>Autogenerated table of contents</td></tr><tr><td><code>=picture</code></td><td>Insert pictures</td></tr><tr><td><code>=formula</code></td><td>Mathematical formulas</td></tr><tr><td><code>=markdown</code></td><td>Markdown support</td></tr><tr><td><code>=</code><var>RESERVED</var></td><td>Semantic blocks (<code>=SYNOPSIS</code>, <code>=BUGS</code>, etc.)</td></tr><tr><td><code>=</code><var>Typename</var></td><td>User-defined block</td></tr></tbody></table><h2 id="Inline-markup-codes">Inline markup codes
+</h2><table id="I_PkOvRiRepRaeYS3lYDh"><thead><tr><th>Markup code</th><th>Specifies</th></tr></thead><tbody><tr><td><code>A&lt;...&gt;</code></td><td>Replaced by contents of specified macro/object</td></tr><tr><td><code>B&lt;...&gt;</code></td><td>Basis/focus of sentence (typically rendered bold)</td></tr><tr><td><code>C&lt;...&gt;</code></td><td>Code (typically rendered fixed-width)</td></tr><tr><td><code>D&lt;...|...;...&gt;</code></td><td>Definition (<code>D&lt;<var>defined term</var>|<var>synonym</var>;<var>synonym</var>;...&gt;</code>)</td></tr><tr><td><code>E&lt;...;...&gt;</code></td><td>Entity names or numeric codepoints (<code>E&lt;<var>entity1</var>;<var>entity2</var>;...&gt;</code>), emoji</td></tr><tr><td><code>F&lt;...&gt;</code></td><td>Mathematical formula</td></tr><tr><td><code>G&lt;...&gt;</code></td><td>Guard inline content (concealed in published output)</td></tr><tr><td><code>H&lt;...&gt;</code></td><td>Superscript</td></tr><tr><td><code>I&lt;...&gt;</code></td><td>Important (typically rendered in italics)</td></tr><tr><td><code>J&lt;...&gt;</code></td><td>Subscript</td></tr><tr><td><code>K&lt;...&gt;</code></td><td>Keyboard input (typically rendered fixed-width)</td></tr><tr><td><code>L&lt;...|...&gt;</code></td><td>Link (<code>L&lt;<var>display text</var>|<var>destination URI</var>&gt;</code>)</td></tr><tr><td><code>M&lt;...:...&gt;</code></td><td>Module-defined code (<code>M&lt;<var>scheme</var>:<var>contents</var>&gt;</code>)</td></tr><tr><td><code>N&lt;...&gt;</code></td><td>Note (not rendered inline)</td></tr><tr><td><code>O&lt;...&gt;</code></td><td>Strikethrough</td></tr><tr><td><code>P&lt;...&gt;</code></td><td>Inline eqivalent for <code>=picture</code> block</td></tr><tr><td><code>Q&lt;&gt;</code></td><td>reserved</td></tr><tr><td><code>R&lt;...&gt;</code></td><td>Replaceable component or metasyntax</td></tr><tr><td><code>S&lt;...&gt;</code></td><td>Space characters to be preserved</td></tr><tr><td><code>T&lt;...&gt;</code></td><td>Terminal output (typically rendered fixed-width)</td></tr><tr><td><code>U&lt;...&gt;</code></td><td>Unusual (typically rendered with underlining)</td></tr><tr><td><code>V&lt;...&gt;</code></td><td>Verbatim (internal markup codes ignored)</td></tr><tr><td><code>W&lt;...|...&gt;</code></td><td>Contextual backlinks</td></tr><tr><td><code>X&lt;...|..,..;...&gt;</code></td><td>Index entry (<code>X&lt;<var>display text</var>|<var>entry</var>,<var>subentry</var>;...&gt;</code>)</td></tr><tr><td><code>Y&lt;&gt;</code></td><td>Reserved</td></tr><tr><td><code>Z&lt;...&gt;</code></td><td>Zero-width comment (contents never rendered)</td></tr></tbody></table></div><div><h1 class="LICENSE">LICENSE</h1><p>Artistic license 2.0
+</p></div><footer></footer></article><div id="nav" class="service_Conatainer__66k_F" style="--count-columns :3"><div class="service_row__gDrL2"><div class="service_column__3WcsU"><a href="/2026/8/20/1/podlite-desktop-0-9-0-markdown-as-a-native-format-highlighting-from-the-document-tree">Podlite Desktop 0.9.0: Markdown as a native format, highlighting from the document tree
+</a></div><div class="service_column__3WcsU"><div class="navigate"><a href="/2026/8/20/1/podlite-desktop-0-9-0-markdown-as-a-native-format-highlighting-from-the-document-tree">←</a><a href="/">↑</a><a href="/v2.0/specification">→</a></div></div><div class="service_column__3WcsU"><a href="/v2.0/specification">Podlite - a lightweight markup language
+</a></div></div></div><div><div id="CookieConsent" class="cookieConsentStyles_CookieConsentStyles__FsCIK"><div class="content"><div id="e4_PHYLvsSr7jDSCFdZIR"><p>This website uses cookies for analytics. 
+</p></div></div><div class="cookieConsentStyles_okButton__XqRXa">Got it!</div></div></div><header id="footer" class="service_Conatainer__66k_F" style="--count-columns :4"><div class="service_row__gDrL2"><div class="service_column__3WcsU"><blockquote><ul><li id="ejST3yDtfuCizQ4zBOE3r"><p><strong>Tools</strong>
+</p></li><ul><li id="g4lhfTTmEpxSx5g-x8DEu"><p><a href="/web">Web</a>
+</p></li><li id="bob31Ft9On1GfxagRCrm7"><p><a href="/cli">CLI</a>
+</p></li><li id="LMMxhv_Bd2ObFj5w-LVMx"><p><a href="/desktop">Desktop</a>
+</p></li><li id="lmCfHr-u544ExGRdelgh2"><p><a href="https://github.com/podlite/podlite-skills">Skills&nbsp;↗</a>
+</p></li><li id="Da_vxgthQofTvFzxIW7P5"><p><a href="/for-agents">For agents</a>
+</p></li></ul><li id="vJVgbqryJ2Pv0i9YeNYcK"><p><strong>Install</strong>
+</p></li><ul><li id="JnXA4w_7l3DrCAmy0cbQd"><p><a href="https://apps.apple.com/us/app/podlite/id1526511053">Mac App Store&nbsp;↗</a>
+</p></li><li id="nn_FhuE_M3YI5eA3DZ2cY"><p><a href="https://www.microsoft.com/store/apps/9NVNT9SNQJM8">Microsoft Store&nbsp;↗</a>
+</p></li><li id="qPjPJH3Bcl6bo9m9JpYUd"><p><a href="https://snapcraft.io/podlite">Snap&nbsp;↗</a>
+</p></li><li id="rqxQyBBYOdopij7_n2e7z"><p><a href="https://github.com/podlite/podlite-desktop/releases">All releases&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="eMn9XS9VuxZGXN-hdWFMM"><p><strong>Docs</strong>
+</p></li><ul><li id="vOg-I5RHe-xcA3R9mKBu0"><p><a href="/specification">Specification</a>
+</p></li><li id="87q7BeESt6l8yiy2LTZNc"><p><a href="/quick-tour">Quick tour</a>
+</p></li><li id="cwIFo4NP75tev3OUXVYIC"><p><a href="/roadmap">Roadmap</a>
+</p></li><li id="Q6gCZHxH26ZeVn8kwkHdV"><p><a href="/contents">News</a>
+</p></li><li id="SrQfxVw1TfOEtocyiKmDQ"><p><a href="/rss.xml">RSS</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="PzqFkRZ7JgzZ9aUV4eaJH"><p><strong>Source</strong>
+</p></li><ul><li id="aobKZ2hxwxPZS_Uy_978A"><p><a href="https://github.com/podlite/podlite">podlite&nbsp;↗</a>
+</p></li><li id="tpkUSlfFdoCGI2w4iVKLO"><p><a href="https://github.com/podlite/podlite-specs">podlite-specs&nbsp;↗</a>
+</p></li><li id="eVcw1KVuNCid6iMzFSLZZ"><p><a href="https://github.com/podlite/podlite-web">podlite-web&nbsp;↗</a>
+</p></li><li id="Qx_RQFOdeDzXrppGvpT9t"><p><a href="https://github.com/podlite/podlite-desktop">podlite-desktop&nbsp;↗</a>
+</p></li><li id="EuCi7J-XgEl1tX12BaizD"><p><a href="https://github.com/podlite/podlite-skills">podlite-skills&nbsp;↗</a>
+</p></li><li id="agN-VL_FSH3hTGFtuEHtw"><p><a href="https://github.com/zag/pod6.in">pod6.in&nbsp;↗</a>
+</p></li><li id="vA7P2b4iIGBfAushdybXZ"><p><a href="https://github.com/zag/podlite-vscode">podlite-vscode&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="AyKLK9UmwokrO3VXorbe2"><p><strong>Take part</strong>
+</p></li><ul><li id="cA0q-bnJNz-FFUnjlRzK"><p><a href="https://github.com/podlite/podlite-specs/discussions">Spec discussions&nbsp;↗</a>
+</p></li><li id="leeGfAeZOVMQDQ3v3GuZX"><p><a href="https://github.com/podlite/podlite/discussions">Dev discussions&nbsp;↗</a>
+</p></li><li id="tZ6AVr96ockawglhxX6UE"><p><a href="https://github.com/podlite/podlite/releases">Releases&nbsp;↗</a>
+</p></li><li id="HZxFMHd1Um6OjE3R9Fzby"><p><a href="https://pod6.in">Playground&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div></div></header><div id="support"><p><a href="https://opencollective.com/podlite">Funding&nbsp;↗</a> pays for the time that goes into Podlite.
+</p></div><div id="legal"><p>© All rights reserved. 2023-2026. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <i><a href="https://github.com/podlite/podlite-web">Made with podlite</a></i> | <a href="/terms">Terms of Service</a> | <a href="/privacy">Privacy Policy</a>
+</p></div></main></div><next-route-announcer><p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; top: 0px; width: 1px; white-space: nowrap; overflow-wrap: normal;"></p></next-route-announcer></body></html>

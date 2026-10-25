@@ -74,3 +74,7 @@ podlite*
 digitalGarden
 !assets/podlite*
 .mounts/
+
+# the snapshot of the layout test is kept whole, whatever the names of its pages and sites
+!/t/layout/
+!/t/layout/**

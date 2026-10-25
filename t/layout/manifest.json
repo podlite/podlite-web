@@ -1,5 +1,5 @@
 {
-  "taken": "2026-10-26T08:19:03.578Z",
+  "taken": "2026-10-26T08:24:53.006Z",
   "chrome": "Chrome/155.0.8059.85",
   "accepted": false,
   "pages": {
@@ -12,7 +12,7 @@
         "1280": 13,
         "1600": 13
       },
-      "html": "5d8b9f7767fc8b19"
+      "html": "0464ed8a749b6bae"
     },
     "podlite-org-home": {
       "url": "https://podlite.org/",
@@ -23,7 +23,7 @@
         "1280": 4,
         "1600": 4
       },
-      "html": "916c2928108c3e96"
+      "html": "5052c9fbb8b94378"
     },
     "podlite-org-cli": {
       "url": "https://podlite.org/cli",
@@ -45,7 +45,7 @@
         "1280": 6,
         "1600": 6
       },
-      "html": "0a044c3f427895d6"
+      "html": "83b19322bf3c430e"
     },
     "zahatski-com-home": {
       "url": "https://zahatski.com/",
@@ -56,7 +56,7 @@
         "1280": 5,
         "1600": 5
       },
-      "html": "7fe5f043db7fb553"
+      "html": "b868bb29cf605b6d"
     }
   },
   "reference": "5e5ab72f7cd50f24"

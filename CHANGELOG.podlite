@@ -8,7 +8,7 @@
 
 =item a hidden word is masked in the description of a page, in its meta, Open Graph and Twitter tags and in its structured data, and in the label of a note in the list of entries
 
-=item C<yarn test> checks where the wide blocks of five published pages stand, tables, pictures, code and the editor, drawn in Chrome with the reference styles and with the styles of the working tree; a change to C<screen.css>, C<global.css> or C<tests.css> that moves one fails the run. The pages are kept in C<t/layout/> and taken again with C<node scripts/layout-snapshot.js>; the run needs Chrome, found at C<CHROME_PATH> or in C</Applications>
+=item C<yarn test> checks where the wide blocks of five published pages stand, tables, pictures, code and the editor, drawn in Chrome with the reference styles and with the styles of the working tree; a change to C<screen.css>, C<global.css> or C<tests.css> that moves one fails the run. The pages are kept in C<t/layout/> and taken again with C<node scripts/layout-snapshot.js>; the run needs Chrome: the path in C<CHROME_PATH>, or Google Chrome in the Applications folder of macOS
 
 =head1 0.10.24
 

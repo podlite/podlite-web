@@ -1,0 +1,1030 @@
+<!DOCTYPE html><html lang="en" class="bg-default"><head><base href="https://podlite.org/"><style>.ͼ1.cm-focused {outline: 1px dotted #212121;}
+.ͼ1 {position: relative !important; box-sizing: border-box; display: flex !important; flex-direction: column;}
+.ͼ1 .cm-scroller {display: flex !important; align-items: flex-start !important; font-family: monospace; line-height: 1.4; height: 100%; overflow-x: auto; position: relative; z-index: 0; overflow-anchor: none;}
+.ͼ1 .cm-content[contenteditable=true] {-webkit-user-modify: read-write-plaintext-only;}
+.ͼ1 .cm-content {margin: 0; flex-grow: 2; flex-shrink: 0; display: block; white-space: pre; word-wrap: normal; box-sizing: border-box; min-height: 100%; padding: 4px 0; outline: none;}
+.ͼ1 .cm-lineWrapping {white-space: pre-wrap; white-space: break-spaces; word-break: break-word; overflow-wrap: anywhere; flex-shrink: 1;}
+.ͼ2 .cm-content {caret-color: black;}
+.ͼ3 .cm-content {caret-color: white;}
+.ͼ1 .cm-line {display: block; padding: 0 2px 0 6px;}
+.ͼ1 .cm-layer > * {position: absolute;}
+.ͼ1 .cm-layer {user-select: none; position: absolute; left: 0; top: 0; contain: size style;}
+.ͼ2 .cm-selectionBackground {background: #d9d9d9;}
+.ͼ3 .cm-selectionBackground {background: #222;}
+.ͼ2.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #d7d4f0;}
+.ͼ3.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground {background: #233;}
+.ͼ1 .cm-cursorLayer {pointer-events: none;}
+.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer {animation: steps(1) cm-blink 1.2s infinite;}
+@keyframes cm-blink {50% {opacity: 0;}}
+@keyframes cm-blink2 {50% {opacity: 0;}}
+.ͼ1 .cm-cursor, .ͼ1 .cm-dropCursor {border-left: 1.2px solid black; margin-left: -0.6px; pointer-events: none;}
+.ͼ1 .cm-cursor {display: none;}
+.ͼ3 .cm-cursor {border-left-color: #ddd;}
+.ͼ1 .cm-selectionHandle {background-color: currentColor; width: 1.5px;}
+.ͼ1 .cm-selectionHandle-start::before, .ͼ1 .cm-selectionHandle-end::before {content: ""; background-color: inherit; border-radius: 50%; width: 8px; height: 8px; position: absolute; left: -3.25px;}
+.ͼ1 .cm-selectionHandle-start::before {top: -8px;}
+.ͼ1 .cm-selectionHandle-end::before {bottom: -8px;}
+.ͼ1 .cm-dropCursor {position: absolute;}
+.ͼ1.cm-focused > .cm-scroller > .cm-cursorLayer .cm-cursor {display: block;}
+.ͼ1 .cm-iso {unicode-bidi: isolate;}
+.ͼ1 .cm-announced {position: fixed; top: -10000px;}
+@media print {.ͼ1 .cm-announced {display: none;}}
+.ͼ2 .cm-activeLine {background-color: #cceeff44;}
+.ͼ3 .cm-activeLine {background-color: #99eeff33;}
+.ͼ2 .cm-specialChar {color: red;}
+.ͼ3 .cm-specialChar {color: #f78;}
+.ͼ1 .cm-gutters {flex-shrink: 0; display: flex; height: 100%; box-sizing: border-box; z-index: 200;}
+.ͼ1 .cm-gutters-before {inset-inline-start: 0;}
+.ͼ1 .cm-gutters-after {inset-inline-end: 0;}
+.ͼ2 .cm-gutters.cm-gutters-before {border-right-width: 1px;}
+.ͼ2 .cm-gutters.cm-gutters-after {border-left-width: 1px;}
+.ͼ2 .cm-gutters {background-color: #f5f5f5; color: #6c6c6c; border: 0px solid #ddd;}
+.ͼ3 .cm-gutters {background-color: #333338; color: #ccc;}
+.ͼ1 .cm-gutter {display: flex !important; flex-direction: column; flex-shrink: 0; box-sizing: border-box; min-height: 100%; overflow: hidden;}
+.ͼ1 .cm-gutterElement {box-sizing: border-box;}
+.ͼ1 .cm-lineNumbers .cm-gutterElement {padding: 0 3px 0 5px; min-width: 20px; text-align: right; white-space: nowrap;}
+.ͼ2 .cm-activeLineGutter {background-color: #e2f2ff;}
+.ͼ3 .cm-activeLineGutter {background-color: #222227;}
+.ͼ1 .cm-panels {box-sizing: border-box; position: sticky; left: 0; right: 0; z-index: 300;}
+.ͼ2 .cm-panels {background-color: #f5f5f5; color: black;}
+.ͼ1 .cm-panels-top {top: 0;}
+.ͼ1 .cm-panels-bottom {bottom: 0;}
+.ͼ2 .cm-panels-top {border-bottom: 1px solid #ddd;}
+.ͼ2 .cm-panels-bottom {border-top: 1px solid #ddd;}
+.ͼ3 .cm-panels {background-color: #333338; color: white;}
+.ͼ1 .cm-dialog label {font-size: 80%;}
+.ͼ1 .cm-dialog {padding: 2px 19px 4px 6px; position: relative;}
+.ͼ1 .cm-dialog-close {position: absolute; top: 3px; right: 4px; background-color: inherit; border: none; font: inherit; font-size: 14px; padding: 0;}
+.ͼ1 .cm-tab {display: inline-block; overflow: hidden; vertical-align: bottom;}
+.ͼ1 .cm-widgetBuffer {vertical-align: text-top; height: 1em; width: 0; display: inline;}
+.ͼ1 .cm-placeholder {color: #888; display: inline-block; vertical-align: top; user-select: none;}
+.ͼ1 .cm-highlightSpace {background-image: radial-gradient(circle at 50% 55%, #aaa 20%, transparent 5%); background-position: center;}
+.ͼ1 .cm-highlightTab {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>'); background-size: auto 100%; background-position: right 90%; background-repeat: no-repeat;}
+.ͼ1 .cm-trailingSpace {background-color: #ff332255;}
+.ͼ1 .cm-button {vertical-align: middle; color: inherit; font-size: 70%; padding: .2em 1em; border-radius: 1px;}
+.ͼ2 .cm-button:active {background-image: linear-gradient(#b4b4b4, #d0d3d6);}
+.ͼ2 .cm-button {background-image: linear-gradient(#eff1f5, #d9d9df); border: 1px solid #888;}
+.ͼ3 .cm-button:active {background-image: linear-gradient(#111, #333);}
+.ͼ3 .cm-button {background-image: linear-gradient(#393939, #111); border: 1px solid #888;}
+.ͼ1 .cm-textfield {vertical-align: middle; color: inherit; font-size: 70%; border: 1px solid silver; padding: .2em .5em;}
+.ͼ2 .cm-textfield {background-color: white;}
+.ͼ3 .cm-textfield {border: 1px solid #555; background-color: inherit;}
+.ͼ1 .cm-diagnostic {padding: 3px 6px 3px 8px; margin-left: -1px; display: block; white-space: pre-wrap;}
+.ͼ1 .cm-diagnostic-error {border-left: 5px solid #d11;}
+.ͼ1 .cm-diagnostic-warning {border-left: 5px solid orange;}
+.ͼ1 .cm-diagnostic-info {border-left: 5px solid #999;}
+.ͼ1 .cm-diagnostic-hint {border-left: 5px solid #66d;}
+.ͼ1 .cm-diagnosticAction {font: inherit; border: none; padding: 2px 4px; background-color: #444; color: white; border-radius: 3px; margin-left: 8px; cursor: pointer;}
+.ͼ1 .cm-diagnosticSource {font-size: 70%; opacity: 0.7;}
+.ͼ1 .cm-lintRange {background-position: left bottom; background-repeat: repeat-x; padding-bottom: 0.7px;}
+.ͼ1 .cm-lintRange-error {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%23f11%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-warning {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22orange%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-info {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%23999%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-hint {background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="6" height="3">%3Cpath%20d%3D%22m0%202.5%20l2%20-1.5%20l1%200%20l2%201.5%20l1%200%22%20stroke%3D%22%2366d%22%20fill%3D%22none%22%20stroke-width%3D%22.7%22%2F%3E</svg>');}
+.ͼ1 .cm-lintRange-active {background-color: #ffdd9980;}
+.ͼ1 .cm-tooltip-lint {padding: 0; margin: 0;}
+.ͼ1 .cm-lintPoint:after {content: ""; position: absolute; bottom: 0; left: -2px; border-left: 3px solid transparent; border-right: 3px solid transparent; border-bottom: 4px solid #d11;}
+.ͼ1 .cm-lintPoint {position: relative;}
+.ͼ1 .cm-lintPoint-warning:after {border-bottom-color: orange;}
+.ͼ1 .cm-lintPoint-info:after {border-bottom-color: #999;}
+.ͼ1 .cm-lintPoint-hint:after {border-bottom-color: #66d;}
+.ͼ1 .cm-panel.cm-panel-lint ul [aria-selected] u {text-decoration: underline;}
+.ͼ1 .cm-panel.cm-panel-lint ul [aria-selected] {background-color: #ddd;}
+.ͼ1 .cm-panel.cm-panel-lint ul:focus [aria-selected] {background: #bdf; background-color: Highlight; color: white; color: HighlightText;}
+.ͼ1 .cm-panel.cm-panel-lint ul u {text-decoration: none;}
+.ͼ1 .cm-panel.cm-panel-lint ul {max-height: 100px; overflow-y: auto; padding: 0; margin: 0;}
+.ͼ1 .cm-panel.cm-panel-lint [name=close] {position: absolute; top: 0; right: 2px; background: inherit; border: none; font: inherit; padding: 0; margin: 0;}
+.ͼ1 .cm-panel.cm-panel-lint {position: relative;}
+.ͼ3 .cm-lintRange-active {background-color: #86714a80;}
+.ͼ3 .cm-panel.cm-panel-lint ul [aria-selected] {background-color: #2e343e;}
+.ͼ1 .cm-panel.cm-search [name=close] {position: absolute; top: 0; right: 4px; background-color: inherit; border: none; font: inherit; padding: 0; margin: 0;}
+.ͼ1 .cm-panel.cm-search input, .ͼ1 .cm-panel.cm-search button, .ͼ1 .cm-panel.cm-search label {margin: .2em .6em .2em 0;}
+.ͼ1 .cm-panel.cm-search input[type=checkbox] {margin-right: .2em;}
+.ͼ1 .cm-panel.cm-search label {font-size: 80%; white-space: pre;}
+.ͼ1 .cm-panel.cm-search {padding: 2px 6px 4px; position: relative;}
+.ͼ2 .cm-searchMatch {background-color: #ffff0054;}
+.ͼ3 .cm-searchMatch {background-color: #00ffff8a;}
+.ͼ2 .cm-searchMatch-selected {background-color: #ff6a0054;}
+.ͼ3 .cm-searchMatch-selected {background-color: #ff00ff8a;}
+.ͼ1 .cm-selectionMatch {background-color: #99ff7780;}
+.ͼ1 .cm-searchMatch .cm-selectionMatch {background-color: transparent;}
+.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > li, .ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > completion-section {padding: 1px 3px; line-height: 1.2;}
+.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > li {overflow-x: hidden; text-overflow: ellipsis; cursor: pointer;}
+.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul > completion-section {display: list-item; border-bottom: 1px solid silver; padding-left: 0.5em; opacity: 0.7;}
+.ͼ1 .cm-tooltip.cm-tooltip-autocomplete > ul {font-family: monospace; white-space: nowrap; overflow: hidden auto; max-width: 700px; max-width: min(700px, 95vw); min-width: 250px; max-height: 10em; height: 100%; list-style: none; margin: 0; padding: 0;}
+.ͼ2 .cm-tooltip-autocomplete ul li[aria-selected] {background: #17c; color: white;}
+.ͼ2 .cm-tooltip-autocomplete-disabled ul li[aria-selected] {background: #777;}
+.ͼ3 .cm-tooltip-autocomplete ul li[aria-selected] {background: #347; color: white;}
+.ͼ3 .cm-tooltip-autocomplete-disabled ul li[aria-selected] {background: #444;}
+.ͼ1 .cm-completionListIncompleteTop:before, .ͼ1 .cm-completionListIncompleteBottom:after {content: "···"; opacity: 0.5; display: block; text-align: center;}
+.ͼ1 .cm-tooltip.cm-completionInfo {position: absolute; padding: 3px 9px; width: max-content; max-width: 400px; box-sizing: border-box; white-space: pre-line;}
+.ͼ1 .cm-completionInfo.cm-completionInfo-left {right: 100%;}
+.ͼ1 .cm-completionInfo.cm-completionInfo-right {left: 100%;}
+.ͼ1 .cm-completionInfo.cm-completionInfo-left-narrow {right: 30px;}
+.ͼ1 .cm-completionInfo.cm-completionInfo-right-narrow {left: 30px;}
+.ͼ2 .cm-snippetField {background-color: #00000022;}
+.ͼ3 .cm-snippetField {background-color: #ffffff22;}
+.ͼ1 .cm-snippetFieldPosition {vertical-align: text-top; width: 0; height: 1.15em; display: inline-block; margin: 0 -0.7px -.7em; border-left: 1.4px dotted #888;}
+.ͼ1 .cm-completionMatchedText {text-decoration: underline;}
+.ͼ1 .cm-completionDetail {margin-left: 0.5em; font-style: italic;}
+.ͼ1 .cm-completionIcon {font-size: 90%; width: .8em; display: inline-block; text-align: center; padding-right: .6em; opacity: 0.6; box-sizing: content-box;}
+.ͼ1 .cm-completionIcon-function:after, .ͼ1 .cm-completionIcon-method:after {content: 'ƒ';}
+.ͼ1 .cm-completionIcon-class:after {content: '○';}
+.ͼ1 .cm-completionIcon-interface:after {content: '◌';}
+.ͼ1 .cm-completionIcon-variable:after {content: '𝑥';}
+.ͼ1 .cm-completionIcon-constant:after {content: '𝐶';}
+.ͼ1 .cm-completionIcon-type:after {content: '𝑡';}
+.ͼ1 .cm-completionIcon-enum:after {content: '∪';}
+.ͼ1 .cm-completionIcon-property:after {content: '□';}
+.ͼ1 .cm-completionIcon-keyword:after {content: '🔑︎';}
+.ͼ1 .cm-completionIcon-namespace:after {content: '▢';}
+.ͼ1 .cm-completionIcon-text:after {content: 'abc'; font-size: 50%; vertical-align: middle;}
+.ͼ1 .cm-tooltip {z-index: 500; box-sizing: border-box;}
+.ͼ2 .cm-tooltip {border: 1px solid #bbb; background-color: #f5f5f5;}
+.ͼ2 .cm-tooltip-section:not(:first-child) {border-top: 1px solid #bbb;}
+.ͼ3 .cm-tooltip {background-color: #333338; color: white;}
+.ͼ1 .cm-tooltip-arrow:before, .ͼ1 .cm-tooltip-arrow:after {content: ''; position: absolute; width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent;}
+.ͼ1 .cm-tooltip-above .cm-tooltip-arrow:before {border-top: 7px solid #bbb;}
+.ͼ1 .cm-tooltip-above .cm-tooltip-arrow:after {border-top: 7px solid #f5f5f5; bottom: 1px;}
+.ͼ1 .cm-tooltip-above .cm-tooltip-arrow {bottom: -7px;}
+.ͼ1 .cm-tooltip-below .cm-tooltip-arrow:before {border-bottom: 7px solid #bbb;}
+.ͼ1 .cm-tooltip-below .cm-tooltip-arrow:after {border-bottom: 7px solid #f5f5f5; top: 1px;}
+.ͼ1 .cm-tooltip-below .cm-tooltip-arrow {top: -7px;}
+.ͼ1 .cm-tooltip-arrow {height: 7px; width: 14px; position: absolute; z-index: -1; overflow: hidden;}
+.ͼ3 .cm-tooltip .cm-tooltip-arrow:before {border-top-color: #333338; border-bottom-color: #333338;}
+.ͼ3 .cm-tooltip .cm-tooltip-arrow:after {border-top-color: transparent; border-bottom-color: transparent;}
+.ͼ1.cm-focused .cm-matchingBracket {background-color: #328c8252;}
+.ͼ1.cm-focused .cm-nonmatchingBracket {background-color: #bb555544;}
+.ͼ1 .cm-foldPlaceholder {background-color: #eee; border: 1px solid #ddd; color: #888; border-radius: .2em; margin: 0 1px; padding: 0 1px; cursor: pointer;}
+.ͼ1 .cm-foldGutter span {padding: 0 1px; cursor: pointer;}
+.ͼp {color: var(--color-prettylights-syntax-comment);}
+.ͼq {color: var(--color-prettylights-syntax-variable);}
+.ͼr {color: var(--color-prettylights-syntax-entity);}
+.ͼs {color: var(--color-prettylights-syntax-variable);}
+.ͼt {color: var(--color-prettylights-syntax-entity);}
+.ͼu {color: var(--color-prettylights-syntax-keyword); font-weight: bold;}
+.ͼv {color: var(--color-prettylights-syntax-string);}
+.ͼw {color: var(--color-accent-emphasis);}
+.ͼx {color: var(--color-prettylights-syntax-markup-deleted-bg);}
+.ͼy {color: red;}
+.ͼz {color: var(--color-prettylights-syntax-variable);}
+.ͼ10 {color: var(--color-prettylights-syntax-entity);}
+.ͼ11 {color: var(--color-prettylights-syntax-entity);}
+.ͼ12 {color: var(--color-prettylights-syntax-markup-list);}
+.ͼ13 {color: var(--color-prettylights-syntax-markup-heading); font-size: 105%; font-weight: bold;}
+.ͼ14 {font-size: 150%;}
+.ͼ15 {font-size: 130%;}
+.ͼ16 {font-size: 110%;}
+.ͼ17 {color: var(--color-prettylights-syntax-string-regexp);}
+.ͼ18 {color: var(--color-prettylights-syntax-markup-italic);}
+.ͼ19 {color: var(--color-prettylights-syntax-constant-other-reference-link); text-decoration: underline;}
+.ͼ1a {color: var(--color-fg-default);}
+.ͼ1b {color: var(--color-prettylights-syntax-entity-tag);}
+.ͼ1c {color: var(--color-prettylights-syntax-entity);}
+.ͼ1d {color: var(--color-prettylights-syntax-constant);}
+.ͼ1e {font-weight: bold;}
+.ͼ1f {font-style: italic;}
+.ͼ1g {font-family: monospace; color: var(--color-prettylights-syntax-string); background-color: var(--color-canvas-subtle); border-radius: 3px;}
+.ͼ1h {text-decoration: line-through;}
+.ͼ1i {color: var(--color-prettylights-syntax-constant);}
+.ͼ1j {color: var(--color-fg-muted);}
+.ͼ1k {text-decoration: underline;}
+.ͼ1l {color: var(--color-prettylights-syntax-constant);}
+.ͼ1m {color: var(--color-fg-muted);}
+.ͼ1n {color: var(--color-prettylights-syntax-string);}
+.ͼo .cm-gutters {background-color: var(--color-canvas-subtle); color: var(--color-fg-muted); border-right-color: var(--color-border-muted);}
+.ͼo {background-color: var(--color-canvas-subtle); color: var(--color-fg-default);}
+.ͼo.cm-editor .cm-scroller {font-family: Menlo,Monaco,Consolas,Courier New,monospace;}
+.ͼo .cm-content {caret-color: var(--color-fg-default);}
+.ͼo .cm-cursor, .ͼo .cm-dropCursor {border-left-color: var(--color-fg-default);}
+.ͼo .cm-activeLine {background-color: var(--color-neutral-muted);}
+.ͼo .cm-activeLineGutter {background-color: var(--color-neutral-muted);}
+.ͼo.cm-focused .cm-selectionBackground, .ͼo .cm-line::selection, .ͼo .cm-selectionLayer .cm-selectionBackground, .ͼo .cm-content ::selection {background: var(--color-border-default) !important;}
+.ͼo .cm-selectionMatch {background-color: var(--color-border-muted);}
+.ͼ1p {height: 700px;}
+.ͼ1p .cm-scroller {height: 100% !important;}
+.ͼ5 {color: #404740;}
+.ͼ6 {text-decoration: underline;}
+.ͼ7 {text-decoration: underline; font-weight: bold;}
+.ͼ8 {font-style: italic;}
+.ͼ9 {font-weight: bold;}
+.ͼa {text-decoration: line-through;}
+.ͼb {color: #708;}
+.ͼc {color: #219;}
+.ͼd {color: #164;}
+.ͼe {color: #a11;}
+.ͼf {color: #e40;}
+.ͼg {color: #00f;}
+.ͼh {color: #30a;}
+.ͼi {color: #085;}
+.ͼj {color: #167;}
+.ͼk {color: #256;}
+.ͼl {color: #00c;}
+.ͼm {color: #940;}
+.ͼn {color: #f00;}
+.ͼ4 .cm-line ::selection, .ͼ4 .cm-line::selection {background-color: transparent !important;}
+.ͼ4 .cm-line {caret-color: transparent !important;}
+.ͼ4 .cm-content :focus::selection, .ͼ4 .cm-content :focus ::selection {background-color: Highlight !important;}
+.ͼ4 .cm-content :focus {caret-color: initial !important;}
+.ͼ4 .cm-content {caret-color: transparent !important;}
+</style><meta charset="utf-8"><title>Podlite</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"><meta name="description" content="Markup for AI agents. Structure you can check."><link rel="canonical" href="https://podlite.org/"><meta property="og:site_name" content="Podlite"><meta property="og:title" content="Podlite"><meta property="og:description" content="Markup for AI agents. Structure you can check."><meta property="og:url" content="https://podlite.org/"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Podlite"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta property="og:image" content="https://podlite.org/_next/static/media/photo.bcb64011.png"><meta name="twitter:image" content="https://podlite.org/_next/static/media/photo.bcb64011.png"><meta name="twitter:description" content="Markup for AI agents. Structure you can check."><link rel="shortcut icon" href="/favicon.png"><meta charset="utf-8"><meta name="next-head-count" content="18"><noscript data-n-css=""></noscript><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style><style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+_::-webkit-full-page-media, _:future, :root mjx-container {
+  will-change: opacity;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  border-collapse: collapse;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-mo {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-stretchy-h {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-stretchy-h > * {
+  display: table-cell;
+  width: 0;
+}
+
+mjx-stretchy-h > * > mjx-c {
+  display: inline-block;
+  transform: scalex(1.0000001);
+}
+
+mjx-stretchy-h > * > mjx-c::before {
+  display: inline-block;
+  width: initial;
+}
+
+mjx-stretchy-h > mjx-ext {
+  /* IE */ overflow: hidden;
+  /* others */ overflow: clip visible;
+  width: 100%;
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c::before {
+  transform: scalex(500);
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c {
+  width: 0;
+}
+
+mjx-stretchy-h > mjx-beg > mjx-c {
+  margin-right: -.1em;
+}
+
+mjx-stretchy-h > mjx-end > mjx-c {
+  margin-left: -.1em;
+}
+
+mjx-stretchy-v {
+  display: inline-block;
+}
+
+mjx-stretchy-v > * {
+  display: block;
+}
+
+mjx-stretchy-v > mjx-beg {
+  height: 0;
+}
+
+mjx-stretchy-v > mjx-end > mjx-c {
+  display: block;
+}
+
+mjx-stretchy-v > * > mjx-c {
+  transform: scaley(1.0000001);
+  transform-origin: left center;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0px solid transparent;
+  /* IE */ overflow: hidden;
+  /* others */ overflow: visible clip;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c::before {
+  width: initial;
+  box-sizing: border-box;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c {
+  transform: scaleY(500) translateY(.075em);
+  overflow: visible;
+}
+
+mjx-mark {
+  display: inline-block;
+  height: 0px;
+}
+
+mjx-mspace {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-TeXAtom {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c1D466.TEX-I::before {
+  padding: 0.442em 0.49em 0.205em 0;
+  content: "y";
+}
+
+mjx-c.mjx-c3D::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "=";
+}
+
+mjx-c.mjx-c1D460.TEX-I::before {
+  padding: 0.442em 0.469em 0.01em 0;
+  content: "s";
+}
+
+mjx-c.mjx-c1D45E.TEX-I::before {
+  padding: 0.442em 0.46em 0.194em 0;
+  content: "q";
+}
+
+mjx-c.mjx-c1D45F.TEX-I::before {
+  padding: 0.442em 0.451em 0.011em 0;
+  content: "r";
+}
+
+mjx-c.mjx-c1D461.TEX-I::before {
+  padding: 0.626em 0.361em 0.011em 0;
+  content: "t";
+}
+
+mjx-c.mjx-c33::before {
+  padding: 0.665em 0.5em 0.022em 0;
+  content: "3";
+}
+
+mjx-c.mjx-c1D465.TEX-I::before {
+  padding: 0.442em 0.572em 0.011em 0;
+  content: "x";
+}
+
+mjx-c.mjx-c2212::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "\2212";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c2B::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "+";
+}
+
+mjx-c.mjx-c28::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: "(";
+}
+
+mjx-c.mjx-c29::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: ")";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+</style><!--layout-styles--></head><body style="overflow: initial;"><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSW6H8XQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="__next"><div><main id="body"><nav id="sitenav" class="sitenav--bar" aria-label="site"><div class="sitenav__bar"><a href="/" class="sitenav__link sitenav__link--anchor">Podlite</a><button type="button" class="sitenav__toggle" aria-expanded="false" aria-controls="sitenav-links">Menu</button></div><div class="sitenav__links" id="sitenav-links"><span class="sitenav__sep" aria-hidden="true">·</span><a href="/quick-tour" class="sitenav__link">quick-tour</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/for-agents" class="sitenav__link">ai</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/specification" class="sitenav__link">specification</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/roadmap" class="sitenav__link">roadmap</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/contents" class="sitenav__link">news</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="https://pod6.in" class="sitenav__link sitenav__link--external" target="_blank" rel="noopener noreferrer">playground<span class="sitenav__out" aria-hidden="true">↗</span></a><span class="sitenav__sep" aria-hidden="true">·</span><a href="https://github.com/podlite" class="sitenav__link sitenav__link--external" target="_blank" rel="noopener noreferrer">github<span class="sitenav__out" aria-hidden="true">↗</span></a></div></nav><header id="header" class="service_Conatainer__66k_F" style="--count-columns :2"><div class="service_row__gDrL2"><div class="service_column__3WcsU"><div id="MDRa8nVtemvanaWohEr8t"><h1 id="Podlite"><a href="/">Podlite</a>
+</h1><div id="tagline"><p>Markup for AI agents. Structure you can check.
+</p></div><div id="oLEhM16Wxe71fOvh7XA9Y"><p>Podlite is a block-based markup language for documents that AI agents write, query, and check.
+</p></div><div id="hero-cta"><p><a href="/for-agents">Use with an agent</a> <a href="/desktop">Write and preview</a>
+</p></div></div></div><div class="service_column__3WcsU"><div id="vJ4EVkFun9ue09kw3u46W"><div class="image_block" id="Y1Fw4RDrgOoRtSLFXVKuK"><img class="shadow_DISABLED" src="/_next/static/media/photo.bcb64011.png" alt="Podlite emblem: a rounded card with two white bars forming an equals sign" loading="eager"></div></div></div></div></header><div id="news-teaser"><p>🎉 New in Podlite 2.0: render CSV as tables, mask content, pre-set block attributes, and more. <a href="/2026/5/26/1/podlite-2-0-released">Read more →</a> · <a href="/contents">All news</a>
+</p></div><div class="editor-block large"><div class="window-capture"><div class="window"><div class="titlebar"><div class="buttons"></div><span class="title">Try it: type on the left, see it render on the right</span><div class="titlebar-spacer"></div></div><div class="content"><div><div class="podlite-editor podlite-var"><div class="podlite-editor-content" style="height: 700px;"><div class="podlite-editor-content-editor" style="width: calc(50%); visibility: visible; opacity: 1;"><div class="cm-theme podlite-editor-inner" caption="Try it: type on the left, see it render on the right"><div class="cm-editor ͼ1 ͼ2 ͼ4 ͼ1p ͼo"><div class="cm-announced" aria-live="polite"></div><div tabindex="-1" class="cm-scroller"><div class="cm-gutters cm-gutters-before" aria-hidden="true" style="min-height: 3643.99px; position: sticky;"><div class="cm-gutter cm-lineNumbers"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;">999</div><div class="cm-gutterElement cm-activeLineGutter" style="height: 26.5982px; margin-top: 4px;">1</div><div class="cm-gutterElement" style="height: 26.5981px;">2</div><div class="cm-gutterElement" style="height: 26.5981px;">3</div><div class="cm-gutterElement" style="height: 26.5981px;">4</div><div class="cm-gutterElement" style="height: 34.5838px;">5</div><div class="cm-gutterElement" style="height: 29.2704px;">6</div><div class="cm-gutterElement" style="height: 26.5981px;">7</div><div class="cm-gutterElement" style="height: 53.1962px;">8</div><div class="cm-gutterElement" style="height: 53.1962px;">9</div><div class="cm-gutterElement" style="height: 26.5982px;">10</div><div class="cm-gutterElement" style="height: 53.1962px;">11</div><div class="cm-gutterElement" style="height: 26.5982px;">12</div><div class="cm-gutterElement" style="height: 53.1962px;">13</div><div class="cm-gutterElement" style="height: 106.392px;">14</div><div class="cm-gutterElement" style="height: 26.5982px;">15</div><div class="cm-gutterElement" style="height: 79.7944px;">16</div><div class="cm-gutterElement" style="height: 26.598px;">17</div><div class="cm-gutterElement" style="height: 34.5839px;">18</div><div class="cm-gutterElement" style="height: 26.598px;">19</div><div class="cm-gutterElement" style="height: 53.1963px;">20</div></div><div class="cm-gutter cm-foldGutter"><div class="cm-gutterElement" style="height: 0px; visibility: hidden; pointer-events: none;"><span title="Unfold line">›</span></div><div class="cm-gutterElement cm-activeLineGutter" style="height: 26.5982px; margin-top: 4px;"></div><div class="cm-gutterElement" style="height: 53.1962px; margin-top: 170.247px;"><span title="Fold line">⌄</span></div></div></div><div spellcheck="false" autocorrect="off" autocapitalize="off" writingsuggestions="false" translate="no" contenteditable="true" style="tab-size: 4;" class="cm-content cm-lineWrapping" role="textbox" aria-multiline="true" data-language="markdown" aria-autocomplete="list"><div class="cm-line cm-activeLine"><br></div><div class="cm-line"><span class="ͼu">=for</span> <span class="ͼw">toc</span> <span class="ͼ1d">:caption</span><span class="ͼv">('Table of contents')</span></div><div class="cm-line">  head1, head2, head3 </div><div class="cm-line">  </div><div class="cm-line"><span class="ͼu">=head2</span><span class="ͼ15 ͼ13"> Space stations</span></div><div class="cm-line"><span class="ͼu">=head3</span><span class="ͼ16 ͼ13"> Life support</span></div><div class="cm-line"><br></div><div class="cm-line">Space stations feature <span class="ͼ1j">I&lt;</span><span class="ͼ1f">hydroponic</span><span class="ͼ1j">&gt;</span> gardens <span class="ͼ1j">N&lt;</span><span class="ͼ1m">Plants grow without soil,</span></div><div class="cm-line"><span class="ͼ1m">using mineral nutrient solutions.</span><span class="ͼ1j">&gt;</span>, a necessity for <span class="ͼ1j">B&lt;</span><span class="ͼ1e">long-term</span><span class="ͼ1j">&gt;</span> missions.</div><div class="cm-line"><br></div><div class="cm-line">This is an inline formulas example: <span class="ͼ1j">F&lt;</span><span class="ͼ18"> y = \sqrt{3x-1}+(1+x)^2 </span><span class="ͼ1j">&gt;</span></div><div class="cm-line"><br></div><div class="cm-line"><span class="ͼu">=for</span> <span class="ͼw">formula</span> <span class="ͼ1d">:caption</span><span class="ͼv">('The Cauchy-Schwarz Inequality')</span></div><div class="cm-line">   \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)</div><div class="cm-line"><br></div><div class="cm-line">See this <span class="ͼ1j">L&lt;</span><span class="ͼ19">link</span><span class="ͼ1j">|</span><span class="ͼ1n">https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality</span><span class="ͼ1j">&gt;</span></div><div class="cm-line"><br></div><div class="cm-line"><span class="ͼu">=head2</span><span class="ͼ15 ͼ13"> Diagrams</span></div><div class="cm-line"><br></div><div class="cm-line"><span class="ͼu">=begin</span> <span class="ͼ1b">Mermaid</span> <span class="ͼ1d">:caption</span><span class="ͼv">('Diagram with caption')</span></div><div class="cm-gap" style="height: 2819.4px;"></div></div><div class="cm-layer cm-layer-above cm-cursorLayer" aria-hidden="true" style="z-index: 150; animation-duration: 1200ms; transform: scale(1.17592, 1.17666);"><div class="cm-cursor cm-cursor-primary" style="left: 53.3641px; top: 5.09998px; height: 18.7px;"></div></div><div class="cm-layer cm-selectionLayer" aria-hidden="true" style="z-index: -2; transform: scale(1.17592, 1.17666);"></div></div></div></div></div><div class="podlite-editor-preview Editorright layoutPreview" data-full-preview="false" style="overflow: auto; border-bottom-right-radius: 3px; width: 50%; border-left: 1px solid var(--color-border-muted); padding: 20px;"><div class="content"><div class="line-src" data-line="2" id="line-2"><div class="toc"><div class="toctitle">Table of contents</div><ul class="toc-list listlevel1"><li class="toc-item"><a href="#Space-stations">Space stations
+</a></li><ul class="toc-list listlevel2"><li class="toc-item"><a href="#Life-support">Life support
+</a></li></ul><li class="toc-item"><a href="#Diagrams">Diagrams
+</a></li><li class="toc-item"><a href="#Lists">Lists 
+</a></li><li class="toc-item"><a href="#Tables">Tables
+</a></li><li class="toc-item"><a href="#Header-inside-markdown">Header inside markdown</a></li></ul></div></div><div class="line-src" data-line="5" id="line-5"><h2 id="Space-stations">Space stations
+</h2></div><div class="line-src" data-line="6" id="line-6"><h3 id="Life-support">Life support
+</h3></div><div class="line-src" data-line="8" id="line-8"><p>Space stations feature <i>hydroponic</i> gardens <sup id="fnref:1" class="footnote"><a href="#fn:1">[1]</a></sup>, a necessity for <strong>long-term</strong> missions.
+</p></div><div class="line-src" data-line="11" id="line-11"><p>This is an inline formulas example: <span class="f-code"><mjx-container class="MathJax" jax="CHTML" style="position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D466 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msqrt space="4"><mjx-sqrt><mjx-surd><mjx-mo class="mjx-n"><mjx-c class="mjx-c221A"></mjx-c></mjx-mo></mjx-surd><mjx-box style="padding-top: 0.134em;"><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c></mjx-mn><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-box></mjx-sqrt></mjx-msqrt><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2B"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="3"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>y</mi><mo>=</mo><msqrt><mn>3</mn><mi>x</mi><mo>−</mo><mn>1</mn></msqrt><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>x</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup></math></mjx-assistive-mml></mjx-container></span>
+</p></div><div class="line-src" data-line="13" id="line-13"><div class="formula" id="9_-2dUaigGFPe8-u712Qt"><div class="formula"><mjx-container class="MathJax" jax="CHTML" display="true" style="position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-msup><mjx-mrow><mjx-mo class="mjx-s4"><mjx-c class="mjx-c28 TEX-S4"></mjx-c></mjx-mo><mjx-munderover><mjx-over style="padding-bottom: 0.192em; padding-left: 0.51em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi></mjx-over><mjx-box><mjx-munder><mjx-row><mjx-base><mjx-mo class="mjx-lop"><mjx-c class="mjx-c2211 TEX-S2"></mjx-c></mjx-mo></mjx-base></mjx-row><mjx-row><mjx-under style="padding-top: 0.167em; padding-left: 0.086em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-texatom></mjx-under></mjx-row></mjx-munder></mjx-box></mjx-munderover><mjx-msub space="2"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44F TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-s4"><mjx-c class="mjx-c29 TEX-S4"></mjx-c></mjx-mo></mjx-mrow><mjx-script style="vertical-align: 1.477em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2264"></mjx-c></mjx-mo><mjx-mrow space="4"><mjx-mo class="mjx-s4"><mjx-c class="mjx-c28 TEX-S4"></mjx-c></mjx-mo><mjx-munderover><mjx-over style="padding-bottom: 0.192em; padding-left: 0.51em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi></mjx-over><mjx-box><mjx-munder><mjx-row><mjx-base><mjx-mo class="mjx-lop"><mjx-c class="mjx-c2211 TEX-S2"></mjx-c></mjx-mo></mjx-base></mjx-row><mjx-row><mjx-under style="padding-top: 0.167em; padding-left: 0.086em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-texatom></mjx-under></mjx-row></mjx-munder></mjx-box></mjx-munderover><mjx-msubsup space="2"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.258em; margin-left: 0px;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-spacer style="margin-top: 0.18em;"></mjx-spacer><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msubsup><mjx-mo class="mjx-s4"><mjx-c class="mjx-c29 TEX-S4"></mjx-c></mjx-mo></mjx-mrow><mjx-mrow space="2"><mjx-mo class="mjx-s4"><mjx-c class="mjx-c28 TEX-S4"></mjx-c></mjx-mo><mjx-munderover><mjx-over style="padding-bottom: 0.192em; padding-left: 0.51em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi></mjx-over><mjx-box><mjx-munder><mjx-row><mjx-base><mjx-mo class="mjx-lop"><mjx-c class="mjx-c2211 TEX-S2"></mjx-c></mjx-mo></mjx-base></mjx-row><mjx-row><mjx-under style="padding-top: 0.167em; padding-left: 0.086em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-texatom></mjx-under></mjx-row></mjx-munder></mjx-box></mjx-munderover><mjx-msubsup space="2"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44F TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.258em; margin-left: 0px;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-spacer style="margin-top: 0.18em;"></mjx-spacer><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msubsup><mjx-mo class="mjx-s4"><mjx-c class="mjx-c29 TEX-S4"></mjx-c></mjx-mo></mjx-mrow></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msup><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow data-mjx-texclass="ORD"><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>a</mi><mi>k</mi></msub><msub><mi>b</mi><mi>k</mi></msub><mo data-mjx-texclass="CLOSE">)</mo></mrow><mn>2</mn></msup><mo>≤</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow data-mjx-texclass="ORD"><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msubsup><mi>a</mi><mi>k</mi><mn>2</mn></msubsup><mo data-mjx-texclass="CLOSE">)</mo></mrow><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow data-mjx-texclass="ORD"><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msubsup><mi>b</mi><mi>k</mi><mn>2</mn></msubsup><mo data-mjx-texclass="CLOSE">)</mo></mrow></math></mjx-assistive-mml></mjx-container></div><div class="caption">The Cauchy-Schwarz Inequality</div></div></div><div class="line-src" data-line="16" id="line-16"><p>See this <a href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">link</a>
+</p></div><div class="line-src" data-line="18" id="line-18"><h2 id="Diagrams">Diagrams
+</h2></div><div class="line-src" data-line="20" id="line-20"><div class="diagram" id="oiDvtlyVXCpN2MQ2ZdNyB"><div class="mermaid" style=""><svg id="graph-div0" width="100%" xmlns="http://www.w3.org/2000/svg" class="flowchart" style="max-width: 334.6875px;" viewBox="0 0 334.6875 218" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#graph-div0{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#graph-div0 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#graph-div0 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#graph-div0 .error-icon{fill:#552222;}#graph-div0 .error-text{fill:#552222;stroke:#552222;}#graph-div0 .edge-thickness-normal{stroke-width:1px;}#graph-div0 .edge-thickness-thick{stroke-width:3.5px;}#graph-div0 .edge-pattern-solid{stroke-dasharray:0;}#graph-div0 .edge-thickness-invisible{stroke-width:0;fill:none;}#graph-div0 .edge-pattern-dashed{stroke-dasharray:3;}#graph-div0 .edge-pattern-dotted{stroke-dasharray:2;}#graph-div0 .marker{fill:#333333;stroke:#333333;}#graph-div0 .marker.cross{stroke:#333333;}#graph-div0 svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#graph-div0 p{margin:0;}#graph-div0 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333;}#graph-div0 .cluster-label text{fill:#333;}#graph-div0 .cluster-label span{color:#333;}#graph-div0 .cluster-label span p{background-color:transparent;}#graph-div0 .label text,#graph-div0 span{fill:#333;color:#333;}#graph-div0 .node rect,#graph-div0 .node circle,#graph-div0 .node ellipse,#graph-div0 .node polygon,#graph-div0 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#graph-div0 .rough-node .label text,#graph-div0 .node .label text,#graph-div0 .image-shape .label,#graph-div0 .icon-shape .label{text-anchor:middle;}#graph-div0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#graph-div0 .rough-node .label,#graph-div0 .node .label,#graph-div0 .image-shape .label,#graph-div0 .icon-shape .label{text-align:center;}#graph-div0 .node.clickable{cursor:pointer;}#graph-div0 .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#graph-div0 .arrowheadPath{fill:#333333;}#graph-div0 .edgePath .path{stroke:#333333;stroke-width:1px;}#graph-div0 .flowchart-link{stroke:#333333;fill:none;}#graph-div0 .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#graph-div0 .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#graph-div0 .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#graph-div0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#graph-div0 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#graph-div0 .cluster text{fill:#333;}#graph-div0 .cluster span{color:#333;}#graph-div0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#graph-div0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#graph-div0 rect.text{fill:none;stroke-width:0;}#graph-div0 .icon-shape,#graph-div0 .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#graph-div0 .icon-shape p,#graph-div0 .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#graph-div0 .icon-shape .label rect,#graph-div0 .image-shape .label rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#graph-div0 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#graph-div0 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#graph-div0 .node .neo-node{stroke:#9370DB;}#graph-div0 [data-look="neo"].node rect,#graph-div0 [data-look="neo"].cluster rect,#graph-div0 [data-look="neo"].node polygon{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#graph-div0 [data-look="neo"].swimlane.cluster rect{filter:none;}#graph-div0 [data-look="neo"].node path{stroke:#9370DB;stroke-width:1px;}#graph-div0 [data-look="neo"].node .outer-path{filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#graph-div0 [data-look="neo"].node .neo-line path{stroke:#9370DB;filter:none;}#graph-div0 [data-look="neo"].node circle{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#graph-div0 [data-look="neo"].node circle .state-start{fill:#000000;}#graph-div0 [data-look="neo"].icon-shape .icon{fill:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#graph-div0 [data-look="neo"].icon-shape .icon-neo path{stroke:#9370DB;filter:drop-shadow(1px 2px 2px rgba(185, 185, 185, 1));}#graph-div0 :root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}</style><g><marker id="graph-div0_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="graph-div0_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="graph-div0_flowchart-v2-pointEnd-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="11.5" refY="7" markerUnits="userSpaceOnUse" markerWidth="10.5" markerHeight="14" orient="auto"><path d="M 0 0 L 11.5 7 L 0 14 z" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></path></marker><marker id="graph-div0_flowchart-v2-pointStart-margin" class="marker flowchart-v2" viewBox="0 0 11.5 14" refX="1" refY="7" markerUnits="userSpaceOnUse" markerWidth="11.5" markerHeight="14" orient="auto"><polygon points="0,7 11.5,14 11.5,0" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></polygon></marker><marker id="graph-div0_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="graph-div0_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="graph-div0_flowchart-v2-circleEnd-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refY="5" refX="12.25" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="graph-div0_flowchart-v2-circleStart-margin" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-2" refY="5" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 0; stroke-dasharray: 1, 0;"></circle></marker><marker id="graph-div0_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="graph-div0_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="graph-div0_flowchart-v2-crossEnd-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="17.7" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5;"></path></marker><marker id="graph-div0_flowchart-v2-crossStart-margin" class="marker cross flowchart-v2" viewBox="0 0 15 15" refX="-3.5" refY="7.5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 1,1 L 14,14 M 1,14 L 14,1" class="arrowMarkerPath" style="stroke-width: 2.5; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M64.856,94.375L71.596,84.854C78.336,75.333,91.816,56.292,102.167,46.771C112.518,37.25,119.74,37.25,123.35,37.25L126.961,37.25" id="graph-div0-L_A_B_0" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_A_B_0" data-points="W3sieCI6NjQuODU1NzIzMTM2NzU4MzEsInkiOjk0LjM3NX0seyJ4IjoxMDUuMjk2ODc1LCJ5IjozNy4yNX0seyJ4IjoxMzAuOTYwOTM3NSwieSI6MzcuMjV9XQ==" data-look="classic" marker-end="url(#graph-div0_flowchart-v2-pointEnd)"></path><path d="M202.914,37.25L207.191,37.25C211.469,37.25,220.023,37.25,231.465,49.878C242.907,62.507,257.236,87.764,264.4,100.392L271.565,113.021" id="graph-div0-L_B_C_0" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_B_C_0" data-points="W3sieCI6MjAyLjkxNDA2MjUsInkiOjM3LjI1fSx7IngiOjIyOC41NzgxMjUsInkiOjM3LjI1fSx7IngiOjI3My41Mzg1NzY0Njg4OTQsInkiOjExNi41fV0=" data-look="classic" marker-end="url(#graph-div0_flowchart-v2-pointEnd)"></path><path d="M262.11,175L256.521,180.833C250.933,186.667,239.755,198.333,223.893,204.167C208.031,210,187.484,210,166.938,210C146.391,210,125.844,210,109.215,201.023C92.587,192.047,79.877,174.093,73.522,165.116L67.167,156.14" id="graph-div0-L_C_A_0" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_C_A_0" data-points="W3sieCI6MjYyLjEwOTg2MTM4MTMyMjk2LCJ5IjoxNzV9LHsieCI6MjI4LjU3ODEyNSwieSI6MjEwfSx7IngiOjE2Ni45Mzc1LCJ5IjoyMTB9LHsieCI6MTA1LjI5Njg3NSwieSI6MjEwfSx7IngiOjY0Ljg1NTcyMzEzNjc1ODMxLCJ5IjoxNTIuODc1fV0=" data-look="classic" marker-end="url(#graph-div0_flowchart-v2-pointEnd)"></path><path d="M203.578,145.75L207.745,145.75C211.911,145.75,220.245,145.75,227.911,145.75C235.578,145.75,242.578,145.75,246.078,145.75L249.578,145.75" id="graph-div0-L_D_C_0" class=" edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_D_C_0" data-points="W3sieCI6MjAzLjU3ODEyNSwieSI6MTQ1Ljc1fSx7IngiOjIyOC41NzgxMjUsInkiOjE0NS43NX0seyJ4IjoyNTMuNTc4MTI1LCJ5IjoxNDUuNzV9XQ==" data-look="classic" marker-end="url(#graph-div0_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel"><g class="label" data-id="L_A_B_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_B_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_C_A_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_D_C_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel "></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default  " id="graph-div0-flowchart-A-0" data-look="classic" transform="translate(44.1484375, 123.625)"><rect class="basic label-container" style="" x="-36.1484375" y="-29.25" width="72.296875" height="58.5"></rect><g class="label" style="" transform="translate(-6.1484375, -14.25)"><rect></rect><foreignObject width="12.296875" height="28.5"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel "><p>A</p></span></div></foreignObject></g></g><g class="node default  " id="graph-div0-flowchart-B-1" data-look="classic" transform="translate(166.9375, 37.25)"><rect class="basic label-container" style="" x="-35.9765625" y="-29.25" width="71.953125" height="58.5"></rect><g class="label" style="" transform="translate(-5.9765625, -14.25)"><rect></rect><foreignObject width="11.953125" height="28.5"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel "><p>B</p></span></div></foreignObject></g></g><g class="node default  " id="graph-div0-flowchart-C-3" data-look="classic" transform="translate(290.1328125, 145.75)"><rect class="basic label-container" style="" x="-36.5546875" y="-29.25" width="73.109375" height="58.5"></rect><g class="label" style="" transform="translate(-6.5546875, -14.25)"><rect></rect><foreignObject width="13.109375" height="28.5"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel "><p>C</p></span></div></foreignObject></g></g><g class="node default  " id="graph-div0-flowchart-D-6" data-look="classic" transform="translate(166.9375, 145.75)"><rect class="basic label-container" style="" x="-36.640625" y="-29.25" width="73.28125" height="58.5"></rect><g class="label" style="" transform="translate(-6.640625, -14.25)"><rect></rect><foreignObject width="13.28125" height="28.5"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel "><p>D</p></span></div></foreignObject></g></g></g></g></g><defs><filter id="graph-div0-drop-shadow" height="130%" width="130%"><feDropShadow dx="4" dy="4" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs><defs><filter id="graph-div0-drop-shadow-small" height="150%" width="150%"><feDropShadow dx="2" dy="2" stdDeviation="0" flood-opacity="0.06" flood-color="#000000"></feDropShadow></filter></defs></svg></div><div class="caption">Diagram with caption</div></div></div><div class="line-src" data-line="32" id="line-32"><h2 id="Lists">Lists 
+</h2></div><div class="line-src" data-line="34" id="line-34"><p>Options <strong>are</strong>:
+</p></div><ul><div class="line-src" data-line="36" id="line-36"><li id="hmORF2c6bCbfaJ4n4pVkf"><div class="line-src" data-line="36" id="line-36"><p>Animal
+</p></div></li></div><ul><div class="line-src" data-line="37" id="line-37"><li id="a7nB_tubpxKgPnziZSb4Q"><div class="line-src" data-line="37" id="line-37"><p>Vertebrate
+</p></div></li></div><div class="line-src" data-line="38" id="line-38"><li id="P-DqSUECX6_qCz0DeqGSd"><div class="line-src" data-line="38" id="line-38"><p>Invertebrate
+</p></div></li></div></ul><div class="line-src" data-line="40" id="line-40"><li id="h3ZhcRkPyvlzE4rwkNhab"><div class="line-src" data-line="40" id="line-40"><p>Phase
+</p></div></li></div><ul><div class="line-src" data-line="41" id="line-41"><li id="c6e140JQxRqQO2S47SJgg"><div class="line-src" data-line="41" id="line-41"><p>Solid
+</p></div></li></div><div class="line-src" data-line="42" id="line-42"><li id="FhvGvPiFH7mCpSVvl87-X"><div class="line-src" data-line="42" id="line-42"><p>Liquid
+</p></div></li></div><div class="line-src" data-line="43" id="line-43"><li id="oQ8ACnzp2q4OXDrZVCHXx"><div class="line-src" data-line="43" id="line-43"><p>Gas
+</p></div></li></div><div class="line-src" data-line="44" id="line-44"><li id="znXyzbXeI1yzSU-Ep8wc"><div class="line-src" data-line="44" id="line-44"><p><i>Chocolate</i>
+</p></div></li></div></ul></ul><div class="line-src" data-line="46" id="line-46"><h2 id="Tables">Tables
+</h2></div><div class="line-src" data-line="48" id="line-48"><table id="gWuIoKU_iYaNUtY8BVgAn"><tbody><tr><td>Constants</td><td>1</td></tr><tr><td>Variables</td><td>10</td></tr><tr><td>Subroutines</td><td>33</td></tr><tr><td>Everything else</td><td>57</td></tr></tbody></table></div><div class="line-src" data-line="54" id="line-54"><table id="rayRx1gJhpPE3ocd6AHsk"><tbody><tr><td> mouse   </td><td> mice</td></tr><tr><td> horse   </td><td> horses</td></tr><tr><td> elephant</td><td> elephants</td></tr></tbody></table></div><div class="line-src" data-line="59" id="line-59"><table id="sS7UV-_uAEJT8sPcwr7s1"><thead><tr><th> Animal</th><th> Legs</th><th>    Eats</th></tr></thead><tbody><tr><td> Zebra </td><td>   4 </td><td> Cookies</td></tr><tr><td> Human </td><td>   2 </td><td>   Pizza</td></tr><tr><td> Shark </td><td>   0 </td><td>    Fish</td></tr></tbody></table></div><div class="line-src" data-line="66" id="line-66"><table id="_f-SMtRzEsDI4VS08yJeS"><tbody><tr><td> X</td><td> O</td><td> </td></tr><tr><td>  </td><td> X</td><td> O</td></tr><tr><td>  </td><td>  </td><td> X</td></tr></tbody></table></div><div class="line-src" data-line="73" id="line-73"><table id="QgXUktIWRI5biUjmB4XH_"><tbody><tr><td>X</td><td>O</td></tr><tr><td>X</td><td>O</td></tr><tr><td>X</td><td></td></tr></tbody></table></div><div class="line-src" data-line="80" id="line-80"><table id="U-2u3F2u6OahvaVk6p4Ml"><caption class="caption">Super table!</caption><thead><tr><th>               Superhero    </th><th> Secret Identity      </th><th>  Superpower</th></tr></thead><tbody><tr><td> The Shoveller              </td><td> Eddie Stevens                </td><td> King Arthur's singing shovel</td></tr><tr><td>Blue Raja</td><td>Geoffrey Smith</td><td>Master of cutlery</td></tr><tr><td> Mr Furious                 </td><td> Roy Orson                    </td><td> Ticking time bomb of fury</td></tr><tr><td>The Bowler</td><td>Carol Pinnsler</td><td>Haunted bowling ball</td></tr></tbody></table></div><div class="line-src" data-line="98" id="line-98"><h2 id="Header-inside-markdown">Header inside markdown</h2></div><div class="line-src" data-line="100" id="line-100"><div class="formula" id="0tmhWfLSBWTmCvvcPplHj"><div class="formula"><mjx-container class="MathJax" jax="CHTML" display="true" style="position: relative;"><mjx-math display="true" class="MJX-TEX" aria-hidden="true" style="margin-left: 0px; margin-right: 0px;"><mjx-mspace></mjx-mspace><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45C TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45F TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D461 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45C TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45F TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45A TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45F TEX-I"></mjx-c></mjx-mi></mjx-texatom><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D453 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mspace></mjx-mspace><mjx-texatom space="4" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-mspace></mjx-mspace><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45B TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43A TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3A"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D453 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D454 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msub space="4"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43B TEX-I"></mjx-c></mjx-mi></mjx-texatom></mjx-script></mjx-msub><mjx-mspace></mjx-mspace></mjx-texatom><mjx-texatom texclass="ORD"><mjx-mspace></mjx-mspace><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45A TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44F TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45C TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-texatom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2E"></mjx-c></mjx-mo></mjx-texatom></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mspace linebreak="newline"></mspace><mi>o</mi><mi>p</mi><mi>e</mi><mi>r</mi><mi>a</mi><mi>t</mi><mi>o</mi><mi>r</mi><mi>n</mi><mi>a</mi><mi>m</mi><mi>e</mi><mrow data-mjx-texclass="ORD"><mi>k</mi><mi>e</mi><mi>r</mi></mrow><mi>f</mi><mo>=</mo><mspace linebreak="newline"></mspace><mrow data-mjx-texclass="ORD"><mi>g</mi><mspace linebreak="newline"></mspace><mi>i</mi><mi>n</mi><mi>G</mi><mo>:</mo><mi>f</mi><mo stretchy="false">(</mo><mi>g</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>e</mi><mrow data-mjx-texclass="ORD"><mi>H</mi></mrow></msub><mspace linebreak="newline"></mspace></mrow><mrow data-mjx-texclass="ORD"><mspace linebreak="newline"></mspace><mi>m</mi><mi>b</mi><mi>o</mi><mi>x</mi><mrow data-mjx-texclass="ORD"><mo>.</mo></mrow></mrow></math></mjx-assistive-mml></mjx-container></div></div></div><ul id="p2pFhOWA6rEFIJUs_a4Wq"><div class="line-src" data-line="105" id="line-105"><li id="tC91l4hGFRxGRsgf8lwgr"><div class="line-src" data-line="105" id="line-105"><p id="bk6PQGwjuNMgEPj5CPyDZ">list 1</p></div><ul id="aXYaac38OdKuuKeXNOBM_"><div class="line-src" data-line="106" id="line-106"><li id="oI2boKGhxmse-kqZ-PJqU"><div class="line-src" data-line="106" id="line-106"><p id="eMNod3l64nKvJFYRrTcp5">level 2</p></div></li></div></ul></li></div></ul><div class="line-src" data-line="117" id="line-117"><pre><code>The use of A&lt;PROGNAME&gt; is U&lt;subject&gt; to the terms and conditions
+laid out by A&lt;VENDOR&gt;, as specified at:
+</code></pre></div><div class="line-src" data-line="120" id="line-120"><pre><code>A&lt;TERMS_URLS&gt;
+</code></pre></div><div class="line-src" data-line="122" id="line-122"><div class="code-block"><pre id="kUlflkLB9Jau5rHAHHfKl"><code>This I&lt;is&gt; a B&lt;text&gt;
+</code></pre></div></div><div class="footnotes"><p><sup id="fn:1" class="footnote"><a href="#fnref:1">[1]</a></sup>Plants grow without soil,
+using mineral nutrient solutions.</p></div></div></div></div></div><div style="min-width: 80rem; display: flex;"> </div></div></div></div><style>
+        .window-capture {
+          padding: 1.5rem;
+          display: inline-block;
+          margin: 0.5rem;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+
+        .window {
+          position: relative;
+          margin: 2rem;
+          border-radius: 6px;
+          background: white;
+          box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+          border: 1px solid #ccc;
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+
+        .titlebar {
+          background: linear-gradient(to bottom, #f7f7f7, #e6e6e6);
+          padding: 8px 12px;
+          border-top-left-radius: 6px;
+          border-top-right-radius: 6px;
+          border-bottom: 1px solid #ccc;
+          display: flex;
+          align-items: center;
+        }
+
+        .titlebar-spacer {
+          flex: 1;
+        }
+
+        .buttons {
+          display: flex;
+          gap: 6px;
+          margin-right: 8px;
+        }
+
+        .buttons button {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+        }
+
+        .close {
+          background: #ff5f56;
+          border: 1px solid #e0443e;
+        }
+
+        .minimize {
+          background: #ffbd2e;
+          border: 1px solid #dea123;
+        }
+
+        .maximize {
+          background: #27c93f;
+          border: 1px solid #1aab29;
+        }
+
+        .title {
+          color: #4d4d4d;
+          font-size: 13px;
+          margin-left: 4px;
+        }
+
+        .content {
+          padding: 16px;
+        }
+
+        .copy-png-btn {
+          background: none;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          padding: 2px 8px;
+          cursor: pointer;
+          font-size: 14px;
+          color: #666;
+          line-height: 1;
+          transition: background 0.15s, color 0.15s;
+        }
+
+        .copy-png-btn:hover {
+          background: #e0e0e0;
+          color: #333;
+        }
+      </style></div></div><section id="showcase" class="pShowcase"><a class="pShowcase__card" href="/for-agents" style="--product:#C17849"><svg class="pShowcase__mark" viewBox="0 0 80 112" role="img" aria-label="Podlite for agents"><rect x="2" y="2" width="76" height="108" rx="10" fill="#C17849"></rect><rect x="8" y="8" width="64" height="96" rx="7" fill="none" stroke="#fff" stroke-width="2"></rect><rect x="20" y="38" width="40" height="10" rx="2" fill="#fff"></rect><rect x="20" y="56" width="40" height="10" rx="2" fill="#fff"></rect></svg><div class="pShowcase__body"><h2 class="pShowcase__name">Podlite <span style="color:#C17849">for agents</span></h2><p class="pShowcase__line">Structured markup your AI agent can read, write and check.</p><span class="pShowcase__cta">Install<!-- --> <!-- -->→</span></div></a><a class="pShowcase__card" href="/cli" style="--product:#4CA672"><svg class="pShowcase__mark" viewBox="0 0 80 112" role="img" aria-label="Podlite CLI"><rect x="2" y="2" width="76" height="108" rx="10" fill="#4CA672"></rect><rect x="8" y="8" width="64" height="96" rx="7" fill="none" stroke="#fff" stroke-width="2"></rect><rect x="20" y="38" width="40" height="10" rx="2" fill="#fff"></rect><rect x="20" y="56" width="40" height="10" rx="2" fill="#fff"></rect></svg><div class="pShowcase__body"><h2 class="pShowcase__name">Podlite <span style="color:#4CA672">CLI</span></h2><p class="pShowcase__line">Convert, render and query Podlite from the terminal. Runs with npx today.</p><span class="pShowcase__cta">Commands<!-- --> <!-- -->→</span></div></a><a class="pShowcase__card" href="/desktop" style="--product:#5BB8E8"><svg class="pShowcase__mark" viewBox="0 0 80 112" role="img" aria-label="Podlite Desktop"><rect x="2" y="2" width="76" height="108" rx="10" fill="#5BB8E8"></rect><rect x="8" y="8" width="64" height="96" rx="7" fill="none" stroke="#fff" stroke-width="2"></rect><rect x="20" y="38" width="40" height="10" rx="2" fill="#fff"></rect><rect x="20" y="56" width="40" height="10" rx="2" fill="#fff"></rect></svg><div class="pShowcase__body"><h2 class="pShowcase__name">Podlite <span style="color:#5BB8E8">Desktop</span></h2><p class="pShowcase__line">Write on the left, see it rendered on the right. Windows, macOS, Linux.</p><span class="pShowcase__cta">Download<!-- --> <!-- -->→</span></div></a><a class="pShowcase__card" href="/web" style="--product:#8B6CAF"><svg class="pShowcase__mark" viewBox="0 0 80 112" role="img" aria-label="Podlite Web"><rect x="2" y="2" width="76" height="108" rx="10" fill="#8B6CAF"></rect><rect x="8" y="8" width="64" height="96" rx="7" fill="none" stroke="#fff" stroke-width="2"></rect><rect x="20" y="38" width="40" height="10" rx="2" fill="#fff"></rect><rect x="20" y="56" width="40" height="10" rx="2" fill="#fff"></rect></svg><div class="pShowcase__body"><h2 class="pShowcase__name">Podlite <span style="color:#8B6CAF">Web</span></h2><p class="pShowcase__line">Turn a folder of Podlite files into a static site. This site is one.</p><span class="pShowcase__cta">How it works<!-- --> <!-- -->→</span></div></a></section><h2 id="Write-structured-documents">Write structured documents
+</h2><p>Use named blocks and typed attributes for content and metadata.
+</p><h2 id="Select-blocks-by-name-and-attributes">Select blocks by name and attributes
+</h2><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> query</span><span style="color:#50A14F"> 'head1'</span><span style="color:#50A14F"> docs/</span><span style="color:#E45649">*</span><span style="color:#50A14F">.podlite</span><span style="color:#986801"> --to</span><span style="color:#50A14F"> json</span></span>
+<span class="line"></span></code></pre></code></div><h2 id="Run-checks-after-an-edit">Run checks after an edit
+</h2><p><code>podlite lint</code> reports a block left open, with its line. <code>podlite test</code>
+checks a document against assertions you write, for example that it has a code
+block in a given language.
+</p><p><a href="https://github.com/podlite/podlite-skills/tree/main/examples/edit-and-check">Run lint and query after an agent edits a document: files, commands and output.</a>
+</p><h2 id="Bring-your-Markdown">Bring your Markdown
+</h2><p>Podlite reads <code>.md</code> files as Markdown, and a Podlite document can include a
+<code>markdown</code> block.
+</p><h2 id="Why-blocks">Why blocks
+</h2><p>The <a href="https://commonmark.org/">CommonMark site</a> says nothing in Markdown counts
+as a syntax error. The <a href="/specification">Podlite specification</a> requires a parser
+to warn when inline formatting such as <code>I&lt;...&gt;</code> is left unclosed, and
+<code>podlite lint</code> reports it with the line.
+</p><p>Our goal is to make Podlite the best markup language for AI.
+</p><h2 id="Web-version-of-Podlite-editor-pod6in">Web version of Podlite editor - <a href="https://pod6.in">pod6.in</a>
+</h2><div class="image_block" id="2uhcc4LtDxXxzRzcS6KMJ"><img class="shadow_DISABLED" src="/_next/static/media/pod6incolor.775810fd.png" alt="The pod6.in web editor: Podlite source on the left, rendered output on the right" loading="eager"></div><div><div id="CookieConsent" class="cookieConsentStyles_CookieConsentStyles__FsCIK"><div class="content"><div id="e4_PHYLvsSr7jDSCFdZIR"><p>This website uses cookies for analytics. 
+</p></div></div><div class="cookieConsentStyles_okButton__XqRXa">Got it!</div></div></div><header id="footer" class="service_Conatainer__66k_F" style="--count-columns :4"><div class="service_row__gDrL2"><div class="service_column__3WcsU"><blockquote><ul><li id="ejST3yDtfuCizQ4zBOE3r"><p><strong>Tools</strong>
+</p></li><ul><li id="g4lhfTTmEpxSx5g-x8DEu"><p><a href="/web">Web</a>
+</p></li><li id="bob31Ft9On1GfxagRCrm7"><p><a href="/cli">CLI</a>
+</p></li><li id="LMMxhv_Bd2ObFj5w-LVMx"><p><a href="/desktop">Desktop</a>
+</p></li><li id="lmCfHr-u544ExGRdelgh2"><p><a href="https://github.com/podlite/podlite-skills">Skills&nbsp;↗</a>
+</p></li><li id="Da_vxgthQofTvFzxIW7P5"><p><a href="/for-agents">For agents</a>
+</p></li></ul><li id="vJVgbqryJ2Pv0i9YeNYcK"><p><strong>Install</strong>
+</p></li><ul><li id="JnXA4w_7l3DrCAmy0cbQd"><p><a href="https://apps.apple.com/us/app/podlite/id1526511053">Mac App Store&nbsp;↗</a>
+</p></li><li id="nn_FhuE_M3YI5eA3DZ2cY"><p><a href="https://www.microsoft.com/store/apps/9NVNT9SNQJM8">Microsoft Store&nbsp;↗</a>
+</p></li><li id="qPjPJH3Bcl6bo9m9JpYUd"><p><a href="https://snapcraft.io/podlite">Snap&nbsp;↗</a>
+</p></li><li id="rqxQyBBYOdopij7_n2e7z"><p><a href="https://github.com/podlite/podlite-desktop/releases">All releases&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="eMn9XS9VuxZGXN-hdWFMM"><p><strong>Docs</strong>
+</p></li><ul><li id="vOg-I5RHe-xcA3R9mKBu0"><p><a href="/specification">Specification</a>
+</p></li><li id="87q7BeESt6l8yiy2LTZNc"><p><a href="/quick-tour">Quick tour</a>
+</p></li><li id="cwIFo4NP75tev3OUXVYIC"><p><a href="/roadmap">Roadmap</a>
+</p></li><li id="Q6gCZHxH26ZeVn8kwkHdV"><p><a href="/contents">News</a>
+</p></li><li id="SrQfxVw1TfOEtocyiKmDQ"><p><a href="/rss.xml">RSS</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="PzqFkRZ7JgzZ9aUV4eaJH"><p><strong>Source</strong>
+</p></li><ul><li id="aobKZ2hxwxPZS_Uy_978A"><p><a href="https://github.com/podlite/podlite">podlite&nbsp;↗</a>
+</p></li><li id="tpkUSlfFdoCGI2w4iVKLO"><p><a href="https://github.com/podlite/podlite-specs">podlite-specs&nbsp;↗</a>
+</p></li><li id="eVcw1KVuNCid6iMzFSLZZ"><p><a href="https://github.com/podlite/podlite-web">podlite-web&nbsp;↗</a>
+</p></li><li id="Qx_RQFOdeDzXrppGvpT9t"><p><a href="https://github.com/podlite/podlite-desktop">podlite-desktop&nbsp;↗</a>
+</p></li><li id="EuCi7J-XgEl1tX12BaizD"><p><a href="https://github.com/podlite/podlite-skills">podlite-skills&nbsp;↗</a>
+</p></li><li id="agN-VL_FSH3hTGFtuEHtw"><p><a href="https://github.com/zag/pod6.in">pod6.in&nbsp;↗</a>
+</p></li><li id="vA7P2b4iIGBfAushdybXZ"><p><a href="https://github.com/zag/podlite-vscode">podlite-vscode&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="AyKLK9UmwokrO3VXorbe2"><p><strong>Take part</strong>
+</p></li><ul><li id="cA0q-bnJNz-FFUnjlRzK"><p><a href="https://github.com/podlite/podlite-specs/discussions">Spec discussions&nbsp;↗</a>
+</p></li><li id="leeGfAeZOVMQDQ3v3GuZX"><p><a href="https://github.com/podlite/podlite/discussions">Dev discussions&nbsp;↗</a>
+</p></li><li id="tZ6AVr96ockawglhxX6UE"><p><a href="https://github.com/podlite/podlite/releases">Releases&nbsp;↗</a>
+</p></li><li id="HZxFMHd1Um6OjE3R9Fzby"><p><a href="https://pod6.in">Playground&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div></div></header><div id="support"><p><a href="https://opencollective.com/podlite">Funding&nbsp;↗</a> pays for the time that goes into Podlite.
+</p></div><div id="legal"><p>© All rights reserved. 2023-2026. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <i><a href="https://github.com/podlite/podlite-web">Made with podlite</a></i> | <a href="/terms">Terms of Service</a> | <a href="/privacy">Privacy Policy</a>
+</p></div></main></div></div><next-route-announcer><p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; top: 0px; width: 1px; white-space: nowrap; overflow-wrap: normal;"></p></next-route-announcer><div class="mermaidTooltip" style="opacity: 0; position: absolute; text-align: center; max-width: 200px; padding: 2px; font-size: 12px; background: rgb(255, 255, 222); border: 1px solid rgb(51, 51, 51); border-radius: 2px; pointer-events: none; z-index: 100;"></div></body></html>

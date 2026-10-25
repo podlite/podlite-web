@@ -159,7 +159,8 @@ const main = async () => {
     process.exit(1)
   }
   if (refused.length) manifest.differsFromPublished = refused
-  const dir = lib.LAYOUT_DIR
+  // the set is written aside and put in place whole, so a failed write leaves the old one
+  const dir = lib.LAYOUT_DIR + '.new'
   fs.rmSync(dir, { recursive: true, force: true })
   fs.mkdirSync(path.join(dir, 'pages'), { recursive: true })
   for (const [name, html] of Object.entries(out.pages)) fs.writeFileSync(path.join(dir, 'pages', name + '.html'), html)
@@ -175,7 +176,12 @@ const main = async () => {
     fs.copyFileSync(path.join(__dirname, '..', 'src', 'styles', f + '.css'), path.join(dir, 'reference', f + '.css'))
   manifest.reference = hash(lib.referenceLayer())
   fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n')
-  console.log(`Snapshot written to ${path.relative(process.cwd(), dir)}`)
+  const old = lib.LAYOUT_DIR + '.old'
+  fs.rmSync(old, { recursive: true, force: true })
+  if (fs.existsSync(lib.LAYOUT_DIR)) fs.renameSync(lib.LAYOUT_DIR, old)
+  fs.renameSync(dir, lib.LAYOUT_DIR)
+  fs.rmSync(old, { recursive: true, force: true })
+  console.log(`Snapshot written to ${path.relative(process.cwd(), lib.LAYOUT_DIR)}`)
 }
 
 main().catch(e => {

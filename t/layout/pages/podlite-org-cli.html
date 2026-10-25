@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en" class="bg-default"><head><base href="https://podlite.org/"><meta charset="utf-8"><title>Podlite CLI — Podlite</title><link rel="alternate" type="application/rss+xml" title="RSS" href="/rss.xml"><meta name="description" content="Convert, render and query Podlite from the terminal."><link rel="canonical" href="https://podlite.org/cli"><meta property="og:site_name" content="Podlite"><meta property="og:title" content="Podlite CLI"><meta property="og:description" content="Convert, render and query Podlite from the terminal."><meta property="og:url" content="https://podlite.org/cli"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Podlite CLI"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta property="og:image" content="https://podlite.org/_next/static/media/card-cli.1604c0c6.svg"><meta name="twitter:image" content="https://podlite.org/_next/static/media/card-cli.1604c0c6.svg"><meta name="twitter:description" content="Convert, render and query Podlite from the terminal."><link rel="shortcut icon" href="/favicon.png"><meta charset="utf-8"><meta name="next-head-count" content="18"><noscript data-n-css=""></noscript><!--layout-styles--></head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSW6H8XQ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript><div id="__next"><main><nav id="sitenav" class="sitenav--bar" aria-label="site"><div class="sitenav__bar"><a href="/" class="sitenav__link sitenav__link--anchor">Podlite</a><button type="button" class="sitenav__toggle" aria-expanded="false" aria-controls="sitenav-links">Menu</button></div><div class="sitenav__links" id="sitenav-links"><span class="sitenav__sep" aria-hidden="true">·</span><a href="/quick-tour" class="sitenav__link">quick-tour</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/for-agents" class="sitenav__link">ai</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/specification" class="sitenav__link">specification</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/roadmap" class="sitenav__link">roadmap</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="/contents" class="sitenav__link">news</a><span class="sitenav__sep" aria-hidden="true">·</span><a href="https://pod6.in" class="sitenav__link sitenav__link--external" target="_blank" rel="noopener noreferrer">playground<span class="sitenav__out" aria-hidden="true">↗</span></a><span class="sitenav__sep" aria-hidden="true">·</span><a href="https://github.com/podlite" class="sitenav__link sitenav__link--external" target="_blank" rel="noopener noreferrer">github<span class="sitenav__out" aria-hidden="true">↗</span></a></div></nav><article><header><h1>Podlite CLI
+</h1></header><header id="header" class="service_Conatainer__66k_F" style="--count-columns\ : 2;"><div class="service_row__gDrL2"><div class="service_column__3WcsU"><div id="DYkrZ_J_RcRSsk-Q38Y-x"><div id="tagline"><p>ask a document questions, from the terminal
+</p></div><div id="z9hOgI1FMBVZ1czRpNi21"><p>Convert, render and query Podlite files. Ships inside the <code>podlite</code> package,
+so <code>npx</code> runs it without installing anything.
+</p></div></div></div><div class="service_column__3WcsU"><div id="277zm05QP7C1RsK3lfMsq"><div class="image_block" id="FMvw_D_T-4aZiCbM2avB6"><img class="shadow_DISABLED" src="/_next/static/media/card-cli.1604c0c6.svg" alt="Podlite CLI emblem: a rounded card with two white bars forming an equals sign" loading="eager"></div></div></div></div></header><h2 id="Grep-does-not-know-what-a-heading-is">Grep does not know what a heading is
+</h2><p>Open a folder of documentation and try to answer a plain question: which code
+samples are Python? Grep will find the word, and it will also find it in prose,
+in a comment, in a filename. It matches characters, because characters are all
+a plain-text file gives it.
+</p><p>A Podlite file gives more. Every block knows what it is and carries its own
+attributes, and the same query that would be a fragile regular expression
+becomes an exact question:
+</p><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> query</span><span style="color:#50A14F"> 'code[:lang&lt;python&gt;]'</span><span style="color:#50A14F"> tutorials/</span><span style="color:#E45649">*</span><span style="color:#50A14F">.podlite</span><span style="color:#986801"> --to</span><span style="color:#50A14F"> json</span></span>
+<span class="line"></span></code></pre></code></div><p>Selector conditions such as <code>code[:lang&lt;python&gt;]</code> run in the CLI today. The
+written rule for them is in the next revision of the specification.
+</p><h2 id="Query">Query
+</h2><p>A selector picks blocks out of a document, and the matches come back in
+whatever format you ask for:
+</p><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> query</span><span style="color:#50A14F"> 'head1'</span><span style="color:#50A14F"> docs/api.podlite</span></span>
+<span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> query</span><span style="color:#50A14F"> 'head1, head2'</span><span style="color:#50A14F"> manual.podlite</span><span style="color:#986801"> --to</span><span style="color:#50A14F"> md</span></span>
+<span class="line"></span></code></pre></code></div><p>Selectors read attributes, so documents can be searched the way a database is
+queried rather than the way text is scanned:
+</p><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> query</span><span style="color:#50A14F"> '*[:applies-nfr~&lt;N004&gt;]'</span><span style="color:#50A14F"> rules/</span><span style="color:#E45649">*</span><span style="color:#50A14F">.podlite</span><span style="color:#986801"> --fail-on-empty</span></span>
+<span class="line"></span></code></pre></code></div><p><code>--fail-on-empty</code> turns an empty result into a non-zero exit. That is the step
+that turns a question into a check a build can run: if the rule stops being
+covered, the build says so.
+</p><h2 id="Convert">Convert
+</h2><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> convert</span><span style="color:#50A14F"> doc.podlite</span><span style="color:#986801"> --to</span><span style="color:#50A14F"> md</span></span>
+<span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> convert</span><span style="color:#E45649"> *</span><span style="color:#50A14F">.podlite</span><span style="color:#986801"> --to</span><span style="color:#50A14F"> md</span><span style="color:#986801"> -o</span><span style="color:#50A14F"> output/</span></span>
+<span class="line"></span></code></pre></code></div><p>Markdown and HTML are the output formats. Without <code>-o</code> the result lands beside
+the source with a new extension. Relative <code>file:</code> image paths can be re-rooted
+with <code>--base</code> or the <code>PODLITE_BASE</code> environment variable, which is what makes
+a converted file usable outside the folder it came from.
+</p><h2 id="Lint">Lint
+</h2><div class="code-block"><code class="shiki"><pre class="shiki one-light" style="background-color:#FAFAFA;color:#383A42" tabindex="0"><code><span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> lint</span><span style="color:#50A14F"> README.podlite</span></span>
+<span class="line"><span style="color:#4078F2">npx</span><span style="color:#50A14F"> podlite</span><span style="color:#50A14F"> lint</span><span style="color:#50A14F"> docs/</span><span style="color:#E45649">*</span><span style="color:#50A14F">.podlite</span><span style="color:#986801"> --strict</span><span style="color:#986801"> --format</span><span style="color:#50A14F"> json</span></span>
+<span class="line"></span></code></pre></code></div><p><code>--strict</code> promotes warnings to errors, <code>--format json</code> gives machine-readable
+output, and <code>--config</code> points at a <code>.podlitelintrc</code> file.
+</p><p>A clean result means the file passes the enabled rules. In strict mode,
+warnings make the command exit with code 1.
+</p><h2 id="Where-it-lives">Where it lives
+</h2><p>The command ships inside the <code>podlite</code> package, next to the parser, in
+<a href="https://github.com/podlite/podlite/tree/main/packages/core">packages/core</a>.
+</p><footer></footer></article><div id="nav" class="service_Conatainer__66k_F" style="--count-columns :3"><div class="service_row__gDrL2"><div class="service_column__3WcsU"></div><div class="service_column__3WcsU"><div class="navigate"></div></div><div class="service_column__3WcsU"></div></div></div><div><div id="CookieConsent" class="cookieConsentStyles_CookieConsentStyles__FsCIK"><div class="content"><div id="e4_PHYLvsSr7jDSCFdZIR"><p>This website uses cookies for analytics. 
+</p></div></div><div class="cookieConsentStyles_okButton__XqRXa">Got it!</div></div></div><header id="footer" class="service_Conatainer__66k_F" style="--count-columns :4"><div class="service_row__gDrL2"><div class="service_column__3WcsU"><blockquote><ul><li id="ejST3yDtfuCizQ4zBOE3r"><p><strong>Tools</strong>
+</p></li><ul><li id="g4lhfTTmEpxSx5g-x8DEu"><p><a href="/web">Web</a>
+</p></li><li id="bob31Ft9On1GfxagRCrm7"><p><a href="/cli">CLI</a>
+</p></li><li id="LMMxhv_Bd2ObFj5w-LVMx"><p><a href="/desktop">Desktop</a>
+</p></li><li id="lmCfHr-u544ExGRdelgh2"><p><a href="https://github.com/podlite/podlite-skills">Skills&nbsp;↗</a>
+</p></li><li id="Da_vxgthQofTvFzxIW7P5"><p><a href="/for-agents">For agents</a>
+</p></li></ul><li id="vJVgbqryJ2Pv0i9YeNYcK"><p><strong>Install</strong>
+</p></li><ul><li id="JnXA4w_7l3DrCAmy0cbQd"><p><a href="https://apps.apple.com/us/app/podlite/id1526511053">Mac App Store&nbsp;↗</a>
+</p></li><li id="nn_FhuE_M3YI5eA3DZ2cY"><p><a href="https://www.microsoft.com/store/apps/9NVNT9SNQJM8">Microsoft Store&nbsp;↗</a>
+</p></li><li id="qPjPJH3Bcl6bo9m9JpYUd"><p><a href="https://snapcraft.io/podlite">Snap&nbsp;↗</a>
+</p></li><li id="rqxQyBBYOdopij7_n2e7z"><p><a href="https://github.com/podlite/podlite-desktop/releases">All releases&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="eMn9XS9VuxZGXN-hdWFMM"><p><strong>Docs</strong>
+</p></li><ul><li id="vOg-I5RHe-xcA3R9mKBu0"><p><a href="/specification">Specification</a>
+</p></li><li id="87q7BeESt6l8yiy2LTZNc"><p><a href="/quick-tour">Quick tour</a>
+</p></li><li id="cwIFo4NP75tev3OUXVYIC"><p><a href="/roadmap">Roadmap</a>
+</p></li><li id="Q6gCZHxH26ZeVn8kwkHdV"><p><a href="/contents">News</a>
+</p></li><li id="SrQfxVw1TfOEtocyiKmDQ"><p><a href="/rss.xml">RSS</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="PzqFkRZ7JgzZ9aUV4eaJH"><p><strong>Source</strong>
+</p></li><ul><li id="aobKZ2hxwxPZS_Uy_978A"><p><a href="https://github.com/podlite/podlite">podlite&nbsp;↗</a>
+</p></li><li id="tpkUSlfFdoCGI2w4iVKLO"><p><a href="https://github.com/podlite/podlite-specs">podlite-specs&nbsp;↗</a>
+</p></li><li id="eVcw1KVuNCid6iMzFSLZZ"><p><a href="https://github.com/podlite/podlite-web">podlite-web&nbsp;↗</a>
+</p></li><li id="Qx_RQFOdeDzXrppGvpT9t"><p><a href="https://github.com/podlite/podlite-desktop">podlite-desktop&nbsp;↗</a>
+</p></li><li id="EuCi7J-XgEl1tX12BaizD"><p><a href="https://github.com/podlite/podlite-skills">podlite-skills&nbsp;↗</a>
+</p></li><li id="agN-VL_FSH3hTGFtuEHtw"><p><a href="https://github.com/zag/pod6.in">pod6.in&nbsp;↗</a>
+</p></li><li id="vA7P2b4iIGBfAushdybXZ"><p><a href="https://github.com/zag/podlite-vscode">podlite-vscode&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div><div class="service_column__3WcsU"><blockquote><ul><li id="AyKLK9UmwokrO3VXorbe2"><p><strong>Take part</strong>
+</p></li><ul><li id="cA0q-bnJNz-FFUnjlRzK"><p><a href="https://github.com/podlite/podlite-specs/discussions">Spec discussions&nbsp;↗</a>
+</p></li><li id="leeGfAeZOVMQDQ3v3GuZX"><p><a href="https://github.com/podlite/podlite/discussions">Dev discussions&nbsp;↗</a>
+</p></li><li id="tZ6AVr96ockawglhxX6UE"><p><a href="https://github.com/podlite/podlite/releases">Releases&nbsp;↗</a>
+</p></li><li id="HZxFMHd1Um6OjE3R9Fzby"><p><a href="https://pod6.in">Playground&nbsp;↗</a>
+</p></li></ul></ul></blockquote></div></div></header><div id="support"><p><a href="https://opencollective.com/podlite">Funding&nbsp;↗</a> pays for the time that goes into Podlite.
+</p></div><div id="legal"><p>© All rights reserved. 2023-2026. <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. <i><a href="https://github.com/podlite/podlite-web">Made with podlite</a></i> | <a href="/terms">Terms of Service</a> | <a href="/privacy">Privacy Policy</a>
+</p></div></main></div><next-route-announcer><p aria-live="assertive" id="__next-route-announcer__" role="alert" style="border: 0px; clip: rect(0px, 0px, 0px, 0px); height: 1px; margin: -1px; overflow: hidden; padding: 0px; position: absolute; top: 0px; width: 1px; white-space: nowrap; overflow-wrap: normal;"></p></next-route-announcer></body></html>

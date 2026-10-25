@@ -55,7 +55,10 @@ const offlinePage = async browser => {
     const picture = page.layoutImages && page.layoutImages[req.url()]
     if (picture) req.respond({ status: 200, contentType: 'image/svg+xml', body: picture })
     else if (req.isNavigationRequest()) req.continue()
-    else req.abort()
+    else {
+      if (req.resourceType() === 'image' && page.layoutMissing) page.layoutMissing.push(req.url())
+      req.abort()
+    }
   })
   return page
 }
@@ -91,8 +94,12 @@ const readBlocks = (page, moved) =>
 // block by 10px to show the comparison sees it; `images` answers the image requests of the page
 const measure = async (page, html, css, width, moved, images) => {
   page.layoutImages = images || {}
+  page.layoutMissing = []
   await page.setViewport({ width, height: HEIGHT })
   await page.setContent(html.replace(STYLES_MARK, `<style>${css}\n${STILL}</style>`), { waitUntil: 'load' })
+  // an image the snapshot cannot answer would be drawn at another size
+  if (images && page.layoutMissing.length)
+    throw new Error(`images not in the snapshot: ${page.layoutMissing.join(', ')}`)
   await page.evaluate(() => window.scrollTo(0, 0))
   return readBlocks(page, moved)
 }
@@ -104,6 +111,7 @@ const compare = (expected, actual) => {
   expected.forEach((e, i) => {
     const a = actual[i]
     if (!a) return
+    if (a.name !== e.name) diffs.push(`#${i} ${e.name} became ${a.name}`)
     for (const f of ['left', 'top', 'width', 'height'])
       if (Math.abs(e[f] - a[f]) > TOLERANCE) diffs.push(`#${i} ${e.name} ${f}: ${e[f]} → ${a[f]}`)
   })
