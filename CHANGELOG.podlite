@@ -6,7 +6,7 @@
 
 =item the text of a link, a table of contents entry among them, is drawn from its markup: a hidden word in it is masked, as in the rest of the page, and its formatting shows, C<B<>>, C<I<>> and C<C<>> as written, an entity C<E<>> as its sign, spaces in C<S<>> kept; a comment C<Z<>> no longer shows
 
-=item a hidden word is masked in the description of a page, in its meta, Open Graph and Twitter tags and in its structured data, and in the label of a note in the list of entries and in the links to the next and previous one
+=item a hidden word is masked in the description of a page, in its meta, Open Graph and Twitter tags and in its structured data, and in the label of a note in the list of entries
 
 =head1 0.10.24
 

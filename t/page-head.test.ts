@@ -129,5 +129,7 @@ describe('a hidden word in the description of a page', () => {
       '=begin pod\n=for para :masked\nThe launch code for the vault door is kept here, well past forty characters.\n\nVisible text.\n=end pod\n',
     )
     expect(text).not.toContain('launch')
+    // the masked paragraph is still the one taken, not the title in its place
+    expect(text).toMatch(/^███ ██████ ████/)
   })
 })
