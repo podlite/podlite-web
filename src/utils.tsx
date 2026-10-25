@@ -138,10 +138,11 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       //@ts-ignore
       DESCRIPTION: () => () => null,
       'L<>': setFn((node, ctx) => {
-        const text_content = getTextContentFromNode(node)
         const href = linkAddress(node, ctx)
+        // The text of a link is drawn from its nodes, as everywhere else: a hidden
+        // word stays masked and formatting stays.
         // A link the page cannot give an address keeps its text and goes nowhere
-        if (href === undefined) return mkComponent(({ key }) => <a key={key}>{text_content}</a>)
+        if (href === undefined) return mkComponent(({ children, key }) => <a key={key}>{children}</a>)
         // A link within the page changes the address itself, so the page hears it; a
         // click at the address already shown changes nothing, and opens the test there.
         const reveal = () => {
@@ -151,16 +152,15 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         return mkComponent(({ children, key }) =>
           href.startsWith('#') ? (
             <a href={href} key={key} onClick={reveal}>
-              {text_content}
+              {children}
             </a>
           ) : isExternalUrl(href) ? (
             <a href={href} key={key}>
-              {text_content}
+              {children}
             </a>
           ) : (
             <Link href={href} key={key}>
-              {text_content}
-              {/* {Array.isArray(children) ? children[0] : children} */}
+              {children}
             </Link>
           ),
         )

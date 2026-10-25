@@ -4,6 +4,8 @@
 
 =item a run with a missing or unknown C<--preset> stops with an error that names the two presets, C<pubdate> and C<everything>
 
+=item the text of a link, a table of contents entry among them, is drawn from its markup: a hidden word in it is masked, as in the rest of the page, and its formatting shows, C<B<>>, C<I<>> and C<C<>> as written, an entity C<E<>> as its sign, spaces in C<S<>> kept; a comment C<Z<>> no longer shows
+
 =head1 0.10.24
 
 =item the Podlite toolchain moves to the 0.0.98 release of the monorepo: a table of contents takes its caption from C<:caption> only; an entity C<E> inside C<C<>> is read as text unless C«=config C<> :allow<E>» is written; markup codes in a C<:caption> are read only when C<=set> gives it, and a caption written on a block is text
