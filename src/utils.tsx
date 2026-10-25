@@ -9,6 +9,7 @@ import {
   PodliteDocument,
   isCovered,
   maskText,
+  writtenValue,
 } from '@podlite/schema'
 import { linkAddress } from './anchor-href'
 import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
@@ -276,8 +277,9 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
     if (typeof node !== 'string' && 'type' in node && node.type == 'image') {
       const imageName = node.src
       // the text for readers who cannot see the picture is hidden with the picture, as the image package does
-      const written = 'alt' in node ? node.alt : undefined
-      const alt = written !== undefined && isCovered(node, ctx) ? maskText(written) : written
+      const covered = isCovered(node, ctx)
+      const written = 'alt' in node ? writtenValue(node.alt) : undefined
+      const alt = written !== undefined && covered ? maskText(written) : written
       const linkTo = ctx.link
       // external images (badges, remote assets) are not in the prebuilt map
       if (imageName && isExternalImageSrc(imageName)) {
@@ -316,7 +318,11 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         )
       } else {
         console.warn(`[podlite-web] image not found: ${imageName}`)
-        return <span className="image-missing">{alt || imageName || 'image'}</span>
+        return (
+          <span className="image-missing">
+            {alt || (imageName && covered ? maskText(imageName) : imageName) || 'image'}
+          </span>
+        )
       }
       return children
     } else {
