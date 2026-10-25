@@ -109,6 +109,9 @@ const capture = async (browser, url) => {
 }
 
 const main = async () => {
+  // a run stopped between the two renames below leaves the previous set aside: put it back
+  const old = lib.LAYOUT_DIR + '.old'
+  if (!fs.existsSync(lib.LAYOUT_DIR) && fs.existsSync(old)) fs.renameSync(old, lib.LAYOUT_DIR)
   const browser = await lib.launch()
   const working = lib.workingLayer()
   const manifest = { taken: new Date().toISOString(), chrome: await browser.version(), accepted: accept, pages: {} }
@@ -174,9 +177,8 @@ const main = async () => {
   fs.mkdirSync(path.join(dir, 'reference'), { recursive: true })
   for (const f of lib.LAYER_FILES)
     fs.copyFileSync(path.join(__dirname, '..', 'src', 'styles', f + '.css'), path.join(dir, 'reference', f + '.css'))
-  manifest.reference = hash(lib.referenceLayer())
+  manifest.reference = hash(lib.readLayer(path.join(dir, 'reference')))
   fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest, null, 2) + '\n')
-  const old = lib.LAYOUT_DIR + '.old'
   fs.rmSync(old, { recursive: true, force: true })
   if (fs.existsSync(lib.LAYOUT_DIR)) fs.renameSync(lib.LAYOUT_DIR, old)
   fs.renameSync(dir, lib.LAYOUT_DIR)

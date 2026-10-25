@@ -98,8 +98,14 @@ const measure = async (page, html, css, width, moved, images) => {
   await page.setViewport({ width, height: HEIGHT })
   await page.setContent(html.replace(STYLES_MARK, `<style>${css}\n${STILL}</style>`), { waitUntil: 'load' })
   // an image the snapshot cannot answer would be drawn at another size
-  if (images && page.layoutMissing.length)
-    throw new Error(`images not in the snapshot: ${page.layoutMissing.join(', ')}`)
+  if (images && page.layoutMissing.length) {
+    // a picture a stylesheet asks for is not part of the snapshot and is left out
+    const pictures = await page.evaluate(() =>
+      Array.prototype.map.call(document.images, img => img.currentSrc || img.src),
+    )
+    const unanswered = page.layoutMissing.filter(url => pictures.includes(url))
+    if (unanswered.length) throw new Error(`images not in the snapshot: ${unanswered.join(', ')}`)
+  }
   await page.evaluate(() => window.scrollTo(0, 0))
   return readBlocks(page, moved)
 }
@@ -127,6 +133,7 @@ module.exports = {
   chromePath,
   launch,
   cutLayer,
+  readLayer,
   workingLayer,
   referenceLayer,
   offlinePage,
