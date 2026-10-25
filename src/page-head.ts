@@ -1,4 +1,4 @@
-import { AstTree, getTextContentFromNode, PodNode } from '@podlite/schema'
+import { AstTree, getMaskedTextContent, PodNode } from '@podlite/schema'
 import { pageDescription } from './page-description'
 
 type PageHeadInput = {
@@ -19,8 +19,9 @@ export type PageHead = {
 // A line break kept from the source is shown as it is inside a meta tag.
 const clean = (text?: string | null): string => (text || '').replace(/\s+/g, ' ').trim()
 
+// A hidden word is written masked: these lines go out past the renderer.
 const textOf = (nodes?: PodNode | AstTree): string =>
-  !nodes ? '' : Array.isArray(nodes) ? nodes.map(getTextContentFromNode).join('') : getTextContentFromNode(nodes)
+  !nodes ? '' : Array.isArray(nodes) ? nodes.map(getMaskedTextContent).join('') : getMaskedTextContent(nodes)
 
 export function pageHead({ pageTitle, siteTitle, hasImage, description, node }: PageHeadInput): PageHead {
   const site = clean(siteTitle)

@@ -1,4 +1,5 @@
-import { PodNode } from '@podlite/schema'
+import { getFromTree, PodNode } from '@podlite/schema'
+import { podlite } from 'podlite'
 import { pageHead } from '../src/page-head'
 
 const para = (text: string): PodNode => ({ type: 'para', content: [{ type: 'text', value: text }] })
@@ -84,5 +85,49 @@ describe('the description of a page', () => {
 
   it('without a page title either, the site title', () => {
     expect(pageHead({ pageTitle: null, siteTitle: 'Site', hasImage: false, node: [] }).description).toBe('Site')
+  })
+})
+
+describe('a hidden word in the description of a page', () => {
+  const tree = (text: string): any => {
+    const p = podlite({ importPlugins: true })
+    return p.toAst(p.parse(text, { podMode: 1 }))
+  }
+  const describe_ = (text: string, asDescription?: (t: any) => any) => {
+    const t = tree(text)
+    return pageHead({ pageTitle: 'Page', siteTitle: 'Site', hasImage: false, description: asDescription?.(t), node: t })
+      .description
+  }
+  const descriptionBlock = (t: any) => (getFromTree(t, 'DESCRIPTION')[0] as any)?.content
+
+  it('is masked in the DESCRIPTION the author wrote', () => {
+    const text = describe_(
+      '=begin pod\n=begin DESCRIPTION\nNotes on the G<Quokka> project and its plans.\n=end DESCRIPTION\n\nBody.\n=end pod\n',
+      descriptionBlock,
+    )
+    expect(text).toBe('Notes on the ██████ project and its plans.')
+  })
+
+  it('is masked in a description the publisher took from a masked paragraph', () => {
+    const doc =
+      '=begin pod\n=for para :masked\nThe launch code for the vault door is kept here, well past forty characters.\n=end pod\n'
+    const text = describe_(doc, t => getFromTree(t, 'para'))
+    expect(text).not.toMatch(/[A-Za-z]/)
+    expect(text).toMatch(/^█+( █+)+\S$/)
+  })
+
+  it('is masked in the first paragraph taken in its place', () => {
+    const text = describe_(
+      '=begin pod\nThe first paragraph names B<G<Lynx>> and L<the G<Wombat> notes|/notes>, long enough to describe it.\n=end pod\n',
+    )
+    for (const word of ['Lynx', 'Wombat']) expect(text).not.toContain(word)
+    expect(text).toContain('names ████ and the ██████ notes')
+  })
+
+  it('is masked when the first paragraph is masked whole', () => {
+    const text = describe_(
+      '=begin pod\n=for para :masked\nThe launch code for the vault door is kept here, well past forty characters.\n\nVisible text.\n=end pod\n',
+    )
+    expect(text).not.toContain('launch')
   })
 })

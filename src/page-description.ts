@@ -1,4 +1,4 @@
-import { getTextContentFromNode } from '@podlite/schema'
+import { getMaskedTextContent } from '@podlite/schema'
 
 const MAX = 160
 const MIN_USEFUL = 40
@@ -31,7 +31,8 @@ function firstParagraph(node: any): string {
   if (typeof node !== 'object') return ''
   if (node.type === 'block' && (node.name === 'head' || node.name === 'TITLE' || node.name === 'SUBTITLE')) return ''
   if (node.type === 'para') {
-    const text = getTextContentFromNode(node).replace(/\s+/g, ' ').trim()
+    // a hidden word stays masked; the mask keeps the length, so the choice of paragraph is the same
+    const text = getMaskedTextContent(node).replace(/\s+/g, ' ').trim()
     return text.length >= MIN_USEFUL ? text : ''
   }
   return firstParagraph(node.content)

@@ -1,6 +1,6 @@
 import styles from '../components/service.module.css'
 import Link from 'next/link'
-import { getTextContentFromNode } from '@podlite/schema'
+import { entryLabel } from 'src/entry-label'
 import moment from 'moment'
 import { isEntry } from '@podlite/publisher/record'
 import { getSiteInfo } from 'src/utils'
@@ -60,7 +60,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
       <>
         <Article />
         <TestComponent id="nav">
-          {prev && makeLink(prev.title || getTextContentFromNode(prev.node), prev.publishUrl)}
+          {prev && makeLink(entryLabel(prev), prev.publishUrl)}
           {
             <div className="navigate">
               {prev ? makeLink('←', prev.publishUrl) : <Link href="#"> </Link>}
@@ -68,7 +68,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
               {next ? makeLink('→', next.publishUrl) : <Link href="#"> </Link>}
             </div>
           }
-          {next && makeLink(next.title || getTextContentFromNode(next.node), next.publishUrl)}
+          {next && makeLink(entryLabel(next), next.publishUrl)}
         </TestComponent>
         {result_footer && renderNode(result_footer)}
       </>

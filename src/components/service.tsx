@@ -7,6 +7,7 @@ import cookieConsentStyles from './cookieConsentStyles.module.css'
 import Link from 'next/link'
 import { DataFeedContent } from 'bin/makeDataSource'
 import { getFromTree, getTextContentFromNode } from '@podlite/schema'
+import { entryLabel } from 'src/entry-label'
 import { useEffect, useState } from 'react'
 import type { publishRecord } from '@podlite/publisher'
 export const TestComponent = ({ id, children }) => {
@@ -54,7 +55,7 @@ export const Contents = ({ locale = 'en', getThisNode }) => {
           </h3>
           {months[month].map(({ publishUrl, title, pubdate, node }) => (
             <Link href={publishUrl} key={publishUrl}>
-              <p>{title || getTextContentFromNode(node)}</p>
+              <p>{entryLabel({ title, node })}</p>
               <hr />
               <time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time>
             </Link>
@@ -103,7 +104,7 @@ const ArticlesWithNavigation = ({
       {articles.map(({ publishUrl, node, ...args }: any) => getPostComponent(node, { publishUrl, node, ...args }))}
 
       <TestComponent id="nav">
-        {prev && makeLink(prev.title || getTextContentFromNode(prev.node), prev.publishUrl)}
+        {prev && makeLink(entryLabel(prev), prev.publishUrl)}
         {
           <div className="navigate">
             {prev ? makeLink('←', prev.publishUrl) : <Link href="#"> </Link>}
@@ -111,7 +112,7 @@ const ArticlesWithNavigation = ({
             {next ? makeLink('→', next.publishUrl) : <Link href="#"> </Link>}
           </div>
         }
-        {next && makeLink(next.title || getTextContentFromNode(next.node), next.publishUrl)}
+        {next && makeLink(entryLabel(next), next.publishUrl)}
       </TestComponent>
       {footer && getPostComponent(footer)}
     </>
