@@ -1,6 +1,15 @@
 /* eslint-disable react/display-name */
 import React, { useEffect, useState } from 'react'
-import { PodNode, Rules, getTextContentFromNode, makeAttrs, setFn, PodliteDocument } from '@podlite/schema'
+import {
+  PodNode,
+  Rules,
+  getTextContentFromNode,
+  makeAttrs,
+  setFn,
+  PodliteDocument,
+  isCovered,
+  maskText,
+} from '@podlite/schema'
 import { linkAddress } from './anchor-href'
 import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
 import dynamic from 'next/dynamic'
@@ -266,10 +275,13 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
   const wrapFunction = (node: PodNode, children, ctx) => {
     if (typeof node !== 'string' && 'type' in node && node.type == 'image') {
       const imageName = node.src
+      // the text for readers who cannot see the picture is hidden with the picture, as the image package does
+      const written = 'alt' in node ? node.alt : undefined
+      const alt = written !== undefined && isCovered(node, ctx) ? maskText(written) : written
       const linkTo = ctx.link
       // external images (badges, remote assets) are not in the prebuilt map
       if (imageName && isExternalImageSrc(imageName)) {
-        const Ext = () => <img src={imageName} alt={'alt' in node ? node.alt : ''} />
+        const Ext = () => <img src={imageName} alt={alt ?? ''} />
         return linkTo ? (
           <a target="_blank" rel="noreferrer" href={linkTo}>
             <Ext />
@@ -292,9 +304,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
               </div>
             )
           } else {
-            return (
-              <img className="shadow_DISABLED" src={assetUrl(img[imageName])} alt={'alt' in node ? node.alt : ''} />
-            )
+            return <img className="shadow_DISABLED" src={assetUrl(img[imageName])} alt={alt ?? ''} />
           }
         }
         return linkTo ? (
@@ -306,7 +316,7 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
         )
       } else {
         console.warn(`[podlite-web] image not found: ${imageName}`)
-        return <span className="image-missing">{('alt' in node && node.alt) || imageName || 'image'}</span>
+        return <span className="image-missing">{alt || imageName || 'image'}</span>
       }
       return children
     } else {
