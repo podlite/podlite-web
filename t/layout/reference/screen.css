@@ -1,0 +1,513 @@
+/* -----------------------------------
+Variables
+-------------------------------------- */
+
+:root {
+    
+    --color-bg: #ffffff; 
+    --color-highlight: #0e0d0a;
+    --color-default: #434342;
+    --color-dim: #797673;
+    --color-vdim: #494745;
+    --font-sans: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+    --font-mono: ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+    --font-serif: Times,serif;
+    --font-size: 19px;
+    --code-font-size: .875em;
+    --font-s: 14px;
+    --font-size-serif:  1rem;/* 18px; */
+    --font-size-abstract: cal(1.23 * var(--font-size-serif));
+    --spacing: 1.5em;
+    --spacing-s: calc(0.5 * var(--spacing));
+    --spacing-m: var(--spacing);
+    --spacing-l: calc(1.5 * var(--spacing));
+    --spacing-xl: calc(2.5 * var(--spacing));
+    --spacing-xxl: calc(5 * var(--spacing));
+    --spacing-col: calc(6 * var(--spacing));
+    --spacing-width-max: 42rem;
+    --spacing-width-tiny: 15rem;
+    --spacing-width-xl: 38rem;
+    --color-indigo-1: #3451b2;
+}
+
+html#post {
+    --color-bg: #F8F6F5;
+    --color-default: #3b3a38;
+    --color-highlight: #000;
+    --color-dim: #93918F;
+    --color-vdim: #c9c5c1;
+}
+
+@media (min-width: 500px) {
+    :root {
+         --font-size:19px;
+    }
+}
+
+@media (min-width: 320px) {
+    #nav > div {
+        min-width: auto !important;;
+    }
+}
+
+
+/* -----------------------------------
+Base
+-------------------------------------- */
+
+* {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    font-feature-settings: "kern" 1,"liga" 1;
+}
+
+html {
+    font-size: var(--font-std);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    background-color: var(--color-bg);
+    color: var(--color-default);
+    font-family: var(--font-sans);
+/*    font-weight: 500; */
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "onum" 1, "liga" 1;
+    font-size: var(--font-size);
+    line-height: 1.5;
+    padding: 1.5rem;
+}
+
+body {
+    margin: 3vw 0;
+}
+
+section {
+    margin-bottom: var(--spacing-xl);
+}
+
+/* -----------------------------------
+Header
+-------------------------------------- */
+
+#body>header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /* margin-bottom: var(--spacing-xxl); */
+    color: var(--color-dim);
+}
+
+#body>header h1 {
+    margin: 0;
+}
+
+#body>header a {
+    text-decoration: none;
+}
+
+/* -----------------------------------
+Footer
+-------------------------------------- */
+
+body>footer {
+    font-size: var(--font-s);
+    line-height: var(--spacing-xl);
+    justify-content: center;
+}
+
+body>footer nav, body>footer {
+    display: flex;
+    gap: var(--spacing-m);
+}
+
+/* -----------------------------------
+Typography
+-------------------------------------- */
+
+h1, h2, h3 {
+    font-weight: 500;
+    margin: var(--spacing-s) 0;
+    color: var(--color-highlight);
+}
+
+article h1 {
+    margin-bottom: 0;
+}
+
+h2 {
+    margin: var(--spacing-m) 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+.toc  a {
+    color: var(--color-default);
+    text-decoration: none;
+}
+a {
+    color: var(--color-indigo-1);
+    text-decoration-color: var(--color-dim);
+    text-decoration-thickness: 0.5px;
+    text-underline-offset: 0.05em;
+}
+
+a:hover {
+    transition: color 0.2s ease-in;
+    color: var(--color-highlight);
+}
+
+h3 a {
+    color: var(--color-highlight);
+}
+
+p, ol, ul, dl {
+    font-family: var(--font-sans);
+    
+    font-weight: normal;
+    margin: 1em 0;
+    font-size: var(--font-size-serif);
+    font-feature-settings: 'onum' 1;
+}
+
+blockquote {
+    font-weight: normal;
+    padding: 0 1em; /* add padding for =nested */
+}
+
+figcaption, .caption , .caption > *{
+    text-align: center;
+    margin-top: var(--spacing-s);
+    font-family: var(--font-sans);
+    color: var(--color-dim);
+    max-width: calc( var(--spacing-width-max)*0.8) !important;
+    font-size: 14px;
+}
+
+small {
+    font-size: var(--font-s);
+    color: var(--color-dim);
+    line-height: 1.5;
+    display: block;
+}
+
+.label, time {
+    color: var(--color-dim);
+}
+
+time {
+    font-feature-settings: 'tnum' 1;
+}
+
+/* inline cocde */
+p>code, :not(article, body, main, dl, li, blockquote, strong) > code
+ code:not([style*="shiki"]) > code, :not(pre)>code:not([class*="shiki"])
+{
+    color: #3451b2;
+    font-size: 0.825rem;
+    border-radius: 4px;
+    padding: 3px 6px;
+    background-color: rgba(142, 150, 170, .14);
+    transition: color .25s, background-color .5s;
+}
+
+code.shiki {
+    /* background-color: white; */
+}
+/* -----------------------------------
+Block Elements
+-------------------------------------- */
+
+hr {
+    margin: var(--spacing-xl) auto;
+    max-width: calc(2 * var(--spacing-xxl));
+    border: none;
+    border-top: 1px solid var(--color-vdim);
+}
+
+figure, video, audio {
+    display: block;
+    width: 100%;
+    margin: var(--spacing-xl) 0;
+}
+
+figure img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* TODO: Remove in future, due to change to figure */
+div.image_block img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* -----------------------------------
+Home
+-------------------------------------- */
+
+.split {
+    margin-bottom: var(--spacing-l);
+}
+
+@media (min-width: 600px) {
+    .split {
+        display: grid;
+        grid-template-columns: clamp(8em, 20vw, var(--spacing-col)) 1fr;
+        align-items: baseline;
+        margin-bottom: var(--spacing-s);
+    }
+    .split time { margin: 0; }
+}
+
+small + p {
+    margin-top: var(--spacing-s);
+}
+
+.main-form {
+    gap: 1rem;
+}
+
+p.emailoctopus-success-message {
+    text-align: left !important;
+    color: #65B176 !important;
+    font-family: var(--font-sans);
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+}
+
+
+/* -----------------------------------
+Post Index & Post
+-------------------------------------- */
+
+section.posts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--font-size);
+}
+
+article header {
+    margin-bottom: var(--spacing-l);
+}
+
+/* -----------------------------------
+Limit widths
+-------------------------------------- */
+
+body>header, article>header,article>table, main>table,
+h1, h2, h3, h4, h5, h6, h7, time,
+p, blockquote, ol, ul, details, pre.code, figcaption, .caption,
+.split, .posts, #header,  pre, #body>header, section>header,dl, dt, article>footer, aside,
+code pre, /* delete this rule */
+article table /* rules for tables inside other blocks*/,
+body table
+{
+    max-width: var(--spacing-width-max);
+    margin-left: auto;
+    margin-right: auto;
+}
+/* A caption is a box of the table's own width, so a table narrower than its
+caption has nowhere to put the text: the browser can only shrink the caption to
+its longest word, and it falls into a column of single words taller than the
+table it describes.
+
+Taking the caption out of the flow keeps it out of the table's width, so the
+grid, its columns and the whole accessibility tree stay as they were, and the
+caption sits under the table centred on it. The space it needs is reserved
+exactly, because a caption held to one line has a known height. */
+article table:has(> caption), main table:has(> caption) {
+    position: relative;
+    margin-bottom: calc(1lh + var(--spacing-s) + 0.4em);
+}
+table > caption.caption {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: none;
+    white-space: nowrap;
+    text-align: center;
+    margin: var(--spacing-s) 0 0;
+}
+
+/* One line does not fit a narrow screen at any alignment. There the table
+becomes a block and the caption an ordinary line above it: it wraps to the
+column and nothing is cut off. */
+@media (max-width: 640px) {
+    article table:has(> caption), main table:has(> caption) {
+        display: block;
+        position: static;
+        margin-bottom: 0;
+    }
+    table > caption.caption {
+        position: static;
+        display: block;
+        transform: none;
+        width: auto;
+        white-space: normal;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* -----------------------------------
+Handle overflow for code blocks
+*/
+code pre, /* delete this rule */
+pre, article>table, article table {
+    overflow:auto;
+}
+code pre, /* delete this rule */
+ pre {
+    font-family: var(--font-mono);
+    font-size: var(--code-font-size);
+    line-height: 1.2;
+}
+figure, audio, video, img, div.image_block {
+    max-width: var(--spacing-width-xl);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.limit {
+    max-width: var(--spacing-width-tiny);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+iframe[src*="youtube"] {
+    max-width: var(--spacing-width-xl);
+    width: 100%;
+	aspect-ratio: 16/9;
+}
+/* -----------------------------------
+adoption
+*/
+section>header {
+    max-width: calc( 10% + var(--spacing-width-max));
+
+}
+
+article>footer {
+    font-size: var(--font-s);
+    line-height: var(--spacing-xl);
+    /* justify-content: center; */
+    justify-content: right;
+    font-size: .5em;
+}
+
+article>footer nav, article>footer {
+    display: flex;
+    gap: var(--spacing-m);
+}
+article>header  {
+    
+   
+}
+article>header h1 {
+    font-weight: 800;
+    font-size: 2.3rem;
+}
+
+.abstract {
+    font-size: var(--font-size-abstract);
+    line-height: 1.38;
+    font-weight: 500;
+    letter-spacing: .011em;
+    color: var(--color-dim);
+}
+
+#nav {
+    max-width: var(--spacing-width-max);
+    margin-left: auto;
+    margin-right: auto;
+}
+#nav > div > div {
+white-space: nowrap;
+text-overflow: ellipsis;
+overflow: hidden;
+text-align: center;
+}
+#nav div.navigate {
+    display: flex;
+    justify-content: space-between;
+
+}
+.navigate > a {
+text-decoration:none;
+}
+#nav > div {
+    min-width: var(--spacing-width-max);
+}
+#copyright {
+    color: var(--color-dim);
+    text-align: center;
+}
+#copyright p {
+    text-decoration: none;
+    font-size: .875rem;
+}
+
+article>div.toc, article>div.details, div.toc
+{
+    max-width: var(--spacing-width-max);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Contents */
+div.details h3 {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+        font-weight: 600;
+}
+div.details h3 time:last-child {
+    margin-left: auto;
+    margin-right: unset;
+}
+div.details  a {
+    transition: color 300ms ease-out;
+    display: flex;
+    align-items: baseline;
+    position: relative;
+}
+div.details  hr {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+        height: 1px;
+        border: 0;
+        border-bottom: 1px dotted var(--color-dim);
+        flex: 1 0 1rem;
+        opacity: .25;
+        max-width: var(--spacing-width-xl);
+}
+div.details a p, div.details time {
+    flex: 0 1 auto;
+}
+div.details  a p {
+text-align: left;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+margin: 0.5rem auto;
+}
+div.details  h3 time, div.details  a time {
+    margin-right:unset;
+    margin-left:unset;
+    white-space: nowrap;
+}

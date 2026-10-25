@@ -1,0 +1,134 @@
+/* Tests of the specification. The renderer puts each test after the block it checks,
+   in one .test-group with it; a test is a details element, folded by a script after
+   load. Wide enough, the line of a test stands in the right margin beside its block
+   and the test opens under the block; narrower, the line stands under the block. */
+
+main {
+    container: page / inline-size;
+}
+
+details.test {
+    margin-bottom: var(--spacing-s);
+    scroll-margin-top: var(--spacing-m);
+}
+
+details.test > summary.test-summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    margin-bottom: 0;
+    padding: 2px 0 2px 10px;
+    border-left: 2px solid var(--color-test, #5BB8E8);
+    font-size: var(--font-s);
+    line-height: 1.4;
+    color: var(--color-dim);
+}
+
+details.test > summary.test-summary::-webkit-details-marker {
+    display: none;
+}
+
+.test-label {
+    flex: none;
+    padding: 0 7px;
+    border: 1px solid var(--color-test, #5BB8E8);
+    border-radius: 10px;
+    background: var(--color-test-soft, #E8F5FC);
+    color: var(--color-test-ink, #1D6F99);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.test-label::before {
+    content: '= ';
+    font-weight: 700;
+}
+
+details.test[open] > summary .test-label,
+details.test > summary:hover .test-label,
+details.test > summary:focus-visible .test-label {
+    background: var(--color-test, #5BB8E8);
+    color: #fff;
+}
+
+details.test > summary:focus-visible {
+    outline: 2px solid var(--color-test-ink, #1D6F99);
+    outline-offset: 2px;
+}
+
+.test-caption {
+    color: var(--color-default);
+}
+
+details.test:target > summary {
+    background: var(--color-test-soft, #E8F5FC);
+}
+
+.test-body {
+    max-width: var(--spacing-width-max);
+    margin: 4px auto var(--spacing-s);
+    padding: 6px 0 4px 12px;
+    border-left: 2px solid var(--color-test, #5BB8E8);
+    font-size: 0.85em;
+}
+
+.test-body > * {
+    margin-bottom: var(--spacing-s);
+}
+
+.test-card {
+    width: 26rem;
+    max-width: calc(100vw - 24px);
+    padding: 12px 14px;
+    border: 1px solid var(--color-vdim);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    font-size: 14px;
+}
+
+/* the block keeps the column of the text and spans the rows the lines of its tests
+   take in the right margin; a test that is opened comes after them, under the block */
+@container page (min-width: 72rem) {
+    .test-group {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--spacing-width-max)) minmax(0, 1fr);
+        grid-auto-flow: row dense;
+        align-items: start;
+    }
+    .test-group > :first-child {
+        grid-column: 2;
+        grid-row: 1 / span 30;
+    }
+    .test-group > details.test {
+        display: contents;
+    }
+    .test-group > details.test > summary.test-summary {
+        grid-column: 3;
+        max-width: 13rem;
+        margin-left: 2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 3px;
+        margin-top: 0.3em;
+    }
+    /* the browser wraps what a details element holds in this box: it is the grid item */
+    .test-group > details.test::details-content,
+    .test-group > details.test > .test-body {
+        grid-column: 2;
+        width: 100%;
+    }
+}
+
+@media print {
+    .test-group {
+        display: block;
+    }
+    details.test {
+        display: block;
+    }
+    details.test > summary.test-summary {
+        flex-direction: row;
+    }
+}

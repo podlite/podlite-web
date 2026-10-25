@@ -1,0 +1,63 @@
+{
+  "taken": "2026-10-26T08:19:03.578Z",
+  "chrome": "Chrome/155.0.8059.85",
+  "accepted": false,
+  "pages": {
+    "podlite-org-specification": {
+      "url": "https://podlite.org/specification",
+      "site": "podlite.org",
+      "css": "https://podlite.org/_next/static/css/54609bb484933e0f.css",
+      "blocks": {
+        "390": 13,
+        "1280": 13,
+        "1600": 13
+      },
+      "html": "5d8b9f7767fc8b19"
+    },
+    "podlite-org-home": {
+      "url": "https://podlite.org/",
+      "site": "podlite.org",
+      "css": "https://podlite.org/_next/static/css/54609bb484933e0f.css",
+      "blocks": {
+        "390": 4,
+        "1280": 4,
+        "1600": 4
+      },
+      "html": "916c2928108c3e96"
+    },
+    "podlite-org-cli": {
+      "url": "https://podlite.org/cli",
+      "site": "podlite.org",
+      "css": "https://podlite.org/_next/static/css/54609bb484933e0f.css",
+      "blocks": {
+        "390": 6,
+        "1280": 6,
+        "1600": 6
+      },
+      "html": "5f8fa8400c88ca95"
+    },
+    "zag-im-home": {
+      "url": "https://zag.im/",
+      "site": "zag.im",
+      "css": "https://zag.im/_next/static/css/b518a7399d8c52e2.css",
+      "blocks": {
+        "390": 6,
+        "1280": 6,
+        "1600": 6
+      },
+      "html": "0a044c3f427895d6"
+    },
+    "zahatski-com-home": {
+      "url": "https://zahatski.com/",
+      "site": "zahatski.com",
+      "css": "https://zahatski.com/_next/static/css/b75f73b5a500d05f.css",
+      "blocks": {
+        "390": 5,
+        "1280": 5,
+        "1600": 5
+      },
+      "html": "7fe5f043db7fb553"
+    }
+  },
+  "reference": "5e5ab72f7cd50f24"
+}
