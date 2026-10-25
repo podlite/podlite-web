@@ -44,6 +44,12 @@ describe('the text of a link on the site', () => {
     expect(html).toContain('<a href="/vault">███ █████</a>')
   })
 
+  it('gives a link written inside its text only that text, as HTML has no link within a link', () => {
+    const nested = render('=begin pod\nSee L<the L<inner G<Kiwi>|/inner> part|/outer>.\n=end pod\n').replace(/<!-- -->/g, '')
+    expect(nested).toContain('<a href="/outer">the inner <span class="masked">████</span> part</a>')
+    expect(nested).not.toContain('href="/inner"')
+  })
+
   it('stays masked in a link the page cannot give an address', () => {
     const lost = render(`=begin pod\n=toc head1\n\n=head1 Project G<Aurox>\n\nText.\n=end pod\n`, tree => {
       const walk = (n: any): void => {

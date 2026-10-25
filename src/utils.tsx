@@ -112,6 +112,10 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       // check if node.content defined
       return makeComponent(src, node, 'content' in node ? interator(node.content, { ...ctx }) : [])
     }
+    // A link draws its text with this mark, so a link written inside that text
+    // gives only its text: HTML has no link within a link.
+    const linkComponent = src => (writer, processor) => (node, ctx, interator) =>
+      makeComponent(src, node, 'content' in node ? interator(node.content, { ...ctx, insideLink: true }) : [])
     const hcode = mkComponent(({ children, key, ...node }, ctx) => (
       <HighlightedCode node={node} keyProp={key} ctx={ctx}>
         {children}
@@ -138,18 +142,20 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       //@ts-ignore
       DESCRIPTION: () => () => null,
       'L<>': setFn((node, ctx) => {
+        if (ctx.insideLink)
+          return mkComponent(({ children, key }) => <React.Fragment key={key}>{children}</React.Fragment>)
         const href = linkAddress(node, ctx)
         // The text of a link is drawn from its nodes, as everywhere else: a hidden
         // word stays masked and formatting stays.
         // A link the page cannot give an address keeps its text and goes nowhere
-        if (href === undefined) return mkComponent(({ children, key }) => <a key={key}>{children}</a>)
+        if (href === undefined) return linkComponent(({ children, key }) => <a key={key}>{children}</a>)
         // A link within the page changes the address itself, so the page hears it; a
         // click at the address already shown changes nothing, and opens the test there.
         const reveal = () => {
           if (decodeURIComponent(window.location.hash) === decodeURIComponent(href))
             revealTest(decodeURIComponent(href.slice(1)))
         }
-        return mkComponent(({ children, key }) =>
+        return linkComponent(({ children, key }) =>
           href.startsWith('#') ? (
             <a href={href} key={key} onClick={reveal}>
               {children}
