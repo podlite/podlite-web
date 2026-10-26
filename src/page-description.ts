@@ -4,9 +4,11 @@ const MAX = 160
 const MIN_USEFUL = 40
 
 // Cuts on a sentence boundary when one is close enough to the limit, on a word otherwise.
-const trim = (text: string): string => {
+// The label of a note is cut by the same rule.
+export const shortText = (text: string): string => {
   if (text.length <= MAX) return text
-  const head = text.slice(0, MAX)
+  // a cut between the two halves of a surrogate pair would leave half a character
+  const head = text.slice(0, /[\uD800-\uDBFF]/.test(text[MAX - 1]) ? MAX - 1 : MAX)
   const sentence = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '))
   if (sentence > MAX / 2) return head.slice(0, sentence + 1)
   const word = head.lastIndexOf(' ')
@@ -16,7 +18,7 @@ const trim = (text: string): string => {
 // A page without its own DESCRIPTION used to fall back to the title, which says nothing twice.
 export function pageDescription(node: unknown, fallback: string): string {
   const found = firstParagraph(node)
-  return found ? trim(found) : fallback
+  return found ? shortText(found) : fallback
 }
 
 function firstParagraph(node: any): string {

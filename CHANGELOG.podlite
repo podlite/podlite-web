@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a note gets its label in the links to the next and the previous entry, from the C<label> the publisher gives a neighbour without a title, a hidden word masked; such a link used to be empty. A long note is cut as a page description is, in the list of entries too, a note with no text, a picture alone, is named by its date, and the links to the neighbours stay out of the search index
+
 =item a link written without an address after a bar, whose text is hidden in whole or in part, goes nowhere: its text is masked and it gets no address, so the hidden words do not show in the page source; a link to a heading of the same page still goes to the anchor of that heading
 
 =head1 0.10.25

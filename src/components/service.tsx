@@ -10,10 +10,10 @@ import { getFromTree, getTextContentFromNode } from '@podlite/schema'
 import { entryLabel } from 'src/entry-label'
 import { useEffect, useState } from 'react'
 import type { publishRecord } from '@podlite/publisher'
-export const TestComponent = ({ id, children }) => {
+export const TestComponent = ({ id, children, ...rest }: { id: string; children: any; [attr: string]: any }) => {
   var style = { '--count-columns ': children.length } as React.CSSProperties
   return (
-    <div id={id} className={styles.Conatainer} style={style}>
+    <div id={id} className={styles.Conatainer} style={style} {...rest}>
       <div className={styles.row}>
         {children.map((i, c) => (
           <div className={styles.column} key={c}>
@@ -55,7 +55,7 @@ export const Contents = ({ locale = 'en', getThisNode }) => {
           </h3>
           {months[month].map(({ publishUrl, title, pubdate, node }) => (
             <Link href={publishUrl} key={publishUrl}>
-              <p>{entryLabel({ title, node })}</p>
+              <p>{entryLabel({ title, node, pubdate })}</p>
               <hr />
               <time dateTime={moment(pubdate).format('YYYY-MM-DD')}>{moment(pubdate).format('Do')}</time>
             </Link>
@@ -103,7 +103,7 @@ const ArticlesWithNavigation = ({
     <>
       {articles.map(({ publishUrl, node, ...args }: any) => getPostComponent(node, { publishUrl, node, ...args }))}
 
-      <TestComponent id="nav">
+      <TestComponent id="nav" data-pagefind-ignore>
         {prev && makeLink(entryLabel(prev), prev.publishUrl)}
         {
           <div className="navigate">

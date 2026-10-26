@@ -45,7 +45,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
     return (
       <>
         <Article />
-        <TestComponent id="nav">
+        <TestComponent id="nav" data-pagefind-ignore>
           <></>
           <div className="navigate">{/* &nbsp; */}</div>
           <></>
@@ -59,7 +59,7 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
     return (
       <>
         <Article />
-        <TestComponent id="nav">
+        <TestComponent id="nav" data-pagefind-ignore>
           {prev && makeLink(entryLabel(prev), prev.publishUrl)}
           {
             <div className="navigate">
