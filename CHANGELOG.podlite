@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.99 release of the monorepo: an C<=include> with no source selects from the document in one fixed state, so two such includes bring each block once; the spaces around the bar of a link stay out of its address; markup nested too deep is written as text instead of stopping the build
+
 =item a run with a missing or unknown C<--preset> stops with an error that names the two presets, C<pubdate> and C<everything>
 
 =item the text of a link, a table of contents entry among them, is drawn from its markup: a hidden word in it is masked, as in the rest of the page, and its formatting shows, C<B<>>, C<I<>> and C<C<>> as written, an entity C<E<>> as its sign, spaces in C<S<>> kept; a comment C<Z<>> no longer shows
