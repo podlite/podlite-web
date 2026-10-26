@@ -66,8 +66,15 @@ describe('a link that takes its address from hidden text', () => {
     ).toBe('#masked-1')
   })
 
-  it('goes to a block by the :id the page writes on it', () => {
-    expect(render('=for para :id<intro>\nOpen.\n\nSee L<#G<intro>>.')).toContain('<a href="#intro">')
+  // only the anchors of headings are handed out before rendering; another block, or a
+  // block the page does not draw, is not known to stand on the page
+  it('goes nowhere when it names a block that is not a heading', () => {
+    expect(render('=for comment :id<Secret>\nHidden comment\n\nSee L<#G<Secret>>.')).not.toContain('Secret')
+    expect(render('=for para :id<intro>\nOpen.\n\nSee L<#G<intro>>.')).toContain('<a>#<span class="masked">')
+  })
+
+  it('goes to the heading the page names, among headings of one name', () => {
+    expect(render('=head1 Same\n\nOne.\n\n=head1 Same\n\nTwo.\n\nSee L<#G<Same-2>>.')).toContain('href="#Same-2"')
   })
 
   it('goes nowhere when the page has no such heading', () => {

@@ -1,7 +1,6 @@
 import {
   bindTarget,
   findAnchor,
-  getSafeNodeId,
   getTextContentFromNode,
   guardedTextLeaves,
   isCovered,
@@ -29,9 +28,10 @@ const named = (target: string, ctx: PageContext): string | undefined => {
   return anchor === undefined ? undefined : `#${anchor}`
 }
 
-// The anchor the page gave the block hidden text names, a name the page shows already,
-// or none. It is read from the page and never made up from the text: the helpers that
-// find an address fall back to the text itself when the page has no such block.
+// The anchor of the heading hidden text names, from the anchors handed out for the
+// page before rendering, or none. Only those are known to stand on the page: an address
+// worked out for another block, or made up from the text by the helpers that fall
+// back to it, may name what the page never shows.
 const pageAnchor = (target: string, ctx: PageContext): string | undefined => {
   if (target === '#') return undefined
   const bindings = ctx?.__bindings as Parameters<typeof bindTarget>[1] | undefined
@@ -39,10 +39,8 @@ const pageAnchor = (target: string, ctx: PageContext): string | undefined => {
     for (const name of [target, target.replace(/\s+/g, ' ')]) {
       const bound = bindTarget(name.slice(1), bindings)
       if (!bound.found) continue
-      // a copy of the context, so asking takes no anchor from the headings still to come
-      const id =
-        ctx?.__anchors?.byNode.get(bound.node) ?? getSafeNodeId(bound.node as any, { ...ctx, __fragments: new Map() })
-      return id == null ? undefined : `#${id}`
+      const anchor = ctx?.__anchors?.byNode.get(bound.node)
+      return anchor === undefined ? undefined : `#${anchor}`
     }
   return named(target, ctx)
 }
