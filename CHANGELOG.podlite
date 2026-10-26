@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a link written without an address after a bar, whose text is hidden in whole or in part, goes nowhere: its text is masked and it gets no address, so the hidden words do not show in the page source; a link to a heading of the same page still goes to the anchor of that heading
+
 =head1 0.10.25
 
 =item the Podlite toolchain moves to the 0.0.99 release of the monorepo: an C<=include> with no source selects from the document in one fixed state, so two such includes bring each block once; the spaces around the bar of a link stay out of its address; markup nested too deep is written as text instead of stopping the build
