@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the links to the next and the previous note stay out of the search on the standard template too: its own copy of the navigation block dropped the mark, so a search for the label of a neighbour found the page under it as well
+
 =head1 0.10.26
 
 =item the Podlite toolchain moves to the 0.0.100 release of the monorepo: a link written inside the text of a link gives only its text, and the mark of a note inside a link has no link of its own, so a page has no link within a link; the publisher gives a note its label for the links to its neighbours, and the site data carries the map of images

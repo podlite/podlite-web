@@ -89,10 +89,13 @@ export const DefaultTemplateComponent = ({ id: er, children, item, renderNode, g
   return <Article />
 }
 
-export const TestComponent = ({ id, children }) => {
+// A copy of the one in service.tsx, which re-exports this file and so cannot be imported here.
+// The attributes it is given go to the outer block, as there: data-pagefind-ignore keeps the
+// labels of the neighbouring notes out of the search.
+export const TestComponent = ({ id, children, ...rest }: { id: string; children: any; [attr: string]: any }) => {
   var style = { '--count-columns ': children.length } as React.CSSProperties
   return (
-    <div id={id} className={styles.Conatainer} style={style}>
+    <div id={id} className={styles.Conatainer} style={style} {...rest}>
       <div className={styles.row}>
         {children.map((i, c) => (
           <div className={styles.column} key={c}>

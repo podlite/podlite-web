@@ -4,7 +4,7 @@
     "lib": ["dom", "esnext"],
     "module": "esnext",
     "target": "es5",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
     "downlevelIteration": true,
     "allowJs": true,
