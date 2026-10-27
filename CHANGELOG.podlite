@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.26
+
 =item the Podlite toolchain moves to the 0.0.100 release of the monorepo: a link written inside the text of a link gives only its text, and the mark of a note inside a link has no link of its own, so a page has no link within a link; the publisher gives a note its label for the links to its neighbours, and the site data carries the map of images
 
 =item a note gets its label in the links to the next and the previous entry, from the C<label> the publisher gives a neighbour without a title, a hidden word masked; such a link used to be empty. A long note is cut as a page description is, in the list of entries too, a note with no text, a picture alone, is named by its date, and the links to the neighbours stay out of the search index
