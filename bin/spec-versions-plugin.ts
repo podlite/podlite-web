@@ -80,7 +80,7 @@ const withAttrs = (item: publishRecord, names: string[]): publishRecord => {
   if (at < 0) return item
   const pod: any = content[at]
   content[at] = { ...pod, config: [...(pod.config || []), ...names.map(name => ({ name, value: true, type: 'boolean' }))] }
-  return { ...item, node: { ...item.node, content } }
+  return { ...item, node: { ...(item.node as any), content } }
 }
 
 const versionOf = (file: string, versions: VersionInfo[]) => versions.find(v => file.startsWith(`${v.dir}/`))
