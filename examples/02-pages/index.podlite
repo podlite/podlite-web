@@ -13,22 +13,22 @@ Z<>=end pod
 =end code
 
 where  I<pubdate> - is needed to indicate that this page is publicly accessible from a certain date.
-Pages without I<pubdate> are skipped when published.
+With C<--preset pubdate>, pages without I<pubdate> are skipped when published.
 
 Pages without a I<puburl> are treated as blog posts and the url is generate based on the publication date.
 For example: 
 =begin code :allow<Z B I>
-Z<>=begin pod :pubdate('2012-08-08 23:00:00') 
+Z<>=begin pod :pubdate('2022-08-06 23:00:00') 
 Z<>=TITLE  Blog post 
 Z<>=end pod
 =end code
 
-will be avalable at url C</2022/8/6/1/blog-post>.
+will be available at url C</2022/8/6/1/blog-post>.
 
 =head2 Linking pages
 
 For now, let's make a link to the About page.
-This is done by using C<L<>> fromatting code: 
+This is done by using C<L<>> formatting code: 
 =begin code
 Please check L<About page|file:./about.podlite>
 =end code

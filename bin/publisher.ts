@@ -30,6 +30,7 @@ import indexingPolicyPlugin, { INDEX_FIELD } from './indexing-policy-plugin'
 import { Prepared, prepareMounts } from './mounts'
 import mountPrefixPlugin from './mount-prefix-plugin'
 import mountTestsPlugin from './mount-tests-plugin'
+import datedAddressPlugin from './dated-address-plugin'
 import { runLint } from 'podlite/lib/lint/index'
 import { getFromTree, makeAttrs } from '@podlite/schema'
 
@@ -141,6 +142,12 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]
     includePatterns: '.*',
     excludePatterns: templateFile ? [indexFilePath, templateFile] : indexFilePath,
   }
+  // everything publishes a dated document at the address pubdate would give it
+  const configDatedAddressPlugin: PluginConfig = {
+    plugin: datedAddressPlugin(),
+    includePatterns: '.*',
+    excludePatterns: templateFile ? [indexFilePath, templateFile] : indexFilePath,
+  }
   const configImagesPlugin: PluginConfig = {
     plugin: imagesPlugin(),
     includePatterns: '.*',
@@ -238,9 +245,8 @@ const makeConfigMainPlugin = (mountsPrepared: Prepared[], items: publishRecord[]
     configDumpPagesPlugin
   ]
 
-  if (preset === 'pubdate') {
-    plugins.unshift(configPubdatePlugin)
-  }
+  // The address is settled first: the section of a mounted source is added to it later.
+  plugins.unshift(preset === 'pubdate' ? configPubdatePlugin : configDatedAddressPlugin)
 
   return composePlugins(plugins, tctx)
 }

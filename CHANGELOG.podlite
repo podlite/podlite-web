@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item under C<--preset everything> a document with a publication date and no C<:puburl> becomes a page at the address C<--preset pubdate> gives it, C</year/month/day/number/slug>, with its short address; it used to get no page, and a link to it led nowhere. A document with neither an address nor a date still does not become a page
+
 =item the dependencies the declared ranges already allowed are taken at their patched versions, which closes 51 of the 102 open security alerts; DOMPurify, which Mermaid diagrams draw through, moves to 3.4.17 and C<json-pointer> to 0.6.2. The high ones left wait for Next 15, Puppeteer 25, a check of PostCSS 8.5 inside Next and the next release of the Podlite toolchain
 
 =item the links to the next and the previous note stay out of the search on the standard template too: its own copy of the navigation block dropped the mark, so a search for the label of a neighbour found the page under it as well

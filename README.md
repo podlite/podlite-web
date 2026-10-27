@@ -55,7 +55,7 @@ docker run --rm -v ${PWD}:/app/pub podlite/podlite-web \
 
 A preset decides which documents become pages.
 
-- **`everything`** — every document is published. Use it while writing, and for sites that are not a blog.
+- **`everything`** — every document with an address is published: one written in `:puburl`, or one built from its publication date, a date still to come included. A document with neither does not become a page. Use it while writing, and for sites that are not a blog.
 - **`pubdate`** — only documents carrying a publication date, and only once that date has passed. This is what a blog wants.
 
 There is no default preset: a run without `--preset` stops with an error that names the two presets, `pubdate` and `everything`.
