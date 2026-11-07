@@ -7,6 +7,9 @@ module.exports = {
   modulePaths: ['<rootDir>'],
   snapshotSerializers: ['jest-serializer-html'],
   transform: {
+    // marked, which @podlite/schema reads Markdown headings with, is published as ES modules
+    // only; the Babel preset Next ships turns it into CommonJS for the tests
+    '[/\\\\]node_modules[/\\\\]marked[/\\\\].+\\.js$': ['babel-jest', { presets: ['next/babel'] }],
     '\\.(t|j)sx?$': 'ts-jest',
   },
   globals: {
@@ -14,5 +17,5 @@ module.exports = {
       tsconfig: '<rootDir>/jest.tsconfig.json',
     },
   },
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\](?!entity-decode/).+\\.js$'],
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\](?!entity-decode/|marked/).+\\.js$'],
 }
