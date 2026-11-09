@@ -51,6 +51,15 @@ docker run --rm -v ${PWD}:/app/pub podlite/podlite-web \
 
 `export-tgz` writes a gzipped tarball instead; `export` leaves the site in `/app/out`.
 
+`export` is `process` followed by `export-built`. When the processed result is already there, for example after a check of what changed, `export-built` builds the site from it without reading the documents again:
+
+```sh
+yarn process ./site --preset pubdate
+yarn export-built
+```
+
+It takes no arguments: the path and the keys belong to `process`. It continues in the same working directory, so nothing may clean it or switch the site between the two commands. It does not check that what `process` left there is current.
+
 ## Presets
 
 A preset decides which documents become pages.

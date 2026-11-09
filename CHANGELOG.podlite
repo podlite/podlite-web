@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item C<export-built> builds the site from the result of a finished C<process> without reading the documents again; C<export> is C<process> followed by it
+
 =head1 0.10.28
 
 =item the Podlite toolchain moves to the 0.0.104 release of the monorepo: Markdown is read by C<remark-parse> 11, rows of a table held apart by separators between every row form one row for each group, the last group too, and long lists and long attribute values are parsed in time that grows with their length
