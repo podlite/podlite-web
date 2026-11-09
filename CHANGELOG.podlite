@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.104 release of the monorepo: Markdown is read by C<remark-parse> 11, rows of a table held apart by separators between every row form one row for each group, the last group too, and long lists and long attribute values are parsed in time that grows with their length
+
 =head1 0.10.27
 
 =item the Podlite toolchain moves to the 0.0.103 release of the monorepo: a table row on one line with bars is split by its own bars, so a word no longer moves into the next column, a bar inside a code stays in the code, and the spaces at the edges of a cell are gone; a C<---> line inside C<=begin markdown> is drawn as a rule; MathJax is loaded at 3.2.2 with the hash of its file, and a formula that cannot be drawn shows its source; React 19 is accepted as a peer; C<nanoid> 3.3.20 or later. The tests transform C<marked>, which C<@podlite/schema> reads Markdown headings with and which is published as ES modules only
