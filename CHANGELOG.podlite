@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.28
+
 =item the Podlite toolchain moves to the 0.0.104 release of the monorepo: Markdown is read by C<remark-parse> 11, rows of a table held apart by separators between every row form one row for each group, the last group too, and long lists and long attribute values are parsed in time that grows with their length
 
 =head1 0.10.27
