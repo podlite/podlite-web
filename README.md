@@ -58,7 +58,7 @@ yarn process ./site --preset pubdate
 yarn export-built
 ```
 
-It takes no arguments: the path and the keys belong to `process`. It continues in the same working directory, so nothing may clean it or switch the site between the two commands. It does not check that what `process` left there is current.
+It takes no arguments: the path and the keys belong to `process`. It continues in the same working directory, so nothing may clean it or switch the site between the two commands. It does not check that what `process` left there is current. The site is built from the choice `process` made: a document whose publication date comes between the two commands waits for the next build.
 
 ## Presets
 
