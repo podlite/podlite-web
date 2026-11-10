@@ -60,6 +60,8 @@ yarn export-built
 
 It takes no arguments: the path and the keys belong to `process`. It continues in the same working directory, so nothing may clean it or switch the site between the two commands. It does not check that what `process` left there is current. The site is built from the choice `process` made: a document whose publication date comes between the two commands waits for the next build.
 
+`process` installs dependencies with `yarn install` and does not remove `node_modules`. A site with its own `package.json` gets a clean reinstall after its `post_plugin` step, as before; a site without one, even with a plugin in `podlite-web.config.js`, does not. `yarn ci` reinstalls from scratch when the tree is damaged.
+
 ## Presets
 
 A preset decides which documents become pages.

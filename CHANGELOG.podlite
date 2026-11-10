@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item C<process> no longer removes and reinstalls C<node_modules> at its start; after the publisher only a site with its own C<package.json> gets a clean reinstall
+
 =item C<export-built> builds the site from the result of a finished C<process> without reading the documents again; C<export> is C<process> followed by it
 
 =head1 0.10.28
