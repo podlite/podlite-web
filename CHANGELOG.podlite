@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.105 release of the monorepo: a lone C<#> numbers a definition and a block whose text starts after a blank line, an item marked C<:!numbered> goes into an unordered list, a check box after a blank line makes a task, the term of a definition with an C<:id> carries it in JSX so links from a table of contents reach it, and an item listed in a table of contents by its first text
+
 =item C<process> no longer removes and reinstalls C<node_modules> at its start; after the publisher only a site with its own C<package.json> gets a clean reinstall
 
 =item C<export-built> builds the site from the result of a finished C<process> without reading the documents again; C<export> is C<process> followed by it
