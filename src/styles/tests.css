@@ -101,6 +101,10 @@ details.test:target > summary {
         grid-column: 2;
         grid-row: 1 / span 30;
     }
+    /* auto margins shrink a grid item to its content; a table takes that width anyway */
+    .test-group > :first-child:not(table) {
+        width: 100%;
+    }
     .test-group > details.test {
         display: contents;
     }
