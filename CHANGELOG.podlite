@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.106 release of the monorepo: code blocks in C<:lang<podlite>> or C<:lang<pod6>> are highlighted with the Podlite grammar, CSV and TSV data are read as norm 3.0 says, with the first row a header unless told otherwise, data that is not CSV is shown as a code block in place of the table, a C<=data-table> given both C<:src> and a body is an error and an empty table, and C<:rename> names the columns of the source by name or by place
+
 =item on a wide page the block a test of the specification follows keeps the text column: a short paragraph, a quotation or a list stands at the left edge of the text instead of in the middle of the column, and a boundary line is no longer drawn with no width
 
 =head1 0.10.29
