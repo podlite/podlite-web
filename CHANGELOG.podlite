@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item the Podlite toolchain moves to the 0.0.107 release of the monorepo: a paragraph written directly inside a C<=test> is a block of the document, text set in from the margin of a delimited semantic block such as C<=begin SYNOPSIS> is a code block, a leading tab in the margin reaches the next multiple of 8 columns, and block names, option names and selector patterns take letters and digits of any script, with an apostrophe followed by a letter allowed in a block name
+
 =item on a wide page a test of the specification that follows a block inside a definition list stands in the right margin like the others; on a narrower page the line of a test is grey unless it is hovered, focused or open, or a link leads to it
 
 =head1 0.10.30
