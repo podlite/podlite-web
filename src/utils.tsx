@@ -10,6 +10,7 @@ import {
   isCovered,
   maskText,
   writtenValue,
+  imageAddress,
 } from '@podlite/schema'
 import { linkAddress } from './anchor-href'
 import { HighlightedCode, WindowWrapper } from '@podlite/editor-react'
@@ -281,6 +282,27 @@ export function getPostComponent(podNode: PodNode, template?: publishRecord, opt
       const written = 'alt' in node ? writtenValue(node.alt) : undefined
       const alt = written !== undefined && covered ? maskText(written) : written
       const linkTo = ctx.link
+      // a data: picture whose block was found is drawn from the data URL, as the
+      // standard renderer does; a covered one keeps its reference outside draft mode
+      const address = imageAddress(node, ctx)
+      if (typeof address === 'string' && address !== imageName) {
+        const type = /^data:([^;,]+)/.exec(address)?.[1] ?? ''
+        const Computed = () =>
+          type.startsWith('video/') ? (
+            <video controls>
+              <source src={address} type={type} />
+            </video>
+          ) : (
+            <img src={address} alt={alt ?? ''} />
+          )
+        return linkTo ? (
+          <a target="_blank" rel="noreferrer" href={linkTo}>
+            <Computed />
+          </a>
+        ) : (
+          <Computed />
+        )
+      }
       // external images (badges, remote assets) are not in the prebuilt map
       if (imageName && isExternalImageSrc(imageName)) {
         const Ext = () => <img src={imageName} alt={alt ?? ''} />

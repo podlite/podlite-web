@@ -3,7 +3,7 @@ import '@podlite/editor-react/Editor.css'
 import '@podlite/editor-react/podlite-vars.css'
 import '../../built/styles.css'
 import * as img from '../../built/images'
-import { assetUrl } from '../image-src'
+import { cardImageOf } from '../card-image'
 import { pageHead } from '../page-head'
 import { structuredData } from '../structured-data'
 import Head from 'next/head'
@@ -21,9 +21,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   // Titles come out of the source with the line break they were written with,
   // and a break inside a meta tag is shown as it is by whoever reads it.
   const pageTitle = (item?.title || '').replace(/\s+/g, ' ').trim()
-  const [image] = getFromTree(item?.node, { type: 'image' }) as Array<Image>
-  const metaImage = image?.src || null
-  const hasImage = Boolean(metaImage && img[metaImage])
+  const metaImage = cardImageOf(getFromTree(item?.node, { type: 'image' }) as Array<Image>, img)
+  const hasImage = Boolean(metaImage)
   const { tab, share, card, description } = pageHead({
     pageTitle,
     siteTitle,
@@ -45,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const version = item?.pluginsData?.version
   const canonicalUrl = version?.canonical ? absoluteUrl(siteUrl, version.canonical) : pageUrl
   const askedOutOfIndex = item?.indexing?.robots === false
-  const imageUrl = hasImage && metaImage ? absoluteUrl(siteUrl, assetUrl(img[metaImage])) : undefined
+  const imageUrl = metaImage ? absoluteUrl(siteUrl, metaImage) : undefined
   const jsonLd = structuredData({
     item,
     title: share,

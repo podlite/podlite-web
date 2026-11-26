@@ -37,7 +37,8 @@ describe('the text of a picture for readers who cannot see it', () => {
   })
 
   it('masks the name of a missing hidden picture that has no text of its own', () => {
-    const html = render('=begin pod :masked\n=picture private-plan.png\n=end pod\n')
+    const html = render('=begin pod :masked\n=for picture :src<private-plan.png>\n=end pod\n')
     expect(html).not.toContain('private-plan')
+    expect(html).toMatch(/<span class="image-missing">█+<\/span>/)
   })
 })

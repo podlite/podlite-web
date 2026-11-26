@@ -41,7 +41,6 @@ Written in Podlite, published as HTML.
 =end pod
 ```
 
-
 ### Export to static site
 
 ```sh
@@ -81,7 +80,7 @@ When a page is shared, the preview card is built from the page's own blocks:
 
 =begin DESCRIPTION
 One or two sentences about the page.
-=picture card.png
+=for picture :src<card.png>
 =end DESCRIPTION
 
 The text of the page.
@@ -91,7 +90,7 @@ The text of the page.
 - **Title** (`og:title`, `twitter:title`): the page title alone; the site title goes in `og:site_name`. A page without a title of its own is named by the site.
 - **Tab** (`<title>`): the page title, a dash, the site title: `Axona: six years from idea to release — My site`. A page without a title of its own, or titled like the site, shows the site title alone.
 - **Description** (`og:description`, `twitter:description`, `description`): the text of `DESCRIPTION`. Without it, or when it is empty, the first paragraph of 40 characters or more, cut to 160 characters; without that, the page title, and without a page title, the site title.
-- **Image** (`og:image`, `twitter:image`): the first picture in the document. Put the card picture inside `DESCRIPTION` so it comes first; otherwise the first picture of the text is used.
+- **Image** (`og:image`, `twitter:image`): the first picture in the document that a card can show: one from the site build, or one at an absolute `http(s)` address. Put the card picture inside `DESCRIPTION` so it comes first; otherwise the first such picture of the text is used.
 - **Card size** (`twitter:card`): `summary_large_image` when the page has that picture, `summary` without one.
 
 Titles and descriptions are written on one line: line breaks from the source become spaces.
@@ -141,13 +140,13 @@ module.exports = {
 }
 ```
 
-| field | meaning |
-|---|---|
-| `name` | the name used elsewhere in the config, and the directory the checkout goes into |
-| `repo` | the repository to clone |
-| `ref` | the branch or tag to build from. For a repository you do not own, use a tag: a branch can change at any time |
+| field      | meaning                                                                                                                                                |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `name`     | the name used elsewhere in the config, and the directory the checkout goes into                                                                        |
+| `repo`     | the repository to clone                                                                                                                                |
+| `ref`      | the branch or tag to build from. For a repository you do not own, use a tag: a branch can change at any time                                           |
 | `required` | true by default. If a required source cannot be prepared, the build stops. With `required: false` the source is skipped and the build prints a warning |
-| `prefix` | the part of the site this source answers at. Without it, addresses come from the documents |
+| `prefix`   | the part of the site this source answers at. Without it, addresses come from the documents                                                             |
 
 Checkouts go into `.mounts/` next to the build, not into the content directory. You build the same site on your own machine, and files from another repository should not end up among your own. If a checkout is already there, the build asks `git ls-remote` for the commit and clones again only if it differs, so a second local build costs almost nothing. `git` has to be on the PATH.
 
@@ -320,7 +319,6 @@ The demo site: a post with its table of contents, and the editor embedded in a p
 
 </td></tr></table>
 </div>
-
 
 ## Author
 

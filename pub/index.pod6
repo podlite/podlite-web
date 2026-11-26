@@ -116,11 +116,11 @@ graph LR
 
 =head3 Using images
 =begin code
-=picture logo.png
+=for picture :src<logo.png>
 This is a logo of L<podlite|https://github.com/podlite> project.
 
 =end code
-=picture logo.png
+=for picture :src<logo.png>
 This is a logo of L<Podlite|https://github.com/podlite> project.
 
 You can try Podlite here: L<https://pod6.in>.

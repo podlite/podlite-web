@@ -1,6 +1,8 @@
-// External images (badges, remote assets) bypass the prebuilt image map.
+// External images (badges, remote assets, data: addresses) bypass the prebuilt
+// image map: an address with a scheme of two characters or more other than
+// file:, or one that starts with //. The publisher reads addresses the same way.
 export function isExternalImageSrc(src: string): boolean {
-  return /^(https?:)?\/\//i.test(src) || src.startsWith('data:')
+  return (/^[A-Za-z][A-Za-z0-9+.-]+:/.test(src) && !/^file:/i.test(src)) || src.startsWith('//')
 }
 
 // A static image import resolves to an object; fonts and video still resolve to a plain url.

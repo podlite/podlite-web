@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=item a C<data:> picture whose C<=data> block resolves is drawn from its data URL, a video by the type in that URL, with its link and text; a hidden one keeps its reference; an address with any scheme but C<file:>, or one that starts with C<//>, is drawn as written, as the publisher reads it; the card of a shared page takes the first picture it can show, one from the site build or one at an absolute C<http(s)> address, passing over C<data:> pictures and videos; this needs the Podlite toolchain with the picture of norm 3.0
+
 =head1 0.10.31
 
 =item the Podlite toolchain moves to the 0.0.107 release of the monorepo: a paragraph written directly inside a C<=test> is a block of the document, text set in from the margin of a delimited semantic block such as C<=begin SYNOPSIS> is a code block, a leading tab in the margin reaches the next multiple of 8 columns, and block names, option names and selector patterns take letters and digits of any script, with an apostrophe followed by a letter allowed in a block name

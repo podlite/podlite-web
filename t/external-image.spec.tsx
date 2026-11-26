@@ -11,6 +11,13 @@ describe('external image source detection', () => {
     expect(isExternalImageSrc('data:image/png;base64,AAAA')).toBe(true)
   })
 
+  it('treats any scheme but file: as external, as the publisher reads it', () => {
+    for (const src of ['foo+bar.2-x:logo', 'HTTPS://x.test/a.png', 'DATA:image/png;base64,AAAA', 'ftp://x.test/a.png'])
+      expect(isExternalImageSrc(src)).toBe(true)
+    for (const src of ['FILE:///tmp/a%20b.png', 'C:/media/a.png', 'img/cover:v2.png'])
+      expect(isExternalImageSrc(src)).toBe(false)
+  })
+
   it('keeps local paths on the prebuilt map path', () => {
     expect(isExternalImageSrc('media/logo.png')).toBe(false)
     expect(isExternalImageSrc('logo.png')).toBe(false)
