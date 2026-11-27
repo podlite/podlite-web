@@ -2,6 +2,8 @@
 
 =head1 Upcoming
 
+=head1 0.10.32
+
 =item the Podlite toolchain moves to the 0.1.0 release of the monorepo: C<=picture> takes its source only from C<:src> and its whole body is the caption, an abbreviated C<=picture path> is now a caption with no picture; a remote picture keeps its address and C<file:> is read as a URI; the version of a site follows the pictures of each page, so every site rebuilds once
 
 =item a C<data:> picture whose C<=data> block resolves is drawn from its data URL, a video by the type in that URL, with its link and text; a hidden one keeps its reference; an address with any scheme but C<file:>, or one that starts with C<//>, is drawn as written, as the publisher reads it; the card of a shared page takes the first picture it can show, one from the site build or one at an absolute C<http(s)> address, passing over C<data:> pictures and videos; this needs the Podlite toolchain with the picture of norm 3.0
